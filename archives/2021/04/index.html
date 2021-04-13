@@ -66,6 +66,21 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
     
 		<body class="is-loading">
+    <!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <!-- require MetingJS-->
+    <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+    <!--网易云-->
+    <meting-js server="netease" id="3129764102" type="playlist" mini="false" fixed="false" list-folded="true"
+        autoplay="true" volume="0.4" theme="#FADFA3" order="random" loop="all" preload="auto" mutex="true">
+    </meting-js>
+    </div>
+    </aside>
+    <div id="sidebar-dimmer"></div>
+    {% endmacro %}
+
+
     <!-- Wrapper 外包 s-->
     <div id="wrapper" class="fade-in overlay">
         <!-- Intro 头部显示 s -->
@@ -155,97 +170,106 @@
         
         <!-- 文章列表   s -->
         <div id="main" style="background-color: transparent; padding:0;">
-        <section class="link_container" style="margin-top: 0; background-color: transparent; ">
-            <div class="link_row">
-                <!-- 文章sample  s-->
+            <section class="link_container" style="margin-top: 0; background-color: transparent; ">
+                <div class="link_row">
+                    <!-- 文章sample  s-->
 
-                
-                <div class="6u 12u(narrower)">
-                    <section class="link_box special">
-                       <a href="/2021/04/12/second/">
-                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
-                            <!--标题-->
-                            <h2 class="page_title_text">  </h2>
-                            <!--段落-->
-                        </div>
-                        </a>
-                        <div class="home-post-info">
-                            <!-- Author Avatar -->
-                            <div class="home-post-info-author-avatar">
-                                <h6><span class="home-post-info-data">2021-04-12</span></h6>
-                                <div class="home-post-info-Category">
-                                    <!-- Category -->
-                                    <span>
-                            <h6>
-                            <a class="post_category-link" target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
-                                </a>
-                            </h6>
-                        </span>
+                    
+                    <div class="6u 12u(narrower)">
+                        <section class="link_box special">
+                            <a href="/2021/04/12/second/">
+                                <div class="page_title"
+                                    style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
+                                    <!--标题-->
+                                    <h2 class="page_title_text">  </h2>
+                                    <!--段落-->
+                                </div>
+                            </a>
+                            <div class="home-post-info">
+                                <!-- Author Avatar -->
+                                <div class="home-post-info-author-avatar">
+                                    <h6><span class="home-post-info-data">2021-04-12</span>
+                                    </h6>
+                                    <div class="home-post-info-Category">
+                                        <!-- Category -->
+                                        <span>
+                                            <h6>
+                                                <a class="post_category-link"
+                                                    target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
+                                                    </a>
+                                            </h6>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- 文章sample  e-->
-            
-                <div class="6u 12u(narrower)">
-                    <section class="link_box special">
-                       <a href="/2021/04/11/first/">
-                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
-                            <!--标题-->
-                            <h2 class="page_title_text">  </h2>
-                            <!--段落-->
-                        </div>
-                        </a>
-                        <div class="home-post-info">
-                            <!-- Author Avatar -->
-                            <div class="home-post-info-author-avatar">
-                                <h6><span class="home-post-info-data">2021-04-11</span></h6>
-                                <div class="home-post-info-Category">
-                                    <!-- Category -->
-                                    <span>
-                            <h6>
-                            <a class="post_category-link" target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
-                                </a>
-                            </h6>
-                        </span>
+                        </section>
+                    </div>
+                    <!-- 文章sample  e-->
+                    
+                    <div class="6u 12u(narrower)">
+                        <section class="link_box special">
+                            <a href="/2021/04/11/first/">
+                                <div class="page_title"
+                                    style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
+                                    <!--标题-->
+                                    <h2 class="page_title_text">  </h2>
+                                    <!--段落-->
+                                </div>
+                            </a>
+                            <div class="home-post-info">
+                                <!-- Author Avatar -->
+                                <div class="home-post-info-author-avatar">
+                                    <h6><span class="home-post-info-data">2021-04-11</span>
+                                    </h6>
+                                    <div class="home-post-info-Category">
+                                        <!-- Category -->
+                                        <span>
+                                            <h6>
+                                                <a class="post_category-link"
+                                                    target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
+                                                    </a>
+                                            </h6>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- 文章sample  e-->
-            
-                <div class="6u 12u(narrower)">
-                    <section class="link_box special">
-                       <a href="/2021/04/11/hello-world/">
-                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
-                            <!--标题-->
-                            <h2 class="page_title_text"> Hello World </h2>
-                            <!--段落-->
-                        </div>
-                        </a>
-                        <div class="home-post-info">
-                            <!-- Author Avatar -->
-                            <div class="home-post-info-author-avatar">
-                                <h6><span class="home-post-info-data">2021-04-11</span></h6>
-                                <div class="home-post-info-Category">
-                                    <!-- Category -->
-                                    <span>
-                            <h6>
-                            <a class="post_category-link" target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
-                                </a>
-                            </h6>
-                        </span>
+                        </section>
+                    </div>
+                    <!-- 文章sample  e-->
+                    
+                    <div class="6u 12u(narrower)">
+                        <section class="link_box special">
+                            <a href="/2021/04/11/hello-world/">
+                                <div class="page_title"
+                                    style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
+                                    <!--标题-->
+                                    <h2 class="page_title_text"> Hello World </h2>
+                                    <!--段落-->
+                                </div>
+                            </a>
+                            <div class="home-post-info">
+                                <!-- Author Avatar -->
+                                <div class="home-post-info-author-avatar">
+                                    <h6><span class="home-post-info-data">2021-04-11</span>
+                                    </h6>
+                                    <div class="home-post-info-Category">
+                                        <!-- Category -->
+                                        <span>
+                                            <h6>
+                                                <a class="post_category-link"
+                                                    target="_blank" rel="noopener" href="http://localhost:4000/categories/Algorithm/">
+                                                    </a>
+                                            </h6>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
+                    <!-- 文章sample  e-->
+                    
                 </div>
-                <!-- 文章sample  e-->
-            
-            </div>
-        </section>
+            </section>
         </div>
         <!-- 文章列表   end -->
         <!-- Main 主要部分 end -->
@@ -270,6 +294,5 @@
     <!-- Wrapper 外包 e-->
     <!-- Scripts -->
 </body>
-
  	
 </html>
