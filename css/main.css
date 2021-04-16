@@ -2897,7 +2897,7 @@ body {
   overflow-x: hidden;
   position: relative;
   transition: padding 0.2s ease-in-out;
-  background-image: url("/images/bg.jpg");
+  background-image: url("../images/bg.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
