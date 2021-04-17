@@ -41,4 +41,23 @@
 </ul>
 <span id="more"></span>]]></content>
   </entry>
+  <entry>
+    <title>categories</title>
+    <url>/2021/04/17/markdown/%E8%87%AA%E5%8A%A8%E5%A2%9E%E9%95%BF%E7%9A%84%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h1 id="可以自动增长的数组"><a href="#可以自动增长的数组" class="headerlink" title="可以自动增长的数组"></a>可以自动增长的数组</h1><h2 id="纯粹的数组实现："><a href="#纯粹的数组实现：" class="headerlink" title="纯粹的数组实现："></a>纯粹的数组实现：</h2><pre><code>---C语言 
+</code></pre>
+<p>//可增长的数组<br>//初级版本，没有加入数据结构1的思想，后续有新的版本<br>//参考资料：浙大翁恺的C语言进阶<br>//#include&lt;stdio.h&gt;<br>//#include&lt;stdlib.h&gt;</p>
+<p>typedef struct {<br>    int <em>array;<br>    int size;<br>}Array;//最好不要写</em>Array，虽然方便，但后续很麻烦 </p>
+<p>Array array_creat(int init_size){// 不返回指针目的是避免潜在的危险<br>    Array a;//只是创建本地变量，而不是指针。<br>    a.size = init_size;<br>    a.array = (int*)malloc(sizeof(int)*a.size);<br>    return a;//<br>}//创建数组 </p>
+<p>void arry_free(Array *a){<br>    free(a-&gt;array) ;<br>    a-&gt;array = NULL;<br>    a-&gt;size = 0;</p>
+<p>}//回收数组的空间 </p>
+<p>//封装 ,保护数据<br>//告诉我们数组中有多少个单元可以用<br>int array_size(const Array *a){<br>    return a-&gt;size;<br>}</p>
+<p>//访问数组的某个单元<br>//以指针类型返回该位置，方便后续的对该点的赋值。<br>int *array_at(Array *a,int index){<br>    if(index &gt;= a-&gt;size){<br>        array_inflate(a, (index-a-&gt;size)+1);<br>/<em>此处有很多种方法，有一种“块”（block）思想在后续的文档中有解释</em>/<br>    };<br>    return  &amp;(a-&gt;array[index]) ;<br>}</p>
+<p>//使得数组长大<br>//所谓的增大其实显然是不可能在a的直接实现<br>//方法就是先创建一块新的空间P，先将a的数据保存到新的空间P<br>//然后让空的a指向P,此时相当于a实现了自我长大。<br>//再将旧的空间释放， </p>
+<p>void array_inflate(void array_inflate){<br>    int <em>p = (int</em>)malloc(sizeof(int)(a-&gt;size+more_size));<br>    int i;<br>    for(i=0; i<a->size;i++){//数据保存<br>        p[i] = a-&gt;array[i];<br>    }<br>    free(a-&gt;array);//释放旧的a<br>    a-&gt;array = p;//长大了<br>    a-&gt;size += more_size;<br>    }</p>
+<p>int main(int argc,char const*argv[]){<br>    Array a = array_creat(100);<br>    *array_at(&amp;a,1000) = 1000;<br>    printf(“数组的大小：%d\n”,array_size(&amp;a));<br>    printf(“该点的值是：%d\n”,*array_at(&amp;a,0));<br>    return 0 ;<br>} </p>
+<pre><code>---
+</code></pre>
+]]></content>
+  </entry>
 </search>
