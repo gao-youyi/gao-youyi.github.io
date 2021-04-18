@@ -27,6 +27,7 @@
 <hr>
 没错，我这个苦逼青年，怀着无比的敬意，按照我亲爱的师哥得我发来的学习视频，从前天晚上8点开始，基本没有听下来的肝到了第二天早上四点多....
 <h4>&nbsp &nbsp &nbsp然后就有了下面这样的我<h4>
+<span id="more"></span>
 <image src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/ctwVEjeYQ2ic9QVvaUJoxwiaL1eFJ7iaKgcyR9PSledAYd9I6V7iaAlO8ibictfeZsRDSFCu4fOxChEvuNa1vpgJWz6Q/0?wx_fmt=png">
 然后我这个苦逼的二货青年，不，是老年人，继续开始了挠头搔👂不知所以然的过程。当然，我也从中学会了很多的东西，比如坚持的力量，学会独处，总的来说，包涵以下几点：
 <br>
@@ -39,7 +40,7 @@
 <li>要学会一个人独处</li>
 <li>保持谦逊</li>
 </ul>
-<span id="more"></span>]]></content>
+<!--more-->]]></content>
   </entry>
   <entry>
     <title>categories</title>
@@ -47,6 +48,7 @@
     <content><![CDATA[<h1 id="可以自动增长的数组"><a href="#可以自动增长的数组" class="headerlink" title="可以自动增长的数组"></a>可以自动增长的数组</h1><h2 id="纯粹的数组实现："><a href="#纯粹的数组实现：" class="headerlink" title="纯粹的数组实现："></a>纯粹的数组实现：</h2><pre><code>---C语言 
 </code></pre>
 <p>//可增长的数组<br>//初级版本，没有加入数据结构1的思想，后续有新的版本<br>//参考资料：浙大翁恺的C语言进阶<br>//#include&lt;stdio.h&gt;<br>//#include&lt;stdlib.h&gt;</p>
+<span id="more"></span>
 <p>typedef struct {<br>    int <em>array;<br>    int size;<br>}Array;//最好不要写</em>Array，虽然方便，但后续很麻烦 </p>
 <p>Array array_creat(int init_size){// 不返回指针目的是避免潜在的危险<br>    Array a;//只是创建本地变量，而不是指针。<br>    a.size = init_size;<br>    a.array = (int*)malloc(sizeof(int)*a.size);<br>    return a;//<br>}//创建数组 </p>
 <p>void arry_free(Array *a){<br>    free(a-&gt;array) ;<br>    a-&gt;array = NULL;<br>    a-&gt;size = 0;</p>
@@ -59,5 +61,21 @@
 <pre><code>---
 </code></pre>
 ]]></content>
+  </entry>
+  <entry>
+    <title>css定位</title>
+    <url>/2021/04/18/%E5%AE%9A%E4%BD%8D/</url>
+    <content><![CDATA[<h1 id="定位学习手册"><a href="#定位学习手册" class="headerlink" title="定位学习手册"></a>定位学习手册</h1><h2 id="定位-定位模式-边偏移"><a href="#定位-定位模式-边偏移" class="headerlink" title="定位=定位模式+边偏移"></a>定位=定位模式+边偏移</h2><blockquote>
+<p>定位模式：指定一个元素在文档中的定位方式<br>边偏移：决定元素的最终位置</p>
+</blockquote>
+<h3 id="四个position属性"><a href="#四个position属性" class="headerlink" title="四个position属性:"></a>四个position属性:</h3><blockquote>
+<blockquote>
+<blockquote>
+<p>static:了解就行<br>1，无定位，和标准流一样。<br>relative：重要！<br>1，它的边偏移是相对自己原来的位置来说的。<br>2，即使移动了，自己原来的位置继续占有，不像浮动一样脱标！<br>absolute:异常重要！！<br>1,如股没有限制，相对于最大的盒子body;<br>2如果父级元素存在任意一种(除了static)定位，则以最近一级父级(也可以是爷爷级别元素)盒子作为参考点移动;否则还是以body作为定位；<br>3,绝对定位的盒子位置不会保留，像浮动型，脱离标准流；<br>fixed:重要<br>1，元素的位置不会随着页面的滚动而动，参照点是以浏览器的可视窗口来决定；</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="子绝对父相对"><a href="#子绝对父相对" class="headerlink" title="子绝对父相对"></a>子绝对父相对</h3><p>一般情况下，如果孩子是absolute定位，父亲采用relative定位，来限制孩子的位置；</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
   </entry>
 </search>
