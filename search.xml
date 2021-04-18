@@ -43,6 +43,22 @@
 <!--more-->]]></content>
   </entry>
   <entry>
+    <title>css定位</title>
+    <url>/2021/04/18/%E5%AE%9A%E4%BD%8D/</url>
+    <content><![CDATA[<h1 id="定位学习手册"><a href="#定位学习手册" class="headerlink" title="定位学习手册"></a>定位学习手册</h1><h2 id="定位-定位模式-边偏移"><a href="#定位-定位模式-边偏移" class="headerlink" title="定位=定位模式+边偏移"></a>定位=定位模式+边偏移</h2><blockquote>
+<p>定位模式：指定一个元素在文档中的定位方式<br>边偏移：决定元素的最终位置</p>
+</blockquote>
+<h3 id="四个position属性"><a href="#四个position属性" class="headerlink" title="四个position属性:"></a>四个position属性:</h3><blockquote>
+<blockquote>
+<blockquote>
+<p>static:了解就行<br>1，无定位，和标准流一样。<br>relative：重要！<br>1，它的边偏移是相对自己原来的位置来说的。<br>2，即使移动了，自己原来的位置继续占有，不像浮动一样脱标！<br>absolute:异常重要！！<br>1,如股没有限制，相对于最大的盒子body;<br>2如果父级元素存在任意一种(除了static)定位，则以最近一级父级(也可以是爷爷级别元素)盒子作为参考点移动;否则还是以body作为定位；<br>3,绝对定位的盒子位置不会保留，像浮动型，脱离标准流；<br>fixed:重要<br>1，元素的位置不会随着页面的滚动而动，参照点是以浏览器的可视窗口来决定；</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="子绝对父相对"><a href="#子绝对父相对" class="headerlink" title="子绝对父相对"></a>子绝对父相对</h3><p>一般情况下，如果孩子是absolute定位，父亲采用relative定位，来限制孩子的位置；</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+  </entry>
+  <entry>
     <title>categories</title>
     <url>/2021/04/17/markdown/%E8%87%AA%E5%8A%A8%E5%A2%9E%E9%95%BF%E7%9A%84%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h1 id="可以自动增长的数组"><a href="#可以自动增长的数组" class="headerlink" title="可以自动增长的数组"></a>可以自动增长的数组</h1><h2 id="纯粹的数组实现："><a href="#纯粹的数组实现：" class="headerlink" title="纯粹的数组实现："></a>纯粹的数组实现：</h2><pre><code>---C语言 
@@ -61,21 +77,5 @@
 <pre><code>---
 </code></pre>
 ]]></content>
-  </entry>
-  <entry>
-    <title>css定位</title>
-    <url>/2021/04/18/%E5%AE%9A%E4%BD%8D/</url>
-    <content><![CDATA[<h1 id="定位学习手册"><a href="#定位学习手册" class="headerlink" title="定位学习手册"></a>定位学习手册</h1><h2 id="定位-定位模式-边偏移"><a href="#定位-定位模式-边偏移" class="headerlink" title="定位=定位模式+边偏移"></a>定位=定位模式+边偏移</h2><blockquote>
-<p>定位模式：指定一个元素在文档中的定位方式<br>边偏移：决定元素的最终位置</p>
-</blockquote>
-<h3 id="四个position属性"><a href="#四个position属性" class="headerlink" title="四个position属性:"></a>四个position属性:</h3><blockquote>
-<blockquote>
-<blockquote>
-<p>static:了解就行<br>1，无定位，和标准流一样。<br>relative：重要！<br>1，它的边偏移是相对自己原来的位置来说的。<br>2，即使移动了，自己原来的位置继续占有，不像浮动一样脱标！<br>absolute:异常重要！！<br>1,如股没有限制，相对于最大的盒子body;<br>2如果父级元素存在任意一种(除了static)定位，则以最近一级父级(也可以是爷爷级别元素)盒子作为参考点移动;否则还是以body作为定位；<br>3,绝对定位的盒子位置不会保留，像浮动型，脱离标准流；<br>fixed:重要<br>1，元素的位置不会随着页面的滚动而动，参照点是以浏览器的可视窗口来决定；</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h3 id="子绝对父相对"><a href="#子绝对父相对" class="headerlink" title="子绝对父相对"></a>子绝对父相对</h3><p>一般情况下，如果孩子是absolute定位，父亲采用relative定位，来限制孩子的位置；</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
   </entry>
 </search>
