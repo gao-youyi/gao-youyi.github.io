@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>这就是我</title>
+    <url>/2021/04/19/Readme/</url>
+    <content><![CDATA[<h2 id="Do-you-know-me"><a href="#Do-you-know-me" class="headerlink" title="Do you know me?"></a>Do you know me?</h2><p>13414</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2021/04/11/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -59,6 +65,22 @@
 <h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
   </entry>
   <entry>
+    <title>不是吧</title>
+    <url>/2021/04/16/%E6%96%B0%E5%BB%BA%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<p>这是我的个人简介！</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>阶段性总结</title>
+    <url>/2021/04/19/%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="阶段性总结"><a href="#阶段性总结" class="headerlink" title="阶段性总结"></a>阶段性总结</h1><h2 id="进入一路工作室之后的感想"><a href="#进入一路工作室之后的感想" class="headerlink" title="进入一路工作室之后的感想"></a>进入一路工作室之后的感想</h2><p>说实话，没想到这麽容易就进入了一路工作室，也就差不多学习了一个星期吧。写了一个CSDN页面，基于hexo搭建了一个博客。其他的真的就基本什么也没考核，这也让我深刻的意识到：学习和工作是自己的事情，如果没有自身的内在驱动，很难成就一番事业的。下一个阶段，我想把js学习了，然后开发一个网页端的学习笔记本。最后转为移动端。<br>进入工作室之后，我想充分利用工作室的资源，比如组队打比赛，和师哥们交流技术，积极的为自己获得实习资格….<br>同时学习了一些js我也再次意识到算法的重要性，从现在起，我就要重新正视算法，努力学习数据结构，同时关于计算机基础的知识也要进一步扩充了。</p>
+<h2 id="机会总是留给有准备的人的"><a href="#机会总是留给有准备的人的" class="headerlink" title="机会总是留给有准备的人的"></a>机会总是留给有准备的人的</h2><p>上学期为了加入星三好工作室，学习了很多的前端基础，所以这学期才会更加顺利的完成一路给我的任务。很多事情都是这样，你永远也不知道你以后会做什么，遇见什么事情，你现在比别人1多学习的东西，都有可能帮助到你。所以，加油，我的少年！！！</p>
+]]></content>
+      <categories>
+        <category>about</category>
+      </categories>
+  </entry>
+  <entry>
     <title>categories</title>
     <url>/2021/04/17/markdown/%E8%87%AA%E5%8A%A8%E5%A2%9E%E9%95%BF%E7%9A%84%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h1 id="可以自动增长的数组"><a href="#可以自动增长的数组" class="headerlink" title="可以自动增长的数组"></a>可以自动增长的数组</h1><h2 id="纯粹的数组实现："><a href="#纯粹的数组实现：" class="headerlink" title="纯粹的数组实现："></a>纯粹的数组实现：</h2><pre><code>---C语言 
@@ -76,13 +98,6 @@
 <p>int main(int argc,char const*argv[]){<br>    Array a = array_creat(100);<br>    *array_at(&amp;a,1000) = 1000;<br>    printf(“数组的大小：%d\n”,array_size(&amp;a));<br>    printf(“该点的值是：%d\n”,*array_at(&amp;a,0));<br>    return 0 ;<br>} </p>
 <pre><code>---
 </code></pre>
-]]></content>
-  </entry>
-  <entry>
-    <title>阶段性总结</title>
-    <url>/2021/04/19/%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1 id="阶段性总结"><a href="#阶段性总结" class="headerlink" title="阶段性总结"></a>阶段性总结</h1><h2 id="进入一路工作室之后的感想"><a href="#进入一路工作室之后的感想" class="headerlink" title="进入一路工作室之后的感想"></a>进入一路工作室之后的感想</h2><p>说实话，没想到这麽容易就进入了一路工作室，也就差不多学习了一个星期吧。写了一个CSDN页面，基于hexo搭建了一个博客。其他的真的就基本什么也没考核，这也让我深刻的意识到：学习和工作是自己的事情，如果没有自身的内在驱动，很难成就一番事业的。下一个阶段，我想把js学习了，然后开发一个网页端的学习笔记本。最后转为移动端。<br>进入工作室之后，我想充分利用工作室的资源，比如组队打比赛，和师哥们交流技术，积极的为自己获得实习资格….<br>同时学习了一些js我也再次意识到算法的重要性，从现在起，我就要重新正视算法，努力学习数据结构，同时关于计算机基础的知识也要进一步扩充了。</p>
-<h2 id="机会总是留给有准备的人的"><a href="#机会总是留给有准备的人的" class="headerlink" title="机会总是留给有准备的人的"></a>机会总是留给有准备的人的</h2><p>上学期为了加入星三好工作室，学习了很多的前端基础，所以这学期才会更加顺利的完成一路给我的任务。很多事情都是这样，你永远也不知道你以后会做什么，遇见什么事情，你现在比别人1多学习的东西，都有可能帮助到你。所以，加油，我的少年！！！</p>
 ]]></content>
   </entry>
 </search>
