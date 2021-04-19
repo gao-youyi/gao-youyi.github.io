@@ -10,7 +10,8 @@
     <title>Hello World</title>
     <url>/2021/04/11/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><span id="more"></span>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
@@ -65,12 +66,6 @@
 <h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
   </entry>
   <entry>
-    <title>不是吧</title>
-    <url>/2021/04/16/%E6%96%B0%E5%BB%BA%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<p>这是我的个人简介！</p>
-]]></content>
-  </entry>
-  <entry>
     <title>阶段性总结</title>
     <url>/2021/04/19/%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h1 id="阶段性总结"><a href="#阶段性总结" class="headerlink" title="阶段性总结"></a>阶段性总结</h1><h2 id="进入一路工作室之后的感想"><a href="#进入一路工作室之后的感想" class="headerlink" title="进入一路工作室之后的感想"></a>进入一路工作室之后的感想</h2><p>说实话，没想到这麽容易就进入了一路工作室，也就差不多学习了一个星期吧。写了一个CSDN页面，基于hexo搭建了一个博客。其他的真的就基本什么也没考核，这也让我深刻的意识到：学习和工作是自己的事情，如果没有自身的内在驱动，很难成就一番事业的。下一个阶段，我想把js学习了，然后开发一个网页端的学习笔记本。最后转为移动端。<br>进入工作室之后，我想充分利用工作室的资源，比如组队打比赛，和师哥们交流技术，积极的为自己获得实习资格….<br>同时学习了一些js我也再次意识到算法的重要性，从现在起，我就要重新正视算法，努力学习数据结构，同时关于计算机基础的知识也要进一步扩充了。</p>
@@ -81,12 +76,14 @@
       </categories>
   </entry>
   <entry>
-    <title>categories</title>
-    <url>/2021/04/17/markdown/%E8%87%AA%E5%8A%A8%E5%A2%9E%E9%95%BF%E7%9A%84%E6%95%B0%E7%BB%84/</url>
+    <title>自动增长的数组</title>
+    <url>/2021/04/17/%E8%87%AA%E5%8A%A8%E5%A2%9E%E9%95%BF%E7%9A%84%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h1 id="可以自动增长的数组"><a href="#可以自动增长的数组" class="headerlink" title="可以自动增长的数组"></a>可以自动增长的数组</h1><h2 id="纯粹的数组实现："><a href="#纯粹的数组实现：" class="headerlink" title="纯粹的数组实现："></a>纯粹的数组实现：</h2><pre><code>---C语言 
 </code></pre>
-<p>//可增长的数组<br>//初级版本，没有加入数据结构1的思想，后续有新的版本<br>//参考资料：浙大翁恺的C语言进阶<br>//#include&lt;stdio.h&gt;<br>//#include&lt;stdlib.h&gt;</p>
+<p>//可增长的数组<br>//初级版本，没有加入数据结构1的思想，后续有新的版本<br>//参考资料：浙大翁恺的C语言进阶 </p>
 <span id="more"></span>
+<p>//#include&lt;stdio.h&gt;<br>//#include&lt;stdlib.h&gt;</p>
+<!--more-->
 <p>typedef struct {<br>    int <em>array;<br>    int size;<br>}Array;//最好不要写</em>Array，虽然方便，但后续很麻烦 </p>
 <p>Array array_creat(int init_size){// 不返回指针目的是避免潜在的危险<br>    Array a;//只是创建本地变量，而不是指针。<br>    a.size = init_size;<br>    a.array = (int*)malloc(sizeof(int)*a.size);<br>    return a;//<br>}//创建数组 </p>
 <p>void arry_free(Array *a){<br>    free(a-&gt;array) ;<br>    a-&gt;array = NULL;<br>    a-&gt;size = 0;</p>
