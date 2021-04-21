@@ -97,4 +97,61 @@
 </code></pre>
 ]]></content>
   </entry>
+  <entry>
+    <title>顺序表学习笔记</title>
+    <url>/2021/04/21/%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<pre><code>&#39;&#39;&#39;c
+&#39;&#39;&#39;#include &lt;stdlib.h&gt;
+&#39;&#39;&#39;#include &lt;stdio.h&gt;
+&#39;&#39;&#39;//循序表实例
+&#39;&#39;&#39;/* 逻辑顺序和物理顺序一致，连续存储，可以任意访问*
+&#39;&#39;&#39;类型声名如下：*/
+&#39;&#39;&#39;/*静态存储*/
+&#39;&#39;&#39;#define LIST_INIT_SIZE 100 //存储空间的初始分配量,这是顺序存储的缺点
+&#39;&#39;&#39;#define LIST_INCREMENT 10  // 存储空间的分配增量
+&#39;&#39;&#39;&#39;typedef int ElemType;      //存储元素的数据类型，可以自定义
+&#39;&#39;&#39;
+</code></pre>
+<p>typedef struct</p>
+<span id="more"></span>
+<p>{<br>    ElemType *elem; //存储空间的基地址<br>    int length;     //当前长度<br>    int listsize;   // 当前分配的存储容量<br>} SqList;</p>
+<p>//初始化线性表<br>int InitList_Sq(SqList &amp;L)<br>{<br>    //构造一个空的先线性表<br>    L.elem = (ElementType *)malloc(LIST_INIT_SIZE * sizeof(ElementType)); //分配空间<br>    //测试分配是否成功<br>    if (!L.elem)<br>        return 0;<br>    //初始化<br>    L.length = 0;                //初始数据量为0<br>    L.listsize = LIST_INIT_SIZE; //初始存储量为最大<br>    return 1;<br>}</p>
+<p>//销毁线性表:动态分配必须释放<br>int DestoryList(SqList &amp;L)<br>{<br>    free(L.elem); //由INIT函数可以知道，此处可以直接一步释放<br>    //释放后不要忘记修改参数的值<br>    L.elem = NULL;<br>    L.length = 0;<br>    L.listsize = 0;<br>    return 1;<br>}</p>
+<p>//求线性表的长度<br>int GetLength(SqList L)<br>{<br>    return L.length; //length里面记录了表中元素的个数<br>}</p>
+<p>//求线性表中第i个元素<br>int GetElem(SqList L, int i, ElemType &amp;e)<br>{<br>    //注意进行数据i是否合法的判断<br>    if (i &lt; 1 || i &gt; L.length)<br>    {<br>        return 0;<br>    }<br>    //返回对应的值<br>    e = *(L.elem + i - 1); //注意线性表中第i个元素的下标为i-1,下标为i的元素的下标为i+1<br>    return 1;<br>}</p>
+<p>//按值查找求下标<br>ElemType LocateElem(SqList L, ElemType e)<br>{<br>    ElemType *p;<br>    int i = 1;<br>    p = L.elem;<br>    //循环遍历，比较查找<br>    while (i &lt; L.length &amp;&amp; (*p++ != e))<br>    {<br>        i++;<br>    }<br>    //判断返回值是否合理<br>    if (i &lt;= L.length)<br>    {<br>        return i;<br>    }<br>    else<br>    {<br>        return 0;<br>    }<br>}</p>
+<p>//插入数据<br>int ListInsert(SqList &amp;L, ElemType e, int i)<br>{<br>    /<em>插入算法：<br>    first,将新元素e插入到L中逻辑序号为i的位置，对应于L.elem[i-1]<br>    second,判断i的值是否合法（1&lt;=i&lt;=L.length+1）<br>    third,second满足时，将L.elem[i-1…length-1]都后移一个位置<br>    然后在L.elem[i-1]处插入e,然后对表中相关参量进行修改。</em>/<br>    //这里先使用一种特别笨的算法进行插入操作，后续进一步学习会介绍更加简洁的算法，但是每一种算法的实现都要掌握</p>
+<pre><code>//判断i是否合法
+ElemType *p;
+if (i &lt; 1 || i &gt; L.length + 1)
+&#123;
+    return 0;
+&#125;
+//这是一个拓展功能，使得数据无论如何都可以呗被存储。可有可无，有的学校不讲
+if (L.length &gt;= L.listsize)
+&#123; //realloc函数自带释放原有空间的功能
+    ElemType *newbase = (ElemType *)realloc(L.elem,
+                                            (L.listsize + LIST_INCREMENT) * sizeof(ElemType));
+    if (!newbase)
+    &#123; //判断是否拓展成功
+        return 0;
+    &#125;
+    L.elem = newbase;
+    L.listsize += LIST_INCREMENT; //修改表中相关参数的值
+&#125;
+ElemType *q = &amp;(L.elem[i - 1]);                //q为插入的位置
+for (p = &amp;(L.elem[L.length - 1]); p &gt;= q; --p) //先让p指向最后一个位置，然后一直遍历到q,
+&#123;
+    *(p + 1) = *p; //等价于p--;
+    *q = e;        //让新的元素e插入到第i个位置，也就是数组的i-1处。
+    ++L.length;    //修改表中的相关参数
+    return 1;
+&#125;
+</code></pre>
+<p>}</p>
+<p>//删除某个位置的元素<br>int ListDelete_Sq(SqList &amp;L, int i, ElemType &amp;e)<br>{<br>    /*<br>    1，删除顺序表中逻辑序号为i的元素<br>    2，判断输入i是否合法<br>    3，当2生效时，将L.elem[i…….length-1]的每一个<br>    元素都前移一个位置，然后修改表中的相关参数。<br>    */<br>    ElemType *p, *q;<br>    if (i &lt; 1 || i &gt; L.length)<br>    { //step 1,判断<br>        return 0;<br>    }<br>    p = &amp;(L.elem[i - 1]);      //step 2，定位<br>    e = *p;                    //不是必须的<br>    q = L.elem + L.length - 1; //表末尾的位置<br>    for (++p; p &lt;= q; ++p)<br>    { //step 3,修改<br>        *(p - 1) = *p;<br>    }<br>    –L.length; //重要！！<br>    return 1;<br>}</p>
+<p>//显示当前表中的数据<br>void display(SqList L)<br>{<br>    for (int i = 1; i &lt;= L.length; i++)<br>    {<br>        printf(“%d”, L.elem[i - 1]);<br>    }<br>}</p>
+<p>int main()<br>{<br>    int A[8] = {1, 2, 3, 4, 5, 100, 200, 300};<br>    int i, j, e = 586;<br>    SqList List;<br>    Init(List);<br>    //插入初始数据<br>    for (i = 1, j = 0; i &lt;= 8; i++, j++)<br>        ListInsert(List, i, A[j]);<br>    printf(“\n 插入之前的元素序列为：\n”);<br>    display(List);<br>    i = 3; //插入的位置<br>    ListInsert(List, i, e);<br>    print(“\n\n插入后的元素序列为：\n”);<br>    display(List);<br>    i = 6; //删除的位置<br>    printf(“\n\n删除后的元素序列为;\n”);<br>    ListDelete_Sq(List, i, e);<br>    display(List);<br>}<br>    ‘’’</p>
+]]></content>
+  </entry>
 </search>
