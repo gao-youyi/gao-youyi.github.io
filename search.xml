@@ -1,14 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>曲折的博客搭建</title>
+    <url>/2021/04/11/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%9C%89%E6%84%9F/</url>
+    <content><![CDATA[<hr>
+<image src="https://th.bing.com/th/id/R8017ed3b55c63759122c0a3e3355bb7c?rik=T4kvqRC2FH%2f%2f5A&riu=http%3a%2f%2fimg.wxcha.com%2ffile%2f201706%2f13%2faa6ae04b42.gif&ehk=p%2bgMFuX3kYlQtLn%2f8fYuecOmfvrWIIQIUpxsDUKQNjc%3d&risl=&pid=ImgRaw">
+错误的打开方式
+<hr>
+没错，我这个苦逼青年，怀着无比的敬意，按照我亲爱的师哥得我发来的学习视频，从前天晚上8点开始，基本没有听下来的肝到了第二天早上四点多....
+<h4>&nbsp &nbsp &nbsp然后就有了下面这样的我<h4>
+<span id="more"></span>
+<image src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/ctwVEjeYQ2ic9QVvaUJoxwiaL1eFJ7iaKgcyR9PSledAYd9I6V7iaAlO8ibictfeZsRDSFCu4fOxChEvuNa1vpgJWz6Q/0?wx_fmt=png">
+然后我这个苦逼的二货青年，不，是老年人，继续开始了挠头搔👂不知所以然的过程。当然，我也从中学会了很多的东西，比如坚持的力量，学会独处，总的来说，包涵以下几点：
+<br>
+
+<ul style="color:red">
+<li>学习新的东西需要有勇于试错的决心</li>
+<li>要敢于正视自己的困难，积极请教</li>
+<li>要付出足够的时间和精力</li>
+<li>要懂得享受着其中的乐趣</li>
+<li>要学会一个人独处</li>
+<li>保持谦逊</li>
+</ul>
+<!--more-->]]></content>
+  </entry>
+  <entry>
+    <title>阶段性总结</title>
+    <url>/2021/04/19/%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="阶段性总结"><a href="#阶段性总结" class="headerlink" title="阶段性总结"></a>阶段性总结</h1><h2 id="进入一路工作室之后的感想"><a href="#进入一路工作室之后的感想" class="headerlink" title="进入一路工作室之后的感想"></a>进入一路工作室之后的感想</h2><p>说实话，没想到这麽容易就进入了一路工作室，也就差不多学习了一个星期吧。写了一个CSDN页面，基于hexo搭建了一个博客。其他的真的就基本什么也没考核，这也让我深刻的意识到：学习和工作是自己的事情，如果没有自身的内在驱动，很难成就一番事业的。下一个阶段，我想把js学习了，然后开发一个网页端的学习笔记本。最后转为移动端。<br>进入工作室之后，我想充分利用工作室的资源，比如组队打比赛，和师哥们交流技术，积极的为自己获得实习资格….<br>同时学习了一些js我也再次意识到算法的重要性，从现在起，我就要重新正视算法，努力学习数据结构，同时关于计算机基础的知识也要进一步扩充了。</p>
+<h2 id="机会总是留给有准备的人的"><a href="#机会总是留给有准备的人的" class="headerlink" title="机会总是留给有准备的人的"></a>机会总是留给有准备的人的</h2><p>上学期为了加入星三好工作室，学习了很多的前端基础，所以这学期才会更加顺利的完成一路给我的任务。很多事情都是这样，你永远也不知道你以后会做什么，遇见什么事情，你现在比别人1多学习的东西，都有可能帮助到你。所以，加油，我的少年！！！</p>
+]]></content>
+      <categories>
+        <category>about</category>
+      </categories>
+  </entry>
+  <entry>
     <title>这就是我</title>
-    <url>/2021/04/19/Readme/</url>
+    <url>/2021/04/19/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/Readme/</url>
     <content><![CDATA[<h2 id="Do-you-know-me"><a href="#Do-you-know-me" class="headerlink" title="Do you know me?"></a>Do you know me?</h2><p>13414</p>
 ]]></content>
   </entry>
   <entry>
+    <title>css定位</title>
+    <url>/2021/04/18/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%AE%9A%E4%BD%8D/</url>
+    <content><![CDATA[<h1 id="定位学习手册"><a href="#定位学习手册" class="headerlink" title="定位学习手册"></a>定位学习手册</h1><h2 id="定位-定位模式-边偏移"><a href="#定位-定位模式-边偏移" class="headerlink" title="定位=定位模式+边偏移"></a>定位=定位模式+边偏移</h2><blockquote>
+<p>定位模式：指定一个元素在文档中的定位方式<br>边偏移：决定元素的最终位置</p>
+</blockquote>
+<h3 id="四个position属性"><a href="#四个position属性" class="headerlink" title="四个position属性:"></a>四个position属性:</h3><blockquote>
+<blockquote>
+<blockquote>
+<p>static:了解就行<br>1，无定位，和标准流一样。<br>relative：重要！<br>1，它的边偏移是相对自己原来的位置来说的。<br>2，即使移动了，自己原来的位置继续占有，不像浮动一样脱标！<br>absolute:异常重要！！<br>1,如股没有限制，相对于最大的盒子body;<br>2如果父级元素存在任意一种(除了static)定位，则以最近一级父级(也可以是爷爷级别元素)盒子作为参考点移动;否则还是以body作为定位；<br>3,绝对定位的盒子位置不会保留，像浮动型，脱离标准流；<br>fixed:重要<br>1，元素的位置不会随着页面的滚动而动，参照点是以浏览器的可视窗口来决定；</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="子绝对父相对"><a href="#子绝对父相对" class="headerlink" title="子绝对父相对"></a>子绝对父相对</h3><p>一般情况下，如果孩子是absolute定位，父亲采用relative定位，来限制孩子的位置；</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+      <tags>
+        <tag>前端开发</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>单链表的实现和基本函数操作</title>
-    <url>/2021/04/23/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/</url>
+    <url>/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<pre><code>---C++
 #include&lt;stdio.h&gt;
 #include&lt;stdlib.h&gt;
@@ -132,80 +185,8 @@ return 1;
       </tags>
   </entry>
   <entry>
-    <title>曲折的博客搭建</title>
-    <url>/2021/04/11/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%9C%89%E6%84%9F/</url>
-    <content><![CDATA[<hr>
-<image src="https://th.bing.com/th/id/R8017ed3b55c63759122c0a3e3355bb7c?rik=T4kvqRC2FH%2f%2f5A&riu=http%3a%2f%2fimg.wxcha.com%2ffile%2f201706%2f13%2faa6ae04b42.gif&ehk=p%2bgMFuX3kYlQtLn%2f8fYuecOmfvrWIIQIUpxsDUKQNjc%3d&risl=&pid=ImgRaw">
-错误的打开方式
-<hr>
-没错，我这个苦逼青年，怀着无比的敬意，按照我亲爱的师哥得我发来的学习视频，从前天晚上8点开始，基本没有听下来的肝到了第二天早上四点多....
-<h4>&nbsp &nbsp &nbsp然后就有了下面这样的我<h4>
-<span id="more"></span>
-<image src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/ctwVEjeYQ2ic9QVvaUJoxwiaL1eFJ7iaKgcyR9PSledAYd9I6V7iaAlO8ibictfeZsRDSFCu4fOxChEvuNa1vpgJWz6Q/0?wx_fmt=png">
-然后我这个苦逼的二货青年，不，是老年人，继续开始了挠头搔👂不知所以然的过程。当然，我也从中学会了很多的东西，比如坚持的力量，学会独处，总的来说，包涵以下几点：
-<br>
-
-<ul style="color:red">
-<li>学习新的东西需要有勇于试错的决心</li>
-<li>要敢于正视自己的困难，积极请教</li>
-<li>要付出足够的时间和精力</li>
-<li>要懂得享受着其中的乐趣</li>
-<li>要学会一个人独处</li>
-<li>保持谦逊</li>
-</ul>
-<!--more-->]]></content>
-  </entry>
-  <entry>
-    <title>css定位</title>
-    <url>/2021/04/18/%E5%AE%9A%E4%BD%8D/</url>
-    <content><![CDATA[<h1 id="定位学习手册"><a href="#定位学习手册" class="headerlink" title="定位学习手册"></a>定位学习手册</h1><h2 id="定位-定位模式-边偏移"><a href="#定位-定位模式-边偏移" class="headerlink" title="定位=定位模式+边偏移"></a>定位=定位模式+边偏移</h2><blockquote>
-<p>定位模式：指定一个元素在文档中的定位方式<br>边偏移：决定元素的最终位置</p>
-</blockquote>
-<h3 id="四个position属性"><a href="#四个position属性" class="headerlink" title="四个position属性:"></a>四个position属性:</h3><blockquote>
-<blockquote>
-<blockquote>
-<p>static:了解就行<br>1，无定位，和标准流一样。<br>relative：重要！<br>1，它的边偏移是相对自己原来的位置来说的。<br>2，即使移动了，自己原来的位置继续占有，不像浮动一样脱标！<br>absolute:异常重要！！<br>1,如股没有限制，相对于最大的盒子body;<br>2如果父级元素存在任意一种(除了static)定位，则以最近一级父级(也可以是爷爷级别元素)盒子作为参考点移动;否则还是以body作为定位；<br>3,绝对定位的盒子位置不会保留，像浮动型，脱离标准流；<br>fixed:重要<br>1，元素的位置不会随着页面的滚动而动，参照点是以浏览器的可视窗口来决定；</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h3 id="子绝对父相对"><a href="#子绝对父相对" class="headerlink" title="子绝对父相对"></a>子绝对父相对</h3><p>一般情况下，如果孩子是absolute定位，父亲采用relative定位，来限制孩子的位置；</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
-  </entry>
-  <entry>
-    <title>阶段性总结</title>
-    <url>/2021/04/19/%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1 id="阶段性总结"><a href="#阶段性总结" class="headerlink" title="阶段性总结"></a>阶段性总结</h1><h2 id="进入一路工作室之后的感想"><a href="#进入一路工作室之后的感想" class="headerlink" title="进入一路工作室之后的感想"></a>进入一路工作室之后的感想</h2><p>说实话，没想到这麽容易就进入了一路工作室，也就差不多学习了一个星期吧。写了一个CSDN页面，基于hexo搭建了一个博客。其他的真的就基本什么也没考核，这也让我深刻的意识到：学习和工作是自己的事情，如果没有自身的内在驱动，很难成就一番事业的。下一个阶段，我想把js学习了，然后开发一个网页端的学习笔记本。最后转为移动端。<br>进入工作室之后，我想充分利用工作室的资源，比如组队打比赛，和师哥们交流技术，积极的为自己获得实习资格….<br>同时学习了一些js我也再次意识到算法的重要性，从现在起，我就要重新正视算法，努力学习数据结构，同时关于计算机基础的知识也要进一步扩充了。</p>
-<h2 id="机会总是留给有准备的人的"><a href="#机会总是留给有准备的人的" class="headerlink" title="机会总是留给有准备的人的"></a>机会总是留给有准备的人的</h2><p>上学期为了加入星三好工作室，学习了很多的前端基础，所以这学期才会更加顺利的完成一路给我的任务。很多事情都是这样，你永远也不知道你以后会做什么，遇见什么事情，你现在比别人1多学习的东西，都有可能帮助到你。所以，加油，我的少年！！！</p>
-]]></content>
-      <categories>
-        <category>about</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>自动增长的数组</title>
-    <url>/2021/04/17/%E8%87%AA%E5%8A%A8%E5%A2%9E%E9%95%BF%E7%9A%84%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h1 id="可以自动增长的数组"><a href="#可以自动增长的数组" class="headerlink" title="可以自动增长的数组"></a>可以自动增长的数组</h1><h2 id="纯粹的数组实现："><a href="#纯粹的数组实现：" class="headerlink" title="纯粹的数组实现："></a>纯粹的数组实现：</h2><pre><code>---C语言 
-</code></pre>
-<p>//可增长的数组<br>//初级版本，没有加入数据结构1的思想，后续有新的版本<br>//参考资料：浙大翁恺的C语言进阶 </p>
-<span id="more"></span>
-<p>//#include&lt;stdio.h&gt;<br>//#include&lt;stdlib.h&gt;</p>
-<!--more-->
-<p>typedef struct {<br>    int <em>array;<br>    int size;<br>}Array;//最好不要写</em>Array，虽然方便，但后续很麻烦 </p>
-<p>Array array_creat(int init_size){// 不返回指针目的是避免潜在的危险<br>    Array a;//只是创建本地变量，而不是指针。<br>    a.size = init_size;<br>    a.array = (int*)malloc(sizeof(int)*a.size);<br>    return a;//<br>}//创建数组 </p>
-<p>void arry_free(Array *a){<br>    free(a-&gt;array) ;<br>    a-&gt;array = NULL;<br>    a-&gt;size = 0;</p>
-<p>}//回收数组的空间 </p>
-<p>//封装 ,保护数据<br>//告诉我们数组中有多少个单元可以用<br>int array_size(const Array *a){<br>    return a-&gt;size;<br>}</p>
-<p>//访问数组的某个单元<br>//以指针类型返回该位置，方便后续的对该点的赋值。<br>int *array_at(Array *a,int index){<br>    if(index &gt;= a-&gt;size){<br>        array_inflate(a, (index-a-&gt;size)+1);<br>/<em>此处有很多种方法，有一种“块”（block）思想在后续的文档中有解释</em>/<br>    };<br>    return  &amp;(a-&gt;array[index]) ;<br>}</p>
-<p>//使得数组长大<br>//所谓的增大其实显然是不可能在a的直接实现<br>//方法就是先创建一块新的空间P，先将a的数据保存到新的空间P<br>//然后让空的a指向P,此时相当于a实现了自我长大。<br>//再将旧的空间释放， </p>
-<p>void array_inflate(void array_inflate){<br>    int <em>p = (int</em>)malloc(sizeof(int)(a-&gt;size+more_size));<br>    int i;<br>    for(i=0; i<a->size;i++){//数据保存<br>        p[i] = a-&gt;array[i];<br>    }<br>    free(a-&gt;array);//释放旧的a<br>    a-&gt;array = p;//长大了<br>    a-&gt;size += more_size;<br>    }</p>
-<p>int main(int argc,char const*argv[]){<br>    Array a = array_creat(100);<br>    *array_at(&amp;a,1000) = 1000;<br>    printf(“数组的大小：%d\n”,array_size(&amp;a));<br>    printf(“该点的值是：%d\n”,*array_at(&amp;a,0));<br>    return 0 ;<br>} </p>
-<pre><code>---
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
     <title>顺序表学习笔记</title>
-    <url>/2021/04/21/%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/2021/04/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
 #include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
@@ -389,5 +370,27 @@ display(List);
       <tags>
         <tag>数据结构</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>自动增长的数组</title>
+    <url>/2021/04/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E8%87%AA%E5%8A%A8%E5%A2%9E%E9%95%BF%E7%9A%84%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h1 id="可以自动增长的数组"><a href="#可以自动增长的数组" class="headerlink" title="可以自动增长的数组"></a>可以自动增长的数组</h1><h2 id="纯粹的数组实现："><a href="#纯粹的数组实现：" class="headerlink" title="纯粹的数组实现："></a>纯粹的数组实现：</h2><pre><code>---C语言 
+</code></pre>
+<p>//可增长的数组<br>//初级版本，没有加入数据结构1的思想，后续有新的版本<br>//参考资料：浙大翁恺的C语言进阶 </p>
+<span id="more"></span>
+<p>//#include&lt;stdio.h&gt;<br>//#include&lt;stdlib.h&gt;</p>
+<!--more-->
+<p>typedef struct {<br>    int <em>array;<br>    int size;<br>}Array;//最好不要写</em>Array，虽然方便，但后续很麻烦 </p>
+<p>Array array_creat(int init_size){// 不返回指针目的是避免潜在的危险<br>    Array a;//只是创建本地变量，而不是指针。<br>    a.size = init_size;<br>    a.array = (int*)malloc(sizeof(int)*a.size);<br>    return a;//<br>}//创建数组 </p>
+<p>void arry_free(Array *a){<br>    free(a-&gt;array) ;<br>    a-&gt;array = NULL;<br>    a-&gt;size = 0;</p>
+<p>}//回收数组的空间 </p>
+<p>//封装 ,保护数据<br>//告诉我们数组中有多少个单元可以用<br>int array_size(const Array *a){<br>    return a-&gt;size;<br>}</p>
+<p>//访问数组的某个单元<br>//以指针类型返回该位置，方便后续的对该点的赋值。<br>int *array_at(Array *a,int index){<br>    if(index &gt;= a-&gt;size){<br>        array_inflate(a, (index-a-&gt;size)+1);<br>/<em>此处有很多种方法，有一种“块”（block）思想在后续的文档中有解释</em>/<br>    };<br>    return  &amp;(a-&gt;array[index]) ;<br>}</p>
+<p>//使得数组长大<br>//所谓的增大其实显然是不可能在a的直接实现<br>//方法就是先创建一块新的空间P，先将a的数据保存到新的空间P<br>//然后让空的a指向P,此时相当于a实现了自我长大。<br>//再将旧的空间释放， </p>
+<p>void array_inflate(void array_inflate){<br>    int <em>p = (int</em>)malloc(sizeof(int)(a-&gt;size+more_size));<br>    int i;<br>    for(i=0; i<a->size;i++){//数据保存<br>        p[i] = a-&gt;array[i];<br>    }<br>    free(a-&gt;array);//释放旧的a<br>    a-&gt;array = p;//长大了<br>    a-&gt;size += more_size;<br>    }</p>
+<p>int main(int argc,char const*argv[]){<br>    Array a = array_creat(100);<br>    *array_at(&amp;a,1000) = 1000;<br>    printf(“数组的大小：%d\n”,array_size(&amp;a));<br>    printf(“该点的值是：%d\n”,*array_at(&amp;a,0));<br>    return 0 ;<br>} </p>
+<pre><code>---
+</code></pre>
+]]></content>
   </entry>
 </search>
