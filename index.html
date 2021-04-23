@@ -160,7 +160,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -222,6 +222,208 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/04/23/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://riyugo.com/i/2021/04/16/si1b1f.gif">
+      <meta itemprop="name" content="高小白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高小白">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/04/23/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">单链表的实现和基本函数操作</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-04-23 18:11:10 / 修改时间：18:17:27" itemprop="dateCreated datePublished" datetime="2021-04-23T18:11:10+08:00">2021-04-23</time>
+    </span>
+
+  
+    <span id="/2021/04/23/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/" class="post-meta-item leancloud_visitors" data-flag-title="单链表的实现和基本函数操作" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2021/04/23/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://gao-youyi.github.io/2021/04/23/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/" class="cy_cmt_count" data-xid="2021/04/23/单链表的实现和基本函数实现/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <pre><code>---C++
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+//链表的实现和函数实现
+/*链表的结构必定包涵一个指针域，所以地址的分配不一定连续
+由计算据随机分配，所以单链表只能单向操作，但是也正是因此
+可以使得表基本无线扩容。 
+结构：
+每个数据元素由结点构成
+链表的第一个元素节点称为首结点 
+最后一个元素称为尾结点，指针域NULL
+一般定义head（头节点）指向首结点a1，这样比较好！！！ 
+*/ 
+typedef int ElemType;
+typedef struct node&#123;
+ElemType data;//数据域 
+struct node *next;//指针域 
+&#125;LNode,*LinkList; 
+
+//初始化单链表
+int InitList(LinkList &amp;L)&#123;
+L = (LinkList)malloc(sizeof(LNode));//分配空间
+if(!L)return 0;//判断是否成功 
+L-&gt;next = NULL; //初始结点指针域为空
+return 1; 
+&#125; 
+
+//销毁单链表
+int DestroyList(LinkList &amp;L)&#123;
+LinkList p;
+while(L)&#123;
+    p= L-&gt;next;
+    free(L); 
+&#125;
+&#125;
+
+//求单链表的长度
+int ListLength(LinkList L)&#123;
+int i = 0;
+//不能直接while(L)因为这样会把头节点移动到尾部； 
+LinkList p=L-&gt;next;
+while(p)&#123;
+    i++;
+    p = p-&gt;next;
+&#125;
+return i;
+&#125;
+
+//求单链表中值为e的元素 
+int LocataElem(LinkList L,ElemType e)&#123;
+int i = 0;
+LinkList p = L-&gt;next;
+while(p)&#123;
+    i++;
+    if(p-&gt;data==e)
+        return i;
+    p=p-&gt;next;
+&#125;
+return 0;//如果没有找到，返回0； 
+&#125;
+
+//单链表的插入操作 
+int ListInsert_L(LinkList &amp;L , int i,ElemType e)&#123;
+LinkList p,s;//创建两个指向结点的指针，这里的LinkList等价于LNode * ； 
+p = L;//让p指向头节点； 
+int j = 0;
+while(p &amp;&amp;j &lt;i-1)&#123;//先让p找到目标结点的上一个结点， 
+    p=p-&gt;next;
+    ++j;
+&#125;
+if(!p||j&gt;i-1)return 0;//判断i是否合法 
+//给s分配空间，来存储数据e， 
+s = (LinkList)malloc(sizeof(LNode));
+s-&gt;data = e;
+
+/*先让s的指针域指向i,此时i-1对应的结点，此时s和p
+都指向目标结点*/ 
+s-&gt;next = p-&gt;next;
+
+/*再让p指向s，这样就把s插入到目标结点的前面了，也
+就是把e插入进去了，此时链表i位置上就是e了；*/ 
+p-&gt;next = s;
+return 1;
+&#125; 
+
+//单链表的删除算法,类似于插入操作
+int  ListDelete_L(LinkList &amp;L, int i, ElemType &amp;e)&#123;
+LinkList p, q;
+p = L;
+int j = 0;
+//同样，先找到i-1个位置
+while(p-&gt;next&amp;&amp;j&lt;i-1)&#123;
+    p = p-&gt;next;
+    ++j;
+&#125; 
+//判断上一步是否正确进行 
+if (!p-&gt;next||j&gt;i-1)&#123;
+    return 0;;
+&#125;
+/*这里要先让p指向q,再让q指向p-&gt;next，
+也就是把链表通过q链接起来，再让p指向
+q的下一个位置，此时p就直接跳过i结点，指向
+i+1结点了，这时候就可以释放i结点了/
+如果直接让q指向i+1的结点，那么i的结点就会被遗忘在
+缓存区，当程序运行足够长时间时，会导致内存不够，
+或者其他的关于内存的问题*/
+q = p-&gt;next;
+p-&gt;next = q-&gt;next;
+e = q-&gt;data;
+free(q);
+return 1; 
+&#125;
+---
+后面我会给出操作实例
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
