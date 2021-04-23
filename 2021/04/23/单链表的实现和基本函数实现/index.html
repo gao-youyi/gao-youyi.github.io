@@ -20,6 +20,17 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;gao-youyi.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:true,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:false,&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;manual&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
 <meta name="description" content="---C++ #include&lt;stdio.h&gt; #include&lt;stdlib.h&gt; &#x2F;&#x2F;链表的实现和函数实现 &#x2F;*链表的结构必定包涵一个指针域，所以地址的分配不一定连续 由计算据随机分配，所以单链表只能单向操作，但是也正是因此 可以使得表基本无线扩容。  结构： 每个数据元素由结点构成 链表的第一个元素节点称为首结点  最后一个元素称为尾结点，指针域NULL 一般定义h">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单链表的实现和基本函数操作">
@@ -28,8 +39,9 @@
 <meta property="og:description" content="---C++ #include&lt;stdio.h&gt; #include&lt;stdlib.h&gt; &#x2F;&#x2F;链表的实现和函数实现 &#x2F;*链表的结构必定包涵一个指针域，所以地址的分配不一定连续 由计算据随机分配，所以单链表只能单向操作，但是也正是因此 可以使得表基本无线扩容。  结构： 每个数据元素由结点构成 链表的第一个元素节点称为首结点  最后一个元素称为尾结点，指针域NULL 一般定义h">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-23T10:11:10.748Z">
-<meta property="article:modified_time" content="2021-04-23T10:17:27.503Z">
+<meta property="article:modified_time" content="2021-04-23T10:32:14.547Z">
 <meta property="article:author" content="高小白">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
 
 
@@ -172,6 +184,10 @@
         <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">分类</span>
       </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
   </nav>
 </div>
   <div class="links-of-author site-overview-item animated">
@@ -261,7 +277,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-04-23 18:11:10 / 修改时间：18:17:27" itemprop="dateCreated datePublished" datetime="2021-04-23T18:11:10+08:00">2021-04-23</time>
+      <time title="创建时间：2021-04-23 18:11:10 / 修改时间：18:32:14" itemprop="dateCreated datePublished" datetime="2021-04-23T18:11:10+08:00">2021-04-23</time>
     </span>
 
   
@@ -317,7 +333,9 @@
 最后一个元素称为尾结点，指针域NULL
 一般定义head（头节点）指向首结点a1，这样比较好！！！ 
 */ 
-typedef int ElemType;
+</code></pre>
+<span id="more"></span>
+<pre><code>typedef int ElemType;
 typedef struct node&#123;
 ElemType data;//数据域 
 struct node *next;//指针域 
@@ -472,6 +490,9 @@ return 1;
   </div>
 </div>
 
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+          </div>
 
         
 
