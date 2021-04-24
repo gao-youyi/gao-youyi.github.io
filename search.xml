@@ -63,9 +63,9 @@
     <title>单链表的实现和基本函数操作</title>
     <url>/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<pre><code>---C++
-#include&lt;stdio.h&gt;
-#include&lt;stdlib.h&gt;
-//链表的实现和函数实现
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+/链表的实现和函数实现
 /*链表的结构必定包涵一个指针域，所以地址的分配不一定连续
 由计算据随机分配，所以单链表只能单向操作，但是也正是因此
 可以使得表基本无线扩容。 
@@ -74,94 +74,110 @@
 链表的第一个元素节点称为首结点 
 最后一个元素称为尾结点，指针域NULL
 一般定义head（头节点）指向首结点a1，这样比较好！！！ 
-*/ 
+*/
 </code></pre>
 <span id="more"></span>
 <pre><code>typedef int ElemType;
-typedef struct node&#123;
-ElemType data;//数据域 
-struct node *next;//指针域 
-&#125;LNode,*LinkList; 
+typedef struct node
+&#123;
+ElemType data;       //数据域
+struct node *next; //指针域
+&#125; LNode, *LinkList;
 
 //初始化单链表
-int InitList(LinkList &amp;L)&#123;
-L = (LinkList)malloc(sizeof(LNode));//分配空间
-if(!L)return 0;//判断是否成功 
+int InitList_L(LinkList &amp;L)
+&#123;
+L = (LinkList)malloc(sizeof(LNode)); //分配空间
+if (!L)
+    return 0;    //判断是否成功
 L-&gt;next = NULL; //初始结点指针域为空
-return 1; 
-&#125; 
+return 1;
+&#125;
 
 //销毁单链表
-int DestroyList(LinkList &amp;L)&#123;
+int DestroyList(LinkList &amp;L)
+&#123;
 LinkList p;
-while(L)&#123;
-    p= L-&gt;next;
-    free(L); 
+while (L)
+&#123;
+    p = L-&gt;next;
+    free(L);
 &#125;
 &#125;
 
 //求单链表的长度
-int ListLength(LinkList L)&#123;
+int ListLength(LinkList L)
+&#123;
 int i = 0;
-//不能直接while(L)因为这样会把头节点移动到尾部； 
-LinkList p=L-&gt;next;
-while(p)&#123;
+//不能直接while(L)因为这样会把头节点移动到尾部；
+LinkList p = L-&gt;next;
+while (p)
+&#123;
     i++;
     p = p-&gt;next;
 &#125;
 return i;
 &#125;
 
-//求单链表中值为e的元素 
-int LocataElem(LinkList L,ElemType e)&#123;
+//求单链表中值为e的元素
+int LocataElem(LinkList L, ElemType e)
+&#123;
 int i = 0;
 LinkList p = L-&gt;next;
-while(p)&#123;
+while (p)
+&#123;
     i++;
-    if(p-&gt;data==e)
+    if (p-&gt;data == e)
         return i;
-    p=p-&gt;next;
+    p = p-&gt;next;
 &#125;
-return 0;//如果没有找到，返回0； 
+return 0; //如果没有找到，返回0；
 &#125;
 
-//单链表的插入操作 
-int ListInsert_L(LinkList &amp;L , int i,ElemType e)&#123;
-LinkList p,s;//创建两个指向结点的指针，这里的LinkList等价于LNode * ； 
-p = L;//让p指向头节点； 
+//单链表的插入操作
+int ListInsert_L(LinkList &amp;L, int i, ElemType e)
+&#123;
+LinkList p, s; //创建两个指向结点的指针，这里的LinkList等价于LNode * ；
+p = L;           //让p指向头节点；
 int j = 0;
-while(p &amp;&amp;j &lt;i-1)&#123;//先让p找到目标结点的上一个结点， 
-    p=p-&gt;next;
+while (p &amp;&amp; j &lt; i - 1)
+&#123; //先让p找到目标结点的上一个结点，
+    p = p-&gt;next;
     ++j;
 &#125;
-if(!p||j&gt;i-1)return 0;//判断i是否合法 
-//给s分配空间，来存储数据e， 
+if (!p || j &gt; i - 1)
+    return 0; //判断i是否合法
+//给s分配空间，来存储数据e，
 s = (LinkList)malloc(sizeof(LNode));
 s-&gt;data = e;
 
 /*先让s的指针域指向i,此时i-1对应的结点，此时s和p
-都指向目标结点*/ 
+都指向目标结点*/
 s-&gt;next = p-&gt;next;
 
 /*再让p指向s，这样就把s插入到目标结点的前面了，也
-就是把e插入进去了，此时链表i位置上就是e了；*/ 
+就是把e插入进去了，此时链表i位置上就是e了；*/
 p-&gt;next = s;
 return 1;
-&#125; 
+&#125;
 
 //单链表的删除算法,类似于插入操作
-int  ListDelete_L(LinkList &amp;L, int i, ElemType &amp;e)&#123;
+int ListDelete_L(LinkList &amp;L, int i, ElemType &amp;e)
+&#123;
 LinkList p, q;
 p = L;
 int j = 0;
 //同样，先找到i-1个位置
-while(p-&gt;next&amp;&amp;j&lt;i-1)&#123;
+while (p-&gt;next &amp;&amp; j &lt; i - 1)
+&#123;
     p = p-&gt;next;
     ++j;
-&#125; 
-//判断上一步是否正确进行 
-if (!p-&gt;next||j&gt;i-1)&#123;
-    return 0;;
+&#125;
+//判断上一步是否正确进行
+if (!p-&gt;next || j &gt; i - 1)
+&#123;
+    return 0;
+    ;
 &#125;
 /*这里要先让p指向q,再让q指向p-&gt;next，
 也就是把链表通过q链接起来，再让p指向
@@ -174,11 +190,52 @@ q = p-&gt;next;
 p-&gt;next = q-&gt;next;
 e = q-&gt;data;
 free(q);
-return 1; 
+return 1;
 &#125;
----
-后面我会给出操作实例
+
+void ShowAddress(LinkList L)
+&#123;
+int i;
+LinkList p = L-&gt;next;
+//当然，这里如果使用while写起来会更简便一些
+if (p)
+&#123;
+    printf(&quot;\n头节点的地址为：\t%p\n&quot;, L); //前面说过了，头结点一般不存储数据
+    for (i = 1; p; i++)
+    &#123;
+        printf(&quot;第%d个结点的值为：\t%d;\t地址为：%p\n&quot;, i, p-&gt;data, p);
+        p = p-&gt;next;
+    &#125;
+&#125;
+&#125;
+
+int main()
+&#123;
+int A[8] = &#123;1, 2, 3, 4, 5, 100, 200, 300&#125;; //测试数据
+int i, j, e = 586;                           //e时是测试数据
+LinkList head, p;                           //head是头节点，相当于&amp;L;
+InitList_L(head);
+
+for (i = 1, j = 0; i &lt;= 8; i++, j++) //注意这里i从1开始，
+    ListInsert_L(head, i, A[j]);     //将数据依次放入
+
+printf(&quot;\n\n 当前单链表的状态为：\n&quot;);
+ShowAddress(head);
+i = 6; //把e放在第六个位置；
+printf(&quot;\n \ n 把e = %d 插入到第 %d 个位置后，单链表的状态为：\n&quot;, e, i);
+ListInsert_L(head, i, e);
+ShowAddress(head); //查看此时各个元素的位置和数据
+i = 5;
+//测试删除操作
+printf(&quot;\n \ n 删除第 %d 结点后的单链表状态： \n &quot;, i);
+ListDelete_L(head, i, e);
+ShowAddress(head); //展示删除成果
+&#125;
+...
 </code></pre>
+<h3 id="致歉："><a href="#致歉：" class="headerlink" title="致歉："></a>致歉：</h3><blockquote>
+<p>非常抱歉各位，昨天写代码的时候没有及时的检查和测试，导致程序出现问题，我表示深刻反思。</p>
+</blockquote>
 ]]></content>
       <tags>
         <tag>数据结构</tag>
@@ -392,5 +449,14 @@ display(List);
 <pre><code>---
 </code></pre>
 ]]></content>
+  </entry>
+  <entry>
+    <title>头插法和尾插法解释</title>
+    <url>/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%A4%B4%E6%8F%92%E6%B3%95%E5%92%8C%E5%B0%BE%E6%8F%92%E6%B3%95%E8%A7%A3%E9%87%8A/</url>
+    <content><![CDATA[<h3 id="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"><a href="#由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。" class="headerlink" title="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"></a>由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。</h3><p><a href="https://blog.csdn.net/qq_41028985/article/details/82859199?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161923112716780269869000%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=161923112716780269869000&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-82859199.first_rank_v2_pc_rank_v29&utm_term=%E5%A4%B4%E6%8F%92%E6%B3%95">点击链接查看外部解释</a></p>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
   </entry>
 </search>
