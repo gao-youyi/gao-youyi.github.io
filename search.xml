@@ -70,7 +70,7 @@
       </tags>
   </entry>
   <entry>
-    <title>单链表的实现和相关练习</title>
+    <title>第二天：单链表的实现和相关练习</title>
     <url>/2021/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<p>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;<br>//链表的实现和函数实现<br>/*链表的结构必定包涵一个指针域，所以地址的分配不一定连续<br>由计算据随机分配，所以单链表只能单向操作，但是也正是因此<br>可以使得表基本无线扩容。<br>结构：<br>每个数据元素由结点构成<br>链表的第一个元素节点称为首结点<br>最后一个元素称为尾结点，指针域NULL<br>一般定义head（头节点）指向首结点a1，这样比较好！！！<br>*/</p>
 <span id="more"></span>
@@ -437,7 +437,7 @@ for (i = 1; i &lt; n; i++) //报数，直到m-1;
       </tags>
   </entry>
   <entry>
-    <title>单循环链表的第一天</title>
+    <title>双链表和双向循环链表</title>
     <url>/2021/04/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8F%8C%E9%93%BE%E8%A1%A8%E5%92%8C%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
 #include &lt;bits/stdc++.h&gt;
