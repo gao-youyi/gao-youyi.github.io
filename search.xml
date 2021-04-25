@@ -325,8 +325,8 @@ display(List);
   </entry>
   <entry>
     <title>单循环链表的第一天</title>
-    <url>/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/</url>
-    <content><![CDATA[<pre><code>...C++
+    <url>/2021/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/</url>
+    <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
 #include &lt;bits/stdc++.h&gt;
 using namespace std;
 typedef int ElemType;
@@ -335,11 +335,10 @@ typedef struct node
 ElemType data;     //数据域
 struct node *next; //指针域
 &#125; LNode, *LinkList;
-
-//初始化单循环链表
 </code></pre>
 <span id="more"></span>
-<pre><code>int InitList_cl(LinkList &amp;L)
+<pre><code>//初始化单循环链表
+int InitList_cl(LinkList &amp;L)
 &#123;
 L = (LinkList)malloc(sizeof(LNode));
 if (!L)
@@ -383,16 +382,138 @@ int Delallx(LNode *&amp;L, ElemType x)
 LNode *pre = L, *p = L-&gt;next;
 while (p &amp;&amp; p-&gt;data == x)
 &#123;
-    pre-&gt;next = p-&gt;next;//
-    free(p);//
-    p = pre-&gt;next;//
+    pre-&gt;next = p-&gt;next; //
+    free(p);             //
+    p = pre-&gt;next;       //
 &#125;
 return 1;
 &#125;
 
 // 解决约瑟夫问题：此时的ElemType date 表示小孩的标号
+//这里采用不带头节点的单循环链表
+void CreateList(LinkList *&amp;L, int n) //创建链表
+&#123;
+int i;
+LinkList *p, *tc; //tc指向尾节点
+L = (LinkList *)malloc(sizeof(LinkList));
+L-&gt;data = 1; //先建立一个只有一个data为1结点的单链表
+tc = L;
+for (i = 2; i &lt; n; i++)
+&#123;
+    p = (LinkList *)malloc(sizeof(LinkList));
+    p-&gt;data = i;  //建立一个存放编号i的结点
+    tc-&gt;next = p; //尾插法，将p放在表的尾部，保证顺序输出；
+    tc = p;       //tc成为尾部
+&#125;
+tc-&gt;next = L; //首结点为L;
+&#125;
+void Joseph(int n, int m)
+&#123;
+int i, j;
+LinkList *L, *p, *q;
+CreateList(L, n);
+for (i = 1; i &lt; n; i++) //报数，直到m-1;
+&#123;
+    p = L;
+    j = 1;
+    while (j &lt; m - 1)
+    &#123;
+        j++;
+        p = p-&gt;next;
+    &#125;
+    q = p-&gt;next;           //q指向第m个结点
+    printf(&quot;%d&quot;, q-&gt;data); //结点出列
+    p-&gt;next = q-&gt;next;     //删除q结点
+    free(q);
+    L = p-&gt;next; //从下一个结点开始继续报数
+&#125;
+&#125;
 
-...
+&#39;&#39;&#39;
+</code></pre>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>单循环链表的第一天</title>
+    <url>/2021/04/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8F%8C%E9%93%BE%E8%A1%A8%E5%92%8C%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/</url>
+    <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+/*前驱和后继都能进行遍历的线性链表
+1，使用两个指针表示结点的逻辑关系
+2，前驱结点指针域prior
+3,后继结点指针域next
+4,不作特别指出，这里的双向链表都是带头结点的双向循环链表
+*/
+typedef int Elemtype;
+typedef struct DuLNode
+&#123;
+Elemtype data;
+struct DULNode *prior, *next;
+&#125; DuLNode, *DuLNode;
+</code></pre>
+<span id="more"></span>
+<pre><code>//双向循环链表求长度
+int ListLength(DuLNode L)
+&#123;
+int i = 0;
+DuLNode p = L-&gt;next;
+while (p) //只用检测p的尾节点是否为空就可以
+&#123;
+    i++;
+    p = p-&gt;next;
+&#125;
+return i;
+&#125;
+
+//插入操作
+//这里的插入顺序真的很重要哦
+/*p--s--q
+1,将s的next指向p-&gt;next;
+2,若p不是最后的结点，将q的prior指向s
+3，将s的Prior指针域指向p;
+4,将p的next指针域指向s；
+*/
+int ListInsert(DuLNode L, int i, Elemtype e)
+&#123;
+DuLNode p, s;
+if (i &lt; 1 || i &gt; ListLength(L) + 1) //判断数据是否合法
+    return 0;
+p = GetElemP(L, i - 1); //找到第i个元素的前驱指针p,
+if (p)                  //判断找到的位置是否正确
+    return 0;
+s = (DuLNode)malloc(sizeof(DuLNode)); //申请的新节点，存放e
+if (!s)
+&#123;
+    exit(OVERFLOW);
+&#125;
+//进行链接操作
+s-&gt;data = e;
+s-&gt;prior = p-&gt;next; //这一步要放在前面，避免p为尾节点
+p-&gt;next-&gt;prior = s;
+p-&gt;next = s;
+return 1;
+&#125;
+
+//删除结点
+int ListDelete(DuLNode L, int i, Elemtype &amp;e)
+&#123;
+DuLNode p;
+if (i &lt; 1) //判断数据是否合法
+    return 0;
+p = GetElemP(L, i); //找到i结点的位置
+if (!p)             //判断找到的位置是否正确
+    return 0;
+e = p-&gt;data;               //先将数据保存下来，可以省略这一步
+p-&gt;prior-&gt;next = p-&gt;next;  //链接后继
+p-&gt;next-&gt;prior = p-&gt;prior; //链接前驱
+free(p);                   //释放
+return 1;
+&#125;
+&#39;&#39;&#39;
 </code></pre>
 ]]></content>
       <tags>
