@@ -35,6 +35,114 @@
       </categories>
   </entry>
   <entry>
+    <title>认识你，真的很幸运</title>
+    <url>/2021/04/19/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/Readme/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>js笔记</title>
+    <url>/2021/04/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="js学习"><a href="#js学习" class="headerlink" title="js学习"></a>js学习</h1><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><pre><code>&#39;&#39;&#39;js
+    &lt;script&gt;
+    //输入框var声明变量
+    var myname1 = prompt(&#39;报上名来 &#39;);
+    var myname2 = prompt(&#39;再次报上名来&#39;)
+    var myname3;
+    myname3 = myname1;
+    myname1 = myname2;
+    myname2 = myname3;
+    //输出myname
+    alert(myname1);
+    alert(myname2);
+    console.log(myname1);
+    console.log(myname2);
+&lt;/script&gt;
+&#39;&#39;&#39;
+</code></pre>
+<h3 id="变量小结"><a href="#变量小结" class="headerlink" title="变量小结"></a>变量小结</h3><imge src="#">]]></content>
+      <tags>
+        <tag>前端开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我的第一次大胆尝试</title>
+    <url>/2021/04/23/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%A7%E8%83%86%E5%B0%9D%E8%AF%95/</url>
+    <content><![CDATA[<h2 id="时间飞逝"><a href="#时间飞逝" class="headerlink" title="时间飞逝"></a>时间飞逝</h2><span id="more"></span>
+<p>时至今日，我已经不能区分出喜欢和爱的感觉，甚至于我都不知道如何表达自己的心情，经历的东西太多，不断冲击着我作为一个普通人的承受能力范围。开始的时候我不断的告诉自己。这些东西不过是你成长中很微不足道的一部分，但是随着我对往事的回忆，我发现时间过的太快了。而我，一直选择兵来将挡，水来土掩的我，终于意识到，其实：自己一直在逃避很多的东西，比如逃避自己的恐惧，自己的不安，自己对于一个人的感情….</p>
+<h3 id="所谓成长"><a href="#所谓成长" class="headerlink" title="所谓成长"></a>所谓成长</h3><p>所谓成长，不过是忘了一些表达，多了一些沉默。</p>
+]]></content>
+      <tags>
+        <tag>十年之约</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>变量1</title>
+    <url>/2020/04/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%8F%98%E9%87%8F1/</url>
+    <content><![CDATA[<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据类型</title>
+    <script>
+        alert('我想打人\b\n但是法律不允许')
+        var str = '我的名字';
+        console.log(str.length);
+        console.log('我好' + str + '爱');
+        var q1 = prompt('do you love me?');
+        var s1 = 'thanks ' + q1;
+        alert(s1);
+    </script>
+</head>
+<span id="more"></span>
+<body>
+    <ul>简单数据类型
+        <li>Number:包括整数和小数，八进制以0开头；十六进制：以0X开始，可以用a到f表示；最大值：MAX_VALUE;最小值：MIN_VALUE;Infinity,Nan,-Infinity</li>
+        <li>Boolean:包括0false和1true</li>
+        <li>String:单引号和双引号都行，使用和c差不多，里面要使转义字符;字符串拼接：和python一样；</li>
+        <li></li>
+    </ul>
+    <ul>
+        <li>字符串转换：：/+拼接字符串，/.tostring转化/string（）函数/</li>
+        <li>数字型转换：：/parseInt()函数/parseFloat()函数/Number()函数/</li>
+        <li>布尔型转换：：/Boolean()函数/</li>
+    </ul>
+</body>
+</html>
+    '''HTML
+    <!DOCTYPE html>
+    <html lang="en">
+
+<pre><code>&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;年龄计算&lt;/title&gt;
+&lt;script&gt;
+    var date = prompt(&#39;你哪一年出生的&#39;);
+    age = 2020 - date;
+    alert(&#39;你现在&#39; + age + &#39;岁 &#39;);
+    var age1 = prompt(&#39;你想到多少岁&#39;);
+    var distance = age1 - age;
+    alert(&#39;还差&#39; + distance + &#39;年&#39;);
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+这是一个简单的关于数据使用的交互式页面
+&lt;/body&gt;
+
+&lt;/html&gt;
+&#39;&#39;&#39;
+</code></pre>
+]]></content>
+      <tags>
+        <tag>前端开发</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>css定位</title>
     <url>/2021/04/18/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%AE%9A%E4%BD%8D/</url>
     <content><![CDATA[<h1 id="定位学习手册"><a href="#定位学习手册" class="headerlink" title="定位学习手册"></a>定位学习手册</h1><h2 id="定位-定位模式-边偏移"><a href="#定位-定位模式-边偏移" class="headerlink" title="定位=定位模式+边偏移"></a>定位=定位模式+边偏移</h2><blockquote>
@@ -54,19 +162,39 @@
       </tags>
   </entry>
   <entry>
-    <title>认识你，真的很幸运</title>
-    <url>/2021/04/19/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/Readme/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>我的第一次大胆尝试</title>
-    <url>/2021/04/23/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%A7%E8%83%86%E5%B0%9D%E8%AF%95/</url>
-    <content><![CDATA[<h2 id="时间飞逝"><a href="#时间飞逝" class="headerlink" title="时间飞逝"></a>时间飞逝</h2><span id="more"></span>
-<p>时至今日，我已经不能区分出喜欢和爱的感觉，甚至于我都不知道如何表达自己的心情，经历的东西太多，不断冲击着我作为一个普通人的承受能力范围。开始的时候我不断的告诉自己。这些东西不过是你成长中很微不足道的一部分，但是随着我对往事的回忆，我发现时间过的太快了。而我，一直选择兵来将挡，水来土掩的我，终于意识到，其实：自己一直在逃避很多的东西，比如逃避自己的恐惧，自己的不安，自己对于一个人的感情….</p>
-<h3 id="所谓成长"><a href="#所谓成长" class="headerlink" title="所谓成长"></a>所谓成长</h3><p>所谓成长，不过是忘了一些表达，多了一些沉默。</p>
+    <title>第二天：单链表的实现和相关练习</title>
+    <url>/2021/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<p>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;<br>//链表的实现和函数实现<br>/*链表的结构必定包涵一个指针域，所以地址的分配不一定连续<br>由计算据随机分配，所以单链表只能单向操作，但是也正是因此<br>可以使得表基本无线扩容。<br>结构：<br>每个数据元素由结点构成<br>链表的第一个元素节点称为首结点<br>最后一个元素称为尾结点，指针域NULL<br>一般定义head（头节点）指向首结点a1，这样比较好！！！<br>*/</p>
+<span id="more"></span>
+<p>typedef int ElemType;<br>typedef struct node<br>{<br>    ElemType data;     //数据域<br>    struct node *next; //指针域<br>} LNode, *LinkList;</p>
+<p>//初始化单链表<br>int InitList_L(LinkList &amp;L)<br>{<br>    L = (LinkList)malloc(sizeof(LNode)); //分配空间<br>    if (!L)<br>        return 0;   //判断是否成功<br>    L-&gt;next = NULL; //初始结点指针域为空<br>    return 1;<br>}</p>
+<p>//销毁单链表<br>int DestroyList(LinkList &amp;L)<br>{<br>    LinkList p;<br>    while (L)<br>    {<br>        p = L-&gt;next;<br>        free(L);<br>    }<br>}</p>
+<p>//求单链表的长度<br>int ListLength(LinkList L)<br>{<br>    int i = 0;<br>    //不能直接while(L)因为这样会把头节点移动到尾部；<br>    LinkList p = L-&gt;next;<br>    while (p)<br>    {<br>        i++;<br>        p = p-&gt;next;<br>    }<br>    return i;<br>}</p>
+<p>//求单链表中值为e的元素<br>int LocataElem(LinkList L, ElemType e)<br>{<br>    int i = 0;<br>    LinkList p = L-&gt;next;<br>    while (p)<br>    {<br>        i++;<br>        if (p-&gt;data == e)<br>            return i;<br>        p = p-&gt;next;<br>    }<br>    return 0; //如果没有找到，返回0；<br>}</p>
+<p>//单链表的插入操作<br>int ListInsert_L(LinkList &amp;L, int i, ElemType e)<br>{<br>    LinkList p, s; //创建两个指向结点的指针，这里的LinkList等价于LNode * ；<br>    p = L;         //让p指向头节点；<br>    int j = 0;<br>    while (p &amp;&amp; j &lt; i - 1)<br>    { //先让p找到目标结点的上一个结点，<br>        p = p-&gt;next;<br>        ++j;<br>    }<br>    if (!p || j &gt; i - 1)<br>        return 0; //判断i是否合法<br>    //给s分配空间，来存储数据e，<br>    s = (LinkList)malloc(sizeof(LNode));<br>    s-&gt;data = e;</p>
+<pre><code>/*先让s的指针域指向i,此时i-1对应的结点，此时s和p
+都指向目标结点*/
+s-&gt;next = p-&gt;next;
+
+/*再让p指向s，这样就把s插入到目标结点的前面了，也
+就是把e插入进去了，此时链表i位置上就是e了；*/
+p-&gt;next = s;
+return 1;
+</code></pre>
+<p>}</p>
+<p>//单链表的删除算法,类似于插入操作<br>int ListDelete_L(LinkList &amp;L, int i, ElemType &amp;e)<br>{<br>    LinkList p, q;<br>    p = L;<br>    int j = 0;<br>    //同样，先找到i-1个位置<br>    while (p-&gt;next &amp;&amp; j &lt; i - 1)<br>    {<br>        p = p-&gt;next;<br>        ++j;<br>    }<br>    //判断上一步是否正确进行<br>    if (!p-&gt;next || j &gt; i - 1)<br>    {<br>        return 0;<br>        ;<br>    }<br>    /<em>这里要先让p指向q,再让q指向p-&gt;next，<br>    也就是把链表通过q链接起来，再让p指向<br>    q的下一个位置，此时p就直接跳过i结点，指向<br>    i+1结点了，这时候就可以释放i结点了/<br>    如果直接让q指向i+1的结点，那么i的结点就会被遗忘在<br>    缓存区，当程序运行足够长时间时，会导致内存不够，<br>    或者其他的关于内存的问题</em>/<br>    q = p-&gt;next;<br>    p-&gt;next = q-&gt;next;<br>    e = q-&gt;data;<br>    free(q);<br>    return 1;<br>}</p>
+<p>//显示链表的元素和物理存储位置<br>void ShowAddress(LinkList L)<br>{<br>    int i;<br>    LinkList p = L-&gt;next;<br>    //当然，这里如果使用while写起来会更简便一些<br>    if (p)<br>    {<br>        printf(“\n头节点的地址为：\t%p\n”, L); //前面说过了，头结点一般不存储数据<br>        for (i = 1; p; i++)<br>        {<br>            printf(“第%d个结点的值为：\t%d;\t地址为：%p\n”, i, p-&gt;data, p);<br>            p = p-&gt;next;<br>        }<br>    }<br>}</p>
+<p>/<em>确定一个链表中元素值最大的结点,我这里设定的是返回对应的结点<br>当然，也可以返回具体的值</em>/<br>LNode *MaxNode(LNode *L)<br>{<br>    LNode *p = L-&gt;next, *maxp = p;<br>    while (p != NULL)<br>    {<br>        if (maxp-&gt;data &lt; p-&gt;data)<br>            maxp = p;<br>        p = p-&gt;next;<br>    }<br>    return maxp;<br>}<br>/*int Search_L(LinkList L)//这是返回具体的值函数<br>{<br>    LinkList p;<br>    ElemType e;<br>    p = L-&gt;next;//第一次写的时候这里出现了问题，原因是L指向头结点，里面没有数据<br>    //通过不断的调试程序，我发现每次输出的值的地址和都不一样，所以我认为一定是<br>    //出现了地址和数值比较的情况，回头检查，意识到这里出现了问题。<br>    e = p-&gt;data;<br>    p = p-&gt;next;<br>    while (p)<br>    {<br>        if (p-&gt;data &gt; e)<br>            e = p-&gt;data;<br>        p = p-&gt;next;<br>    }<br>    return e;<br>}<br>*/</p>
+<p>//删除元素值最大的结点,这是一个经常用到的，但是比较难的知识点<br>/*注意：再删除单链表的某一位置的时候，要知道它的前一个位置<br>1，p遍历，同时pre指向p的前驱<br>2，用maxp 同步p，使得maxp指向最大值，同样maxpre指向maxp的前驱<br>3，基于maxpre和maxpre执行删除操作<br>*/<br>void DelMaxNode(LNode *&amp;L) //其实这里我觉的参数改成LinkList &amp;L，也行<br>{<br>    LNode *p = L-&gt;next, *pre = L, *maxp = p, *maxpre = pre;<br>    while (p)<br>    {<br>        if (maxp-&gt;data &lt; p-&gt;data) //比较大小<br>        {<br>            maxp = p;<br>            maxpre = pre;<br>        }<br>        //对pre和maxpre同步后移，保证紧随p，maxp后面<br>        pre = p;<br>        p = p-&gt;next;<br>    }<br>    maxpre-&gt;next = maxp-&gt;next; //简单的删除操作1<br>    free(maxp);                //简单的删除操作2<br>}<br>/<em>将表中元素逆置</em>/<br>void ListReverse(LNode *&amp;L)<br>{<br>    //先将表一分为二，一个是空的表头，一个是无表头的表<br>    LNode *p = L-&gt;next, *q;<br>    L-&gt;next = NULL;<br>    //尾插法实现<br>    while (p)<br>    {<br>        q = p-&gt;next;<br>        p-&gt;next = L-&gt;next;<br>        L-&gt;next = p;<br>        p = q; //尾插法这一步特别关键，可以保持p始终在第一个元素的位置（L的后继）<br>    }<br>}<br>//查找带头结点的单链表的倒数k个位置上的地址<br>/<em>思路：其实和前面的删除最大值的思路一致，只不过此时<br>    的同步指针不是立刻同步，而是在p移动了k个单位之后，才<br>    进行同步</em>/<br>int Searchk(LinkList list, int k)<br>{<br>    LinkList p, q;<br>    int count = 0;<br>    p = q = list-&gt;next;<br>    while (p &amp;&amp; count &lt; k) //把p从首结点移动到k结点<br>    {<br>        p = p-&gt;next;<br>        count++;<br>    }<br>    //判断k的位置是否合法<br>    if (p == NULL)<br>        return 0;<br>    else<br>    {<br>        while (p) //此时只要p指向尾节点，那么q就指向了倒数k的结点，输出就行<br>        {<br>            q = q-&gt;next;<br>            p = p-&gt;next;<br>        }<br>        printf(“倒数%d个位置的元素是：%d”, k, q-&gt;data); //打印<br>        return 1;<br>    }<br>}<br>int main()<br>{<br>    int A[8] = {1, 2, 3, 4, 5, 100, 200, 300}; //测试数据<br>    int i, j, e = 586;                         //e时是测试数据<br>    LinkList head, p;                          //head是头节点，相当于&L;<br>    InitList_L(head);</p>
+<pre><code>for (i = 1, j = 0; i &lt;= 8; i++, j++) //注意这里i从1开始，
+    ListInsert_L(head, i, A[j]);     //将数据依次放入
+Search_L(head);
+printf(&quot;%d&quot;, Search_L(head));
+</code></pre>
+<p>}</p>
 ]]></content>
       <tags>
-        <tag>十年之约</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -183,6 +311,26 @@ for (i = 1; i &lt; n; i++) //报数，直到m-1;
       </tags>
   </entry>
   <entry>
+    <title>尊重，强者的专属</title>
+    <url>/2021/04/25/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/%E6%97%A5%E8%AE%B0%E4%B8%80/</url>
+    <content><![CDATA[<p>不知道从什么时候起，我开始厌倦了笑给别人看，不是那种装作自己很坚强的样子，而是毫无掩饰的把自己的想法展示给别人。</p>
+<span id="more"></span>
+<p>记得以前自己是一个特别能隐忍的人，但是那时候也过得很累，每天都在为了那个和自己关系不大，但是实现起来基本不可能的目标去努力。<br>但是想来，那时候也是自己进步最大的日子，每天生活在自己的世界里，不关心外界发生了什么，只是在乎今天自己进步了没有。害，现在想想那时候的日子多么的简单啊，单调着但是也充实着。<br>后来，你闯进我的生命，似乎是你的到来，是为了给我的18岁增添一抹遗憾。我们在不合适的时间在一起，这注定了我们的结局不会太美好，但是，谁让我动心了呢？谁让我是高友谊呢？我永远相信人的力量，我不愿意屈服于任何人，任何事情，当然，除了你之外。<br>我选择在高考那个对于我们人生至关重要的结点，去挑战着那些承认的告诫。让我十分感动，也是我一直坚持下来的动力就是你对我的相信。你知道吗？当我每次跟你谈起未来的时候，我甚至都把我们的孩子的名字想好了，现在想来，我自己甚至都感觉很害怕，你是对于我来说有多么的中重要啊，让那个18岁的少年，努力去做着28岁中年人的选择。<br>时至今日，你仍然是我心心念念的那个人，我对你的思念，一刻也不曾消逝，就像我的生命一般，不曾停止。<br>我始终相信，在未来的某一天，我们一定可以再次相见，那么，就让我在那之前，足够的努力，不负我们的遇见，加油，我亲爱的璇！</p>
+]]></content>
+      <tags>
+        <tag>十年之约</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>头插法和尾插法解释</title>
+    <url>/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%A4%B4%E6%8F%92%E6%B3%95%E5%92%8C%E5%B0%BE%E6%8F%92%E6%B3%95%E8%A7%A3%E9%87%8A/</url>
+    <content><![CDATA[<h3 id="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"><a href="#由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。" class="headerlink" title="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"></a>由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。</h3><p><a href="https://blog.csdn.net/qq_41028985/article/details/82859199?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161923112716780269869000%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=161923112716780269869000&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-82859199.first_rank_v2_pc_rank_v29&utm_term=%E5%A4%B4%E6%8F%92%E6%B3%95">点击链接查看外部解释</a></p>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>双链表和双向循环链表</title>
     <url>/2021/04/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8F%8C%E9%93%BE%E8%A1%A8%E5%92%8C%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
@@ -265,73 +413,6 @@ return 1;
       <tags>
         <tag>数据结构</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>第二天：单链表的实现和相关练习</title>
-    <url>/2021/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<p>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;<br>//链表的实现和函数实现<br>/*链表的结构必定包涵一个指针域，所以地址的分配不一定连续<br>由计算据随机分配，所以单链表只能单向操作，但是也正是因此<br>可以使得表基本无线扩容。<br>结构：<br>每个数据元素由结点构成<br>链表的第一个元素节点称为首结点<br>最后一个元素称为尾结点，指针域NULL<br>一般定义head（头节点）指向首结点a1，这样比较好！！！<br>*/</p>
-<span id="more"></span>
-<p>typedef int ElemType;<br>typedef struct node<br>{<br>    ElemType data;     //数据域<br>    struct node *next; //指针域<br>} LNode, *LinkList;</p>
-<p>//初始化单链表<br>int InitList_L(LinkList &amp;L)<br>{<br>    L = (LinkList)malloc(sizeof(LNode)); //分配空间<br>    if (!L)<br>        return 0;   //判断是否成功<br>    L-&gt;next = NULL; //初始结点指针域为空<br>    return 1;<br>}</p>
-<p>//销毁单链表<br>int DestroyList(LinkList &amp;L)<br>{<br>    LinkList p;<br>    while (L)<br>    {<br>        p = L-&gt;next;<br>        free(L);<br>    }<br>}</p>
-<p>//求单链表的长度<br>int ListLength(LinkList L)<br>{<br>    int i = 0;<br>    //不能直接while(L)因为这样会把头节点移动到尾部；<br>    LinkList p = L-&gt;next;<br>    while (p)<br>    {<br>        i++;<br>        p = p-&gt;next;<br>    }<br>    return i;<br>}</p>
-<p>//求单链表中值为e的元素<br>int LocataElem(LinkList L, ElemType e)<br>{<br>    int i = 0;<br>    LinkList p = L-&gt;next;<br>    while (p)<br>    {<br>        i++;<br>        if (p-&gt;data == e)<br>            return i;<br>        p = p-&gt;next;<br>    }<br>    return 0; //如果没有找到，返回0；<br>}</p>
-<p>//单链表的插入操作<br>int ListInsert_L(LinkList &amp;L, int i, ElemType e)<br>{<br>    LinkList p, s; //创建两个指向结点的指针，这里的LinkList等价于LNode * ；<br>    p = L;         //让p指向头节点；<br>    int j = 0;<br>    while (p &amp;&amp; j &lt; i - 1)<br>    { //先让p找到目标结点的上一个结点，<br>        p = p-&gt;next;<br>        ++j;<br>    }<br>    if (!p || j &gt; i - 1)<br>        return 0; //判断i是否合法<br>    //给s分配空间，来存储数据e，<br>    s = (LinkList)malloc(sizeof(LNode));<br>    s-&gt;data = e;</p>
-<pre><code>/*先让s的指针域指向i,此时i-1对应的结点，此时s和p
-都指向目标结点*/
-s-&gt;next = p-&gt;next;
-
-/*再让p指向s，这样就把s插入到目标结点的前面了，也
-就是把e插入进去了，此时链表i位置上就是e了；*/
-p-&gt;next = s;
-return 1;
-</code></pre>
-<p>}</p>
-<p>//单链表的删除算法,类似于插入操作<br>int ListDelete_L(LinkList &amp;L, int i, ElemType &amp;e)<br>{<br>    LinkList p, q;<br>    p = L;<br>    int j = 0;<br>    //同样，先找到i-1个位置<br>    while (p-&gt;next &amp;&amp; j &lt; i - 1)<br>    {<br>        p = p-&gt;next;<br>        ++j;<br>    }<br>    //判断上一步是否正确进行<br>    if (!p-&gt;next || j &gt; i - 1)<br>    {<br>        return 0;<br>        ;<br>    }<br>    /<em>这里要先让p指向q,再让q指向p-&gt;next，<br>    也就是把链表通过q链接起来，再让p指向<br>    q的下一个位置，此时p就直接跳过i结点，指向<br>    i+1结点了，这时候就可以释放i结点了/<br>    如果直接让q指向i+1的结点，那么i的结点就会被遗忘在<br>    缓存区，当程序运行足够长时间时，会导致内存不够，<br>    或者其他的关于内存的问题</em>/<br>    q = p-&gt;next;<br>    p-&gt;next = q-&gt;next;<br>    e = q-&gt;data;<br>    free(q);<br>    return 1;<br>}</p>
-<p>//显示链表的元素和物理存储位置<br>void ShowAddress(LinkList L)<br>{<br>    int i;<br>    LinkList p = L-&gt;next;<br>    //当然，这里如果使用while写起来会更简便一些<br>    if (p)<br>    {<br>        printf(“\n头节点的地址为：\t%p\n”, L); //前面说过了，头结点一般不存储数据<br>        for (i = 1; p; i++)<br>        {<br>            printf(“第%d个结点的值为：\t%d;\t地址为：%p\n”, i, p-&gt;data, p);<br>            p = p-&gt;next;<br>        }<br>    }<br>}</p>
-<p>/<em>确定一个链表中元素值最大的结点,我这里设定的是返回对应的结点<br>当然，也可以返回具体的值</em>/<br>LNode *MaxNode(LNode *L)<br>{<br>    LNode *p = L-&gt;next, *maxp = p;<br>    while (p != NULL)<br>    {<br>        if (maxp-&gt;data &lt; p-&gt;data)<br>            maxp = p;<br>        p = p-&gt;next;<br>    }<br>    return maxp;<br>}<br>/*int Search_L(LinkList L)//这是返回具体的值函数<br>{<br>    LinkList p;<br>    ElemType e;<br>    p = L-&gt;next;//第一次写的时候这里出现了问题，原因是L指向头结点，里面没有数据<br>    //通过不断的调试程序，我发现每次输出的值的地址和都不一样，所以我认为一定是<br>    //出现了地址和数值比较的情况，回头检查，意识到这里出现了问题。<br>    e = p-&gt;data;<br>    p = p-&gt;next;<br>    while (p)<br>    {<br>        if (p-&gt;data &gt; e)<br>            e = p-&gt;data;<br>        p = p-&gt;next;<br>    }<br>    return e;<br>}<br>*/</p>
-<p>//删除元素值最大的结点,这是一个经常用到的，但是比较难的知识点<br>/*注意：再删除单链表的某一位置的时候，要知道它的前一个位置<br>1，p遍历，同时pre指向p的前驱<br>2，用maxp 同步p，使得maxp指向最大值，同样maxpre指向maxp的前驱<br>3，基于maxpre和maxpre执行删除操作<br>*/<br>void DelMaxNode(LNode *&amp;L) //其实这里我觉的参数改成LinkList &amp;L，也行<br>{<br>    LNode *p = L-&gt;next, *pre = L, *maxp = p, *maxpre = pre;<br>    while (p)<br>    {<br>        if (maxp-&gt;data &lt; p-&gt;data) //比较大小<br>        {<br>            maxp = p;<br>            maxpre = pre;<br>        }<br>        //对pre和maxpre同步后移，保证紧随p，maxp后面<br>        pre = p;<br>        p = p-&gt;next;<br>    }<br>    maxpre-&gt;next = maxp-&gt;next; //简单的删除操作1<br>    free(maxp);                //简单的删除操作2<br>}<br>/<em>将表中元素逆置</em>/<br>void ListReverse(LNode *&amp;L)<br>{<br>    //先将表一分为二，一个是空的表头，一个是无表头的表<br>    LNode *p = L-&gt;next, *q;<br>    L-&gt;next = NULL;<br>    //尾插法实现<br>    while (p)<br>    {<br>        q = p-&gt;next;<br>        p-&gt;next = L-&gt;next;<br>        L-&gt;next = p;<br>        p = q; //尾插法这一步特别关键，可以保持p始终在第一个元素的位置（L的后继）<br>    }<br>}<br>//查找带头结点的单链表的倒数k个位置上的地址<br>/<em>思路：其实和前面的删除最大值的思路一致，只不过此时<br>    的同步指针不是立刻同步，而是在p移动了k个单位之后，才<br>    进行同步</em>/<br>int Searchk(LinkList list, int k)<br>{<br>    LinkList p, q;<br>    int count = 0;<br>    p = q = list-&gt;next;<br>    while (p &amp;&amp; count &lt; k) //把p从首结点移动到k结点<br>    {<br>        p = p-&gt;next;<br>        count++;<br>    }<br>    //判断k的位置是否合法<br>    if (p == NULL)<br>        return 0;<br>    else<br>    {<br>        while (p) //此时只要p指向尾节点，那么q就指向了倒数k的结点，输出就行<br>        {<br>            q = q-&gt;next;<br>            p = p-&gt;next;<br>        }<br>        printf(“倒数%d个位置的元素是：%d”, k, q-&gt;data); //打印<br>        return 1;<br>    }<br>}<br>int main()<br>{<br>    int A[8] = {1, 2, 3, 4, 5, 100, 200, 300}; //测试数据<br>    int i, j, e = 586;                         //e时是测试数据<br>    LinkList head, p;                          //head是头节点，相当于&L;<br>    InitList_L(head);</p>
-<pre><code>for (i = 1, j = 0; i &lt;= 8; i++, j++) //注意这里i从1开始，
-    ListInsert_L(head, i, A[j]);     //将数据依次放入
-Search_L(head);
-printf(&quot;%d&quot;, Search_L(head));
-</code></pre>
-<p>}</p>
-]]></content>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>头插法和尾插法解释</title>
-    <url>/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%A4%B4%E6%8F%92%E6%B3%95%E5%92%8C%E5%B0%BE%E6%8F%92%E6%B3%95%E8%A7%A3%E9%87%8A/</url>
-    <content><![CDATA[<h3 id="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"><a href="#由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。" class="headerlink" title="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"></a>由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。</h3><p><a href="https://blog.csdn.net/qq_41028985/article/details/82859199?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161923112716780269869000%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=161923112716780269869000&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-82859199.first_rank_v2_pc_rank_v29&utm_term=%E5%A4%B4%E6%8F%92%E6%B3%95">点击链接查看外部解释</a></p>
-]]></content>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>自动增长的数组</title>
-    <url>/2021/04/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E8%87%AA%E5%8A%A8%E5%A2%9E%E9%95%BF%E7%9A%84%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h1 id="可以自动增长的数组"><a href="#可以自动增长的数组" class="headerlink" title="可以自动增长的数组"></a>可以自动增长的数组</h1><h2 id="纯粹的数组实现："><a href="#纯粹的数组实现：" class="headerlink" title="纯粹的数组实现："></a>纯粹的数组实现：</h2><pre><code>---C语言 
-</code></pre>
-<p>//可增长的数组<br>//初级版本，没有加入数据结构1的思想，后续有新的版本<br>//参考资料：浙大翁恺的C语言进阶 </p>
-<span id="more"></span>
-<p>//#include&lt;stdio.h&gt;<br>//#include&lt;stdlib.h&gt;</p>
-<!--more-->
-<p>typedef struct {<br>    int <em>array;<br>    int size;<br>}Array;//最好不要写</em>Array，虽然方便，但后续很麻烦 </p>
-<p>Array array_creat(int init_size){// 不返回指针目的是避免潜在的危险<br>    Array a;//只是创建本地变量，而不是指针。<br>    a.size = init_size;<br>    a.array = (int*)malloc(sizeof(int)*a.size);<br>    return a;//<br>}//创建数组 </p>
-<p>void arry_free(Array *a){<br>    free(a-&gt;array) ;<br>    a-&gt;array = NULL;<br>    a-&gt;size = 0;</p>
-<p>}//回收数组的空间 </p>
-<p>//封装 ,保护数据<br>//告诉我们数组中有多少个单元可以用<br>int array_size(const Array *a){<br>    return a-&gt;size;<br>}</p>
-<p>//访问数组的某个单元<br>//以指针类型返回该位置，方便后续的对该点的赋值。<br>int *array_at(Array *a,int index){<br>    if(index &gt;= a-&gt;size){<br>        array_inflate(a, (index-a-&gt;size)+1);<br>/<em>此处有很多种方法，有一种“块”（block）思想在后续的文档中有解释</em>/<br>    };<br>    return  &amp;(a-&gt;array[index]) ;<br>}</p>
-<p>//使得数组长大<br>//所谓的增大其实显然是不可能在a的直接实现<br>//方法就是先创建一块新的空间P，先将a的数据保存到新的空间P<br>//然后让空的a指向P,此时相当于a实现了自我长大。<br>//再将旧的空间释放， </p>
-<p>void array_inflate(void array_inflate){<br>    int <em>p = (int</em>)malloc(sizeof(int)(a-&gt;size+more_size));<br>    int i;<br>    for(i=0; i<a->size;i++){//数据保存<br>        p[i] = a-&gt;array[i];<br>    }<br>    free(a-&gt;array);//释放旧的a<br>    a-&gt;array = p;//长大了<br>    a-&gt;size += more_size;<br>    }</p>
-<p>int main(int argc,char const*argv[]){<br>    Array a = array_creat(100);<br>    *array_at(&amp;a,1000) = 1000;<br>    printf(“数组的大小：%d\n”,array_size(&amp;a));<br>    printf(“该点的值是：%d\n”,*array_at(&amp;a,0));<br>    return 0 ;<br>} </p>
-<pre><code>---
-</code></pre>
-]]></content>
   </entry>
   <entry>
     <title>顺序表学习笔记</title>
@@ -521,106 +602,25 @@ display(List);
       </tags>
   </entry>
   <entry>
-    <title>变量1</title>
-    <url>/2020/04/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%8F%98%E9%87%8F1/</url>
-    <content><![CDATA[<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数据类型</title>
-    <script>
-        alert('我想打人\b\n但是法律不允许')
-        var str = '我的名字';
-        console.log(str.length);
-        console.log('我好' + str + '爱');
-        var q1 = prompt('do you love me?');
-        var s1 = 'thanks ' + q1;
-        alert(s1);
-    </script>
-</head>
+    <title>自动增长的数组</title>
+    <url>/2021/04/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E8%87%AA%E5%8A%A8%E5%A2%9E%E9%95%BF%E7%9A%84%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h1 id="可以自动增长的数组"><a href="#可以自动增长的数组" class="headerlink" title="可以自动增长的数组"></a>可以自动增长的数组</h1><h2 id="纯粹的数组实现："><a href="#纯粹的数组实现：" class="headerlink" title="纯粹的数组实现："></a>纯粹的数组实现：</h2><pre><code>---C语言 
+</code></pre>
+<p>//可增长的数组<br>//初级版本，没有加入数据结构1的思想，后续有新的版本<br>//参考资料：浙大翁恺的C语言进阶 </p>
 <span id="more"></span>
-<body>
-    <ul>简单数据类型
-        <li>Number:包括整数和小数，八进制以0开头；十六进制：以0X开始，可以用a到f表示；最大值：MAX_VALUE;最小值：MIN_VALUE;Infinity,Nan,-Infinity</li>
-        <li>Boolean:包括0false和1true</li>
-        <li>String:单引号和双引号都行，使用和c差不多，里面要使转义字符;字符串拼接：和python一样；</li>
-        <li></li>
-    </ul>
-    <ul>
-        <li>字符串转换：：/+拼接字符串，/.tostring转化/string（）函数/</li>
-        <li>数字型转换：：/parseInt()函数/parseFloat()函数/Number()函数/</li>
-        <li>布尔型转换：：/Boolean()函数/</li>
-    </ul>
-</body>
-</html>
-    '''HTML
-    <!DOCTYPE html>
-    <html lang="en">
-
-<pre><code>&lt;head&gt;
-&lt;meta charset=&quot;UTF-8&quot;&gt;
-&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-&lt;title&gt;年龄计算&lt;/title&gt;
-&lt;script&gt;
-    var date = prompt(&#39;你哪一年出生的&#39;);
-    age = 2020 - date;
-    alert(&#39;你现在&#39; + age + &#39;岁 &#39;);
-    var age1 = prompt(&#39;你想到多少岁&#39;);
-    var distance = age1 - age;
-    alert(&#39;还差&#39; + distance + &#39;年&#39;);
-&lt;/script&gt;
-&lt;/head&gt;
-
-&lt;body&gt;
-这是一个简单的关于数据使用的交互式页面
-&lt;/body&gt;
-
-&lt;/html&gt;
-&#39;&#39;&#39;
+<p>//#include&lt;stdio.h&gt;<br>//#include&lt;stdlib.h&gt;</p>
+<!--more-->
+<p>typedef struct {<br>    int <em>array;<br>    int size;<br>}Array;//最好不要写</em>Array，虽然方便，但后续很麻烦 </p>
+<p>Array array_creat(int init_size){// 不返回指针目的是避免潜在的危险<br>    Array a;//只是创建本地变量，而不是指针。<br>    a.size = init_size;<br>    a.array = (int*)malloc(sizeof(int)*a.size);<br>    return a;//<br>}//创建数组 </p>
+<p>void arry_free(Array *a){<br>    free(a-&gt;array) ;<br>    a-&gt;array = NULL;<br>    a-&gt;size = 0;</p>
+<p>}//回收数组的空间 </p>
+<p>//封装 ,保护数据<br>//告诉我们数组中有多少个单元可以用<br>int array_size(const Array *a){<br>    return a-&gt;size;<br>}</p>
+<p>//访问数组的某个单元<br>//以指针类型返回该位置，方便后续的对该点的赋值。<br>int *array_at(Array *a,int index){<br>    if(index &gt;= a-&gt;size){<br>        array_inflate(a, (index-a-&gt;size)+1);<br>/<em>此处有很多种方法，有一种“块”（block）思想在后续的文档中有解释</em>/<br>    };<br>    return  &amp;(a-&gt;array[index]) ;<br>}</p>
+<p>//使得数组长大<br>//所谓的增大其实显然是不可能在a的直接实现<br>//方法就是先创建一块新的空间P，先将a的数据保存到新的空间P<br>//然后让空的a指向P,此时相当于a实现了自我长大。<br>//再将旧的空间释放， </p>
+<p>void array_inflate(void array_inflate){<br>    int <em>p = (int</em>)malloc(sizeof(int)(a-&gt;size+more_size));<br>    int i;<br>    for(i=0; i<a->size;i++){//数据保存<br>        p[i] = a-&gt;array[i];<br>    }<br>    free(a-&gt;array);//释放旧的a<br>    a-&gt;array = p;//长大了<br>    a-&gt;size += more_size;<br>    }</p>
+<p>int main(int argc,char const*argv[]){<br>    Array a = array_creat(100);<br>    *array_at(&amp;a,1000) = 1000;<br>    printf(“数组的大小：%d\n”,array_size(&amp;a));<br>    printf(“该点的值是：%d\n”,*array_at(&amp;a,0));<br>    return 0 ;<br>} </p>
+<pre><code>---
 </code></pre>
 ]]></content>
-      <tags>
-        <tag>前端开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>js笔记</title>
-    <url>/2021/04/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="js学习"><a href="#js学习" class="headerlink" title="js学习"></a>js学习</h1><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><pre><code>&#39;&#39;&#39;js
-    &lt;script&gt;
-    //输入框var声明变量
-    var myname1 = prompt(&#39;报上名来 &#39;);
-    var myname2 = prompt(&#39;再次报上名来&#39;)
-    var myname3;
-    myname3 = myname1;
-    myname1 = myname2;
-    myname2 = myname3;
-    //输出myname
-    alert(myname1);
-    alert(myname2);
-    console.log(myname1);
-    console.log(myname2);
-&lt;/script&gt;
-&#39;&#39;&#39;
-</code></pre>
-<h3 id="变量小结"><a href="#变量小结" class="headerlink" title="变量小结"></a>变量小结</h3><imge src="#">]]></content>
-      <tags>
-        <tag>前端开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>尊重，强者的专属</title>
-    <url>/2021/04/25/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/%E6%97%A5%E8%AE%B0%E4%B8%80/</url>
-    <content><![CDATA[<p>不知道从什么时候起，我开始厌倦了笑给别人看，不是那种装作自己很坚强的样子，而是毫无掩饰的把自己的想法展示给别人。</p>
-<span id="more"></span>
-<p>记得以前自己是一个特别能隐忍的人，但是那时候也过得很累，每天都在为了那个和自己关系不大，但是实现起来基本不可能的目标去努力。<br>但是想来，那时候也是自己进步最大的日子，每天生活在自己的世界里，不关心外界发生了什么，只是在乎今天自己进步了没有。害，现在想想那时候的日子多么的简单啊，单调着但是也充实着。<br>后来，你闯进我的生命，似乎是你的到来，是为了给我的18岁增添一抹遗憾。我们在不合适的时间在一起，这注定了我们的结局不会太美好，但是，谁让我动心了呢？谁让我是高友谊呢？我永远相信人的力量，我不愿意屈服于任何人，任何事情，当然，除了你之外。<br>我选择在高考那个对于我们人生至关重要的结点，去挑战着那些承认的告诫。让我十分感动，也是我一直坚持下来的动力就是你对我的相信。你知道吗？当我每次跟你谈起未来的时候，我甚至都把我们的孩子的名字想好了，现在想来，我自己甚至都感觉很害怕，你是对于我来说有多么的中重要啊，让那个18岁的少年，努力去做着28岁中年人的选择。<br>时至今日，你仍然是我心心念念的那个人，我对你的思念，一刻也不曾消逝，就像我的生命一般，不曾停止。<br>我始终相信，在未来的某一天，我们一定可以再次相见，那么，就让我在那之前，足够的努力，不负我们的遇见，加油，我亲爱的璇！</p>
-]]></content>
-      <tags>
-        <tag>十年之约</tag>
-      </tags>
   </entry>
 </search>
