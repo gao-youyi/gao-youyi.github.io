@@ -31,27 +31,28 @@
     })();
 </script>
 
-<meta name="description" content="错误的打开方式  没错，我这个苦逼青年，怀着无比的敬意，按照我亲爱的师哥得我发来的学习视频，从前天晚上8点开始，基本没有听下来的肝到了第二天早上四点多.... &amp;nbsp &amp;nbsp &amp;nbsp然后就有了下面这样的我">
+<meta name="description" content="&#39;&#39;&#39;C++ #include &lt;bits&#x2F;stdc++.h&gt; using namespace std; &#x2F;&#x2F;任何一种存储结构都可以写成顺序存储和链式存储 &#x2F;&#x2F;入栈：Push：*(S.top)++,出栈：Pop:*--S.top；栈顶元素top，从 &#x2F;*栈的顺序表结构*&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="曲折的博客搭建">
-<meta property="og:url" content="http://gao-youyi.github.io/2021/04/11/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%9C%89%E6%84%9F/index.html">
+<meta property="og:title" content="栈的顺序表实现">
+<meta property="og:url" content="http://gao-youyi.github.io/2021/04/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="高小白">
-<meta property="og:description" content="错误的打开方式  没错，我这个苦逼青年，怀着无比的敬意，按照我亲爱的师哥得我发来的学习视频，从前天晚上8点开始，基本没有听下来的肝到了第二天早上四点多.... &amp;nbsp &amp;nbsp &amp;nbsp然后就有了下面这样的我">
+<meta property="og:description" content="&#39;&#39;&#39;C++ #include &lt;bits&#x2F;stdc++.h&gt; using namespace std; &#x2F;&#x2F;任何一种存储结构都可以写成顺序存储和链式存储 &#x2F;&#x2F;入栈：Push：*(S.top)++,出栈：Pop:*--S.top；栈顶元素top，从 &#x2F;*栈的顺序表结构*&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-04-11T12:34:22.191Z">
-<meta property="article:modified_time" content="2021-04-24T00:56:43.925Z">
+<meta property="article:published_time" content="2021-04-26T14:38:00.000Z">
+<meta property="article:modified_time" content="2021-04-26T14:39:53.089Z">
 <meta property="article:author" content="高小白">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://gao-youyi.github.io/2021/04/11/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%9C%89%E6%84%9F/">
+<link rel="canonical" href="http://gao-youyi.github.io/2021/04/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;gao-youyi.github.io&#x2F;2021&#x2F;04&#x2F;11&#x2F;%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%9C%89%E6%84%9F&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;04&#x2F;11&#x2F;博客搭建有感&#x2F;&quot;,&quot;title&quot;:&quot;曲折的博客搭建&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;gao-youyi.github.io&#x2F;2021&#x2F;04&#x2F;26&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84&#x2F;%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97&#x2F;%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;04&#x2F;26&#x2F;数据结构&#x2F;栈和队列&#x2F;栈的顺序表实现&#x2F;&quot;,&quot;title&quot;:&quot;栈的顺序表实现&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>曲折的博客搭建 | 高小白</title><script src="/js/config.js"></script>
+<title>栈的顺序表实现 | 高小白</title><script src="/js/config.js"></script>
   
 
 
@@ -143,7 +144,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
        <!--网易云插件-->
   <iframe frameborder="1px" border="0" marginwidth="0" marginheight="0" width=330 height=86 
       src="//music.163.com/outchain/player?type=2&id=463352828&auto=0&height=66">
@@ -160,37 +161,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">&amp;nbsp &amp;nbsp &amp;nbsp然后就有了下面这样的我
-
-
-然后我这个苦逼的二货青年，不，是老年人，继续开始了挠头搔👂不知所以然的过程。当然，我也从中学会了很多的东西，比如坚持的力量，学会独处，总的来说，包涵以下几点：
-
-
-
-
-学习新的东西需要有勇于试错的决心
-要敢于正视自己的困难，积极请教
-要付出足够的时间和精力
-要懂得享受着其中的乐趣
-要学会一个人独处
-保持谦逊
-
-</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">
-
-
-然后我这个苦逼的二货青年，不，是老年人，继续开始了挠头搔👂不知所以然的过程。当然，我也从中学会了很多的东西，比如坚持的力量，学会独处，总的来说，包涵以下几点：
-
-
-
-
-学习新的东西需要有勇于试错的决心
-要敢于正视自己的困难，积极请教
-要付出足够的时间和精力
-要懂得享受着其中的乐趣
-要学会一个人独处
-保持谦逊
-
-</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -282,7 +252,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/04/11/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%9C%89%E6%84%9F/">
+    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/04/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://5b0988e595225.cdn.sohucs.com/images/20200421/2c31c57374fd445ab3ac98c60e9af59b.gif">
@@ -295,7 +265,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          曲折的博客搭建<a href="https://gao-youyi.github.io_posts/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%9C%89%E6%84%9F.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          栈的顺序表实现<a href="https://gao-youyi.github.io_posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -305,19 +275,13 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2021-04-11 20:34:22" itemprop="dateCreated datePublished" datetime="2021-04-11T20:34:22+08:00">2021-04-11</time>
+      <time title="创建时间：2021-04-26 22:38:00 / 修改时间：22:39:53" itemprop="dateCreated datePublished" datetime="2021-04-26T22:38:00+08:00">2021-04-26</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-24 08:56:43" itemprop="dateModified" datetime="2021-04-24T08:56:43+08:00">2021-04-24</time>
-      </span>
 
   
-    <span id="/2021/04/11/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%9C%89%E6%84%9F/" class="post-meta-item leancloud_visitors" data-flag-title="曲折的博客搭建" title="阅读次数">
+    <span id="/2021/04/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0/" class="post-meta-item leancloud_visitors" data-flag-title="栈的顺序表实现" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -340,8 +304,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2021/04/11/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%9C%89%E6%84%9F/#SOHUCS" itemprop="discussionUrl">
-        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/04/11/博客搭建有感/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2021/04/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/04/26/数据结构/栈和队列/栈的顺序表实现/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -356,26 +320,68 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <hr>
-<image src="https://th.bing.com/th/id/R8017ed3b55c63759122c0a3e3355bb7c?rik=T4kvqRC2FH%2f%2f5A&riu=http%3a%2f%2fimg.wxcha.com%2ffile%2f201706%2f13%2faa6ae04b42.gif&ehk=p%2bgMFuX3kYlQtLn%2f8fYuecOmfvrWIIQIUpxsDUKQNjc%3d&risl=&pid=ImgRaw">
-错误的打开方式
-<hr>
-没错，我这个苦逼青年，怀着无比的敬意，按照我亲爱的师哥得我发来的学习视频，从前天晚上8点开始，基本没有听下来的肝到了第二天早上四点多....
-<h4>&nbsp &nbsp &nbsp然后就有了下面这样的我<h4>
+        <pre><code>&#39;&#39;&#39;C++
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+//任何一种存储结构都可以写成顺序存储和链式存储
+//入栈：Push：*(S.top)++,出栈：Pop:*--S.top；栈顶元素top，从
+/*栈的顺序表结构*/
+</code></pre>
 <span id="more"></span>
-<image src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/ctwVEjeYQ2ic9QVvaUJoxwiaL1eFJ7iaKgcyR9PSledAYd9I6V7iaAlO8ibictfeZsRDSFCu4fOxChEvuNa1vpgJWz6Q/0?wx_fmt=png">
-然后我这个苦逼的二货青年，不，是老年人，继续开始了挠头搔👂不知所以然的过程。当然，我也从中学会了很多的东西，比如坚持的力量，学会独处，总的来说，包涵以下几点：
-<br>
+<pre><code>#define STACK_INIT_SIZE 100 //初始分配量
+#define STACK_INCREMENT 10  //存储空间分配增量
+typedef char ElemType;
+typedef struct
+&#123;
+ElemType *base; //栈底指针,位置不变
+ElemType *top;  //栈顶指针，top = base 时，栈为空
+int stacksize;  //栈空间大小
+&#125; SqStack;
 
-<ul style="color:red">
-<li>学习新的东西需要有勇于试错的决心</li>
-<li>要敢于正视自己的困难，积极请教</li>
-<li>要付出足够的时间和精力</li>
-<li>要懂得享受着其中的乐趣</li>
-<li>要学会一个人独处</li>
-<li>保持谦逊</li>
-</ul>
-<!--more-->
+//初始化栈
+void intStack(SqStack &amp;S)
+&#123;
+if (!(S.base = (ElemType *)malloc(STACK_INIT_SIZE * sizeof(ElemType))))
+    exit(OVERFLOW); //存储分配失败
+S.top = S.base;
+S.stacksize = STACK_INIT_SIZE;
+&#125;
+
+//销毁栈
+void DestroyStack(SqStack &amp;S)
+&#123;
+free(S.base);  //首地址
+S.base = NULL; //置空
+S.top = NULL;
+S.stacksize = 0;
+&#125;
+
+//进栈操作
+void Push(SqStack &amp;S, ElemType e)
+&#123;
+if ((S.top - S.base) &gt;= S.stacksize)
+&#123; //动态扩充空间
+    S.base = (ElemType *)realloc(S.base, ((S.stacksize) + STACK_INCREMENT) * sizeof(ElemType));
+    if (!S.base)
+        exit(OVERFLOW); //判断上一步是否分配成功
+    S.top = S.base + S.stacksize;
+    S.stacksize += STACK_INCREMENT;
+&#125;
+*(S.top)++ = e; //Push
+&#125;
+
+//出栈
+int Pop(SqStack &amp;S, ElemType &amp;e)
+&#123;
+if (S.top == S.base)
+    return 0;
+e = *--S.top;
+return 1;
+&#125;
+</code></pre>
+<p>//取出栈顶元素值,这里并没有对S.top进行修改，因为只是<br>int GetTop(SqStack S, ElemType &amp;e) //取出的值通过e返回，但是对S不进行修改<br>{<br>    if (S.top &gt; S.base)<br>    {<br>        e = *(S.top - 1); //传出栈顶值<br>        return 1;<br>    }<br>    else<br>        return 0;<br>}</p>
+<p>//判断栈是否为空<br>int StackEmpty(SqStack S)<br>{ //当栈为空的时候，返回值为1,否则为0；<br>    if (S.top == S.base)<br>        return 1;<br>    else<br>        return 0;<br>}<br>    …</p>
+
     </div>
 
     
@@ -428,18 +434,21 @@
   </div>
 </div>
 
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/04/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%8F%98%E9%87%8F1/" rel="prev" title="变量1">
-                  <i class="fa fa-chevron-left"></i> 变量1
+                <a href="/2021/04/25/%E6%97%A5%E8%AE%B0%E4%B8%80/" rel="prev" title="尊重，强者的专属">
+                  <i class="fa fa-chevron-left"></i> 尊重，强者的专属
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/04/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E8%87%AA%E5%8A%A8%E5%A2%9E%E9%95%BF%E7%9A%84%E6%95%B0%E7%BB%84/" rel="next" title="自动增长的数组">
-                  自动增长的数组 <i class="fa fa-chevron-right"></i>
+                <a href="/2021/04/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E6%A0%88%E7%9A%84%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0/" rel="next" title="栈的链式实现">
+                  栈的链式实现 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

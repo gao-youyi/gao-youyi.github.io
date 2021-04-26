@@ -631,4 +631,177 @@ display(List);
         <tag>十年之约</tag>
       </tags>
   </entry>
+  <entry>
+    <title>栈的顺序表实现</title>
+    <url>/2021/04/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+//任何一种存储结构都可以写成顺序存储和链式存储
+//入栈：Push：*(S.top)++,出栈：Pop:*--S.top；栈顶元素top，从
+/*栈的顺序表结构*/
+</code></pre>
+<span id="more"></span>
+<pre><code>#define STACK_INIT_SIZE 100 //初始分配量
+#define STACK_INCREMENT 10  //存储空间分配增量
+typedef char ElemType;
+typedef struct
+&#123;
+ElemType *base; //栈底指针,位置不变
+ElemType *top;  //栈顶指针，top = base 时，栈为空
+int stacksize;  //栈空间大小
+&#125; SqStack;
+
+//初始化栈
+void intStack(SqStack &amp;S)
+&#123;
+if (!(S.base = (ElemType *)malloc(STACK_INIT_SIZE * sizeof(ElemType))))
+    exit(OVERFLOW); //存储分配失败
+S.top = S.base;
+S.stacksize = STACK_INIT_SIZE;
+&#125;
+
+//销毁栈
+void DestroyStack(SqStack &amp;S)
+&#123;
+free(S.base);  //首地址
+S.base = NULL; //置空
+S.top = NULL;
+S.stacksize = 0;
+&#125;
+
+//进栈操作
+void Push(SqStack &amp;S, ElemType e)
+&#123;
+if ((S.top - S.base) &gt;= S.stacksize)
+&#123; //动态扩充空间
+    S.base = (ElemType *)realloc(S.base, ((S.stacksize) + STACK_INCREMENT) * sizeof(ElemType));
+    if (!S.base)
+        exit(OVERFLOW); //判断上一步是否分配成功
+    S.top = S.base + S.stacksize;
+    S.stacksize += STACK_INCREMENT;
+&#125;
+*(S.top)++ = e; //Push
+&#125;
+
+//出栈
+int Pop(SqStack &amp;S, ElemType &amp;e)
+&#123;
+if (S.top == S.base)
+    return 0;
+e = *--S.top;
+return 1;
+&#125;
+</code></pre>
+<p>//取出栈顶元素值,这里并没有对S.top进行修改，因为只是<br>int GetTop(SqStack S, ElemType &amp;e) //取出的值通过e返回，但是对S不进行修改<br>{<br>    if (S.top &gt; S.base)<br>    {<br>        e = *(S.top - 1); //传出栈顶值<br>        return 1;<br>    }<br>    else<br>        return 0;<br>}</p>
+<p>//判断栈是否为空<br>int StackEmpty(SqStack S)<br>{ //当栈为空的时候，返回值为1,否则为0；<br>    if (S.top == S.base)<br>        return 1;<br>    else<br>        return 0;<br>}<br>    …</p>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>栈的链式实现</title>
+    <url>/2021/04/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E6%A0%88%E7%9A%84%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+/链栈：采用单链表作为链栈，单链表不带头结点
+//此时不存在栈满的情况
+//初始时Top ==NULL
+//Push：创建新的结点p,将p插到栈顶的位置！头插法！
+//Pop:返回栈顶Data值，同时删除该结点
+//top指针指向An栈顶，A1指向栈底
+</code></pre>
+<span id="more"></span>
+<pre><code>typedef char ElemType;
+//栈的定义和单链表的定义基本一致
+typedef struct node
+&#123;
+ElemType data;
+struct node *next;
+
+&#125; LinkStack;
+
+//初始化链栈
+void InitStack(LinkStack *&amp;top)
+&#123;
+top = NULL;
+&#125;
+
+//销毁栈
+//说实话，这里暂时没有搞明白
+void DestroyStack(LinkStack *&amp;top)
+&#123;
+LinkStack *pre = top, *p;
+if (pre == NULL)
+    return;
+p = pre-&gt;next;
+while (P != NULL)
+&#123;
+    free(pre);
+    pre = p;
+    p = p-&gt;next;
+&#125;
+free(pre);
+&#125;
+
+//进栈：头插
+int Push(LinkStack *&amp;top, ElemType x)
+&#123;
+LinkStack *p;
+p = (LinkStack *)malloc(sizeof(LinkStack)); //每次Push都要申请空间
+p-&gt;data = x;                                //数据域
+p-&gt;next = top;                              //top移动到前面
+top = p;
+return 1;
+&#125;
+
+//出栈：通过x返回栈点的值，删除该栈点
+int Pop(LinkStack *&amp;top, ElemType &amp;x)
+&#123;
+LinkStack *p;
+if (top == NULL) //判断栈空否
+    return 0;
+else
+&#123;
+    p = top;       //进入栈顶
+    x = p-&gt;data;   //取
+    top = p-&gt;next; //链接
+    free(p);       //释放top的上一个结点p,则top也被释放了
+    return 1;
+&#125;
+&#125;
+
+//取栈顶元素
+int GetTop(LinkStack *top, ElemType &amp;x) //用X取出值
+&#123;
+if (top == NULL) //判断是否为空
+    return 0;
+else
+&#123;
+    x = top-&gt;data; //取出
+    return 1;
+&#125;
+&#125;
+
+//判断栈是否为空
+int StackEmpty(LinkStack *top)
+&#123;
+if (top == NULL)
+&#123;
+    return 1;
+&#125;
+else
+&#123;
+    return 0;
+&#125;
+&#125;
+&#39;&#39;&#39;
+</code></pre>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
 </search>
