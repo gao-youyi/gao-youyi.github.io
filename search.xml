@@ -1009,4 +1009,104 @@ while (i &lt; n &amp;&amp; flag == 1)
         <tag>数据结构 栈</tag>
       </tags>
   </entry>
+  <entry>
+    <title>队列的实现和基础操作</title>
+    <url>/2021/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%98%9F%E5%88%97/</url>
+    <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
+/*
+插入：进队：队尾
+删除：出队：队头
+可以想象一下啊买东西排队的情况
+First In First Out
+F I F O
+允许插入的一端成为队尾，允许删除的一端称为队头。
+所以我们再学习这一部分知识的时候一定要对头插法和
+尾插法有着熟练的掌握！
+
+模型：
+front： 头指针，指向队列头元素
+rear:  尾指针，指向尾元素的下一个
+*/
+//静态存储
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#define MAX_SIZE 20
+struct ElemType char;
+//typedef struct
+//&#123;
+//    ElemType data[MAX_SIZE]; //所有元素
+//    int front, raer;         //队尾和队头
+//&#125; SqQueue;
+#define MAXQSIZE 100 //最大的队列长度+1
+typedef struct
+&#123;
+ElemType *base;
+int front;
+int rear;
+
+&#125; SqQueue;
+
+//初始化队列
+void InitQueue(SqQueue &amp;Q)
+&#123;
+Q.base = (ElemType *)malloc(MAXQSIZE * sizeof(ElemType));
+if (!Q.base)
+    exit(OVERFLOW); //判断是否分配成功
+Q.front = Q.rear = 0;
+&#125;
+
+//销毁队列
+void DestroyQueue(SqQueue Q)
+&#123;
+if (Q.base)
+&#123;
+    free(Q.base);
+    Q.base = NULL;
+    Q.front = Q.rear = 0;
+&#125;
+&#125;
+
+//入队列
+int EnQueue(SqQueue &amp;Q,ElemType e&#123;
+if ((Q.rear + 1) % MAXQSIZE == Q.front)
+    return 0; //判断是否队满
+Q.base[Q.rear] = 0;
+Q.rear = (Q.rear + 1) % MAXQSIZE;
+return 1;
+&#125;
+
+//出队
+int DeQueue(SqQueue &amp;Q,Elemtype &amp;e)&#123;
+if (Q.front == Q.rear) //如果为空，删除并返回队头元素
+    return 0;          //否则返回0
+e = Q.base[Q.front];
+Q.front = (Q.front + 1) % MAXQSIZE;
+return 1;
+&#125;
+
+//取队头元素
+int GetHead(SqQueue Q,Elemtype &amp;e)&#123;
+if (Q.front == Q.rear)
+    return 0;
+e = Q.base[Q.front];
+return 1;
+&#125;
+
+//判断队空
+int QueueEmpty(SqQueue Q)&#123;
+if (Q.front == Q.rear)
+    return 1;
+else
+    return 0;
+&#125;
+&#39;&#39;&#39;
+</code></pre>
+<h3 id="惭愧"><a href="#惭愧" class="headerlink" title="惭愧"></a>惭愧</h3><p>今天由于种种原因，没有完成今天的任务，感觉很难受，但是还好的是，解决了一个一直困扰自己的问题:DevC++中的头文件包涵问题，由于自己使用的dev是个人根据官网开发的汉化版，存在一定的问题，我想应该是一些库函数没有补充完整，或者是其他的一些文件缺失，又或者是自己不小心删除了一些它的文件，导致自己一直处于”file .h not founded”状态，今天将dev重新下载安装后，终于解决了这个问题。</p>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
 </search>
