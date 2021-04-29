@@ -620,301 +620,6 @@ return 1;
       </tags>
   </entry>
   <entry>
-    <title>队列的实现和基础操作</title>
-    <url>/2021/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%98%9F%E5%88%97/</url>
-    <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
-/*
-插入：进队：队尾
-删除：出队：队头
-可以想象一下啊买东西排队的情况
-First In First Out
-F I F O
-允许插入的一端成为队尾，允许删除的一端称为队头。
-所以我们再学习这一部分知识的时候一定要对头插法和
-尾插法有着熟练的掌握！
-</code></pre>
-<span id="more"></span>
-<pre><code>模型：
-front： 头指针，指向队列头元素
-rear:  尾指针，指向尾元素的下一个
-*/
-//静态存储
-#include &lt;bits/stdc++.h&gt;
-using namespace std;
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#define MAX_SIZE 20
-struct ElemType char;
-//typedef struct
-//&#123;
-//    ElemType data[MAX_SIZE]; //所有元素
-//    int front, raer;         //队尾和队头
-//&#125; SqQueue;
-#define MAXQSIZE 100 //最大的队列长度+1
-typedef struct
-&#123;
-ElemType *base;
-int front;
-int rear;
-
-&#125; SqQueue;
-
-//初始化队列
-void InitQueue(SqQueue &amp;Q)
-&#123;
-Q.base = (ElemType *)malloc(MAXQSIZE * sizeof(ElemType));
-if (!Q.base)
-    exit(OVERFLOW); //判断是否分配成功
-Q.front = Q.rear = 0;
-&#125;
-
-//销毁队列
-void DestroyQueue(SqQueue Q)
-&#123;
-if (Q.base)
-&#123;
-    free(Q.base);
-    Q.base = NULL;
-    Q.front = Q.rear = 0;
-&#125;
-&#125;
-
-//入队列
-int EnQueue(SqQueue &amp;Q,ElemType e&#123;
-if ((Q.rear + 1) % MAXQSIZE == Q.front)
-    return 0; //判断是否队满
-Q.base[Q.rear] = 0;
-Q.rear = (Q.rear + 1) % MAXQSIZE;
-return 1;
-&#125;
-
-//出队
-int DeQueue(SqQueue &amp;Q,Elemtype &amp;e)&#123;
-if (Q.front == Q.rear) //如果为空，删除并返回队头元素
-    return 0;          //否则返回0
-e = Q.base[Q.front];
-Q.front = (Q.front + 1) % MAXQSIZE;
-return 1;
-&#125;
-
-//取队头元素
-int GetHead(SqQueue Q,Elemtype &amp;e)&#123;
-if (Q.front == Q.rear)
-    return 0;
-e = Q.base[Q.front];
-return 1;
-&#125;
-
-//判断队空
-int QueueEmpty(SqQueue Q)&#123;
-if (Q.front == Q.rear)
-    return 1;
-else
-    return 0;
-&#125;
-&#39;&#39;&#39;
-</code></pre>
-<h3 id="惭愧"><a href="#惭愧" class="headerlink" title="惭愧"></a>惭愧</h3><h2 id="今天由于种种原因，没有完成今天的任务，感觉很难受，但是还好的是，解决了一个一直困扰自己的问题-DevC-中的头文件包涵问题，由于自己使用的dev是个人根据官网开发的汉化版，存在一定的问题，我想应该是一些库函数没有补充完整，或者是其他的一些文件缺失，又或者是自己不小心删除了一些它的文件，导致自己一直处于”file-h-not-founded”状态，今天将dev重新下载安装后，终于解决了这个问题。"><a href="#今天由于种种原因，没有完成今天的任务，感觉很难受，但是还好的是，解决了一个一直困扰自己的问题-DevC-中的头文件包涵问题，由于自己使用的dev是个人根据官网开发的汉化版，存在一定的问题，我想应该是一些库函数没有补充完整，或者是其他的一些文件缺失，又或者是自己不小心删除了一些它的文件，导致自己一直处于”file-h-not-founded”状态，今天将dev重新下载安装后，终于解决了这个问题。" class="headerlink" title="今天由于种种原因，没有完成今天的任务，感觉很难受，但是还好的是，解决了一个一直困扰自己的问题:DevC++中的头文件包涵问题，由于自己使用的dev是个人根据官网开发的汉化版，存在一定的问题，我想应该是一些库函数没有补充完整，或者是其他的一些文件缺失，又或者是自己不小心删除了一些它的文件，导致自己一直处于”file .h not founded”状态，今天将dev重新下载安装后，终于解决了这个问题。"></a>今天由于种种原因，没有完成今天的任务，感觉很难受，但是还好的是，解决了一个一直困扰自己的问题:DevC++中的头文件包涵问题，由于自己使用的dev是个人根据官网开发的汉化版，存在一定的问题，我想应该是一些库函数没有补充完整，或者是其他的一些文件缺失，又或者是自己不小心删除了一些它的文件，导致自己一直处于”file .h not founded”状态，今天将dev重新下载安装后，终于解决了这个问题。</h2><p><span style="font-size:35px;color:black;font-weight:800">更新于2021-4-29  9：56</span></p>
-<p style="color:red;font-size:30px;">今天继续昨天的任务，更新如下：</p>
-    '''C
-    /*
-    插入：进队：队尾
-    删除：出队：队头
-    可以想象一下啊买东西排队的情况
-    First In First Out
-    F I F O
-    允许插入的一端成为队尾，允许删除的一端称为队头。
-    所以我们再学习这一部分知识的时候一定要对头插法和
-    尾插法有着熟练的掌握！
-
-<pre><code>！！！模型一：！！！
-front： 头指针，指向队列头元素
-rear:  尾指针，指向尾元素的下一个
-队空条件：front == rear
-队满条件：rear - front ==0
-这里读者可以自己试试几种队满和对空的情况
-
-通过不断的测试，我们发现，如果仅仅根据rear =MAXSIZE
-判断队满的情况是不合理的，因为再实际的生活和问题中我们知道
-，一个队伍可以站多少人，完全取决于总的人数，也就是MAXSIZE
-，而不是取决于最后一个人是不是站在了某一个地方，也就是rear==MAXSIZE
-，如果那样的话，显然会造成存储空间的大大浪费，所以，
-模型二：
-我们这里不妨1设想，即使使用数组，数组也是一个循环或者说是一个front 和
-rear连在一起环状数组，数组的下标同样成立，比如，当MAXSIZE=5,front =4时
-,按照道理说此时的rear已经起码为5了（其实按照道理是不可以的），也就是说不能再进队了，
-但是可以想到，在front 的前面应该还有4个位置，所以根据循环数组
-的假设，我们知道此时的rear应该是rear = 1，而不是5，可以继续
-在top处入队，假设此时处于4的位置元素为a,=进入新的元素b,之后，
-b就在4的位置了，而a就在0的位置了，此时相应的rear的位置应该为1，也就是
-队头指针进一：front=(front+) MOD MAXSIZE
-队尾元素进一： rear = (rear+1) MOD MAXSIZE,
-而不是简单的加一操作了。
-如此继续进行入队，我们发现：
-当队满的时候，front = rear但是不等于0，而且不同的入队和出队的情况下，队满的
-情况也不一样，最为头疼的是，我们好像没法判断队空了，因为此时队空和队满都
-是front = rear,!!所以，为了可以区分这个问题我们
-规定：
-1，当rear = front时，队空
-2，当(rear+1)MOD MAXSIZE = front 时，队满
-由2的规定我们不难发现，按照这种情况下的队满，不是真正意义上的队满，
-比如此时rear = 3，front  = 4，由2的规定，我们知道已经满足，但是
-由于rear并不会指向元素，所以当队满的时候，实际上还是可以加入一个
-元素，但是不得不说，这个相对于模型一已经有巨大的改进了；
-可以归纳如下：
-队空：Q.front == Q.rear
-对满： (Q.rear+1)%MAXSIZE == Q.front 
-进队： Q.data[Q.rear]=x; Q.rear =(Q.rear+1)%MAXSIZE;
-出队： x=Q.data[Q.front]; Q.front = (Q.front+1)%MAXSIZE;
-模型三：
-可以设置一个flag标识，每次
-
-*/
-//静态存储
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#define MAX_SIZE 20
-typedef struct char ElemType;
-//typedef struct
-//&#123;
-//    ElemType data[MAX_SIZE]; //所有元素
-//    int front, raer;         //队尾和队头
-//&#125; SqQueue;
-#define MAXQSIZE 100 //最大的队列长度+1
-typedef struct
-&#123;
-ElemType *base; //用来初始化分配空间
-int front;
-int rear;
-
-&#125; SqQueue;
-
-//初始化队列
-void InitQueue(SqQueue &amp;Q)
-&#123;
-Q.base = (ElemType *)malloc(MAXQSIZE * sizeof(ElemType));
-if (!Q.base)
-    exit(OVERFLOW); //判断是否分配成功
-Q.front = Q.rear = 0;
-&#125;
-
-//销毁队列
-void DestroyQueue(SqQueue Q)
-&#123;
-    if (Q.base)
-//如果队不是空
-&#123;
-    free(Q.base);
-    Q.base = NULL;
-    Q.front = Q.rear = 0; //这里的表参数也要改变
-&#125;
-&#125;
-
-//入队列
-int EnQueue(SqQueue &amp;Q,ElemType e&#123;
-if ((Q.rear + 1) % MAXQSIZE == Q.front)
-    return 0; //判断是否队满
-Q.base[Q.rear] = 0;
-Q.rear = (Q.rear + 1) % MAXQSIZE;
-return 1;
-&#125;
-
-//出队
-int DeQueue(SqQueue &amp;Q,Elemtype &amp;e)&#123;
-if (Q.front == Q.rear) //如果为空，删除并返回队头元素
-    return 0;          //否则返回0
-e = Q.base[Q.front];
-Q.front = (Q.front + 1) % MAXQSIZE;
-return 1;
-&#125;
-
-//取队头元素
-int GetHead(SqQueue Q,Elemtype &amp;e)&#123;
-if (Q.front == Q.rear)
-    return 0;
-e = Q.base[Q.front];
-return 1;
-&#125;
-
-//判断队空
-int QueueEmpty(SqQueue Q)&#123;
-if (Q.front == Q.rear)
-    return 1;
-else
-    return 0;
-&#125;
-
-
-//求队列中元素的个数(循环队列)
-int QueueLength(SqQueue Q)&#123;
-/*其实我自己的想法是根据队满条件建立循环，但是总结发现
-这个方法确实成立，而且很简便*/
-return (Q.rear - Q.front + MAXQSIZE) % MAXQSIZE;
-&#125;
-
-/*如果只有front队头指针，一个计数器count, 大小为MAXSIZE的
-环形数组，问
-1，最多可以容纳多少元素
-2，设计相关算法*/
-#define MaxSize 10
-typedef struct&#123;
-int data[MaxSize];
-int front;
-int count;
-&#125;SQ;
-//SQ为空：sq.count == 0;
-//队满： sq.count == MaxSize;
-//队尾元素的位置： (sq.front +sq.count)%MaxSize;
-
-//初始化
-void InitSQ(SQ &amp;qu)&#123;
-qu.front = qu.count = 0;
-
-&#125;
-
-//销毁队列不需要，因为没有malloc
-
-//入队
-int EnSQ(SQ &amp;sq,int x)&#123;
-if (sq.count == MaxSize)
-    return 0;
-sq.data[(sq.front + sq.count) % MaxSize] = x;
-sq.count++; //计数器
-return 1;
-&#125;
-
-//出队
-int DeSQ(SQ &amp;sq,int &amp;x)&#123;
-if (sq.count == 0)
-    return 0;
-x = sq.data[sq.front];
-sq.front = (sq.front + 1) % MaxSize; //重要
-sq.count--;                          //计数器
-return 1;
-&#125;
-
-//取队头元素
-int GetSQ(SQ sq,int &amp;x)&#123;
-if (sq.count == 0) //判断队是否为空
-    return 0;
-x = sq.data[sq.front];
-return 1;
-&#125;
-
-//判断队空
-int SQEmpty(SQ sq)&#123;
-if (sq.count == 0)
-    return 1; //如果队空，返回1；
-else
-    return 0;
-</code></pre>
-<p>}<br>    ‘’’</p>
-<p style="color: pink ;font-size:30px;">写博客还挺的，大家如果可以，评论一下也好呀</p>]]></content>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>双链表和双向循环链表</title>
     <url>/2021/04/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8F%8C%E9%93%BE%E8%A1%A8%E5%92%8C%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
@@ -1328,5 +1033,460 @@ display(List);
 <pre><code>---
 </code></pre>
 ]]></content>
+  </entry>
+  <entry>
+    <title>队列的顺序表实现和基础操作</title>
+    <url>/2021/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%98%9F%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
+/*
+插入：进队：队尾
+删除：出队：队头
+可以想象一下啊买东西排队的情况
+First In First Out
+F I F O
+允许插入的一端成为队尾，允许删除的一端称为队头。
+所以我们再学习这一部分知识的时候一定要对头插法和
+尾插法有着熟练的掌握！
+</code></pre>
+<span id="more"></span>
+<pre><code>模型：
+front： 头指针，指向队列头元素
+rear:  尾指针，指向尾元素的下一个
+*/
+//静态存储
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#define MAX_SIZE 20
+struct ElemType char;
+//typedef struct
+//&#123;
+//    ElemType data[MAX_SIZE]; //所有元素
+//    int front, raer;         //队尾和队头
+//&#125; SqQueue;
+#define MAXQSIZE 100 //最大的队列长度+1
+typedef struct
+&#123;
+ElemType *base;
+int front;
+int rear;
+
+&#125; SqQueue;
+
+//初始化队列
+void InitQueue(SqQueue &amp;Q)
+&#123;
+Q.base = (ElemType *)malloc(MAXQSIZE * sizeof(ElemType));
+if (!Q.base)
+    exit(OVERFLOW); //判断是否分配成功
+Q.front = Q.rear = 0;
+&#125;
+
+//销毁队列
+void DestroyQueue(SqQueue Q)
+&#123;
+if (Q.base)
+&#123;
+    free(Q.base);
+    Q.base = NULL;
+    Q.front = Q.rear = 0;
+&#125;
+&#125;
+
+//入队列
+int EnQueue(SqQueue &amp;Q,ElemType e&#123;
+if ((Q.rear + 1) % MAXQSIZE == Q.front)
+    return 0; //判断是否队满
+Q.base[Q.rear] = 0;
+Q.rear = (Q.rear + 1) % MAXQSIZE;
+return 1;
+&#125;
+
+//出队
+int DeQueue(SqQueue &amp;Q,Elemtype &amp;e)&#123;
+if (Q.front == Q.rear) //如果为空，删除并返回队头元素
+    return 0;          //否则返回0
+e = Q.base[Q.front];
+Q.front = (Q.front + 1) % MAXQSIZE;
+return 1;
+&#125;
+
+//取队头元素
+int GetHead(SqQueue Q,Elemtype &amp;e)&#123;
+if (Q.front == Q.rear)
+    return 0;
+e = Q.base[Q.front];
+return 1;
+&#125;
+
+//判断队空
+int QueueEmpty(SqQueue Q)&#123;
+if (Q.front == Q.rear)
+    return 1;
+else
+    return 0;
+&#125;
+&#39;&#39;&#39;
+</code></pre>
+<h3 id="惭愧"><a href="#惭愧" class="headerlink" title="惭愧"></a>惭愧</h3><h2 id="今天由于种种原因，没有完成今天的任务，感觉很难受，但是还好的是，解决了一个一直困扰自己的问题-DevC-中的头文件包涵问题，由于自己使用的dev是个人根据官网开发的汉化版，存在一定的问题，我想应该是一些库函数没有补充完整，或者是其他的一些文件缺失，又或者是自己不小心删除了一些它的文件，导致自己一直处于”file-h-not-founded”状态，今天将dev重新下载安装后，终于解决了这个问题。"><a href="#今天由于种种原因，没有完成今天的任务，感觉很难受，但是还好的是，解决了一个一直困扰自己的问题-DevC-中的头文件包涵问题，由于自己使用的dev是个人根据官网开发的汉化版，存在一定的问题，我想应该是一些库函数没有补充完整，或者是其他的一些文件缺失，又或者是自己不小心删除了一些它的文件，导致自己一直处于”file-h-not-founded”状态，今天将dev重新下载安装后，终于解决了这个问题。" class="headerlink" title="今天由于种种原因，没有完成今天的任务，感觉很难受，但是还好的是，解决了一个一直困扰自己的问题:DevC++中的头文件包涵问题，由于自己使用的dev是个人根据官网开发的汉化版，存在一定的问题，我想应该是一些库函数没有补充完整，或者是其他的一些文件缺失，又或者是自己不小心删除了一些它的文件，导致自己一直处于”file .h not founded”状态，今天将dev重新下载安装后，终于解决了这个问题。"></a>今天由于种种原因，没有完成今天的任务，感觉很难受，但是还好的是，解决了一个一直困扰自己的问题:DevC++中的头文件包涵问题，由于自己使用的dev是个人根据官网开发的汉化版，存在一定的问题，我想应该是一些库函数没有补充完整，或者是其他的一些文件缺失，又或者是自己不小心删除了一些它的文件，导致自己一直处于”file .h not founded”状态，今天将dev重新下载安装后，终于解决了这个问题。</h2><p><span style="font-size:35px;color:black;font-weight:800">更新于2021-4-29  9：56</span></p>
+<p style="color:red;font-size:30px;">今天继续昨天的任务，更新如下：</p>
+    '''C
+    /*
+    插入：进队：队尾
+    删除：出队：队头
+    可以想象一下啊买东西排队的情况
+    First In First Out
+    F I F O
+    允许插入的一端成为队尾，允许删除的一端称为队头。
+    所以我们再学习这一部分知识的时候一定要对头插法和
+    尾插法有着熟练的掌握！
+
+<pre><code>！！！模型一：！！！
+front： 头指针，指向队列头元素
+rear:  尾指针，指向尾元素的下一个
+队空条件：front == rear
+队满条件：rear - front ==0
+这里读者可以自己试试几种队满和对空的情况
+
+通过不断的测试，我们发现，如果仅仅根据rear =MAXSIZE
+判断队满的情况是不合理的，因为再实际的生活和问题中我们知道
+，一个队伍可以站多少人，完全取决于总的人数，也就是MAXSIZE
+，而不是取决于最后一个人是不是站在了某一个地方，也就是rear==MAXSIZE
+，如果那样的话，显然会造成存储空间的大大浪费，所以，
+模型二：
+我们这里不妨1设想，即使使用数组，数组也是一个循环或者说是一个front 和
+rear连在一起环状数组，数组的下标同样成立，比如，当MAXSIZE=5,front =4时
+,按照道理说此时的rear已经起码为5了（其实按照道理是不可以的），也就是说不能再进队了，
+但是可以想到，在front 的前面应该还有4个位置，所以根据循环数组
+的假设，我们知道此时的rear应该是rear = 1，而不是5，可以继续
+在top处入队，假设此时处于4的位置元素为a,=进入新的元素b,之后，
+b就在4的位置了，而a就在0的位置了，此时相应的rear的位置应该为1，也就是
+队头指针进一：front=(front+) MOD MAXSIZE
+队尾元素进一： rear = (rear+1) MOD MAXSIZE,
+而不是简单的加一操作了。
+如此继续进行入队，我们发现：
+当队满的时候，front = rear但是不等于0，而且不同的入队和出队的情况下，队满的
+情况也不一样，最为头疼的是，我们好像没法判断队空了，因为此时队空和队满都
+是front = rear,!!所以，为了可以区分这个问题我们
+规定：
+1，当rear = front时，队空
+2，当(rear+1)MOD MAXSIZE = front 时，队满
+由2的规定我们不难发现，按照这种情况下的队满，不是真正意义上的队满，
+比如此时rear = 3，front  = 4，由2的规定，我们知道已经满足，但是
+由于rear并不会指向元素，所以当队满的时候，实际上还是可以加入一个
+元素，但是不得不说，这个相对于模型一已经有巨大的改进了；
+可以归纳如下：
+队空：Q.front == Q.rear
+对满： (Q.rear+1)%MAXSIZE == Q.front 
+进队： Q.data[Q.rear]=x; Q.rear =(Q.rear+1)%MAXSIZE;
+出队： x=Q.data[Q.front]; Q.front = (Q.front+1)%MAXSIZE;
+模型三：
+可以设置一个flag标识，每次
+
+*/
+//静态存储
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#define MAX_SIZE 20
+typedef struct char ElemType;
+//typedef struct
+//&#123;
+//    ElemType data[MAX_SIZE]; //所有元素
+//    int front, raer;         //队尾和队头
+//&#125; SqQueue;
+#define MAXQSIZE 100 //最大的队列长度+1
+typedef struct
+&#123;
+ElemType *base; //用来初始化分配空间
+int front;
+int rear;
+
+&#125; SqQueue;
+
+//初始化队列
+void InitQueue(SqQueue &amp;Q)
+&#123;
+Q.base = (ElemType *)malloc(MAXQSIZE * sizeof(ElemType));
+if (!Q.base)
+    exit(OVERFLOW); //判断是否分配成功
+Q.front = Q.rear = 0;
+&#125;
+
+//销毁队列
+void DestroyQueue(SqQueue Q)
+&#123;
+    if (Q.base)
+//如果队不是空
+&#123;
+    free(Q.base);
+    Q.base = NULL;
+    Q.front = Q.rear = 0; //这里的表参数也要改变
+&#125;
+&#125;
+
+//入队列
+int EnQueue(SqQueue &amp;Q,ElemType e&#123;
+if ((Q.rear + 1) % MAXQSIZE == Q.front)
+    return 0; //判断是否队满
+Q.base[Q.rear] = 0;
+Q.rear = (Q.rear + 1) % MAXQSIZE;
+return 1;
+&#125;
+
+//出队
+int DeQueue(SqQueue &amp;Q,Elemtype &amp;e)&#123;
+if (Q.front == Q.rear) //如果为空，删除并返回队头元素
+    return 0;          //否则返回0
+e = Q.base[Q.front];
+Q.front = (Q.front + 1) % MAXQSIZE;
+return 1;
+&#125;
+
+//取队头元素
+int GetHead(SqQueue Q,Elemtype &amp;e)&#123;
+if (Q.front == Q.rear)
+    return 0;
+e = Q.base[Q.front];
+return 1;
+&#125;
+
+//判断队空
+int QueueEmpty(SqQueue Q)&#123;
+if (Q.front == Q.rear)
+    return 1;
+else
+    return 0;
+&#125;
+
+
+//求队列中元素的个数(循环队列)
+int QueueLength(SqQueue Q)&#123;
+/*其实我自己的想法是根据队满条件建立循环，但是总结发现
+这个方法确实成立，而且很简便*/
+return (Q.rear - Q.front + MAXQSIZE) % MAXQSIZE;
+&#125;
+
+/*如果只有front队头指针，一个计数器count, 大小为MAXSIZE的
+环形数组，问
+1，最多可以容纳多少元素
+2，设计相关算法*/
+#define MaxSize 10
+typedef struct&#123;
+int data[MaxSize];
+int front;
+int count;
+&#125;SQ;
+//SQ为空：sq.count == 0;
+//队满： sq.count == MaxSize;
+//队尾元素的位置： (sq.front +sq.count)%MaxSize;
+
+//初始化
+void InitSQ(SQ &amp;qu)&#123;
+qu.front = qu.count = 0;
+
+&#125;
+
+//销毁队列不需要，因为没有malloc
+
+//入队
+int EnSQ(SQ &amp;sq,int x)&#123;
+if (sq.count == MaxSize)
+    return 0;
+sq.data[(sq.front + sq.count) % MaxSize] = x;
+sq.count++; //计数器
+return 1;
+&#125;
+
+//出队
+int DeSQ(SQ &amp;sq,int &amp;x)&#123;
+if (sq.count == 0)
+    return 0;
+x = sq.data[sq.front];
+sq.front = (sq.front + 1) % MaxSize; //重要
+sq.count--;                          //计数器
+return 1;
+&#125;
+
+//取队头元素
+int GetSQ(SQ sq,int &amp;x)&#123;
+if (sq.count == 0) //判断队是否为空
+    return 0;
+x = sq.data[sq.front];
+return 1;
+&#125;
+
+//判断队空
+int SQEmpty(SQ sq)&#123;
+if (sq.count == 0)
+    return 1; //如果队空，返回1；
+else
+    return 0;
+</code></pre>
+<p>}<br>    ‘’’</p>
+<p style="color: pink ;font-size:30px;">写博客还挺的，大家如果可以，评论一下也好呀</p>]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>队列的链表实现和基本操作和练习</title>
+    <url>/2021/04/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%98%9F%E5%88%97%E7%9A%84%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%92%8C%E7%BB%83%E4%B9%A0/</url>
+    <content><![CDATA[<pre><code>&#39;&#39;&#39;C
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+//带有头结点的单链表
+//数据结点
+</code></pre>
+<span id="more"></span>
+<pre><code>typedef struct
+&#123;
+char data;          //存放对元素
+struct QNode *next; //指向下一结点
+&#125; QNode, *QueuePtr;
+
+//链队结点
+typedef struct
+&#123;
+QNode *front; //队头指针，删除使用
+QNode *rear;  //队尾指针，加入使用
+&#125; LinkQueue;
+
+//判断条件
+//队空：Q.front-&gt;next==NULL
+//队满：基本不可能
+//进队: 同链表，创建结点。插入队尾，并由Q.rear指向它，也就是尾插法
+//出队；删除队头的结点
+
+//初始化链队列
+void InitQueueLink(LinkQueue &amp;Q)
+&#123;
+if (!Q.front = Q.rear = (QueuePtr)malloc(sizeof(QNode)))
+    exit(OVERFLOW);
+Q.front-&gt;next = NULL;
+&#125;
+
+//销毁队列
+void DestroyQueue(LinkQueue &amp;Q)
+&#123;
+while (Q.front) //这是一个循环，rear是front的同步指针，来循环遍历删除
+&#123;
+    Q.rear = Q.front-&gt;next;
+    free(Q.front);
+    Q.front = Q.rear;
+&#125;
+Q.front = Q.rear = NULL;
+&#125;
+
+//入队列
+void EnQueue(LinkQueue &amp;Q, char e)
+&#123;
+QueuePtr p; //存放新的元素
+if (!p = (QueuePtr)malloc(sizeof(QNode)))
+    exit(OVERFLOW); //这句话不但申请了空间，还进行了检查
+p-&gt;data = e;
+p-&gt;next = NULL;
+Q.rear-&gt;next = p; //链接
+Q.rear = p;       //更新rear位置
+&#125;
+
+//出队列,其实就是头插法
+int DeQueue(LinkQueue &amp;Q, char &amp;e)
+&#123;
+QueuePtr p;
+if (Q.front == Q.rear)
+    return 0;
+p = Q.front-&gt;next;       //让p和首元素在指向同一块区域，也就是找到要释放的地方
+e = p-&gt;data;             //将数据存在p中
+Q.front-&gt;next = p-&gt;next; //将front 链接到要释放的地方的后面
+if (Q.rear == p)         //如果只有一个元素的话，队列为空
+    Q.rear = Q.front;
+free(p); //释放p和它对应的结点
+return 1;
+&#125;
+
+//取队头元素
+int GetHead(LinkQueue Q, char &amp;e)
+&#123;
+QueuePtr p; //这里不定义这个指针也行，但是要保证队不为空，此时直接e = Q.front-&gt;next-&gt;data;
+if (Q.rear = Q.front)
+&#123;
+    return 0;
+&#125;
+p = Q.front-&gt;next;
+e = p-&gt;data;
+return 1;
+&#125;
+
+//判断队空
+int QueueEmpty(LinkQueue Q)
+&#123;
+if (!Q.front-&gt;next == NULL)
+    return 0;
+else
+    return 1;
+&#125;
+
+/*实例：
+使用不带头结点的循环链表来表示队列，Q是这样的链表中尾节点指针
+基于此，给出入队和出队算法
+*/
+//审题：虽然=题目没有设置队头结点。但是由于是循环单链表，reae-&gt;next就是首结点
+//同理，如果Q.rear == NULL;那么队列为空；
+//如果Q.rear-&gt;next  == Q,那就是只有一个结点
+typedef struct node
+&#123;
+char data;         //数据域
+struct node *next; //指针域
+&#125; QNode;               //结点数据类型
+
+//入队列
+void EnterQueue(QNode *&amp;Q, char x)
+&#123;
+QNode *s;
+s = (QNode *)malloc(sizeof(QNode));
+s-&gt;data = x;
+if (Q == NULL) //如果原队为空，那就原地打转一次
+&#123;
+    Q = s;
+    Q-&gt;next = Q;
+&#125;
+else
+&#123;
+    s-&gt;next = Q-&gt;next; //先让s指向首元素
+    Q-&gt;next = s;       //链接
+    Q = s;             //更新尾结点的位置
+&#125;
+&#125;
+
+//出队列
+int ExitQueue(QNode *&amp;Q, char &amp;x)
+&#123;
+QNode *s;
+if (Q == NULL) //队为空的情况
+    return 0;
+if (Q-&gt;next == Q) //只有一个结点的情况
+&#123;
+    x = Q-&gt;data;
+    free(Q);
+    Q = NULL;
+&#125;
+else
+&#123;
+    s = Q-&gt;next; //让s和首元素的位置一样
+    x = s-&gt;data;
+    Q-&gt;next = s-&gt;next; //链接
+    free(s);           //释放
+&#125;
+return 1;
+&#125;
+&#39;&#39;&#39;
+</code></pre>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>最近要期中考试了，一边是数据结构，一边是前端js，还有大雾和微积分，说实话，有那么几个瞬间，不想崔自己，但是我明白，机会总是留给有准备的人的！<br><P style="color:red;">一起加油啦，我的少年！</p><br><img src="https://th.bing.com/th/id/Rb88127ad299f700469d5640ceedaaa47?rik=6wTWcxIJdkfGCQ&pid=ImgRaw" width="100%"></p>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
   </entry>
 </search>
