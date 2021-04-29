@@ -81,50 +81,6 @@
       </tags>
   </entry>
   <entry>
-    <title>js笔记</title>
-    <url>/2021/04/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="js学习"><a href="#js学习" class="headerlink" title="js学习"></a>js学习</h1><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><pre><code>&#39;&#39;&#39;js
-    &lt;script&gt;
-    //输入框var声明变量
-    var myname1 = prompt(&#39;报上名来 &#39;);
-    var myname2 = prompt(&#39;再次报上名来&#39;)
-    var myname3;
-    myname3 = myname1;
-    myname1 = myname2;
-    myname2 = myname3;
-    //输出myname
-    alert(myname1);
-    alert(myname2);
-    console.log(myname1);
-    console.log(myname2);
-&lt;/script&gt;
-&#39;&#39;&#39;
-</code></pre>
-<h3 id="变量小结"><a href="#变量小结" class="headerlink" title="变量小结"></a>变量小结</h3><imge src="#">]]></content>
-      <tags>
-        <tag>前端开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>css定位</title>
-    <url>/2021/04/18/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%AE%9A%E4%BD%8D/</url>
-    <content><![CDATA[<h1 id="定位学习手册"><a href="#定位学习手册" class="headerlink" title="定位学习手册"></a>定位学习手册</h1><h2 id="定位-定位模式-边偏移"><a href="#定位-定位模式-边偏移" class="headerlink" title="定位=定位模式+边偏移"></a>定位=定位模式+边偏移</h2><blockquote>
-<p>定位模式：指定一个元素在文档中的定位方式<br>边偏移：决定元素的最终位置</p>
-</blockquote>
-<h3 id="四个position属性"><a href="#四个position属性" class="headerlink" title="四个position属性:"></a>四个position属性:</h3><blockquote>
-<blockquote>
-<blockquote>
-<p>static:了解就行<br>1，无定位，和标准流一样。<br>relative：重要！<br>1，它的边偏移是相对自己原来的位置来说的。<br>2，即使移动了，自己原来的位置继续占有，不像浮动一样脱标！<br>absolute:异常重要！！<br>1,如股没有限制，相对于最大的盒子body;<br>2如果父级元素存在任意一种(除了static)定位，则以最近一级父级(也可以是爷爷级别元素)盒子作为参考点移动;否则还是以body作为定位；<br>3,绝对定位的盒子位置不会保留，像浮动型，脱离标准流；<br>fixed:重要<br>1，元素的位置不会随着页面的滚动而动，参照点是以浏览器的可视窗口来决定；</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h3 id="子绝对父相对"><a href="#子绝对父相对" class="headerlink" title="子绝对父相对"></a>子绝对父相对</h3><p>一般情况下，如果孩子是absolute定位，父亲采用relative定位，来限制孩子的位置；</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
-      <tags>
-        <tag>前端开发</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>变量1</title>
     <url>/2020/04/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%8F%98%E9%87%8F1/</url>
     <content><![CDATA[<!DOCTYPE html>
@@ -187,6 +143,50 @@
 &#39;&#39;&#39;
 </code></pre>
 ]]></content>
+      <tags>
+        <tag>前端开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js笔记</title>
+    <url>/2021/04/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="js学习"><a href="#js学习" class="headerlink" title="js学习"></a>js学习</h1><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><pre><code>&#39;&#39;&#39;js
+    &lt;script&gt;
+    //输入框var声明变量
+    var myname1 = prompt(&#39;报上名来 &#39;);
+    var myname2 = prompt(&#39;再次报上名来&#39;)
+    var myname3;
+    myname3 = myname1;
+    myname1 = myname2;
+    myname2 = myname3;
+    //输出myname
+    alert(myname1);
+    alert(myname2);
+    console.log(myname1);
+    console.log(myname2);
+&lt;/script&gt;
+&#39;&#39;&#39;
+</code></pre>
+<h3 id="变量小结"><a href="#变量小结" class="headerlink" title="变量小结"></a>变量小结</h3><imge src="#">]]></content>
+      <tags>
+        <tag>前端开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>css定位</title>
+    <url>/2021/04/18/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%AE%9A%E4%BD%8D/</url>
+    <content><![CDATA[<h1 id="定位学习手册"><a href="#定位学习手册" class="headerlink" title="定位学习手册"></a>定位学习手册</h1><h2 id="定位-定位模式-边偏移"><a href="#定位-定位模式-边偏移" class="headerlink" title="定位=定位模式+边偏移"></a>定位=定位模式+边偏移</h2><blockquote>
+<p>定位模式：指定一个元素在文档中的定位方式<br>边偏移：决定元素的最终位置</p>
+</blockquote>
+<h3 id="四个position属性"><a href="#四个position属性" class="headerlink" title="四个position属性:"></a>四个position属性:</h3><blockquote>
+<blockquote>
+<blockquote>
+<p>static:了解就行<br>1，无定位，和标准流一样。<br>relative：重要！<br>1，它的边偏移是相对自己原来的位置来说的。<br>2，即使移动了，自己原来的位置继续占有，不像浮动一样脱标！<br>absolute:异常重要！！<br>1,如股没有限制，相对于最大的盒子body;<br>2如果父级元素存在任意一种(除了static)定位，则以最近一级父级(也可以是爷爷级别元素)盒子作为参考点移动;否则还是以body作为定位；<br>3,绝对定位的盒子位置不会保留，像浮动型，脱离标准流；<br>fixed:重要<br>1，元素的位置不会随着页面的滚动而动，参照点是以浏览器的可视窗口来决定；</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="子绝对父相对"><a href="#子绝对父相对" class="headerlink" title="子绝对父相对"></a>子绝对父相对</h3><p>一般情况下，如果孩子是absolute定位，父亲采用relative定位，来限制孩子的位置；</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
       <tags>
         <tag>前端开发</tag>
       </tags>
@@ -1188,6 +1188,15 @@ printf(&quot;%d&quot;, Search_L(head));
       </tags>
   </entry>
   <entry>
+    <title>头插法和尾插法解释</title>
+    <url>/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%A4%B4%E6%8F%92%E6%B3%95%E5%92%8C%E5%B0%BE%E6%8F%92%E6%B3%95%E8%A7%A3%E9%87%8A/</url>
+    <content><![CDATA[<h3 id="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"><a href="#由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。" class="headerlink" title="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"></a>由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。</h3><p><a href="https://blog.csdn.net/qq_41028985/article/details/82859199?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161923112716780269869000%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=161923112716780269869000&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-82859199.first_rank_v2_pc_rank_v29&utm_term=%E5%A4%B4%E6%8F%92%E6%B3%95">点击链接查看外部解释</a></p>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>双链表和双向循环链表</title>
     <url>/2021/04/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8F%8C%E9%93%BE%E8%A1%A8%E5%92%8C%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
@@ -1266,15 +1275,6 @@ return 1;
 &#125;
 &#39;&#39;&#39;
 </code></pre>
-]]></content>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>头插法和尾插法解释</title>
-    <url>/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%A4%B4%E6%8F%92%E6%B3%95%E5%92%8C%E5%B0%BE%E6%8F%92%E6%B3%95%E8%A7%A3%E9%87%8A/</url>
-    <content><![CDATA[<h3 id="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"><a href="#由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。" class="headerlink" title="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"></a>由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。</h3><p><a href="https://blog.csdn.net/qq_41028985/article/details/82859199?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161923112716780269869000%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=161923112716780269869000&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-82859199.first_rank_v2_pc_rank_v29&utm_term=%E5%A4%B4%E6%8F%92%E6%B3%95">点击链接查看外部解释</a></p>
 ]]></content>
       <tags>
         <tag>数据结构</tag>
