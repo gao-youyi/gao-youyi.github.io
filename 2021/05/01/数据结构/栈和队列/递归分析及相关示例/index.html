@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;gao-youyi.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:true,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:true,&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;manual&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+<meta name="description" content="&#39;&#39;&#39;C #include &lt;stdio.h&gt; #include &lt;string.h&gt; #include &lt;stdlib.h&gt; &#x2F;* 1,直接递归， 2，简介递归 使用情况： 1，数据结构本身是递归的，比如链表的类型定义。 2，数学问题：比如汉诺塔问题 3,问题本身是递归问题：比如兔子数列 *&#x2F;  &#x2F;*递归模型 1，终止条件：递归出口&#x2F;确">
+<meta property="og:type" content="article">
+<meta property="og:title" content="递归实现以及相关示例">
+<meta property="og:url" content="http://gao-youyi.github.io/2021/05/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%80%92%E5%BD%92%E5%88%86%E6%9E%90%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%A4%BA%E4%BE%8B/index.html">
+<meta property="og:site_name" content="高小白">
+<meta property="og:description" content="&#39;&#39;&#39;C #include &lt;stdio.h&gt; #include &lt;string.h&gt; #include &lt;stdlib.h&gt; &#x2F;* 1,直接递归， 2，简介递归 使用情况： 1，数据结构本身是递归的，比如链表的类型定义。 2，数学问题：比如汉诺塔问题 3,问题本身是递归问题：比如兔子数列 *&#x2F;  &#x2F;*递归模型 1，终止条件：递归出口&#x2F;确">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-01T01:47:00.000Z">
+<meta property="article:modified_time" content="2021-05-01T01:53:45.342Z">
+<meta property="article:author" content="高小白">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://gao-youyi.github.io/2021/05/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%80%92%E5%BD%92%E5%88%86%E6%9E%90%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%A4%BA%E4%BE%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;gao-youyi.github.io&#x2F;2021&#x2F;05&#x2F;01&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84&#x2F;%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97&#x2F;%E9%80%92%E5%BD%92%E5%88%86%E6%9E%90%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%A4%BA%E4%BE%8B&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;05&#x2F;01&#x2F;数据结构&#x2F;栈和队列&#x2F;递归分析及相关示例&#x2F;&quot;,&quot;title&quot;:&quot;递归实现以及相关示例&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>递归实现以及相关示例 | 高小白</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">高小白</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fjia-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+       <!--网易云插件-->
+  <iframe frameborder="1px" border="0" marginwidth="0" marginheight="0" width=330 height=86
+      src="//music.163.com/outchain/player?type=2&id=1475596788&auto=1&height=66">
+  </iframe>
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="高小白"
+      src="https://5b0988e595225.cdn.sohucs.com/images/20200421/2c31c57374fd445ab3ac98c60e9af59b.gif">
+  <p class="site-author-name" itemprop="name">高小白</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2955340415@qq.com" title="E-Mail → mailto:2955340415@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/13075088004" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;13075088004" rel="noopener" target="_blank"><i class="weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/yourname" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.uestc.edu.cn/" title="https:&#x2F;&#x2F;www.uestc.edu.cn" rel="noopener" target="_blank">电子科技大学官网</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/gao-youyi" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/05/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%80%92%E5%BD%92%E5%88%86%E6%9E%90%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%A4%BA%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://5b0988e595225.cdn.sohucs.com/images/20200421/2c31c57374fd445ab3ac98c60e9af59b.gif">
+      <meta itemprop="name" content="高小白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高小白">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          递归实现以及相关示例<a href="https://gao-youyi.github.io_posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%80%92%E5%BD%92%E5%88%86%E6%9E%90%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%A4%BA%E4%BE%8B.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-05-01 09:47:00 / 修改时间：09:53:45" itemprop="dateCreated datePublished" datetime="2021-05-01T09:47:00+08:00">2021-05-01</time>
+    </span>
+
+  
+    <span id="/2021/05/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%80%92%E5%BD%92%E5%88%86%E6%9E%90%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%A4%BA%E4%BE%8B/" class="post-meta-item leancloud_visitors" data-flag-title="递归实现以及相关示例" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2021/05/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%80%92%E5%BD%92%E5%88%86%E6%9E%90%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%A4%BA%E4%BE%8B/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/05/01/数据结构/栈和队列/递归分析及相关示例/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <pre><code>&#39;&#39;&#39;C
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+/*
+1,直接递归，
+2，简介递归
+使用情况：
+1，数据结构本身是递归的，比如链表的类型定义。
+2，数学问题：比如汉诺塔问题
+3,问题本身是递归问题：比如兔子数列
+*/
+
+/*递归模型
+1，终止条件：递归出口/确定了什么时候递归结束
+2，递归关系：递归体/确定了递归进行的方式
+递归的目的：以大化小，直到最简单的问题。
+程序化：可以发现，在递归问题中，先出现的数据，到最后才能
+得到结果，这正符合了栈的思想：先进后出！
+递归工作栈：
+*/
+
+/*汉诺塔问题：
+1，n ==1，时，直接将盘子移动到B//临界条件
+2, n&gt;1,时，将A上的n-1个盘子移动到B，此时C作为过渡
+3,用A作为过渡，将B上的n-1个盘子移动到C
+4，如此进行，循环往复。
+*/
+//汉诺塔问题的代码实现
+void HanNuoTa(int n, char A, char B, char C)
+&#123;
+//A是最初的柱子，C是目标柱子
+if (n == 1)
+    printf(&quot;MOVE%s &quot;, A, &quot;to %s&quot;, C) else
+    &#123;
+        HanNuoTa(n - 1, A, C, B);
+        printf(&quot;MOVE %s&quot;, A, &quot;to %s&quot;, C);
+        HanNuoTa(n - 1, B, A, C);
+    &#125;
+&#125;
+
+//通过递归计算数组中的最小值
+float f(float A[], int i)
+&#123;
+float m;
+if (i == 0) //递归出口
+    return A[0];
+else
+&#123;                    //递归体：
+    m = f(A, i - 1); //初值
+    if (m &gt; A(i))    //判断A[i-1]和A[i]的大小
+        return A[i];
+    else //返回两个数中的最小的那个
+        return m;
+&#125;
+&#125;
+
+//递归计算结点的个数，链表不带头结点
+int count(LNode *L)
+&#123;
+if (L == NULL) //出口
+    return 0;
+else
+    return count(L-&gt;next) + 1; //递归体
+&#125;
+
+//递归输出结点的值
+void Travers(LNode *L)
+&#123;
+if (L == NULL) //出口
+    return;
+printf(&quot;%d/t/n&quot;, L-&gt;data); //递归体
+Travers(L-&gt;next);
+&#125;
+
+//倒序输出单链表结点的值
+void TraverseR(LNode *L)
+&#123;
+if (L == NULL) //出口
+    return;
+//递归体
+TraverseR(L-&gt;next);
+printf(&quot;%d/t/n&quot;, L-&gt;data);
+&#125;
+
+//删除以L为首结点的单链表中值为x的第一个结点
+void del(LNode *&amp;L, ElemType x)
+&#123;
+LNode *t;
+if (L == NULL)
+    return;
+if (L-&gt;data == x) //出口
+&#123;                 //简单的删除结点的操作
+    t = L;
+    L = L-&gt;next;
+    free(t);
+    return;
+&#125;
+else //递归体
+    del(L-&gt;next, x);
+&#125;
+
+//利用递归删除结点值为x的所有的结点
+void delall(LNode *L, ElemType x)
+&#123;
+LNode *t;
+if (L == NULL)
+    return;
+if (L-&gt;data == x) //出口
+&#123;
+    t = L;
+    L = L-&gt;next;
+    delall(L, x);
+&#125;
+else
+    delall(L-&gt;next, x); //递归体
+&#125;
+
+//输出最大值结点
+ElemType maxv(LNode *L)
+&#123;
+ElemType m;
+if (L-&gt;next == NULL) //出口
+    return L-&gt;data;
+m = maxv(L-&gt;data);
+if (m &gt; L-&gt;data) //递归体
+    return m;
+else
+    return L-&gt;data;
+&#125;
+
+//输出最小结点值
+ElemType minv(LNode *L)
+&#123;
+ElemType m;
+if (L-&gt;next == NULL)
+    return L-&gt;data;
+m = minv(L-&gt;next);
+if (m &gt; L-&gt;data)
+    return L-&gt;data;
+else
+    return m;
+&#125;
+...
+</code></pre>
+<p style="color:pink;">其实我是很不想写递归相关的代码的，因为感觉平时相关的问题，转化为循环就可以解决，但是递归自然有着自己不可替代的好处，所以我最后还是勉为其难的将它写了下来</p>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>true</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://riyugo.com/i/2021/04/16/t2xfnj.png" alt="高小白 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="https://riyugo.com/i/2021/04/16/t26qiy.jpg" alt="高小白 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://riyugo.com/i/2021/04/16/trw5tf.png">
+          <span class="icon">
+            <i class="添加微信好友"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://riyugo.com/i/2021/04/16/tu78in.png">
+          <span class="icon">
+            <i class="关注我的微信公众号"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/05/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%A4%A7%E5%AE%B6%E9%83%BD%E4%B8%8D%E6%84%BF%E6%84%8F%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98/%E4%B8%BA%E5%95%A5%E6%9C%80%E5%A5%BD%E4%B8%8D%E8%A6%81%E9%80%92%E5%BD%92/" rel="prev" title="万万不可滥用递归">
+                  <i class="fa fa-chevron-left"></i> 万万不可滥用递归
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS"></div><script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gao-youyi</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="https://riyugo.com/i/2021/04/17/fb1pop.png"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script size="20" alpha="0.3" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{&quot;enable&quot;:true,&quot;app_id&quot;:&quot;RekDA5tMhF5OWVAy2gYkXCjJ-gzGzoHsz&quot;,&quot;app_key&quot;:&quot;VX4awY7L8NQEWpSg66EJ4oya&quot;,&quot;server_url&quot;:null,&quot;security&quot;:false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{&quot;enable&quot;:true,&quot;appid&quot;:&quot;cyvqhIrHF&quot;,&quot;appkey&quot;:&quot;18691995efd9040aa08ce07e36d95b3a&quot;}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>
