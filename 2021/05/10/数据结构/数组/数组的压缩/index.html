@@ -31,28 +31,28 @@
     })();
 </script>
 
-<meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta name="description" content="&#39;&#39;&#39;C #include &lt;stdio.h&gt;   #include &lt;stdlib.h&gt; #include &lt;string.h&gt; &#x2F;&#x2F;---------------------------------------------------------------- &#x2F;&#x2F;顺序存储，静态存储和动态存储(malloc),可以改变大小的--一维数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="日记二">
-<meta property="og:url" content="http://gao-youyi.github.io/2021/04/23/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%A7%E8%83%86%E5%B0%9D%E8%AF%95/index.html">
+<meta property="og:title" content="数组的压缩">
+<meta property="og:url" content="http://gao-youyi.github.io/2021/05/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E7%BB%84/%E6%95%B0%E7%BB%84%E7%9A%84%E5%8E%8B%E7%BC%A9/index.html">
 <meta property="og:site_name" content="高小白">
-<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:description" content="&#39;&#39;&#39;C #include &lt;stdio.h&gt;   #include &lt;stdlib.h&gt; #include &lt;string.h&gt; &#x2F;&#x2F;---------------------------------------------------------------- &#x2F;&#x2F;顺序存储，静态存储和动态存储(malloc),可以改变大小的--一维数">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-04-23T12:52:00.000Z">
-<meta property="article:modified_time" content="2021-04-27T08:12:38.133Z">
+<meta property="article:published_time" content="2021-05-10T13:22:49.938Z">
+<meta property="article:modified_time" content="2021-05-10T13:26:55.595Z">
 <meta property="article:author" content="高小白">
-<meta property="article:tag" content="十年之约">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://gao-youyi.github.io/2021/04/23/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%A7%E8%83%86%E5%B0%9D%E8%AF%95/">
+<link rel="canonical" href="http://gao-youyi.github.io/2021/05/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E7%BB%84/%E6%95%B0%E7%BB%84%E7%9A%84%E5%8E%8B%E7%BC%A9/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;gao-youyi.github.io&#x2F;2021&#x2F;04&#x2F;23&#x2F;%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F&#x2F;%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%A7%E8%83%86%E5%B0%9D%E8%AF%95&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;04&#x2F;23&#x2F;个人情感&#x2F;我的第一次大胆尝试&#x2F;&quot;,&quot;title&quot;:&quot;日记二&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;gao-youyi.github.io&#x2F;2021&#x2F;05&#x2F;10&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84&#x2F;%E6%95%B0%E7%BB%84&#x2F;%E6%95%B0%E7%BB%84%E7%9A%84%E5%8E%8B%E7%BC%A9&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;05&#x2F;10&#x2F;数据结构&#x2F;数组&#x2F;数组的压缩&#x2F;&quot;,&quot;title&quot;:&quot;数组的压缩&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>日记二 | 高小白</title><script src="/js/config.js"></script>
+<title>数组的压缩 | 高小白</title><script src="/js/config.js"></script>
   
 
 
@@ -252,7 +252,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/04/23/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%A7%E8%83%86%E5%B0%9D%E8%AF%95/">
+    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/05/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E7%BB%84/%E6%95%B0%E7%BB%84%E7%9A%84%E5%8E%8B%E7%BC%A9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://5b0988e595225.cdn.sohucs.com/images/20200421/2c31c57374fd445ab3ac98c60e9af59b.gif">
@@ -265,7 +265,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          日记二<a href="https://gao-youyi.github.io_posts/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%A7%E8%83%86%E5%B0%9D%E8%AF%95.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          数组的压缩<a href="https://gao-youyi.github.io_posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E7%BB%84/%E6%95%B0%E7%BB%84%E7%9A%84%E5%8E%8B%E7%BC%A9.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -275,19 +275,13 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2021-04-23 20:52:00" itemprop="dateCreated datePublished" datetime="2021-04-23T20:52:00+08:00">2021-04-23</time>
+      <time title="创建时间：2021-05-10 21:22:49 / 修改时间：21:26:55" itemprop="dateCreated datePublished" datetime="2021-05-10T21:22:49+08:00">2021-05-10</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-27 16:12:38" itemprop="dateModified" datetime="2021-04-27T16:12:38+08:00">2021-04-27</time>
-      </span>
 
   
-    <span id="/2021/04/23/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%A7%E8%83%86%E5%B0%9D%E8%AF%95/" class="post-meta-item leancloud_visitors" data-flag-title="日记二" title="阅读次数">
+    <span id="/2021/05/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E7%BB%84/%E6%95%B0%E7%BB%84%E7%9A%84%E5%8E%8B%E7%BC%A9/" class="post-meta-item leancloud_visitors" data-flag-title="数组的压缩" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -310,8 +304,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2021/04/23/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%A7%E8%83%86%E5%B0%9D%E8%AF%95/#SOHUCS" itemprop="discussionUrl">
-        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/04/23/个人情感/我的第一次大胆尝试/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2021/05/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E7%BB%84/%E6%95%B0%E7%BB%84%E7%9A%84%E5%8E%8B%E7%BC%A9/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/05/10/数据结构/数组/数组的压缩/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -326,18 +320,70 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="04d8a10a216d94ccb0ee528b2a5e373e79f5b309568835165e73351652d25199">93dd12884d51126aa6348f9766728429aa4e1451a8d7c0e85fb10c7eb65ce7730f8960c2a9ed237b9ff9108a0c1b682566d0f36fbfe0126b2300dec508ce2f3dc1b688b103c0b63b374ff10fa1e30ecd6c43d04d3804023bb35610f6c79fbdc2aaad935b0326d98d6bc95cde7b3cf008c616c75a17b9278c25c798b279afe035ed0d5de3a4a703ec9626ff202a3ed0676e0c5e68b0db4cf0b9360e4ba0df27f02256a08942880a152bd01fe6ee093c83349af6df5c5303238ff702ed7bbfa97417ea715c6c89e544ba7f4e929b0f0df7de3181245ca8c5c9073a5f5bab54e534361606e6257dbe76498539606eb3bdfeeaf5f726e12966239ef473913180d5ea851c8c13a4221453bd3cafe6aed23b9ee86083d0aee67991e2bd96c13f318688523253d0d9e7e87348777521299cacd005a1db613d9d7344a3e32517ca8853577e387234e1408cb16a874255586ea8bc30be3a18437efe9bbc2ec1a22b93bf5df40b8067e788794e16dbf0f821361c3ced9f75bcb36968c00239344000018f40b38985d108d32e13b3f167935c7b572f4d820b9afe80437a6835e76a02b7666999a785158fd744d30716384bef7ba8ce3ff8cb5020edc425a12809648c58494bd17d3b7fa6b16b9f849a19a88fc6a43bf79a9e1418ea8114464fb347d33479d541cadab8ee9312c2a4aeba6da55e7072a09bdce56accb9b38b59e410429ba4e792b99485c781616b440fbd1dd2436278f4d45e6ef9a01b7afe5a556b25ae7e0a2e61a08a7596bbf4f92175db44f4ca610c3ea0fb989a7a4a7ff9dabb043ce66788c33609a4cf2031ade4de824b286e968854a3f3e61ff09c0fdefb6f43f9c77810894a8880a58787b07f74df56ef1b2bd8a80c60eae261fcdb1c44dd5c2e6c87d85a0f2a47944fb7cb73e5a8ad2d66c1e5d425931d1d87a8ba2b78c78a6ac3f374f8d0cc000c5a4dd35c3ab1dc1133e2df59f7927ce1ec111f98bcc1bf1d8fbf03f3d867aec2cf13811f926765fc6877a999a08873c32cd8a5a7317922ee5ab5ce3f853670c79c0b36b2d956e0461f10e7ec2d6bfdd70cf2af511d2636c3cc552221ef8e89d13ce87876886a057fddb21a875e01175045bc39b7384facd3deb918cb4f2a5038c0dc334f26af70f786358c698694df4673002cb0457cfb737431546e3dcfef67f919e236122d90710c37529e46d10a8673ac4553b78edb635decba9a926a657f83d388f47d2ef1ef96f1dd9f54949083f221eb46a6c2d5347fbdc2b591b4fbd4e915fb49cb8012e93a2d02cf06271971c33bceb56c6b7ae23a1b</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入文章密码，请不要介意，文章内容过于私密，不便透露。</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+        <pre><code>&#39;&#39;&#39;C
+#include &lt;stdio.h&gt;  
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+//----------------------------------------------------------------
+//顺序存储，静态存储和动态存储(malloc),可以改变大小的--一维数组
+//二维数组，三维数组
+//二维数组其实可以看做一维数组的一维数组，
+/*比如：
+typedef ElemType array2[m][n];
+等价于：
+typedef ElemType array1[n];//创建一维数组
+typedef array1 array2[m];//一维数组类型的一维数组，结合成二维数组
+*/
+//二维数组的静态定义
+#define M 30
+int ArrayA[M][M], ArrayB[100][60];
+//二维数组的动态存储
+//必须建立一个指向这个数组的起始位置的指针
+//这里要注意这个指针必须是二级指针
+//因为一维数组是一级指针
+//为了指向一维数组，就必须创建一个二级指针
+//同时申请空间的时候也要注意，第一次
+int **A;
+int m = 10, n = 6, i, j;
+*A = (int **)malloc(m * sizeof(int *)); //首先创建m个头指针，每个指针都是int*类型
+for (i = 0; i &lt; m; i++)
+A[i] = (int *)malloc(n * (int)); //然后借助于每一个头指针，申请m个n的int空间
+for (i = 0; i &lt; m; i++)
+for (j = 0; j &lt; n; j++)
+    scanf(&quot;%d&quot;, &amp;A[i][j]); //建议进行初始化，注意二维数组的赋值必须要双重循环
+//但是，也要注意在使用之后还要注意回收空间
+//肯定是借助于1头结点回收
+for (i = 0; i &lt; m; i++)
+free(A[i]); //先借助于头结点删除每一行
+free(A);        //最后删除最开始的那个头结点(二级指针)
+
+//二维数组的存储：理解以行为主的存储和以列为主的存储(太简单了，就不写了)
+
+/*三维数组的地址的计算
+各维元素的个数分别为：m,n ,p;记住，三维数组表示的是体积，要像计算体积那样计算
+则下标为a[i][j][k]的元素的位置计算为：
+&amp;a[i][j][k]=a(首地址)+(i*n*p+j*p+k)*size
+*/
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+//对于一些特殊矩阵可以进行压缩存储，一般阶数很高
+/*
+
+1)对称矩阵
+方法：只存储对角线和对角线以下的元素1，上三角，2，下三角
+下三角矩阵：
+地址的计算：
+对于a[i][j]:
+i&lt;j:(在下三角部分)
+在压缩矩阵的位置是i*(i+1)/2+j,因为每一行只有1,2,3,4,i个元素，一直到第i+1行，有j个元素在a[i][j]的前面
+i&gt;j:(调换一下位置就好)
+
+2)三角矩阵
+3)w对角矩阵
+&#39;&#39;&#39;
+</code></pre>
+
     </div>
 
     
@@ -391,21 +437,18 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E5%8D%81%E5%B9%B4%E4%B9%8B%E7%BA%A6/" rel="tag"><i class="fa fa-tag"></i> 十年之约</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%A4%B4%E6%8F%92%E6%B3%95%E5%92%8C%E5%B0%BE%E6%8F%92%E6%B3%95%E8%A7%A3%E9%87%8A/" rel="prev" title="头插法和尾插法解释">
-                  <i class="fa fa-chevron-left"></i> 头插法和尾插法解释
+                <a href="/2021/05/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%B8%B2/BP%E5%92%8CKMP/" rel="prev" title="BF和KMP算法的实现和思考">
+                  <i class="fa fa-chevron-left"></i> BF和KMP算法的实现和思考
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" rel="next" title="单循环链表的第一天">
-                  单循环链表的第一天 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
