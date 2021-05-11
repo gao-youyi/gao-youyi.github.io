@@ -11,6 +11,11 @@
       </categories>
   </entry>
   <entry>
+    <title>认识你，真的很幸运</title>
+    <url>/2021/04/19/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/Readme/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>日记二</title>
     <url>/2021/04/23/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%A7%E8%83%86%E5%B0%9D%E8%AF%95/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
@@ -49,11 +54,6 @@
       </tags>
   </entry>
   <entry>
-    <title>认识你，真的很幸运</title>
-    <url>/2021/04/19/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/Readme/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>曲折的博客搭建</title>
     <url>/2021/04/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%9C%89%E6%84%9F/</url>
     <content><![CDATA[<hr>
@@ -76,6 +76,25 @@
 <li>保持谦逊</li>
 </ul>
 <!--more-->]]></content>
+      <tags>
+        <tag>前端开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>css定位</title>
+    <url>/2021/04/18/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%AE%9A%E4%BD%8D/</url>
+    <content><![CDATA[<h1 id="定位学习手册"><a href="#定位学习手册" class="headerlink" title="定位学习手册"></a>定位学习手册</h1><h2 id="定位-定位模式-边偏移"><a href="#定位-定位模式-边偏移" class="headerlink" title="定位=定位模式+边偏移"></a>定位=定位模式+边偏移</h2><blockquote>
+<p>定位模式：指定一个元素在文档中的定位方式<br>边偏移：决定元素的最终位置</p>
+</blockquote>
+<h3 id="四个position属性"><a href="#四个position属性" class="headerlink" title="四个position属性:"></a>四个position属性:</h3><blockquote>
+<blockquote>
+<blockquote>
+<p>static:了解就行<br>1，无定位，和标准流一样。<br>relative：重要！<br>1，它的边偏移是相对自己原来的位置来说的。<br>2，即使移动了，自己原来的位置继续占有，不像浮动一样脱标！<br>absolute:异常重要！！<br>1,如股没有限制，相对于最大的盒子body;<br>2如果父级元素存在任意一种(除了static)定位，则以最近一级父级(也可以是爷爷级别元素)盒子作为参考点移动;否则还是以body作为定位；<br>3,绝对定位的盒子位置不会保留，像浮动型，脱离标准流；<br>fixed:重要<br>1，元素的位置不会随着页面的滚动而动，参照点是以浏览器的可视窗口来决定；</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="子绝对父相对"><a href="#子绝对父相对" class="headerlink" title="子绝对父相对"></a>子绝对父相对</h3><p>一般情况下，如果孩子是absolute定位，父亲采用relative定位，来限制孩子的位置；</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
       <tags>
         <tag>前端开发</tag>
       </tags>
@@ -168,25 +187,6 @@
 &#39;&#39;&#39;
 </code></pre>
 <h3 id="变量小结"><a href="#变量小结" class="headerlink" title="变量小结"></a>变量小结</h3><imge src="#">]]></content>
-      <tags>
-        <tag>前端开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>css定位</title>
-    <url>/2021/04/18/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%AE%9A%E4%BD%8D/</url>
-    <content><![CDATA[<h1 id="定位学习手册"><a href="#定位学习手册" class="headerlink" title="定位学习手册"></a>定位学习手册</h1><h2 id="定位-定位模式-边偏移"><a href="#定位-定位模式-边偏移" class="headerlink" title="定位=定位模式+边偏移"></a>定位=定位模式+边偏移</h2><blockquote>
-<p>定位模式：指定一个元素在文档中的定位方式<br>边偏移：决定元素的最终位置</p>
-</blockquote>
-<h3 id="四个position属性"><a href="#四个position属性" class="headerlink" title="四个position属性:"></a>四个position属性:</h3><blockquote>
-<blockquote>
-<blockquote>
-<p>static:了解就行<br>1，无定位，和标准流一样。<br>relative：重要！<br>1，它的边偏移是相对自己原来的位置来说的。<br>2，即使移动了，自己原来的位置继续占有，不像浮动一样脱标！<br>absolute:异常重要！！<br>1,如股没有限制，相对于最大的盒子body;<br>2如果父级元素存在任意一种(除了static)定位，则以最近一级父级(也可以是爷爷级别元素)盒子作为参考点移动;否则还是以body作为定位；<br>3,绝对定位的盒子位置不会保留，像浮动型，脱离标准流；<br>fixed:重要<br>1，元素的位置不会随着页面的滚动而动，参照点是以浏览器的可视窗口来决定；</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h3 id="子绝对父相对"><a href="#子绝对父相对" class="headerlink" title="子绝对父相对"></a>子绝对父相对</h3><p>一般情况下，如果孩子是absolute定位，父亲采用relative定位，来限制孩子的位置；</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
       <tags>
         <tag>前端开发</tag>
       </tags>
@@ -298,7 +298,7 @@ else
       </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>顺序串和堆串的实现</title>
     <url>/2021/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%B8%B2/%E9%A1%BA%E5%BA%8F%E4%B8%B2%E5%92%8C%E9%93%BE%E4%B8%B2%E7%9A%84%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<pre><code>&#39;&#39;&#39;C
 #include &lt;stdio.h&gt;
@@ -483,6 +483,173 @@ SubString(a, pos, len);
       </tags>
   </entry>
   <entry>
+    <title>数组的压缩</title>
+    <url>/2021/05/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/%E6%95%B0%E7%BB%84%E7%9A%84%E5%8E%8B%E7%BC%A9/</url>
+    <content><![CDATA[<pre><code>&#39;&#39;&#39;C
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+//对于一些特殊矩阵可以进行压缩存储，一般阶数很高
+/*
+</code></pre>
+<span id="more"></span>
+<pre><code>1)对称矩阵
+方法：只存储对角线和对角线以下的元素1，上三角，2，下三角
+
+下三角矩阵：
+地址的计算：
+对于a[i][j]:
+i&lt;j:(在下三角部分)
+在压缩矩阵的位置是i*(i+1)/2+j,因为每一行只有1,2,3,4,i个元素，一直到第i+1行，有j个元素在a[i][j]的前面
+i&gt;j:(调换一下位置就好)，也就是对于a[i][j]j*(j+1)/2+j，这样就可以用一个简单的行矩阵存储他们。
+
+2)三对角矩阵
+1，确定元素的个数3(n-1)+1;
+2,同样不计入0元，
+3，在一维数组array中，A[i][j]在第i行，它前面有3i-1个非零
+元素，在本行中第j列前面有j-i+1个，所以元素A[i][j]在压缩数组中的位置是k = 2*i+j(下标)
+
+3)w对角矩阵
+
+//------------------------------------------------------------------------------------------------------------
+稀疏矩阵：0元的个数远远大于非零元素，当然没有硬性要求
+很多的稀疏矩阵没有特殊的规律，所以为了找出每一个非零元素的位置，总要记下他的位置(i,j)
+F1:
+三元组顺序表：
+每一个三元组(i,j,aij)唯一确定了矩阵A的一个非零元素
+三元组顺序表中三元组的个数记录在变量tu中，次即矩阵中非零元素的个数。稀疏矩阵的行数和列数分别记录在mu,nu中
+但是这样是远远不够的，只是按照上面那样进行存储，我们无法得到原先的矩阵的行数和列数！此时可以利用tu=acount,
+mu=linecount,nu=listcount,
+因此实现如下：
+*/
+#define MaxSize 100
+typedef int ElemType typedef struct
+&#123;
+int i, j;
+ElemType e;
+&#125; Triple; //定义每一个结点的数据类型
+
+typedef struct
+&#123;
+int mu, nu, tu;
+Triple data[MaxSize];
+&#125; TSMatrix; //定义每一个数组的数据类型
+
+//借助于稀疏矩阵的三元组进行转置
+/*可以发现，由于原先的矩阵是按行存储，转制后相当于按列存储，那么可以通过遍历原来的
+三元表，每次遍历，都找到最小的那个nu,然后把nu作为新的三元表的mu,进行重新排序，
+交换原先的三元组的mu和nu的值，存储在新的三元表中，数据不变，即可。
+*/
+void TransposeSMatrix(TSMatrix M, TSMatrix &amp;T)
+&#123;
+int p, q, col;
+T.mu = M.nu;
+T.nu = M.mu;
+T.tu = M.tu; //先大致完成参数转换6
+if (T.tu)    //只要表部位空，就执行转置
+&#123;
+    q = 1;                            //开始的时候新的三元组的下标，这里从一开始，而不是0
+    for (col = 1; col &lt;= M.nu; ++col) //按照列数进行循环
+    &#123;
+        for (p = 1; p &lt; M.tu; ++p) //对每一个三元组进行遍历
+        &#123;
+            if (M.data[p].j == col)        //只要三元组的列等于计数器，那么就作为对应计数器的转置三元组(计数器是递增的)，元素的位置也是
+            &#123;                              //进行转置
+                T.data[q].i = M.data[p].j; //交换行数到列数
+                T.data[q].j = M.data[p].i; //交换列数到行数
+                T.data[q].e = M.data[p].e; //值不变
+                ++q;                       //依次生成新的三元组
+            &#125;
+        &#125;
+    &#125;
+&#125;
+&#125;
+/*
+下面我们来计算一下这种方式的复杂度，有n个三元组，m列（可以转置，那么行数也是m）的话，就要先循环m次
+然后每次都要遍历所有的元素，所以为m*n次,那个转换值的步骤复杂度为1，所以一共是O(m*n);
+还是比较麻烦的*/
+
+//快速转置算法
+/*建立两个辅助数组，num[col]和cpot[col]
+num[col]：记录矩阵转置前各列非零元个数，转置后自然就是各行非零元的个数
+cpot[col]：记录转置后各行第一个非零元组在转置三元组表中开始存放的位置
+注意这里的cpot的值是对应的num[]之前的所有的元组的个数之和。这样就可以很简单
+的根据num计算出copt*/
+void FastTransposeSMatrix(TSMatrix M, TSMatrix &amp;T)
+&#123;
+int p, q, t, col, num[MaxSize], cpot[MaxSize];
+T.mu = M.nu;
+T.nu = M.mu;
+T.tu = M.tu;
+if (T.tu)
+&#123;
+    for (col = 0; col &lt; M.nu; ++col)
+        num[col] = 0; //初始化
+    for (t = 0; t &lt; M.tu; ++t)
+        ++num[M.data[t].j]; //统计转置之前每列的非零元的个数，M.data[t].j表示每次遍历的元素的列数，每出现一次，对应的num值就+1
+    cpot[0] = 0;            //初始的copt的数据
+    //cpot的运算要在num的计算之后才能进行
+    for (col = 1; col &lt; M.nu; ++col)              //统计转置矩阵中每一行第一个非零元素在三元组表中的位置
+        cpot[col] = cpot[col - 1] + num[col - 1]; //这里相当于一个递归定义，其实也可以写成cpot[col]+=num[col-1];
+    for (p = 0; p &lt; M.tu; ++p)                    //然后可以根据辅助数组进行转置
+    &#123;                                             //对于任意一个M中的元素
+        col = M.data[p].j;                        //先查出它在哪一列
+        q = cpot[col];                            //然后再找到这一列的第一个元素的所在的对应的T中的位置
+        T.data[q].i = M.data[p].j;                //转置
+        T.data[q].j = M.data[p].i;                //转置
+        T.data[q].e = M.data[p].e;                //转置
+                                                    //下面这一步特别关键，只有这样才能确定除了每一列的第一  个元素在T中的位置的位置
+            ++cpot[col];                              //每次出现一次这一列，对应的cpot的值就+1，这样就可以根据上一个(其实是第一个)元素的行数，找到其对应的T的位置
+    &#125;
+&#125;
+&#125;
+/*
+我们可以再次分析一下这个快速转置的算法的复杂度：
+可以发现，有四个并列循环，分别为O(nu),O(tu),O(nu),O(tu),所以总的时间复杂度为O(nu+mu),
+显然，这远远小于上一个简单的双重循环*/
+//----------------------------------------------------------------
+
+//行逻辑链接的顺序表:就是相对于普通的三元组表加了一个数组rpos[]表示各行第一个非零元素的位置
+//这里可以看作和上面的辅助数组差不多的作用
+#define MAXRC 20
+typedef struct
+&#123;
+    Triple data[MaxSize]; //三元组表
+int rpos[MAXRC];      //各行第一个非零元素的位置表
+int mu, nu, tu;       //行，列，非零元个数
+&#125; RLSMatrix;
+//----------------------------------------------------------------
+
+//十字链表
+/*
+这是一种指针结构，包涵两个指针right(行)和down(列),用他俩来链接其他的元素，可以想成十字架
+同时自然还有row,col,value常量
+可以想到，这样的链表应该还挺麻烦的
+*/
+typedef struct OLNode //三元组的数据结构
+&#123;
+int i, j;
+ElementType e;
+OLNode *right, *down;
+&#125; OLNode *OLink; //right和down是指向结点类型的指针，包括数据域和每个数组数据的位置信息
+
+struct CrossList //表的数据结构
+&#123;
+QLink *rhead, *chead; //相当于头指针
+int mu, nu, tu;
+&#125;; //再定义一下链表的数据结构，包括指向OLNode结点的指针和表的尺寸
+
+//----------------------------------------------------------------
+
+&#39;&#39;&#39;
+</code></pre>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>free就够了吗！</title>
     <url>/2021/04/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%A4%A7%E5%AE%B6%E9%83%BD%E4%B8%8D%E6%84%BF%E6%84%8F%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98/free%E4%B9%8B%E5%90%8E%E7%9A%84NULL%E6%98%AF%E4%B8%BA%E5%95%A5/</url>
     <content><![CDATA[<h2 id="基本原理："><a href="#基本原理：" class="headerlink" title="基本原理："></a>基本原理：</h2><pre><code>&#39;&#39;&#39;c
@@ -502,15 +669,6 @@ printf(&quot;*p = %d\n&quot;, *p);
 ]]></content>
       <tags>
         <tag>数据结构 C语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>万万不可滥用递归</title>
-    <url>/2021/05/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%A4%A7%E5%AE%B6%E9%83%BD%E4%B8%8D%E6%84%BF%E6%84%8F%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98/%E4%B8%BA%E5%95%A5%E6%9C%80%E5%A5%BD%E4%B8%8D%E8%A6%81%E9%80%92%E5%BD%92/</url>
-    <content><![CDATA[<h3 id="虽然今天学习了递归，但是我们应该清醒的认识到：可能我们工作中一次也不会用到递归。由于这个问题很多博主已经讲的很好了，我就不献丑了，这里只是给大家提供了一篇讲的还不错的博文链接："><a href="#虽然今天学习了递归，但是我们应该清醒的认识到：可能我们工作中一次也不会用到递归。由于这个问题很多博主已经讲的很好了，我就不献丑了，这里只是给大家提供了一篇讲的还不错的博文链接：" class="headerlink" title="虽然今天学习了递归，但是我们应该清醒的认识到：可能我们工作中一次也不会用到递归。由于这个问题很多博主已经讲的很好了，我就不献丑了，这里只是给大家提供了一篇讲的还不错的博文链接："></a>虽然今天学习了递归，但是我们应该清醒的认识到：可能我们工作中一次也不会用到递归。由于这个问题很多博主已经讲的很好了，我就不献丑了，这里只是给大家提供了一篇讲的还不错的博文链接：</h3><h3 id="具体原因请点击下面的博客链接："><a href="#具体原因请点击下面的博客链接：" class="headerlink" title="具体原因请点击下面的博客链接："></a>具体原因请点击下面的博客链接：</h3><p><a href="https://blog.csdn.net/qq_35246620/article/details/104855300?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161983304616780261947754%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=161983304616780261947754&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-1-104855300.first_rank_v2_pc_rank_v29&utm_term=%E4%B8%BA%E4%BB%80%E8%8E%AB%E6%9C%80%E5%A5%BD%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E9%80%92%E5%BD%92">递归的问题</a></p>
-]]></content>
-      <tags>
-        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -710,6 +868,15 @@ while (i &lt; n &amp;&amp; flag == 1)
       </tags>
   </entry>
   <entry>
+    <title>万万不可滥用递归</title>
+    <url>/2021/05/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%A4%A7%E5%AE%B6%E9%83%BD%E4%B8%8D%E6%84%BF%E6%84%8F%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98/%E4%B8%BA%E5%95%A5%E6%9C%80%E5%A5%BD%E4%B8%8D%E8%A6%81%E9%80%92%E5%BD%92/</url>
+    <content><![CDATA[<h3 id="虽然今天学习了递归，但是我们应该清醒的认识到：可能我们工作中一次也不会用到递归。由于这个问题很多博主已经讲的很好了，我就不献丑了，这里只是给大家提供了一篇讲的还不错的博文链接："><a href="#虽然今天学习了递归，但是我们应该清醒的认识到：可能我们工作中一次也不会用到递归。由于这个问题很多博主已经讲的很好了，我就不献丑了，这里只是给大家提供了一篇讲的还不错的博文链接：" class="headerlink" title="虽然今天学习了递归，但是我们应该清醒的认识到：可能我们工作中一次也不会用到递归。由于这个问题很多博主已经讲的很好了，我就不献丑了，这里只是给大家提供了一篇讲的还不错的博文链接："></a>虽然今天学习了递归，但是我们应该清醒的认识到：可能我们工作中一次也不会用到递归。由于这个问题很多博主已经讲的很好了，我就不献丑了，这里只是给大家提供了一篇讲的还不错的博文链接：</h3><h3 id="具体原因请点击下面的博客链接："><a href="#具体原因请点击下面的博客链接：" class="headerlink" title="具体原因请点击下面的博客链接："></a>具体原因请点击下面的博客链接：</h3><p><a href="https://blog.csdn.net/qq_35246620/article/details/104855300?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161983304616780261947754%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=161983304616780261947754&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-1-104855300.first_rank_v2_pc_rank_v29&utm_term=%E4%B8%BA%E4%BB%80%E8%8E%AB%E6%9C%80%E5%A5%BD%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E9%80%92%E5%BD%92">递归的问题</a></p>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>栈的链式实现</title>
     <url>/2021/04/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E6%A0%88%E7%9A%84%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
@@ -809,6 +976,75 @@ else
 &#39;&#39;&#39;
 </code></pre>
 <h2 id="更新于2021-4-27日"><a href="#更新于2021-4-27日" class="headerlink" title="更新于2021-4-27日"></a>更新于2021-4-27日</h2><p>昨天回去，反思了一下自己为什莫没有理解老师的意思，想来应该还是自己对于栈的数据结构以及头插法和尾插法不是特别熟练，<br>但愿大家不要犯和同样的错误，对于链表的两种插入操作，一定要熟练，这是基础。</p>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>栈的顺序表实现</title>
+    <url>/2021/04/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+//任何一种存储结构都可以写成顺序存储和链式存储
+//入栈：Push：*(S.top)++,出栈：Pop:*--S.top；栈顶元素top，从
+/*栈的顺序表结构*/
+</code></pre>
+<span id="more"></span>
+<pre><code>#define STACK_INIT_SIZE 100 //初始分配量
+#define STACK_INCREMENT 10  //存储空间分配增量
+typedef char ElemType;
+typedef struct
+&#123;
+ElemType *base; //栈底指针,位置不变
+ElemType *top;  //栈顶指针，top = base 时，栈为空
+int stacksize;  //栈空间大小
+&#125; SqStack;
+
+//初始化栈
+void intStack(SqStack &amp;S)
+&#123;
+if (!(S.base = (ElemType *)malloc(STACK_INIT_SIZE * sizeof(ElemType))))
+    exit(OVERFLOW); //存储分配失败
+S.top = S.base;
+S.stacksize = STACK_INIT_SIZE;
+&#125;
+
+//销毁栈
+void DestroyStack(SqStack &amp;S)
+&#123;
+free(S.base);  //首地址
+S.base = NULL; //置空
+S.top = NULL;
+S.stacksize = 0;
+&#125;
+
+//进栈操作
+void Push(SqStack &amp;S, ElemType e)
+&#123;
+if ((S.top - S.base) &gt;= S.stacksize)
+&#123; //动态扩充空间
+    S.base = (ElemType *)realloc(S.base, ((S.stacksize) + STACK_INCREMENT) * sizeof(ElemType));
+    if (!S.base)
+        exit(OVERFLOW); //判断上一步是否分配成功
+    S.top = S.base + S.stacksize;
+    S.stacksize += STACK_INCREMENT;
+&#125;
+*(S.top)++ = e; //Push
+&#125;
+
+//出栈
+int Pop(SqStack &amp;S, ElemType &amp;e)
+&#123;
+if (S.top == S.base)
+    return 0;
+e = *--S.top;
+return 1;
+&#125;
+</code></pre>
+<p>//取出栈顶元素值,这里并没有对S.top进行修改，因为只是<br>int GetTop(SqStack S, ElemType &amp;e) //取出的值通过e返回，但是对S不进行修改<br>{<br>    if (S.top &gt; S.base)<br>    {<br>        e = *(S.top - 1); //传出栈顶值<br>        return 1;<br>    }<br>    else<br>        return 0;<br>}</p>
+<p>//判断栈是否为空<br>int StackEmpty(SqStack S)<br>{ //当栈为空的时候，返回值为1,否则为0；<br>    if (S.top == S.base)<br>        return 1;<br>    else<br>        return 0;<br>}<br>    …</p>
 ]]></content>
       <tags>
         <tag>数据结构</tag>
@@ -1424,75 +1660,6 @@ else
       </tags>
   </entry>
   <entry>
-    <title>栈的顺序表实现</title>
-    <url>/2021/04/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
-#include &lt;bits/stdc++.h&gt;
-using namespace std;
-//任何一种存储结构都可以写成顺序存储和链式存储
-//入栈：Push：*(S.top)++,出栈：Pop:*--S.top；栈顶元素top，从
-/*栈的顺序表结构*/
-</code></pre>
-<span id="more"></span>
-<pre><code>#define STACK_INIT_SIZE 100 //初始分配量
-#define STACK_INCREMENT 10  //存储空间分配增量
-typedef char ElemType;
-typedef struct
-&#123;
-ElemType *base; //栈底指针,位置不变
-ElemType *top;  //栈顶指针，top = base 时，栈为空
-int stacksize;  //栈空间大小
-&#125; SqStack;
-
-//初始化栈
-void intStack(SqStack &amp;S)
-&#123;
-if (!(S.base = (ElemType *)malloc(STACK_INIT_SIZE * sizeof(ElemType))))
-    exit(OVERFLOW); //存储分配失败
-S.top = S.base;
-S.stacksize = STACK_INIT_SIZE;
-&#125;
-
-//销毁栈
-void DestroyStack(SqStack &amp;S)
-&#123;
-free(S.base);  //首地址
-S.base = NULL; //置空
-S.top = NULL;
-S.stacksize = 0;
-&#125;
-
-//进栈操作
-void Push(SqStack &amp;S, ElemType e)
-&#123;
-if ((S.top - S.base) &gt;= S.stacksize)
-&#123; //动态扩充空间
-    S.base = (ElemType *)realloc(S.base, ((S.stacksize) + STACK_INCREMENT) * sizeof(ElemType));
-    if (!S.base)
-        exit(OVERFLOW); //判断上一步是否分配成功
-    S.top = S.base + S.stacksize;
-    S.stacksize += STACK_INCREMENT;
-&#125;
-*(S.top)++ = e; //Push
-&#125;
-
-//出栈
-int Pop(SqStack &amp;S, ElemType &amp;e)
-&#123;
-if (S.top == S.base)
-    return 0;
-e = *--S.top;
-return 1;
-&#125;
-</code></pre>
-<p>//取出栈顶元素值,这里并没有对S.top进行修改，因为只是<br>int GetTop(SqStack S, ElemType &amp;e) //取出的值通过e返回，但是对S不进行修改<br>{<br>    if (S.top &gt; S.base)<br>    {<br>        e = *(S.top - 1); //传出栈顶值<br>        return 1;<br>    }<br>    else<br>        return 0;<br>}</p>
-<p>//判断栈是否为空<br>int StackEmpty(SqStack S)<br>{ //当栈为空的时候，返回值为1,否则为0；<br>    if (S.top == S.base)<br>        return 1;<br>    else<br>        return 0;<br>}<br>    …</p>
-]]></content>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>单循环链表的第一天</title>
     <url>/2021/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
@@ -1642,6 +1809,15 @@ printf(&quot;%d&quot;, Search_L(head));
       </tags>
   </entry>
   <entry>
+    <title>头插法和尾插法解释</title>
+    <url>/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%A4%B4%E6%8F%92%E6%B3%95%E5%92%8C%E5%B0%BE%E6%8F%92%E6%B3%95%E8%A7%A3%E9%87%8A/</url>
+    <content><![CDATA[<h3 id="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"><a href="#由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。" class="headerlink" title="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"></a>由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。</h3><p><a href="https://blog.csdn.net/qq_41028985/article/details/82859199?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161923112716780269869000%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=161923112716780269869000&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-82859199.first_rank_v2_pc_rank_v29&utm_term=%E5%A4%B4%E6%8F%92%E6%B3%95">点击链接查看外部解释</a></p>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>双链表和双向循环链表</title>
     <url>/2021/04/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8F%8C%E9%93%BE%E8%A1%A8%E5%92%8C%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<pre><code>&#39;&#39;&#39;C++
@@ -1720,15 +1896,6 @@ return 1;
 &#125;
 &#39;&#39;&#39;
 </code></pre>
-]]></content>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>头插法和尾插法解释</title>
-    <url>/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%A4%B4%E6%8F%92%E6%B3%95%E5%92%8C%E5%B0%BE%E6%8F%92%E6%B3%95%E8%A7%A3%E9%87%8A/</url>
-    <content><![CDATA[<h3 id="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"><a href="#由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。" class="headerlink" title="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"></a>由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。</h3><p><a href="https://blog.csdn.net/qq_41028985/article/details/82859199?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161923112716780269869000%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=161923112716780269869000&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-82859199.first_rank_v2_pc_rank_v29&utm_term=%E5%A4%B4%E6%8F%92%E6%B3%95">点击链接查看外部解释</a></p>
 ]]></content>
       <tags>
         <tag>数据结构</tag>
@@ -1936,173 +2103,6 @@ printf(&quot;\n\n删除后的元素序列为;\n&quot;);
 ListDelete_Sq(List, i, e);
 display(List);
 &#125;
-&#39;&#39;&#39;
-</code></pre>
-]]></content>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数组的压缩</title>
-    <url>/2021/05/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/%E6%95%B0%E7%BB%84%E7%9A%84%E5%8E%8B%E7%BC%A9/</url>
-    <content><![CDATA[<pre><code>&#39;&#39;&#39;C
-
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-//对于一些特殊矩阵可以进行压缩存储，一般阶数很高
-/*
-</code></pre>
-<span id="more"></span>
-<pre><code>1)对称矩阵
-方法：只存储对角线和对角线以下的元素1，上三角，2，下三角
-
-下三角矩阵：
-地址的计算：
-对于a[i][j]:
-i&lt;j:(在下三角部分)
-在压缩矩阵的位置是i*(i+1)/2+j,因为每一行只有1,2,3,4,i个元素，一直到第i+1行，有j个元素在a[i][j]的前面
-i&gt;j:(调换一下位置就好)，也就是对于a[i][j]j*(j+1)/2+j，这样就可以用一个简单的行矩阵存储他们。
-
-2)三对角矩阵
-1，确定元素的个数3(n-1)+1;
-2,同样不计入0元，
-3，在一维数组array中，A[i][j]在第i行，它前面有3i-1个非零
-元素，在本行中第j列前面有j-i+1个，所以元素A[i][j]在压缩数组中的位置是k = 2*i+j(下标)
-
-3)w对角矩阵
-
-//------------------------------------------------------------------------------------------------------------
-稀疏矩阵：0元的个数远远大于非零元素，当然没有硬性要求
-很多的稀疏矩阵没有特殊的规律，所以为了找出每一个非零元素的位置，总要记下他的位置(i,j)
-F1:
-三元组顺序表：
-每一个三元组(i,j,aij)唯一确定了矩阵A的一个非零元素
-三元组顺序表中三元组的个数记录在变量tu中，次即矩阵中非零元素的个数。稀疏矩阵的行数和列数分别记录在mu,nu中
-但是这样是远远不够的，只是按照上面那样进行存储，我们无法得到原先的矩阵的行数和列数！此时可以利用tu=acount,
-mu=linecount,nu=listcount,
-因此实现如下：
-*/
-#define MaxSize 100
-typedef int ElemType typedef struct
-&#123;
-int i, j;
-ElemType e;
-&#125; Triple; //定义每一个结点的数据类型
-
-typedef struct
-&#123;
-int mu, nu, tu;
-Triple data[MaxSize];
-&#125; TSMatrix; //定义每一个数组的数据类型
-
-//借助于稀疏矩阵的三元组进行转置
-/*可以发现，由于原先的矩阵是按行存储，转制后相当于按列存储，那么可以通过遍历原来的
-三元表，每次遍历，都找到最小的那个nu,然后把nu作为新的三元表的mu,进行重新排序，
-交换原先的三元组的mu和nu的值，存储在新的三元表中，数据不变，即可。
-*/
-void TransposeSMatrix(TSMatrix M, TSMatrix &amp;T)
-&#123;
-int p, q, col;
-T.mu = M.nu;
-T.nu = M.mu;
-T.tu = M.tu; //先大致完成参数转换6
-if (T.tu)    //只要表部位空，就执行转置
-&#123;
-    q = 1;                            //开始的时候新的三元组的下标，这里从一开始，而不是0
-    for (col = 1; col &lt;= M.nu; ++col) //按照列数进行循环
-    &#123;
-        for (p = 1; p &lt; M.tu; ++p) //对每一个三元组进行遍历
-        &#123;
-            if (M.data[p].j == col)        //只要三元组的列等于计数器，那么就作为对应计数器的转置三元组(计数器是递增的)，元素的位置也是
-            &#123;                              //进行转置
-                T.data[q].i = M.data[p].j; //交换行数到列数
-                T.data[q].j = M.data[p].i; //交换列数到行数
-                T.data[q].e = M.data[p].e; //值不变
-                ++q;                       //依次生成新的三元组
-            &#125;
-        &#125;
-    &#125;
-&#125;
-&#125;
-/*
-下面我们来计算一下这种方式的复杂度，有n个三元组，m列（可以转置，那么行数也是m）的话，就要先循环m次
-然后每次都要遍历所有的元素，所以为m*n次,那个转换值的步骤复杂度为1，所以一共是O(m*n);
-还是比较麻烦的*/
-
-//快速转置算法
-/*建立两个辅助数组，num[col]和cpot[col]
-num[col]：记录矩阵转置前各列非零元个数，转置后自然就是各行非零元的个数
-cpot[col]：记录转置后各行第一个非零元组在转置三元组表中开始存放的位置
-注意这里的cpot的值是对应的num[]之前的所有的元组的个数之和。这样就可以很简单
-的根据num计算出copt*/
-void FastTransposeSMatrix(TSMatrix M, TSMatrix &amp;T)
-&#123;
-int p, q, t, col, num[MaxSize], cpot[MaxSize];
-T.mu = M.nu;
-T.nu = M.mu;
-T.tu = M.tu;
-if (T.tu)
-&#123;
-    for (col = 0; col &lt; M.nu; ++col)
-        num[col] = 0; //初始化
-    for (t = 0; t &lt; M.tu; ++t)
-        ++num[M.data[t].j]; //统计转置之前每列的非零元的个数，M.data[t].j表示每次遍历的元素的列数，每出现一次，对应的num值就+1
-    cpot[0] = 0;            //初始的copt的数据
-    //cpot的运算要在num的计算之后才能进行
-    for (col = 1; col &lt; M.nu; ++col)              //统计转置矩阵中每一行第一个非零元素在三元组表中的位置
-        cpot[col] = cpot[col - 1] + num[col - 1]; //这里相当于一个递归定义，其实也可以写成cpot[col]+=num[col-1];
-    for (p = 0; p &lt; M.tu; ++p)                    //然后可以根据辅助数组进行转置
-    &#123;                                             //对于任意一个M中的元素
-        col = M.data[p].j;                        //先查出它在哪一列
-        q = cpot[col];                            //然后再找到这一列的第一个元素的所在的对应的T中的位置
-        T.data[q].i = M.data[p].j;                //转置
-        T.data[q].j = M.data[p].i;                //转置
-        T.data[q].e = M.data[p].e;                //转置
-                                                    //下面这一步特别关键，只有这样才能确定除了每一列的第一  个元素在T中的位置的位置
-            ++cpot[col];                              //每次出现一次这一列，对应的cpot的值就+1，这样就可以根据上一个(其实是第一个)元素的行数，找到其对应的T的位置
-    &#125;
-&#125;
-&#125;
-/*
-我们可以再次分析一下这个快速转置的算法的复杂度：
-可以发现，有四个并列循环，分别为O(nu),O(tu),O(nu),O(tu),所以总的时间复杂度为O(nu+mu),
-显然，这远远小于上一个简单的双重循环*/
-//----------------------------------------------------------------
-
-//行逻辑链接的顺序表:就是相对于普通的三元组表加了一个数组rpos[]表示各行第一个非零元素的位置
-//这里可以看作和上面的辅助数组差不多的作用
-#define MAXRC 20
-typedef struct
-&#123;
-    Triple data[MaxSize]; //三元组表
-int rpos[MAXRC];      //各行第一个非零元素的位置表
-int mu, nu, tu;       //行，列，非零元个数
-&#125; RLSMatrix;
-//----------------------------------------------------------------
-
-//十字链表
-/*
-这是一种指针结构，包涵两个指针right(行)和down(列),用他俩来链接其他的元素，可以想成十字架
-同时自然还有row,col,value常量
-可以想到，这样的链表应该还挺麻烦的
-*/
-typedef struct OLNode //三元组的数据结构
-&#123;
-int i, j;
-ElementType e;
-OLNode *right, *down;
-&#125; OLNode *OLink; //right和down是指向结点类型的指针，包括数据域和每个数组数据的位置信息
-
-struct CrossList //表的数据结构
-&#123;
-QLink *rhead, *chead; //相当于头指针
-int mu, nu, tu;
-&#125;; //再定义一下链表的数据结构，包括指向OLNode结点的指针和表的尺寸
-
-//----------------------------------------------------------------
-
 &#39;&#39;&#39;
 </code></pre>
 ]]></content>
