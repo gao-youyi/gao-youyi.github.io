@@ -546,6 +546,7 @@ printf(&quot;*p = %d\n&quot;, *p);
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include &lt;stdio.h&gt;
+&lt;!--more--&gt;
 /*----------------------------------------------------------------
 广义表：
 所有的有限个元素的序列，其中每一个元素作为原子项，可以是一个表，也可以是一个简单的结点，元素
@@ -817,7 +818,8 @@ int mu, nu, tu;
   <entry>
     <title>广义表的相关资料</title>
     <url>/2021/05/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8/%E9%A2%98%E7%9B%AE%E5%92%8C%E8%B5%84%E6%96%99/</url>
-    <content><![CDATA[<h2 id="十字链表的考研题"><a href="#十字链表的考研题" class="headerlink" title="十字链表的考研题"></a>十字链表的考研题</h2><image src="https://mmbiz.qpic.cn/mmbiz_png/Oh8hEHHdJpdEfld0vY8GHuM9ibtN6tuWB8Gyy5RJlKp3libRO9Gw6gcwF173Mc94aQX0G36icuvglqCiaT5R4N1htg/0?wx_fmt=png">
+    <content><![CDATA[<h2 id="十字链表的考研题"><a href="#十字链表的考研题" class="headerlink" title="十字链表的考研题"></a>十字链表的考研题</h2><span id="more"></span>
+<image src="https://mmbiz.qpic.cn/mmbiz_png/Oh8hEHHdJpdEfld0vY8GHuM9ibtN6tuWB8Gyy5RJlKp3libRO9Gw6gcwF173Mc94aQX0G36icuvglqCiaT5R4N1htg/0?wx_fmt=png">
 </image>
 (第二类广义表的表示方法)
 答案:
