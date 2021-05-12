@@ -171,7 +171,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -237,6 +237,221 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/04/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%A4%A7%E5%AE%B6%E9%83%BD%E4%B8%8D%E6%84%BF%E6%84%8F%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98/free%E4%B9%8B%E5%90%8E%E7%9A%84NULL%E6%98%AF%E4%B8%BA%E5%95%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://5b0988e595225.cdn.sohucs.com/images/20200421/2c31c57374fd445ab3ac98c60e9af59b.gif">
+      <meta itemprop="name" content="高小白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高小白">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/04/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%A4%A7%E5%AE%B6%E9%83%BD%E4%B8%8D%E6%84%BF%E6%84%8F%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98/free%E4%B9%8B%E5%90%8E%E7%9A%84NULL%E6%98%AF%E4%B8%BA%E5%95%A5/" class="post-title-link" itemprop="url">free就够了吗！</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-04-29 08:28:00 / 修改时间：10:18:50" itemprop="dateCreated datePublished" datetime="2021-04-29T08:28:00+08:00">2021-04-29</time>
+    </span>
+
+  
+    <span id="/2021/04/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%A4%A7%E5%AE%B6%E9%83%BD%E4%B8%8D%E6%84%BF%E6%84%8F%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98/free%E4%B9%8B%E5%90%8E%E7%9A%84NULL%E6%98%AF%E4%B8%BA%E5%95%A5/" class="post-meta-item leancloud_visitors" data-flag-title="free就够了吗！" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2021/04/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%A4%A7%E5%AE%B6%E9%83%BD%E4%B8%8D%E6%84%BF%E6%84%8F%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98/free%E4%B9%8B%E5%90%8E%E7%9A%84NULL%E6%98%AF%E4%B8%BA%E5%95%A5/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://gao-youyi.github.io/2021/04/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%A4%A7%E5%AE%B6%E9%83%BD%E4%B8%8D%E6%84%BF%E6%84%8F%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98/free%E4%B9%8B%E5%90%8E%E7%9A%84NULL%E6%98%AF%E4%B8%BA%E5%95%A5/" class="cy_cmt_count" data-xid="2021/04/29/数据结构/大家都不愿意解决的问题/free之后的NULL是为啥/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="基本原理："><a href="#基本原理：" class="headerlink" title="基本原理："></a>基本原理：</h2><pre><code>&#39;&#39;&#39;c
+int * p = (int *)malloc(4);
+*p = 4;
+printf(&quot;*p = %d\n&quot;, *p);
+free(p);
+*p = 5;
+printf(&quot;*p = %d\n&quot;, *p);
+&#39;&#39;&#39;
+</code></pre>
+<h3 id="问题：释放后，-p应该没有权限读和写了吗，怎么还可以赋值成功，不赋值也可以读出一个垃圾值？"><a href="#问题：释放后，-p应该没有权限读和写了吗，怎么还可以赋值成功，不赋值也可以读出一个垃圾值？" class="headerlink" title="问题：释放后，*p应该没有权限读和写了吗，怎么还可以赋值成功，不赋值也可以读出一个垃圾值？"></a>问题：释放后，*p应该没有权限读和写了吗，怎么还可以赋值成功，不赋值也可以读出一个垃圾值？</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%A4%A7%E5%AE%B6%E9%83%BD%E4%B8%8D%E6%84%BF%E6%84%8F%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98/free%E4%B9%8B%E5%90%8E%E7%9A%84NULL%E6%98%AF%E4%B8%BA%E5%95%A5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%98%9F%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://5b0988e595225.cdn.sohucs.com/images/20200421/2c31c57374fd445ab3ac98c60e9af59b.gif">
+      <meta itemprop="name" content="高小白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高小白">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%98%9F%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">队列的顺序表实现和基础操作</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-04-28 22:03:00" itemprop="dateCreated datePublished" datetime="2021-04-28T22:03:00+08:00">2021-04-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-04-29 20:27:06" itemprop="dateModified" datetime="2021-04-29T20:27:06+08:00">2021-04-29</time>
+      </span>
+
+  
+    <span id="/2021/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%98%9F%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" class="post-meta-item leancloud_visitors" data-flag-title="队列的顺序表实现和基础操作" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2021/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%98%9F%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://gao-youyi.github.io/2021/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%98%9F%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" class="cy_cmt_count" data-xid="2021/04/28/数据结构/栈和队列/队列的顺序表实现和基础操作/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <pre><code>&#39;&#39;&#39;C++
+/*
+插入：进队：队尾
+删除：出队：队头
+可以想象一下啊买东西排队的情况
+First In First Out
+F I F O
+允许插入的一端成为队尾，允许删除的一端称为队头。
+所以我们再学习这一部分知识的时候一定要对头插法和
+尾插法有着熟练的掌握！
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/%E9%98%9F%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1048,201 +1263,6 @@ struct node *next; //指针域
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/04/23/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%A7%E8%83%86%E5%B0%9D%E8%AF%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%A4%B4%E6%8F%92%E6%B3%95%E5%92%8C%E5%B0%BE%E6%8F%92%E6%B3%95%E8%A7%A3%E9%87%8A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://5b0988e595225.cdn.sohucs.com/images/20200421/2c31c57374fd445ab3ac98c60e9af59b.gif">
-      <meta itemprop="name" content="高小白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="高小白">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%A4%B4%E6%8F%92%E6%B3%95%E5%92%8C%E5%B0%BE%E6%8F%92%E6%B3%95%E8%A7%A3%E9%87%8A/" class="post-title-link" itemprop="url">头插法和尾插法解释</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-04-23 10:27:00" itemprop="dateCreated datePublished" datetime="2021-04-23T10:27:00+08:00">2021-04-23</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-24 10:31:16" itemprop="dateModified" datetime="2021-04-24T10:31:16+08:00">2021-04-24</time>
-      </span>
-
-  
-    <span id="/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%A4%B4%E6%8F%92%E6%B3%95%E5%92%8C%E5%B0%BE%E6%8F%92%E6%B3%95%E8%A7%A3%E9%87%8A/" class="post-meta-item leancloud_visitors" data-flag-title="头插法和尾插法解释" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%A4%B4%E6%8F%92%E6%B3%95%E5%92%8C%E5%B0%BE%E6%8F%92%E6%B3%95%E8%A7%A3%E9%87%8A/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://gao-youyi.github.io/2021/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%A4%B4%E6%8F%92%E6%B3%95%E5%92%8C%E5%B0%BE%E6%8F%92%E6%B3%95%E8%A7%A3%E9%87%8A/" class="cy_cmt_count" data-xid="2021/04/23/数据结构/顺序表/头插法和尾插法解释/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"><a href="#由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。" class="headerlink" title="由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。"></a>由于书本上对于头插法和尾插法已经解释的很好了，我这里直接放上链接，大家需要的可以自己查看。</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41028985/article/details/82859199?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161923112716780269869000%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=161923112716780269869000&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-82859199.first_rank_v2_pc_rank_v29&utm_term=%E5%A4%B4%E6%8F%92%E6%B3%95">点击链接查看外部解释</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://5b0988e595225.cdn.sohucs.com/images/20200421/2c31c57374fd445ab3ac98c60e9af59b.gif">
-      <meta itemprop="name" content="高小白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="高小白">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">第二天：单链表的实现和相关练习</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-04-22 00:00:00" itemprop="dateCreated datePublished" datetime="2021-04-22T00:00:00+08:00">2021-04-22</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-25 15:30:10" itemprop="dateModified" datetime="2021-04-25T15:30:10+08:00">2021-04-25</time>
-      </span>
-
-  
-    <span id="/2021/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/" class="post-meta-item leancloud_visitors" data-flag-title="第二天：单链表的实现和相关练习" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2021/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://gao-youyi.github.io/2021/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/" class="cy_cmt_count" data-xid="2021/04/22/数据结构/顺序表/单链表的实现和基本函数实现/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;<br>//链表的实现和函数实现<br>/*链表的结构必定包涵一个指针域，所以地址的分配不一定连续<br>由计算据随机分配，所以单链表只能单向操作，但是也正是因此<br>可以使得表基本无线扩容。<br>结构：<br>每个数据元素由结点构成<br>链表的第一个元素节点称为首结点<br>最后一个元素称为尾结点，指针域NULL<br>一般定义head（头节点）指向首结点a1，这样比较好！！！<br>*/</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
