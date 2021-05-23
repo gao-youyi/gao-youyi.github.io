@@ -171,7 +171,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -314,6 +314,107 @@
 <p style="color:black;font-weight:800;">也许这就是青春吧：总会在自己最不懂事，最没有能力的年纪，爱上了一个自己最想保护的人。</p>
 <p style="color:black;font-weight:800">也许这就是时间的力量吧：它总是让我们经历的更多之后，原谅所有的不美好，让我们学会感谢，感谢所有的遇见和别离。</p>
 <p style="color:black;font-weight:800;">希望我们在彼此看不到的地方，各自安好，做自己的光，追寻各自的方向。</p>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/05/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://5b0988e595225.cdn.sohucs.com/images/20200421/2c31c57374fd445ab3ac98c60e9af59b.gif">
+      <meta itemprop="name" content="高小白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高小白">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/05/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">二叉树的实现和递归算法解决问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-05-23 00:00:00 / 修改时间：22:17:16" itemprop="dateCreated datePublished" datetime="2021-05-23T00:00:00+08:00">2021-05-23</time>
+    </span>
+
+  
+    <span id="/2021/05/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="二叉树的实现和递归算法解决问题" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2021/05/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://gao-youyi.github.io/2021/05/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/" class="cy_cmt_count" data-xid="2021/05/23/数据结构/树/二叉树的实现和递归算法/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <pre><code>&#39;&#39;&#39;c语言
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+typedef char TElemType;
+typedef struct BiTNode
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1184,115 +1285,6 @@ typedef struct GLNode1
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/05/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%B8%B2/BP%E5%92%8CKMP/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%B8%B2/%E9%A1%BA%E5%BA%8F%E4%B8%B2%E5%92%8C%E9%93%BE%E4%B8%B2%E7%9A%84%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://5b0988e595225.cdn.sohucs.com/images/20200421/2c31c57374fd445ab3ac98c60e9af59b.gif">
-      <meta itemprop="name" content="高小白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="高小白">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%B8%B2/%E9%A1%BA%E5%BA%8F%E4%B8%B2%E5%92%8C%E9%93%BE%E4%B8%B2%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">顺序串和堆串的实现</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-05-07 08:33:00" itemprop="dateCreated datePublished" datetime="2021-05-07T08:33:00+08:00">2021-05-07</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-05-11 16:57:04" itemprop="dateModified" datetime="2021-05-11T16:57:04+08:00">2021-05-11</time>
-      </span>
-
-  
-    <span id="/2021/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%B8%B2/%E9%A1%BA%E5%BA%8F%E4%B8%B2%E5%92%8C%E9%93%BE%E4%B8%B2%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="post-meta-item leancloud_visitors" data-flag-title="顺序串和堆串的实现" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2021/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%B8%B2/%E9%A1%BA%E5%BA%8F%E4%B8%B2%E5%92%8C%E9%93%BE%E4%B8%B2%E7%9A%84%E5%AE%9E%E7%8E%B0/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://gao-youyi.github.io/2021/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%B8%B2/%E9%A1%BA%E5%BA%8F%E4%B8%B2%E5%92%8C%E9%93%BE%E4%B8%B2%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="cy_cmt_count" data-xid="2021/05/07/数据结构/串/顺序串和链串的实现/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <pre><code>&#39;&#39;&#39;C
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-#include &lt;stdlib.h&gt;
-/*S是串的名字，串值，串中字符，串的长度，空串，注意空串和空白串的区别。
-子串:连续的！位置由第一个字符第一次出现的位置确定
-主串：任意的连续的包涵子串的串
-串变量和串常量
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%B8%B2/%E9%A1%BA%E5%BA%8F%E4%B8%B2%E5%92%8C%E9%93%BE%E4%B8%B2%E7%9A%84%E5%AE%9E%E7%8E%B0/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

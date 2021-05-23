@@ -31,28 +31,28 @@
     })();
 </script>
 
-<meta name="description" content="&#39;&#39;&#39;C++ #include &lt;bits&#x2F;stdc++.h&gt; using namespace std; typedef int ElemType; typedef struct node &amp;#123; ElemType data;     &#x2F;&#x2F;数据域 struct node *next; &#x2F;&#x2F;指针域 &amp;#125; LNode, *LinkList;">
+<meta name="description" content="&#39;&#39;&#39;c语言 #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h&gt; typedef char TElemType; typedef struct BiTNode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="单循环链表的第一天">
-<meta property="og:url" content="http://gao-youyi.github.io/2021/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/index.html">
+<meta property="og:title" content="二叉树的实现和递归算法解决问题">
+<meta property="og:url" content="http://gao-youyi.github.io/2021/05/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="高小白">
-<meta property="og:description" content="&#39;&#39;&#39;C++ #include &lt;bits&#x2F;stdc++.h&gt; using namespace std; typedef int ElemType; typedef struct node &amp;#123; ElemType data;     &#x2F;&#x2F;数据域 struct node *next; &#x2F;&#x2F;指针域 &amp;#125; LNode, *LinkList;">
+<meta property="og:description" content="&#39;&#39;&#39;c语言 #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h&gt; typedef char TElemType; typedef struct BiTNode">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-04-24T14:00:00.000Z">
-<meta property="article:modified_time" content="2021-04-25T07:28:41.022Z">
+<meta property="article:published_time" content="2021-05-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-23T14:17:16.382Z">
 <meta property="article:author" content="高小白">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://gao-youyi.github.io/2021/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/">
+<link rel="canonical" href="http://gao-youyi.github.io/2021/05/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;gao-youyi.github.io&#x2F;2021&#x2F;04&#x2F;24&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84&#x2F;%E9%A1%BA%E5%BA%8F%E8%A1%A8&#x2F;%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;04&#x2F;24&#x2F;数据结构&#x2F;顺序表&#x2F;单循环链表&#x2F;&quot;,&quot;title&quot;:&quot;单循环链表的第一天&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;gao-youyi.github.io&#x2F;2021&#x2F;05&#x2F;23&#x2F;%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84&#x2F;%E6%A0%91&#x2F;%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;05&#x2F;23&#x2F;数据结构&#x2F;树&#x2F;二叉树的实现和递归算法&#x2F;&quot;,&quot;title&quot;:&quot;二叉树的实现和递归算法解决问题&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>单循环链表的第一天 | 高小白</title><script src="/js/config.js"></script>
+<title>二叉树的实现和递归算法解决问题 | 高小白</title><script src="/js/config.js"></script>
   
 
 
@@ -252,7 +252,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/">
+    <link itemprop="mainEntityOfPage" href="http://gao-youyi.github.io/2021/05/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://5b0988e595225.cdn.sohucs.com/images/20200421/2c31c57374fd445ab3ac98c60e9af59b.gif">
@@ -265,7 +265,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          单循环链表的第一天<a href="https://gao-youyi.github.io_posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          二叉树的实现和递归算法解决问题<a href="https://gao-youyi.github.io_posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -275,19 +275,13 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2021-04-24 22:00:00" itemprop="dateCreated datePublished" datetime="2021-04-24T22:00:00+08:00">2021-04-24</time>
+      <time title="创建时间：2021-05-23 00:00:00 / 修改时间：22:17:16" itemprop="dateCreated datePublished" datetime="2021-05-23T00:00:00+08:00">2021-05-23</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-25 15:28:41" itemprop="dateModified" datetime="2021-04-25T15:28:41+08:00">2021-04-25</time>
-      </span>
 
   
-    <span id="/2021/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" class="post-meta-item leancloud_visitors" data-flag-title="单循环链表的第一天" title="阅读次数">
+    <span id="/2021/05/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="二叉树的实现和递归算法解决问题" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -310,8 +304,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2021/04/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8D%95%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/#SOHUCS" itemprop="discussionUrl">
-        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/04/24/数据结构/顺序表/单循环链表/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2021/05/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/05/23/数据结构/树/二叉树的实现和递归算法/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -326,111 +320,109 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <pre><code>&#39;&#39;&#39;C++
-#include &lt;bits/stdc++.h&gt;
-using namespace std;
-typedef int ElemType;
-typedef struct node
-&#123;
-ElemType data;     //数据域
-struct node *next; //指针域
-&#125; LNode, *LinkList;
+        <pre><code>&#39;&#39;&#39;c语言
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+typedef char TElemType;
+typedef struct BiTNode
 </code></pre>
 <span id="more"></span>
-<pre><code>//初始化单循环链表
-int InitList_cl(LinkList &amp;L)
-&#123;
-L = (LinkList)malloc(sizeof(LNode));
-if (!L)
-    exit(OVERFLOW);
-L-&gt;next = L; //这里可以对比以下单链表的初始化
-return 1;
+<pre><code>//--------------------------------------------------------------------------------------------------------------
+//二叉树的顺序存储结构
+/*
+完全二叉树：
+存储的基础：
+1，对于一个从上到下，从左到右的编号的完全二叉树
+假设他的结点为2m,或者2m+1,则它的双亲结点为m.
+2，同理，如果结点为2m。那么根据计算可以知道
+他的子结点是&#123;
+1),左节点，4m,
+2)，右结点,4m+1
 &#125;
+这样很简单，无需附加信息
 
-//求单循环链表的长度
-int ListLength(LinkList L)
-&#123;
-int i = 0;
-LinkList p = L-&gt;next;
-while (p != L) //这里就只是把求单链表的条件换了一下
-&#123;
-    i++;
-    p = p-&gt;next;
-&#125;
-return i;
-&#125;
 
-/*example1:
-求单循环链表中所有值为x的结点的个数
+//--------------------------------------------------------------------------------------------------------------------------------
+普通的二叉树
+这时候比较麻烦，无法单独仅仅存储它本身
+这时候可以补全它的结点，使得它为完全二叉树，这样的结点为xu&#39;jie&#39;dian
+虚结点的值为空。
 */
-int CountNode(LNode *L, ElemType x)
-&#123;
-int i = 0;
-LNode *p = L-&gt;next;
-while (p != L) //可以对比以下单链表
-&#123;
-    if (p-&gt;data == x)
-        i++;
-    p = p-&gt;next;
-&#125;
-return i;
-&#125;
+#define MAX_TREE_SIZE 100                //二叉树的最大结点数
+typedef int SqBiTree[MAX_TREE_SIZE]; //这里把树的结点数据类型简单的存储为int类型 int == TreeElementType
+SqBiTree bt;                             //
+                                     //从小标为0的结点开始存储树的根节点，将值为为#的结点记作空结点，但是这样仍然很难记录结点之间的关系
+                                     //如此这样存储，对于比较空的二叉树，空间利用率太小了
 
-//删除结点值为x的结点
-int Delallx(LNode *&amp;L, ElemType x)
+    //----------------------------------------------------------------
+//二叉和三叉都行
+//二叉链表表示法的实现，显然二叉的空间利用率更好
+/*
+对于n个结点，有2n个指针域，那么就有n-1，个分支，就有n-1个非空指针域，就有n+1个空的指针域
+*/
+//C语言实现
+typedef struct BiTNode
 &#123;
-LNode *pre = L, *p = L-&gt;next;
-while (p &amp;&amp; p-&gt;data == x)
-&#123;
-    pre-&gt;next = p-&gt;next; //
-    free(p);             //
-    p = pre-&gt;next;       //
-&#125;
-return 1;
-&#125;
+TElemType data;
+BiTNode *lchild, *rchild; //指向左右的孩子,当某结点不存在左右孩子的时候，其为空NULL
+&#125; BiTNode, *BiTNode;
+//----------------------------------------------------------------
+//二叉树的遍历，每个结点被访问一次
+/*
+可以记根节点为D,左子树为L,右子树为R
+根据自左到右的遍历规则，那么有
+DLR//先序遍历
+LDR//中序遍历
+LRD//后序遍历
+*/
 
-// 解决约瑟夫问题：此时的ElemType date 表示小孩的标号
-//这里采用不带头节点的单循环链表
-void CreateList(LinkList *&amp;L, int n) //创建链表
+//先序遍历
+void PreOrder(BiTNode bt)
 &#123;
-int i;
-LinkList *p, *tc; //tc指向尾节点
-L = (LinkList *)malloc(sizeof(LinkList));
-L-&gt;data = 1; //先建立一个只有一个data为1结点的单链表
-tc = L;
-for (i = 2; i &lt; n; i++)
+if (bt) //只要树(子树)根节点不是空
 &#123;
-    p = (LinkList *)malloc(sizeof(LinkList));
-    p-&gt;data = i;  //建立一个存放编号i的结点
-    tc-&gt;next = p; //尾插法，将p放在表的尾部，保证顺序输出；
-    tc = p;       //tc成为尾部
+    printf(&quot;%c&quot;, bt-&gt;data); //输出根节点的值
+    PreOrder(bt-&gt;lchild);   //左子树的值
+    PreOrder(bt-&gt;rchild);   //右子树的值
 &#125;
-tc-&gt;next = L; //首结点为L;
-&#125;
-void Joseph(int n, int m)
-&#123;
-int i, j;
-LinkList *L, *p, *q;
-CreateList(L, n);
-for (i = 1; i &lt; n; i++) //报数，直到m-1;
-&#123;
-    p = L;
-    j = 1;
-    while (j &lt; m - 1)
-    &#123;
-        j++;
-        p = p-&gt;next;
-    &#125;
-    q = p-&gt;next;           //q指向第m个结点
-    printf(&quot;%d&quot;, q-&gt;data); //结点出列
-    p-&gt;next = q-&gt;next;     //删除q结点
-    free(q);
-    L = p-&gt;next; //从下一个结点开始继续报数
-&#125;
-&#125;
+&#125; //递归定义，这里要注意理解输出的过程中的不断的递归
 
-&#39;&#39;&#39;
+//中序遍历
+void InOrder(BiTNode bt)
+&#123;
+if (bt)
+&#123;
+    InOrder(bt-&gt;lchild);    //先输出左子树
+    printf(&quot;%c&quot;, bt-&gt;data); //当左子树全部输出之后，再输出根节点的值
+    InOrder(bt-&gt;rchild);    //输出右子树
+&#125;
+&#125; //这里的递归输出相对复杂，记得多理解一下
+
+//后序遍历
+void PostOrder(BiTNode bt)
+&#123;
+if (bt)
+&#123;
+    PostOrder(bt-&gt;lchild);  //输出左子树
+    PostOrder(bt-&gt;rchild);  //右子树
+    printf(&quot;%c&quot;, bt-&gt;data); //跟结点
+    //其实这里的每一种遍历输出都是挺麻烦的，注意实践检验和验证
+&#125;
+&#125;
 </code></pre>
+<p>//—————————————————————-<br>//二叉树的递归算法设计<br>/*<br>例题一：<br>假设二叉树中所有的结点的值为整数，采用二叉链表存储结构，求该二叉树b中所有结点值之和<br>*/<br>int SUM(BiTNode *bt)<br>{<br>    int sun;<br>    if (bt)<br>    {<br>        sun = SUM(bt-&gt;rchild) + SUM(bt-&gt;lchild) + SUM(bt); //不为空，就连续递归，返回下一层的值<br>    }<br>    else<br>        sun = 0; //如果结点为空，就返回0；<br>    return sun;<br>}</p>
+<p>//销毁二叉树<br>/*<br>分析：显然，这里不能先销毁根节点，所以只能是后序遍历的顺序了<br>*/<br>void DestroyBTree(BiTNode b)<br>{          //不要傻乎乎的以为这里只是销毁了两层结点，这是一个递归算法，只要是根结点的子树，都会被释放<br>    if (b) //只要根结点不为空<br>    {<br>        DestroyBTree(b-&gt;lchild); //先销毁左子树<br>        DestroyBTree(b-&gt;rchild); //然后是右子树<br>        free(b);                 //最后销毁根结点<br>    }<br>    else<br>        return;<br>}</p>
+<p>//—————————————————————————–<br>//实例的解决，创建二叉树<br>/*<br>如果节点为空，就构造虚结点，从而满足二叉树*/<br>void CreateBiTree(BiTNode &amp;T)<br>{<br>    //线序排序,还是一个递归定义<br>    TElemType ch;<br>    printf(“请输入结点的值”);<br>    scanf(“%c”, &amp;ch);<br>    if (ch == ‘#’) //建立一个<br>        T = NULL;<br>    else<br>    {<br>        T = (BiTNode)malloc(sizeof(BiTNode));<br>        if (!T)<br>            exit(-1);<br>        T-&gt;data = ch;<br>        CreateBiTree(T-&gt;lchild);<br>        CreateBiTree(T-&gt;rchild);<br>    }<br>}<br>//调用函数<br>int main()<br>{<br>    BiTNode bt;<br>    printf(“\n创建二叉树，请输入结点的值：\n”);<br>    CreateBiTree(bt);<br>    printf(“\n先序遍历序列:\n”);<br>    PreOrder(bt);<br>    printf(“\n后序遍历:\n”);<br>    PostOrder(bt);<br>    printf(“\n”);<br>}</p>
+<p>//求二叉树的高度<br>int bt_Height(BiTNode *bt)<br>{<br>    if (bt = NULL)<br>    {<br>        return 0;<br>    }<br>    else<br>    {<br>        if (bt-&gt;lchild == NULL &amp;&amp; bt-&gt;rchild == NULL)<br>            return 1;</p>
+<pre><code>    else
+        return 1 + max(bt_Height(bt-&gt;lchild), bt_Height(bt-&gt;rchild));
+    //或者利用return (hl&gt;hr)?:hl+1:hr+1//也就是三目运算符
+&#125;
+</code></pre>
+<p>}</p>
+<p>//求二叉树的叶子结点的个数<br>int LeafCount(BiTNode <em>T)<br>{<br>    int lnum, rnum;<br>    if (T == NULL)<br>        return 0;<br>    else if (T-&gt;lchild == NULL &amp;&amp; T-&gt;rchild == NULL)<br>        return 1;<br>    else<br>    {<br>        lnum = LeafCount(T-&gt;lchild);<br>        rnum = LeafCount(T-&gt;rchild);<br>        return (lnum + rnum);<br>    }<br>}<br>//交换二叉树的左右子树<br>/</em><br>由于每个结点都是以链表的形式存储，所以实质上还是对指针的操作*/<br>int Exchange(BiTNode *T)<br>{<br>    if (T != NULL) //出口<br>    {<br>        if (T-&gt;lchild != NULL || T-&gt;rchild != NULL)<br>        {<br>            BiTNode *s = T-&gt;lchild; //先设置一个指向左子树的指针<br>            T-&gt;lchild = T-&gt;rchild;  //交换左右子树的地址<br>            T-&gt;rchild = s;          //交换左右子树的地址<br>            Exchange(T-&gt;lchild);    //递归<br>            Exchange(T-&gt;rchild);    //递归<br>        }<br>    }<br>}<br>//计算单分支结点的个数<br>int DegreeOne(BiTNode *bt)<br>{<br>    int lnum, rnum, n;<br>    if (bt == NULL) //判断根节点是否为空<br>        return 0;<br>    else<br>    { //先判断树根是否为单分支结点<br>        if ((b-&gt;lchild == NULL &amp;&amp; b-&gt;rchild != NULL) || (b-&gt;lchild != NULL &amp;&amp; b-&gt;rchild != NULL))<br>            n = 1;<br>        else<br>            n = 0;<br>    }<br>    lnum = DegreeOne(bt-&gt;lchild); //递归<br>    rnum = DegreeOne(bt-&gt;rchild); //递归<br>    return (lnum + rnum + n);<br>}</p>
+<p>//若每个结点存储的是一个单个的字符，求二叉树中最小值的结点<br>void FindMinNode(BiTNode *bt, char &amp;min) //传地址就不用直接返回参数了<br>{<br>    if (bt == NULL)<br>        return NULL;<br>    else<br>    {<br>        if (bt-&gt;data &lt; min)           //循环体<br>            min = bt-&gt;data;           //循环体<br>        FindMinNode(bt-&gt;lchild, min); //递归调用<br>        FindMaxNode(bt-&gt;rchild, min); //递归调用<br>    }<br>}<br>    ‘’’</p>
 
     </div>
 
@@ -492,13 +484,13 @@ for (i = 1; i &lt; n; i++) //报数，直到m-1;
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/04/23/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%A7%E8%83%86%E5%B0%9D%E8%AF%95/" rel="prev" title="日记二">
-                  <i class="fa fa-chevron-left"></i> 日记二
+                <a href="/2021/05/22/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/%E9%9A%8F%E7%AC%94/" rel="prev" title="简单写写">
+                  <i class="fa fa-chevron-left"></i> 简单写写
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/04/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E9%A1%BA%E5%BA%8F%E8%A1%A8/%E5%8F%8C%E9%93%BE%E8%A1%A8%E5%92%8C%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" rel="next" title="双链表和双向循环链表">
-                  双链表和双向循环链表 <i class="fa fa-chevron-right"></i>
+                <a href="/2021/05/23/%E4%B8%AA%E4%BA%BA%E6%83%85%E6%84%9F/%E5%90%8E%E6%9D%A5%E7%9A%84%E6%88%91%EF%BC%8C%E6%B2%A1%E4%BA%86%E6%88%91%E4%BB%AC/" rel="next" title="后来的我，没了我们">
+                  后来的我，没了我们 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
