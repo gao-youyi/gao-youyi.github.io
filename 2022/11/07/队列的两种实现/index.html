@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="队列的两种实现和相关操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C和数据结构——队列的两种实现">
+<meta property="og:url" content="http://example.com/2022/11/07/%E9%98%9F%E5%88%97%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="高">
+<meta property="og:description" content="队列的两种实现和相关操作">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-17T02:35:21.174Z">
+<meta property="article:author" content="Gao Xiaobai">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="C语言">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="数组">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="实例">
+<meta property="article:tag" content="队列">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/11/07/%E9%98%9F%E5%88%97%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%AE%9E%E7%8E%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>C和数据结构——队列的两种实现 | 高</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">高</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/07/%E9%98%9F%E5%88%97%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Gao Xiaobai">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C和数据结构——队列的两种实现
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-11-07 00:00:00" itemprop="dateCreated datePublished" datetime="2022-11-07T00:00:00+08:00">2022-11-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-17 10:35:21" itemprop="dateModified" datetime="2023-03-17T10:35:21+08:00">2023-03-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">C和数据结构</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">队列的两种实现和相关操作</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="静态"><a href="#静态" class="headerlink" title="静态"></a>静态</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">插入：进队：队尾</span><br><span class="line">删除：出队：队头</span><br><span class="line">可以想象一下啊买东西排队的情况</span><br><span class="line">First In First Out</span><br><span class="line">F I F O</span><br><span class="line">允许插入的一端成为队尾，允许删除的一端称为队头。</span><br><span class="line">所以我们再学习这一部分知识的时候一定要对头插法和</span><br><span class="line">尾插法有着熟练的掌握！</span><br><span class="line"></span><br><span class="line">！！！模型一：！！！</span><br><span class="line">front： 头指针，指向队列头元素</span><br><span class="line">rear:  尾指针，指向尾元素的下一个</span><br><span class="line">队空条件：front == rear</span><br><span class="line">队满条件：rear - front ==0</span><br><span class="line">这里读者可以自己试试几种队满和对空的情况</span><br><span class="line"></span><br><span class="line">通过不断的测试，我们发现，如果仅仅根据rear =MAXSIZE</span><br><span class="line">判断队满的情况是不合理的，因为再实际的生活和问题中我们知道</span><br><span class="line">，一个队伍可以站多少人，完全取决于总的人数，也就是MAXSIZE</span><br><span class="line">，而不是取决于最后一个人是不是站在了某一个地方，也就是rear==MAXSIZE</span><br><span class="line">，如果那样的话，显然会造成存储空间的大大浪费，所以，</span><br><span class="line">模型二：</span><br><span class="line">我们这里不妨1设想，即使使用数组，数组也是一个循环或者说是一个front 和</span><br><span class="line">rear连在一起环状数组，数组的下标同样成立，比如，当MAXSIZE=5,front =4时</span><br><span class="line">,按照道理说此时的rear已经起码为5了（其实按照道理是不可以的），也就是说不能再进队了，</span><br><span class="line">但是可以想到，在front 的前面应该还有4个位置，所以根据循环数组</span><br><span class="line">的假设，我们知道此时的rear应该是rear = 1，而不是5，可以继续</span><br><span class="line">在top处入队，假设此时处于4的位置元素为a,=进入新的元素b,之后，</span><br><span class="line">b就在4的位置了，而a就在0的位置了，此时相应的rear的位置应该为1，也就是</span><br><span class="line">队头指针进一：front=(front+) MOD MAXSIZE</span><br><span class="line">队尾元素进一： rear = (rear+1) MOD MAXSIZE,</span><br><span class="line">而不是简单的加一操作了。</span><br><span class="line">如此继续进行入队，我们发现：</span><br><span class="line">当队满的时候，front = rear但是不等于0，而且不同的入队和出队的情况下，队满的</span><br><span class="line">情况也不一样，最为头疼的是，我们好像没法判断队空了，因为此时队空和队满都</span><br><span class="line">是front = rear,!!所以，为了可以区分这个问题我们</span><br><span class="line">规定：</span><br><span class="line">1，当rear = front时，队空</span><br><span class="line">2，当(rear+1)MOD MAXSIZE = front 时，队满</span><br><span class="line">由2的规定我们不难发现，按照这种情况下的队满，不是真正意义上的队满，</span><br><span class="line">比如此时rear = 3，front  = 4，由2的规定，我们知道已经满足，但是</span><br><span class="line">由于rear并不会指向元素，所以当队满的时候，实际上还是可以加入一个</span><br><span class="line">元素，但是不得不说，这个相对于模型一已经有巨大的改进了；</span><br><span class="line">可以归纳如下：</span><br><span class="line">队空：Q.front == Q.rear</span><br><span class="line">对满： (Q.rear+1)%MAXSIZE == Q.front </span><br><span class="line">进队： Q.data[Q.rear]=x; Q.rear =(Q.rear+1)%MAXSIZE;</span><br><span class="line">出队： x=Q.data[Q.front]; Q.front = (Q.front+1)%MAXSIZE;</span><br><span class="line">模型三：</span><br><span class="line">可以设置一个flag标识，每次</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">//静态存储</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#define MAX_SIZE 20</span><br><span class="line">typedef char ElemType;</span><br><span class="line">//typedef struct</span><br><span class="line">//&#123;</span><br><span class="line">//    ElemType data[MAX_SIZE]; //所有元素</span><br><span class="line">//    int front, raer;         //队尾和队头</span><br><span class="line">//&#125; SqQueue;</span><br><span class="line">#define MAXQSIZE 100 //最大的队列长度+1</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    ElemType *base; //用来初始化分配空间</span><br><span class="line">    int front;</span><br><span class="line">    int rear;</span><br><span class="line"></span><br><span class="line">&#125; SqQueue;</span><br><span class="line"></span><br><span class="line">//初始化队列</span><br><span class="line">void InitQueue(SqQueue &amp;Q)</span><br><span class="line">&#123;</span><br><span class="line">    Q.base = (ElemType *)malloc(MAXQSIZE * sizeof(ElemType));</span><br><span class="line">    if (!Q.base)</span><br><span class="line">        exit(OVERFLOW); //判断是否分配成功</span><br><span class="line">    Q.front = Q.rear = 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//销毁队列</span><br><span class="line">void DestroyQueue(SqQueue Q)</span><br><span class="line">&#123;</span><br><span class="line">    if (Q.base)</span><br><span class="line">    //如果队不是空</span><br><span class="line">    &#123;</span><br><span class="line">        free(Q.base);</span><br><span class="line">        Q.base = NULL;</span><br><span class="line">        Q.front = Q.rear = 0; //这里的表参数也要改变</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//入队列</span><br><span class="line">int EnQueue(SqQueue &amp;Q,ElemType e&#123;</span><br><span class="line">    if ((Q.rear + 1) % MAXQSIZE == Q.front)</span><br><span class="line">        return 0; //判断是否队满</span><br><span class="line">    Q.base[Q.rear] = 0;</span><br><span class="line">    Q.rear = (Q.rear + 1) % MAXQSIZE;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//出队</span><br><span class="line">int DeQueue(SqQueue &amp;Q,Elemtype &amp;e)&#123;</span><br><span class="line">    if (Q.front == Q.rear) //如果为空，删除并返回队头元素</span><br><span class="line">        return 0;          //否则返回0</span><br><span class="line">    e = Q.base[Q.front];</span><br><span class="line">    Q.front = (Q.front + 1) % MAXQSIZE;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//取队头元素</span><br><span class="line">int GetHead(SqQueue Q,Elemtype &amp;e)&#123;</span><br><span class="line">    if (Q.front == Q.rear)</span><br><span class="line">        return 0;</span><br><span class="line">    e = Q.base[Q.front];</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//判断队空</span><br><span class="line">int QueueEmpty(SqQueue Q)&#123;</span><br><span class="line">    if (Q.front == Q.rear)</span><br><span class="line">        return 1;</span><br><span class="line">    else</span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//求队列中元素的个数(循环队列)</span><br><span class="line">int QueueLength(SqQueue Q)&#123;</span><br><span class="line">    /*其实我自己的想法是根据队满条件建立循环，但是总结发现</span><br><span class="line">    这个方法确实成立，而且很简便*/</span><br><span class="line">    return (Q.rear - Q.front + MAXQSIZE) % MAXQSIZE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*如果只有front队头指针，一个计数器count, 大小为MAXSIZE的</span><br><span class="line">环形数组，问</span><br><span class="line">1，最多可以容纳多少元素</span><br><span class="line">2，设计相关算法*/</span><br><span class="line">#define MaxSize 10</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    int data[MaxSize];</span><br><span class="line">    int front;</span><br><span class="line">    int count;</span><br><span class="line">&#125;SQ;</span><br><span class="line">//SQ为空：sq.count == 0;</span><br><span class="line">//队满： sq.count == MaxSize;</span><br><span class="line">//队尾元素的位置： (sq.front +sq.count)%MaxSize;</span><br><span class="line"></span><br><span class="line">//初始化</span><br><span class="line">void InitSQ(SQ &amp;qu)&#123;</span><br><span class="line">    qu.front = qu.count = 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//销毁队列不需要，因为没有malloc</span><br><span class="line"></span><br><span class="line">//入队</span><br><span class="line">int EnSQ(SQ &amp;sq,int x)&#123;</span><br><span class="line">    if (sq.count == MaxSize)</span><br><span class="line">        return 0;</span><br><span class="line">    sq.data[(sq.front + sq.count) % MaxSize] = x;</span><br><span class="line">    sq.count++; //计数器</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//出队</span><br><span class="line">int DeSQ(SQ &amp;sq,int &amp;x)&#123;</span><br><span class="line">    if (sq.count == 0)</span><br><span class="line">        return 0;</span><br><span class="line">    x = sq.data[sq.front];</span><br><span class="line">    sq.front = (sq.front + 1) % MaxSize; //重要</span><br><span class="line">    sq.count--;                          //计数器</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//取队头元素</span><br><span class="line">int GetSQ(SQ sq,int &amp;x)&#123;</span><br><span class="line">    if (sq.count == 0) //判断队是否为空</span><br><span class="line">        return 0;</span><br><span class="line">    x = sq.data[sq.front];</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//判断队空</span><br><span class="line">int SQEmpty(SQ sq)&#123;</span><br><span class="line">    if (sq.count == 0)</span><br><span class="line">        return 1; //如果队空，返回1；</span><br><span class="line">    else</span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="链队列"><a href="#链队列" class="headerlink" title="链队列"></a>链队列</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">//带有头结点的单链表</span><br><span class="line">//数据结点</span><br><span class="line"></span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    char data;          //存放对元素</span><br><span class="line">    struct QNode *next; //指向下一结点</span><br><span class="line">&#125; QNode, *QueuePtr;</span><br><span class="line"></span><br><span class="line">//链队结点</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    QNode *front; //队头指针，删除使用</span><br><span class="line">    QNode *rear;  //队尾指针，加入使用</span><br><span class="line">&#125; LinkQueue;</span><br><span class="line"></span><br><span class="line">//判断条件</span><br><span class="line">//队空：Q.front-&gt;next==NULL</span><br><span class="line">//队满：基本不可能</span><br><span class="line">//进队: 同链表，创建结点。插入队尾，并由Q.rear指向它，也就是尾插法</span><br><span class="line">//出队；删除队头的结点</span><br><span class="line"></span><br><span class="line">//初始化链队列</span><br><span class="line">void InitQueueLink(LinkQueue &amp;Q)</span><br><span class="line">&#123;</span><br><span class="line">    if (!Q.front = Q.rear = (QueuePtr)malloc(sizeof(QNode)))</span><br><span class="line">        exit(OVERFLOW);</span><br><span class="line">    Q.front-&gt;next = NULL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//销毁队列</span><br><span class="line">void DestroyQueue(LinkQueue &amp;Q)</span><br><span class="line">&#123;</span><br><span class="line">    while (Q.front) //这是一个循环，rear是front的同步指针，来循环遍历删除</span><br><span class="line">    &#123;</span><br><span class="line">        Q.rear = Q.front-&gt;next;</span><br><span class="line">        free(Q.front);</span><br><span class="line">        Q.front = Q.rear;</span><br><span class="line">    &#125;</span><br><span class="line">    Q.front = Q.rear = NULL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//入队列</span><br><span class="line">void EnQueue(LinkQueue &amp;Q, char e)</span><br><span class="line">&#123;</span><br><span class="line">    QueuePtr p; //存放新的元素</span><br><span class="line">    if (!p = (QueuePtr)malloc(sizeof(QNode)))</span><br><span class="line">        exit(OVERFLOW); //这句话不但申请了空间，还进行了检查</span><br><span class="line">    p-&gt;data = e;</span><br><span class="line">    p-&gt;next = NULL;</span><br><span class="line">    Q.rear-&gt;next = p; //链接</span><br><span class="line">    Q.rear = p;       //更新rear位置</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//出队列,其实就是头插法</span><br><span class="line">int DeQueue(LinkQueue &amp;Q, char &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">    QueuePtr p;</span><br><span class="line">    if (Q.front == Q.rear)</span><br><span class="line">        return 0;</span><br><span class="line">    p = Q.front-&gt;next;       //让p和首元素在指向同一块区域，也就是找到要释放的地方</span><br><span class="line">    e = p-&gt;data;             //将数据存在p中</span><br><span class="line">    Q.front-&gt;next = p-&gt;next; //将front 链接到要释放的地方的后面</span><br><span class="line">    if (Q.rear == p)         //如果只有一个元素的话，队列为空</span><br><span class="line">        Q.rear = Q.front;</span><br><span class="line">    free(p); //释放p和它对应的结点</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//取队头元素</span><br><span class="line">int GetHead(LinkQueue Q, char &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">    QueuePtr p; //这里不定义这个指针也行，但是要保证队不为空，此时直接e = Q.front-&gt;next-&gt;data;</span><br><span class="line">    if (Q.rear = Q.front)</span><br><span class="line">    &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    p = Q.front-&gt;next;</span><br><span class="line">    e = p-&gt;data;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//判断队空</span><br><span class="line">int QueueEmpty(LinkQueue Q)</span><br><span class="line">&#123;</span><br><span class="line">    if (!Q.front-&gt;next == NULL)</span><br><span class="line">        return 0;</span><br><span class="line">    else</span><br><span class="line">        return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*实例：</span><br><span class="line">使用不带头结点的循环链表来表示队列，Q是这样的链表中尾节点指针</span><br><span class="line">基于此，给出入队和出队算法</span><br><span class="line">*/</span><br><span class="line">//审题：虽然=题目没有设置队头结点。但是由于是循环单链表，reae-&gt;next就是首结点</span><br><span class="line">//同理，如果Q.rear == NULL;那么队列为空；</span><br><span class="line">//如果Q.rear-&gt;next  == Q,那就是只有一个结点</span><br><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">    char data;         //数据域</span><br><span class="line">    struct node *next; //指针域</span><br><span class="line">&#125; QNode;               //结点数据类型</span><br><span class="line"></span><br><span class="line">//入队列</span><br><span class="line">void EnterQueue(QNode *&amp;Q, char x)</span><br><span class="line">&#123;</span><br><span class="line">    QNode *s;</span><br><span class="line">    s = (QNode *)malloc(sizeof(QNode));</span><br><span class="line">    s-&gt;data = x;</span><br><span class="line">    if (Q == NULL) //如果原队为空，那就原地打转一次</span><br><span class="line">    &#123;</span><br><span class="line">        Q = s;</span><br><span class="line">        Q-&gt;next = Q;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        s-&gt;next = Q-&gt;next; //先让s指向首元素</span><br><span class="line">        Q-&gt;next = s;       //链接</span><br><span class="line">        Q = s;             //更新尾结点的位置</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//出队列</span><br><span class="line">int ExitQueue(QNode *&amp;Q, char &amp;x)</span><br><span class="line">&#123;</span><br><span class="line">    QNode *s;</span><br><span class="line">    if (Q == NULL) //队为空的情况</span><br><span class="line">        return 0;</span><br><span class="line">    if (Q-&gt;next == Q) //只有一个结点的情况</span><br><span class="line">    &#123;</span><br><span class="line">        x = Q-&gt;data;</span><br><span class="line">        free(Q);</span><br><span class="line">        Q = NULL;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        s = Q-&gt;next; //让s和首元素的位置一样</span><br><span class="line">        x = s-&gt;data;</span><br><span class="line">        Q-&gt;next = s-&gt;next; //链接</span><br><span class="line">        free(s);           //释放</span><br><span class="line">    &#125;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag"># C语言</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"># 数组</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E5%AE%9E%E4%BE%8B/" rel="tag"># 实例</a>
+              <a href="/tags/%E9%98%9F%E5%88%97/" rel="tag"># 队列</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/06/%E9%80%92%E5%BD%92/" rel="prev" title="C和数据结构——递归的学习和应用">
+      <i class="fa fa-chevron-left"></i> C和数据结构——递归的学习和应用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/07/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E6%A0%91%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" rel="next" title="C和数据结构——二叉树实现和树的相关概念">
+      C和数据结构——二叉树实现和树的相关概念 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81"><span class="nav-number">1.</span> <span class="nav-text">静态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E9%98%9F%E5%88%97"><span class="nav-number">2.</span> <span class="nav-text">链队列</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Gao Xiaobai</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gao Xiaobai</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

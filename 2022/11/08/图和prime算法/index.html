@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="图和prime算法的实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C和数据结构——图和prime算法">
+<meta property="og:url" content="http://example.com/2022/11/08/%E5%9B%BE%E5%92%8Cprime%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="高">
+<meta property="og:description" content="图和prime算法的实现">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-17T02:49:16.650Z">
+<meta property="article:author" content="Gao Xiaobai">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="C语言">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="实例">
+<meta property="article:tag" content="图">
+<meta property="article:tag" content="递归">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/11/08/%E5%9B%BE%E5%92%8Cprime%E7%AE%97%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>C和数据结构——图和prime算法 | 高</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">高</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/08/%E5%9B%BE%E5%92%8Cprime%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Gao Xiaobai">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C和数据结构——图和prime算法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-11-08 00:00:00" itemprop="dateCreated datePublished" datetime="2022-11-08T00:00:00+08:00">2022-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-17 10:49:16" itemprop="dateModified" datetime="2023-03-17T10:49:16+08:00">2023-03-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">C和数据结构</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">图和prime算法的实现</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="图的实现和相关算法"><a href="#图的实现和相关算法" class="headerlink" title="图的实现和相关算法"></a>图的实现和相关算法</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">//自定义</span><br><span class="line">#define INF INT_MAX</span><br><span class="line">#define MAXVEX 30</span><br><span class="line">//typedef char VertexType;</span><br><span class="line">typedef struct vertex</span><br><span class="line">&#123;</span><br><span class="line">    int adjvex;    //顶点编号</span><br><span class="line">    char data[10]; //顶点的信息,可有可无，这里定义为char[10]</span><br><span class="line">&#125; VType;           //顶点的数据类型</span><br><span class="line"></span><br><span class="line">typedef struct graph</span><br><span class="line">&#123;</span><br><span class="line">    int n, e;                  //n,e,为图中存在的顶点和边的个数</span><br><span class="line">    VType vexs[MAXVEX];        //顶点集合</span><br><span class="line">    int edges[MAXVEX][MAXVEX]; //邻接矩阵</span><br><span class="line">&#125; MGraph;                      //图的数据类型</span><br><span class="line">//图的邻接表</span><br><span class="line">typedef char VertexType[10]; //</span><br><span class="line">typedef struct edgenode</span><br><span class="line">&#123;</span><br><span class="line">    int adjvex;               //相邻点序号</span><br><span class="line">    int weight;               //边的权值</span><br><span class="line">    struct edgenode *nextarc; //指向下一条边的顶点</span><br><span class="line">&#125; ArcNode;                    //每个顶点建立的单链表中边结点的数据类型</span><br><span class="line"></span><br><span class="line">typedef struct vexnode</span><br><span class="line">&#123;</span><br><span class="line">    VertexType data;   //存放顶点信息</span><br><span class="line">    ArcNode *firstarc; //作为头指针指向第一条边结点</span><br><span class="line">&#125; VHeadNode;           //单链表的头结点数据类型</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    int n, e;                  //,n,e为实际的顶点数和边数</span><br><span class="line">    VHeadNode adjlist[MAXVEX]; //单链表头结点数组</span><br><span class="line">&#125; ALGraph;                     //图的邻接表数据类型</span><br><span class="line"></span><br><span class="line">//----------------------------------------------------------------</span><br><span class="line">//邻接矩阵相关的算法</span><br><span class="line">/*已知邻接矩阵数组A,顶点数n,边数e,建立图G的邻接矩阵存储结构*/</span><br><span class="line">void CreatGraph(MGraph &amp;g, int A[][MAXVEX], int n, int e)</span><br><span class="line">&#123;</span><br><span class="line">    int i, j;</span><br><span class="line">    g.n = n;</span><br><span class="line">    g.e = e;</span><br><span class="line">    for (i = 0; i &lt; n; i++)</span><br><span class="line">        for (j = 0; j &lt; n; j++)</span><br><span class="line">            g.edges[i][j] = A[i][j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//求无向图顶点的度</span><br><span class="line">int Degree1(MGraph g, int v)</span><br><span class="line">&#123;</span><br><span class="line">    int i, d = 0;</span><br><span class="line">    if (v &lt; 0 || v &gt;= g.n) //判断边是否合法</span><br><span class="line">        return -1;</span><br><span class="line">    for (i = 0; i &lt; g.n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if (g.edges[v][i] &gt; 0 &amp;&amp; g.edges[v][i] &lt; INF) //计算度</span><br><span class="line">            d++;</span><br><span class="line">    &#125;</span><br><span class="line">    return d;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//数组存储的有向图的顶点的度的计算</span><br><span class="line">int Degree2(MGraph g, int v)</span><br><span class="line">&#123;</span><br><span class="line">    int i, d1 = 0, d2 = 0, d;</span><br><span class="line">    if (v &lt; 0 || v &gt;= g.n)</span><br><span class="line">        return -1;</span><br><span class="line">    for (i = 0; i &lt; g.n; i++)</span><br><span class="line">        if (g.edges[v][i] &gt; 0 &amp;&amp; g.edges[v][i] &lt; INF)</span><br><span class="line">            d1++; //以v为开始的度，就是出度</span><br><span class="line">    for (i = 0; i &lt; g.n; i++)</span><br><span class="line">        if (g.edges[i][v] &gt; 0 &amp;&amp; g.edges[i][v] &lt; INF)</span><br><span class="line">            d2++; //以v为结束的度，也就是入度</span><br><span class="line">    d = d1 + d2;  //总的度数</span><br><span class="line">    return d;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//================================================================</span><br><span class="line">//建立图的邻接表算法</span><br><span class="line">/*已知邻接矩阵数组A,顶点数n,边数e,建立图G的邻接矩阵存储结构*/</span><br><span class="line">void CreatGraph2(ALGraph *&amp;G, int A[][MAXVEX], int n, int e)</span><br><span class="line">&#123;</span><br><span class="line">    int i, j;</span><br><span class="line">    ArcNode *p; //这是结点指针</span><br><span class="line">    G = (ALGraph *)malloc(sizeof(ALGraph));</span><br><span class="line">    G-&gt;n = n;</span><br><span class="line">    G-&gt;e = e;                  //先确认边和结点的个数</span><br><span class="line">    for (i = 0; i &lt; G-&gt;n; i++) //将每个头结点的指针域先置空</span><br><span class="line">        G-&gt;adjlist[i].firstarc = NULL;</span><br><span class="line">    for (i = 0; i &lt; G-&gt;n; i++)                          //对于每个链表都进行循环赋值插入</span><br><span class="line">        for (j = G-&gt;n - 1; j &gt;= 0; j--)                 //对某一个链表进行操作</span><br><span class="line">            if (A[i][j] &gt; 0 &amp;&amp; A[i][j] &lt; INF)           //只要邻接矩阵存在边</span><br><span class="line">            &#123;                                           //使用头插法将所有边的信息链接起来</span><br><span class="line">                p = (ArcNode *)malloc(sizeof(ArcNode)); //先申请一块新的空间</span><br><span class="line">                p-&gt;adjvex = j;                          //让这个边的后值置为j</span><br><span class="line">                p-&gt;weight = A[i][j];                    //赋权4给w</span><br><span class="line">                p-&gt;nextarc = G-&gt;adjlist[i].firstarc;    //再让p指向i个链表的第一个结点</span><br><span class="line">                G-&gt;adjlist[i].firstarc = p;             //再让头结点重置为p,这样头结点还是头结点，新的结点实现头插</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//销毁图</span><br><span class="line">void DestroyGraph(ALGraph *&amp;G)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    ArcNode *pre, *p;</span><br><span class="line">    for (i = 0; i &lt; G-&gt;n; i++) //遍历所有的头结点</span><br><span class="line">    &#123;</span><br><span class="line">        pre = G-&gt;adjlist[i].firstarc; //通过头结点删除链表</span><br><span class="line">        if (pre != NULL)</span><br><span class="line">        &#123;</span><br><span class="line">            /*同遍历链表类似，区别在于p_mov每指向某个节点后都将该节点释放</span><br><span class="line"></span><br><span class="line">1、释放前要先保存下一个节点，释放后备份恢复给p_mov,否则释放了当前节点，下一个节点的地址就将失去；</span><br><span class="line">2、依次将所有节点释放后，最后返回NULL（标示释放完毕）。*/</span><br><span class="line">            p = pre-&gt;nextarc; //记录后一个结点的位置</span><br><span class="line">            while (p != NULL) //释放i个链表</span><br><span class="line">            &#123;</span><br><span class="line">                free(pre);        //释放前一个结点</span><br><span class="line">                pre = p;          //递归，让前驱指针继续移动，直到后继为空</span><br><span class="line">                p = pre-&gt;nextarc; //后继指针同步移动</span><br><span class="line">            &#125;</span><br><span class="line">            free(pre); //释放最后一个结点</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    free(G); //释放G所指的头头结点数组的内存空间</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//求无向图顶点的度</span><br><span class="line">int Degree21(ALGraph *G, int v)</span><br><span class="line">&#123;</span><br><span class="line">    int d = 0;</span><br><span class="line">    ArcNode *p; //创建一个指向结点的指针，便于遍历</span><br><span class="line">    if (v &lt; 0 || v &gt; G-&gt;n)</span><br><span class="line">        return -1;</span><br><span class="line">    p = G-&gt;adjlist[v].firstarc;</span><br><span class="line">    while (p != NULL) //只要统计单链表的长度就行</span><br><span class="line">    &#123;</span><br><span class="line">        d++;</span><br><span class="line">        p = p-&gt;nextarc;</span><br><span class="line">    &#125;</span><br><span class="line">    return d;</span><br><span class="line">&#125;</span><br><span class="line">//有向图的度</span><br><span class="line">int Degree22(ALGraph *G, int v)</span><br><span class="line">&#123;</span><br><span class="line">    int i, d1 = 0, d2 = 0, d;</span><br><span class="line">    ArcNode *p; //</span><br><span class="line">    if (v &lt; 0 || v &gt; G-&gt;n)</span><br><span class="line">        return -1;</span><br><span class="line">    p = G-&gt;adjlist[v].firstarc;</span><br><span class="line">    while (p != NULL) //先一维循环，查找以v为起点的边，也就是出度</span><br><span class="line">    &#123;</span><br><span class="line">        d1++;</span><br><span class="line">        p = p-&gt;nextarc;</span><br><span class="line">    &#125;</span><br><span class="line">    for (i = 0; i &lt; G-&gt;n; i++) //再二维循环，遍历整个数组</span><br><span class="line">    &#123;</span><br><span class="line">        p = G-&gt;adjlist[i].firstarc;</span><br><span class="line">        while (p != NULL) //查找以v为末尾节点的边，也就是入度</span><br><span class="line">        &#123;</span><br><span class="line">            if (p-&gt;adjvex == v)</span><br><span class="line">                d2++;</span><br><span class="line">            p = p-&gt;nextarc;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    d = d1 + d2;</span><br><span class="line">    return d;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//将邻接矩阵g转换为邻接表G</span><br><span class="line">void MAtTodj(MGraph g, ALGraph *&amp;G)</span><br><span class="line">&#123;</span><br><span class="line">    int i, j;</span><br><span class="line">    ArcNode *p;                             //</span><br><span class="line">    G = (ALGraph *)malloc(sizeof(ALGraph)); //先建表</span><br><span class="line">    for (i = 0; i &lt; g.n; i++)</span><br><span class="line">        G-&gt;adjlist[i].firstarc = NULL;                      //置空</span><br><span class="line">    for (i = 0; i &lt; g.n; i++)                               //对邻接矩阵进行遍历</span><br><span class="line">        for (j = g.n - 1; j &gt;= 0; j--)                      //这个遍历显然是二重的</span><br><span class="line">            if (g.edges[i][j] != 0 &amp;&amp; g.edges[i][j] != INF) //对于第i中可取的值，都创建一个新的结点p</span><br><span class="line">            &#123;</span><br><span class="line">                p = (ArcNode *)malloc(sizeof(ArcNode)); //申请结点指针类型空间</span><br><span class="line">                p-&gt;adjvex = j;                          //记录尾结点的位置                     //对这个结点p进行赋值</span><br><span class="line">                p-&gt;weight = g.edges[i][j];              //赋权</span><br><span class="line">                p-&gt;nextarc = G-&gt;adjlist[i].firstarc;    //只要结点值合法，就创建一个结点，采用头插法</span><br><span class="line">                G-&gt;adjlist[i].firstarc = p;             //重置头结点</span><br><span class="line">            &#125;</span><br><span class="line">    G-&gt;n = g.n;</span><br><span class="line">    G-&gt;e = g.e;</span><br><span class="line">&#125;</span><br><span class="line">//////////////////////////////////////////////////////////////////////////////////////////////////////</span><br><span class="line">/*为了防止多次访问，设置标记数组visited[],开始为0，访问后为1</span><br><span class="line">1,深度优先遍历、确定一个开始当我起点，然后开始访问第一个临界点，然后访问第一个临界点的临界点，</span><br><span class="line">对于已经被访问的，直接跳过，然后开始，直到所有的结点都被访问</span><br><span class="line">*/</span><br><span class="line">int visited[MAXVEX] = &#123;0&#125;;  //先设置一个全局变量</span><br><span class="line">void DFS(ALGraph *G, int v) //深度优先遍历算法</span><br><span class="line">&#123;</span><br><span class="line">    int w;                             //标记邻接点的位置</span><br><span class="line">    ArcNode *p;                        //用于遍历</span><br><span class="line">    printf(&quot;即将访问的是顶点v:%d&quot;, v); //访问v顶点</span><br><span class="line">    visited[v] = 1;                    //改变标志位</span><br><span class="line">    p = G-&gt;adjlist[v].firstarc;        //找v的第一个邻接点</span><br><span class="line">    while (p != NULL)                  //找v的所有邻接点</span><br><span class="line">    &#123;</span><br><span class="line">        w = p-&gt;adjvex; //</span><br><span class="line">        &#123;</span><br><span class="line">            if (visited[w] == 0) //只要w没被访问</span><br><span class="line">                DFS(G, w);       //就从w出发进行深度优先遍历</span><br><span class="line">            p = p-&gt;nextarc;      //被访问就下一个</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/*----------------------------------------------------------------</span><br><span class="line">2)广度优先算法</span><br><span class="line">指定从v开始，依次访问它所在的链表，也就是访问它的所有的邻接点，然后再从第一个邻接点开始，</span><br><span class="line">重复这样的循环，直到v的最后一个邻接点也被遍历了。*/</span><br><span class="line">void BFS(ALGraph *G, int vi)</span><br><span class="line">&#123;</span><br><span class="line">    int i, v;</span><br><span class="line">    ArcNode *p;</span><br><span class="line">    int Q[MAXVEX], front = 0, rear = 0; //定义一个队列Q,初始化Q</span><br><span class="line">    for (i = 0; i &lt; G-&gt;n; i++)          //这一步在已经有了全局变量的时候就不用了</span><br><span class="line">        visited[i] = 0;                 //这一步在已经有了全局变量的时候就不用了</span><br><span class="line">    printf(&quot;现在访问的:%d\t&quot;, vi);      //输出</span><br><span class="line">    visited[i] = 1;                     //已经访问的结点，要进行置一操作</span><br><span class="line">    rear = (rear + 1) % MAXVEX;         //初始顶点进队，这里涉及到队列的知识，可以回头复习一下</span><br><span class="line">    Q[rear] = vi;                       //进队，先进先出，所以用队呀</span><br><span class="line">    while (front != rear)               //只要队列不为空</span><br><span class="line">    &#123;</span><br><span class="line">        front = (front + 1) % MAXVEX;</span><br><span class="line">        v = Q[front];               //出队顶点v</span><br><span class="line">        p = G-&gt;adjlist[v].firstarc; //对v所在的链表进行遍历，也就是查找v的所有的邻接点</span><br><span class="line">        while (p != NULL)           //只要v的邻接点没有被访问完</span><br><span class="line">        &#123;</span><br><span class="line">            if (visited[p-&gt;adjvex] == 0) //如果是访问了visited=0的，就访问它且进队，否则跳过</span><br><span class="line">            &#123;</span><br><span class="line">                printf(&quot;现在访问到了：%d\n\t&quot;, p-&gt;adjvex); //访问</span><br><span class="line">                visited[p-&gt;adjvex] = 1;                    //置一</span><br><span class="line">                rear = (rear + 1) % MAXVEX;                //进队</span><br><span class="line">                Q[rear] = p-&gt;adjvex;                       //进队</span><br><span class="line">            &#125;</span><br><span class="line">            p = p-&gt;nextarc; //如果visited=1,就跳过，继续后面的访问</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    ALGraph tu = &#123;4, 1&#125;;</span><br><span class="line">    ALGraph &amp;G = tu;</span><br><span class="line">    ALGraph *q;</span><br><span class="line">    *q = tu;</span><br><span class="line">    int A[][30] = &#123;</span><br><span class="line">        &#123;1111&#125;, &#123;0000&#125;, &#123;1111&#125;, &#123;0000&#125;&#125;;</span><br><span class="line">    int(*p)[30] = A;</span><br><span class="line">    int n = 4;</span><br><span class="line">    int e = 8;</span><br><span class="line">    CreatGraph2(q, p, n, e);</span><br><span class="line">    DFS(q, 1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="prime算法"><a href="#prime算法" class="headerlink" title="prime算法"></a>prime算法</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;tu.h&quot;</span><br><span class="line">//prim算法的实现</span><br><span class="line">//从顶点开始，进行遍历</span><br><span class="line">//开始v1,然后遍历最小权值的点</span><br><span class="line">//只要点没有被遍历，就如此进行</span><br><span class="line">//设置两个辅助数组，用来选择点</span><br><span class="line">/*</span><br><span class="line">对于v-u中的每个顶点j，记录它到u中的一条最小边</span><br><span class="line">closest[j]存储该边依附在u中的顶点的编号</span><br><span class="line">lowcost[j]存储该边的权值</span><br><span class="line">U中lowcost[k]=0;v-u中的lowcost[j]&gt;0</span><br><span class="line">*/</span><br><span class="line">void prim(MGraph g, int v)</span><br><span class="line">&#123; //v是开始的点</span><br><span class="line">    //采用邻接矩阵的方式</span><br><span class="line">    int lowcost[MAXVEX]; //存储访问到的结点的值，也就是邻接矩阵对应的权值</span><br><span class="line">    int closest[MAXVEX]; //存储最小权值所在的点</span><br><span class="line">    int min, i, j, k;</span><br><span class="line">    for (i = 0; i &lt; g.n; i++) //初始化</span><br><span class="line">    &#123;</span><br><span class="line">        lowcost[i] = g.edges[v][i]; //先初始化权值表，后续会改动</span><br><span class="line">        closest[i] = v;             //初始化</span><br><span class="line">        for (i = 0; i &lt; g.n; i++)   //构造n-1条边</span><br><span class="line">        &#123;</span><br><span class="line">            min = INF;</span><br><span class="line">            k = -1;</span><br><span class="line">            for (j = 0; j &lt; g.n; j++) //从V-U中找出与U最近的顶点K</span><br><span class="line">            &#123;</span><br><span class="line">                if (lowcost[j] != 0 &amp;&amp; lowcost[j] &lt; min) //查找最小权值所在的点和记录它的权值</span><br><span class="line">                &#123;</span><br><span class="line">                    min = lowcost[j]; //找到最小权值</span><br><span class="line">                    k = j;            //k作为最近的顶点的编号</span><br><span class="line">                &#125;</span><br><span class="line">                printf(&quot;\n边%d到%d---------权值为%d\n&quot;, closest[k], k, min);</span><br><span class="line">                lowcost[k] = 0;           //标记k已经加入U</span><br><span class="line">                for (j = 0; j &lt; g.n; j++) //修正lowcost和closet，还是循环n次</span><br><span class="line">                &#123;</span><br><span class="line">                    if (lowcost[j] != 0 &amp;&amp; g.edges[k][j] &lt; lowcost[j]) //原先的lowcost里存储的是v所在行的权值，使之与k所在的行的权值进行比较，查出最小的，作为新的k点</span><br><span class="line">                    &#123;</span><br><span class="line">                        lowcost[j] = g.edges[k][j];</span><br><span class="line">                        closest[j] = k;</span><br><span class="line">                        //查找出的最小的权值和对应的边，</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag"># C语言</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E5%AE%9E%E4%BE%8B/" rel="tag"># 实例</a>
+              <a href="/tags/%E5%9B%BE/" rel="tag"># 图</a>
+              <a href="/tags/%E9%80%92%E5%BD%92/" rel="tag"># 递归</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/07/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E6%A0%91%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" rel="prev" title="C和数据结构——二叉树实现和树的相关概念">
+      <i class="fa fa-chevron-left"></i> C和数据结构——二叉树实现和树的相关概念
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/11/index/" rel="next" title="hexo中如何正确写博客">
+      hexo中如何正确写博客 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">图的实现和相关算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#prime%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">prime算法</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Gao Xiaobai</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gao Xiaobai</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
