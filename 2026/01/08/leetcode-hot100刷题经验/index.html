@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="这篇主要写给准备实习、秋招，或者想把算法基础重新捡起来的同学。Hot100 真正的价值，不在于数字，而在于建立题感和模板。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Hot100 刷题经验：不是刷完 100 道就够了，而是要形成模板">
+<meta property="og:url" content="http://example.com/2026/01/08/leetcode-hot100%E5%88%B7%E9%A2%98%E7%BB%8F%E9%AA%8C/index.html">
+<meta property="og:site_name" content="高">
+<meta property="og:description" content="这篇主要写给准备实习、秋招，或者想把算法基础重新捡起来的同学。Hot100 真正的价值，不在于数字，而在于建立题感和模板。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-01-08T14:35:00.000Z">
+<meta property="article:modified_time" content="2026-03-08T01:16:46.000Z">
+<meta property="article:author" content="Gao Xiaobai">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="Hot100">
+<meta property="article:tag" content="实习准备">
+<meta property="article:tag" content="秋招">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/01/08/leetcode-hot100%E5%88%B7%E9%A2%98%E7%BB%8F%E9%AA%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>LeetCode Hot100 刷题经验：不是刷完 100 道就够了，而是要形成模板 | 高</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">高</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/01/08/leetcode-hot100%E5%88%B7%E9%A2%98%E7%BB%8F%E9%AA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Gao Xiaobai">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode Hot100 刷题经验：不是刷完 100 道就够了，而是要形成模板
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-01-08 22:35:00" itemprop="dateCreated datePublished" datetime="2026-01-08T22:35:00+08:00">2026-01-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-03-08 09:16:46" itemprop="dateModified" datetime="2026-03-08T09:16:46+08:00">2026-03-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">算法刷题</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">这篇主要写给准备实习、秋招，或者想把算法基础重新捡起来的同学。Hot100 真正的价值，不在于数字，而在于建立题感和模板。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>我最近又把 LeetCode Hot100 过了一遍。</p>
+<p>不是因为它有多神，而是因为到研究生阶段你会发现：算法题这东西，一段时间不碰，手感掉得非常快。尤其是平时做科研、写工程代码比较多的时候，脑子会更习惯“大系统逻辑”，反而不够敏感于题目里的局部结构。</p>
+<span id="more"></span>
+
+<p>所以这篇不写“我刷了多少题”，只写我觉得真正有用的经验。</p>
+<h2 id="1-Hot100-不是题单，是模板训练集"><a href="#1-Hot100-不是题单，是模板训练集" class="headerlink" title="1. Hot100 不是题单，是模板训练集"></a>1. Hot100 不是题单，是模板训练集</h2><p>很多人刷 Hot100 的方式是：</p>
+<ul>
+<li>做一道</li>
+<li>过一道</li>
+<li>收藏一道</li>
+<li>然后下一道</li>
+</ul>
+<p>最后刷完了，问他双指针模板是什么、二叉树 DFS 怎么快速写、动态规划怎么定义状态，还是卡住。</p>
+<p>这就说明，你刷的是题，不是方法。</p>
+<p>我现在更认可的一种说法是：</p>
+<blockquote>
+<p>Hot100 的价值，不在于 100 这个数字，而在于它能帮你把高频题型压缩成有限的思维模板。</p>
+</blockquote>
+<h2 id="2-我会把-Hot100-分成这几类来刷"><a href="#2-我会把-Hot100-分成这几类来刷" class="headerlink" title="2. 我会把 Hot100 分成这几类来刷"></a>2. 我会把 Hot100 分成这几类来刷</h2><h2 id="第一类：哈希-数组-双指针"><a href="#第一类：哈希-数组-双指针" class="headerlink" title="第一类：哈希 / 数组 / 双指针"></a>第一类：哈希 / 数组 / 双指针</h2><p>这一类是最适合恢复手感的。</p>
+<p>因为它们通常：</p>
+<ul>
+<li>代码量不大；</li>
+<li>反馈快；</li>
+<li>容易建立“看题识型”的感觉。</li>
+</ul>
+<p>像这些思路一定要练熟：</p>
+<ul>
+<li>两数之和：哈希</li>
+<li>三数之和：排序 + 双指针</li>
+<li>盛最多水的容器：对撞双指针</li>
+<li>移动零：快慢指针</li>
+</ul>
+<p>如果这一类都经常卡，那后面更复杂的题型大概率也会乱。</p>
+<h2 id="第二类：链表"><a href="#第二类：链表" class="headerlink" title="第二类：链表"></a>第二类：链表</h2><p>链表题最大的特点不是难，而是特别容易写乱。</p>
+<p>我自己的习惯是，把链表题统一先想清楚三件事：</p>
+<ol>
+<li>要不要 dummy 节点；</li>
+<li>当前操作涉及几个指针；</li>
+<li>修改指针前有没有保存后继。</li>
+</ol>
+<p>像反转链表、合并链表、删除倒数第 N 个结点、环形链表，这几道其实就能把常见套路覆盖掉很多。</p>
+<h2 id="第三类：栈-队列-单调栈"><a href="#第三类：栈-队列-单调栈" class="headerlink" title="第三类：栈 / 队列 / 单调栈"></a>第三类：栈 / 队列 / 单调栈</h2><p>这一类题一旦模板形成，速度会提得很明显。</p>
+<p>尤其是：</p>
+<ul>
+<li>有效括号</li>
+<li>最小栈</li>
+<li>每日温度</li>
+<li>柱状图中最大的矩形</li>
+</ul>
+<p>这里我最大的体会是：</p>
+<blockquote>
+<p>单调栈不难，难的是你没把“维护什么单调性”这句话想明白。</p>
+</blockquote>
+<h2 id="第四类：二叉树"><a href="#第四类：二叉树" class="headerlink" title="第四类：二叉树"></a>第四类：二叉树</h2><p>二叉树是 Hot100 的大头之一，也是最容易让人看起来会、实际写起来慢的部分。</p>
+<p>我会强行把自己训练成看到树题先问：</p>
+<ul>
+<li>这是前中后序哪种 DFS；</li>
+<li>要不要层序 BFS；</li>
+<li>这是“遍历型递归”还是“分解型递归”；</li>
+<li>返回值到底代表什么。</li>
+</ul>
+<p>比如：</p>
+<ul>
+<li>最大深度</li>
+<li>对称二叉树</li>
+<li>二叉树展开为链表</li>
+<li>最近公共祖先</li>
+</ul>
+<p>这些题表面不同，但很多时候底层思路是通的。</p>
+<h2 id="第五类：回溯"><a href="#第五类：回溯" class="headerlink" title="第五类：回溯"></a>第五类：回溯</h2><p>回溯题非常适合练代码组织能力。</p>
+<p>我的经验是，不要一上来就怕。先把这几个元素固定下来：</p>
+<ul>
+<li>路径 path</li>
+<li>选择列表 choices</li>
+<li>结束条件</li>
+<li>回退动作</li>
+</ul>
+<p>子集、全排列、组合总和、括号生成，这一套顺下来以后，回溯基本盘就差不多有了。</p>
+<h2 id="第六类：动态规划"><a href="#第六类：动态规划" class="headerlink" title="第六类：动态规划"></a>第六类：动态规划</h2><p>很多人怕 DP，其实根本原因通常不是不会转移，而是不知道状态该怎么定义。</p>
+<p>我自己现在做 DP 题，强迫自己先写这四句：</p>
+<ol>
+<li><code>dp[i]</code> / <code>dp[i][j]</code> 表示什么；</li>
+<li>初始值是什么；</li>
+<li>转移从哪里来；</li>
+<li>最终答案取哪里。</li>
+</ol>
+<p>像：</p>
+<ul>
+<li>爬楼梯</li>
+<li>打家劫舍</li>
+<li>最长递增子序列</li>
+<li>零钱兑换</li>
+<li>编辑距离</li>
+</ul>
+<p>这些题并不一定一遍就秒，但只要你把状态定义练出来，后面会顺很多。</p>
+<h2 id="第七类：图-BFS-二分-堆"><a href="#第七类：图-BFS-二分-堆" class="headerlink" title="第七类：图 / BFS / 二分 / 堆"></a>第七类：图 / BFS / 二分 / 堆</h2><p>这一类在面试里也常见，而且常和前面题型交叉。</p>
+<p>比如：</p>
+<ul>
+<li>岛屿数量：DFS / BFS</li>
+<li>腐烂的橘子：多源 BFS</li>
+<li>搜索旋转排序数组：二分</li>
+<li>数组中的第 K 个最大元素：堆 / 快排思想</li>
+</ul>
+<p>这里我比较建议按“场景”记，而不是按题号记。</p>
+<h2 id="3-我现在刷题，基本只做三件事"><a href="#3-我现在刷题，基本只做三件事" class="headerlink" title="3. 我现在刷题，基本只做三件事"></a>3. 我现在刷题，基本只做三件事</h2><h2 id="1-归类"><a href="#1-归类" class="headerlink" title="1. 归类"></a>1. 归类</h2><p>每做完一道题，我都会给它贴一个主标签：</p>
+<ul>
+<li>双指针</li>
+<li>哈希</li>
+<li>树 DFS</li>
+<li>回溯</li>
+<li>DP</li>
+<li>二分</li>
+</ul>
+<p>这样后面复习的时候，不是重做整本题单，而是按题型补弱项。</p>
+<h2 id="2-总结模板"><a href="#2-总结模板" class="headerlink" title="2. 总结模板"></a>2. 总结模板</h2><p>比如我会专门维护一些非常短的模板：</p>
+<ul>
+<li>二叉树递归模板</li>
+<li>层序遍历模板</li>
+<li>回溯模板</li>
+<li>二分模板</li>
+<li>单调栈模板</li>
+<li>链表 dummy 模板</li>
+</ul>
+<p>模板不是为了背代码，而是为了在高压场景下快速起手。</p>
+<h2 id="3-二刷和三刷"><a href="#3-二刷和三刷" class="headerlink" title="3. 二刷和三刷"></a>3. 二刷和三刷</h2><p>一道题一遍做出来，不代表你真的会。</p>
+<p>尤其是面试常考题，最好过几天再做一次。只有到了你能在比较短时间内重新写出来，才算真的内化。</p>
+<h2 id="4-我觉得最容易踩的坑"><a href="#4-我觉得最容易踩的坑" class="headerlink" title="4. 我觉得最容易踩的坑"></a>4. 我觉得最容易踩的坑</h2><h2 id="坑一：盲目追数量"><a href="#坑一：盲目追数量" class="headerlink" title="坑一：盲目追数量"></a>坑一：盲目追数量</h2><p>刷 300 道但没有形成方法，不如把 Hot100 真正吃透。</p>
+<h2 id="坑二：只看题解，不自己写"><a href="#坑二：只看题解，不自己写" class="headerlink" title="坑二：只看题解，不自己写"></a>坑二：只看题解，不自己写</h2><p>看懂和写出来之间，差得非常多。</p>
+<h2 id="坑三：语言细节不熟"><a href="#坑三：语言细节不熟" class="headerlink" title="坑三：语言细节不熟"></a>坑三：语言细节不熟</h2><p>尤其是 C++ / Python 常用容器、排序、自定义比较器、堆、哈希表的写法，不熟的话会影响你整场状态。</p>
+<h2 id="坑四：不会复盘"><a href="#坑四：不会复盘" class="headerlink" title="坑四：不会复盘"></a>坑四：不会复盘</h2><p>卡过的题如果不记录，下次还会卡在同一个地方。</p>
+<h2 id="5-如果是为了实习-秋招，我建议怎么安排"><a href="#5-如果是为了实习-秋招，我建议怎么安排" class="headerlink" title="5. 如果是为了实习 / 秋招，我建议怎么安排"></a>5. 如果是为了实习 / 秋招，我建议怎么安排</h2><p>如果你是为了找实习或者秋招面试，我会建议：</p>
+<h3 id="第一阶段：Hot100-过一遍，建立模板"><a href="#第一阶段：Hot100-过一遍，建立模板" class="headerlink" title="第一阶段：Hot100 过一遍，建立模板"></a>第一阶段：Hot100 过一遍，建立模板</h3><p>别急着求快。</p>
+<h3 id="第二阶段：按题型补短板"><a href="#第二阶段：按题型补短板" class="headerlink" title="第二阶段：按题型补短板"></a>第二阶段：按题型补短板</h3><p>哪一类老错，就集中练哪一类。</p>
+<h3 id="第三阶段：限时训练"><a href="#第三阶段：限时训练" class="headerlink" title="第三阶段：限时训练"></a>第三阶段：限时训练</h3><p>模拟真实面试节奏，练表达和代码书写速度。</p>
+<h3 id="第四阶段：回看高频经典题"><a href="#第四阶段：回看高频经典题" class="headerlink" title="第四阶段：回看高频经典题"></a>第四阶段：回看高频经典题</h3><p>不要把所有时间都花在新题上，经典题的收益通常更高。</p>
+<h2 id="6-我现在对刷题这件事的看法"><a href="#6-我现在对刷题这件事的看法" class="headerlink" title="6. 我现在对刷题这件事的看法"></a>6. 我现在对刷题这件事的看法</h2><p>以前我会觉得，刷题就是一种“必须忍受”的门槛。</p>
+<p>现在反而觉得，它至少有两个好处：</p>
+<ul>
+<li>让你在有限时间里快速恢复基础数据结构和算法直觉；</li>
+<li>让你的代码组织能力变得更干净。</li>
+</ul>
+<p>当然，刷题不能替代真实开发，也不能替代系统设计和工程经验。但如果你目标里包含实习、秋招、技术面试，那 Hot100 的性价比依然很高。</p>
+<p>最后还是那句话：</p>
+<blockquote>
+<p>不要把刷完 100 道当成终点。</p>
+</blockquote>
+<p>真正有用的是，你最后有没有在脑子里形成一套“看到题目就能迅速归类、起手、推进”的模板体系。这个东西，才会在面试那几分钟真正救你。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+              <a href="/tags/Hot100/" rel="tag"># Hot100</a>
+              <a href="/tags/%E5%AE%9E%E4%B9%A0%E5%87%86%E5%A4%87/" rel="tag"># 实习准备</a>
+              <a href="/tags/%E7%A7%8B%E6%8B%9B/" rel="tag"># 秋招</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/10/12/%E9%87%91%E8%9E%8D%E9%A2%86%E5%9F%9F%E7%9F%A5%E8%AF%86%E7%9A%84%E5%AD%A6%E4%B9%A0/" rel="prev" title="我是怎么补金融知识的：给计算机背景同学的一条务实路线">
+      <i class="fa fa-chevron-left"></i> 我是怎么补金融知识的：给计算机背景同学的一条务实路线
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/02/12/%E7%A0%94%E7%A9%B6%E7%94%9F%E5%AE%9E%E4%B9%A0%E7%AE%80%E5%8E%86latex%E6%A8%A1%E6%9D%BF%E5%88%86%E4%BA%AB/" rel="next" title="研究生实习简历 LaTeX 模板分享：一页纸就够，别把简历写成论文">
+      研究生实习简历 LaTeX 模板分享：一页纸就够，别把简历写成论文 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Hot100-%E4%B8%8D%E6%98%AF%E9%A2%98%E5%8D%95%EF%BC%8C%E6%98%AF%E6%A8%A1%E6%9D%BF%E8%AE%AD%E7%BB%83%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">1. Hot100 不是题单，是模板训练集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%88%91%E4%BC%9A%E6%8A%8A-Hot100-%E5%88%86%E6%88%90%E8%BF%99%E5%87%A0%E7%B1%BB%E6%9D%A5%E5%88%B7"><span class="nav-number">2.</span> <span class="nav-text">2. 我会把 Hot100 分成这几类来刷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%B1%BB%EF%BC%9A%E5%93%88%E5%B8%8C-%E6%95%B0%E7%BB%84-%E5%8F%8C%E6%8C%87%E9%92%88"><span class="nav-number">3.</span> <span class="nav-text">第一类：哈希 &#x2F; 数组 &#x2F; 双指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%B1%BB%EF%BC%9A%E9%93%BE%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">第二类：链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%B1%BB%EF%BC%9A%E6%A0%88-%E9%98%9F%E5%88%97-%E5%8D%95%E8%B0%83%E6%A0%88"><span class="nav-number">5.</span> <span class="nav-text">第三类：栈 &#x2F; 队列 &#x2F; 单调栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%B1%BB%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">6.</span> <span class="nav-text">第四类：二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%B1%BB%EF%BC%9A%E5%9B%9E%E6%BA%AF"><span class="nav-number">7.</span> <span class="nav-text">第五类：回溯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%B1%BB%EF%BC%9A%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-number">8.</span> <span class="nav-text">第六类：动态规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%B1%BB%EF%BC%9A%E5%9B%BE-BFS-%E4%BA%8C%E5%88%86-%E5%A0%86"><span class="nav-number">9.</span> <span class="nav-text">第七类：图 &#x2F; BFS &#x2F; 二分 &#x2F; 堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%88%91%E7%8E%B0%E5%9C%A8%E5%88%B7%E9%A2%98%EF%BC%8C%E5%9F%BA%E6%9C%AC%E5%8F%AA%E5%81%9A%E4%B8%89%E4%BB%B6%E4%BA%8B"><span class="nav-number">10.</span> <span class="nav-text">3. 我现在刷题，基本只做三件事</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BD%92%E7%B1%BB"><span class="nav-number">11.</span> <span class="nav-text">1. 归类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%80%BB%E7%BB%93%E6%A8%A1%E6%9D%BF"><span class="nav-number">12.</span> <span class="nav-text">2. 总结模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BA%8C%E5%88%B7%E5%92%8C%E4%B8%89%E5%88%B7"><span class="nav-number">13.</span> <span class="nav-text">3. 二刷和三刷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%88%91%E8%A7%89%E5%BE%97%E6%9C%80%E5%AE%B9%E6%98%93%E8%B8%A9%E7%9A%84%E5%9D%91"><span class="nav-number">14.</span> <span class="nav-text">4. 我觉得最容易踩的坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%91%E4%B8%80%EF%BC%9A%E7%9B%B2%E7%9B%AE%E8%BF%BD%E6%95%B0%E9%87%8F"><span class="nav-number">15.</span> <span class="nav-text">坑一：盲目追数量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%91%E4%BA%8C%EF%BC%9A%E5%8F%AA%E7%9C%8B%E9%A2%98%E8%A7%A3%EF%BC%8C%E4%B8%8D%E8%87%AA%E5%B7%B1%E5%86%99"><span class="nav-number">16.</span> <span class="nav-text">坑二：只看题解，不自己写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%91%E4%B8%89%EF%BC%9A%E8%AF%AD%E8%A8%80%E7%BB%86%E8%8A%82%E4%B8%8D%E7%86%9F"><span class="nav-number">17.</span> <span class="nav-text">坑三：语言细节不熟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%91%E5%9B%9B%EF%BC%9A%E4%B8%8D%E4%BC%9A%E5%A4%8D%E7%9B%98"><span class="nav-number">18.</span> <span class="nav-text">坑四：不会复盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%A6%82%E6%9E%9C%E6%98%AF%E4%B8%BA%E4%BA%86%E5%AE%9E%E4%B9%A0-%E7%A7%8B%E6%8B%9B%EF%BC%8C%E6%88%91%E5%BB%BA%E8%AE%AE%E6%80%8E%E4%B9%88%E5%AE%89%E6%8E%92"><span class="nav-number">19.</span> <span class="nav-text">5. 如果是为了实习 &#x2F; 秋招，我建议怎么安排</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9AHot100-%E8%BF%87%E4%B8%80%E9%81%8D%EF%BC%8C%E5%BB%BA%E7%AB%8B%E6%A8%A1%E6%9D%BF"><span class="nav-number">19.1.</span> <span class="nav-text">第一阶段：Hot100 过一遍，建立模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%8C%89%E9%A2%98%E5%9E%8B%E8%A1%A5%E7%9F%AD%E6%9D%BF"><span class="nav-number">19.2.</span> <span class="nav-text">第二阶段：按题型补短板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%EF%BC%9A%E9%99%90%E6%97%B6%E8%AE%AD%E7%BB%83"><span class="nav-number">19.3.</span> <span class="nav-text">第三阶段：限时训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%9B%9E%E7%9C%8B%E9%AB%98%E9%A2%91%E7%BB%8F%E5%85%B8%E9%A2%98"><span class="nav-number">19.4.</span> <span class="nav-text">第四阶段：回看高频经典题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%88%91%E7%8E%B0%E5%9C%A8%E5%AF%B9%E5%88%B7%E9%A2%98%E8%BF%99%E4%BB%B6%E4%BA%8B%E7%9A%84%E7%9C%8B%E6%B3%95"><span class="nav-number">20.</span> <span class="nav-text">6. 我现在对刷题这件事的看法</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Gao Xiaobai</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gao Xiaobai</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
