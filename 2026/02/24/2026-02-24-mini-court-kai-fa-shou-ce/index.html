@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gao-youyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width_expanded":320,"width_dual_column":240},"copycode":true,"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前段时间把一个一直想做的小产品落了地，名字叫 Mini Court 小法庭。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mini Court 小法庭 MVP 开发手册：一个 LLM 场景化产品是怎么从 0 到 1 搭起来的">
+<meta property="og:url" content="https://gao-youyi.github.io/2026/02/24/2026-02-24-mini-court-kai-fa-shou-ce/">
+<meta property="og:site_name" content="高友谊">
+<meta property="og:description" content="前段时间把一个一直想做的小产品落了地，名字叫 Mini Court 小法庭。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-24T13:10:00.000Z">
+<meta property="article:modified_time" content="2026-03-08T05:36:46.000Z">
+<meta property="article:author" content="Gao Youyi">
+<meta property="article:tag" content="栈">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="NestJS">
+<meta property="article:tag" content="Prisma">
+<meta property="article:tag" content="PostgreSQL">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="产品手册">
+<meta property="article:tag" content="Mini Court">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://gao-youyi.github.io/2026/02/24/2026-02-24-mini-court-kai-fa-shou-ce/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Mini Court 小法庭 MVP 开发手册：一个 LLM 场景化产品是怎么从 0 到 1 搭起来的 | 高友谊</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">高友谊</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录科研、技术与思考</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">97</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">39</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gao-youyi.github.io/2026/02/24/2026-02-24-mini-court-kai-fa-shou-ce/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Gao Youyi">
+      <meta itemprop="description" content="电子科技大学硕士研究生，关注时空预测、交通流预测、AI产品开发与个人成长。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高友谊">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mini Court 小法庭 MVP 开发手册：一个 LLM 场景化产品是怎么从 0 到 1 搭起来的
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-02-24 21:10:00" itemprop="dateCreated datePublished" datetime="2026-02-24T21:10:00+08:00">2026-02-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-08 13:36:46" itemprop="dateModified" datetime="2026-03-08T13:36:46+08:00">2026-03-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%A7%E5%93%81%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">产品开发</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">前段时间把一个一直想做的小产品落了地，名字叫 Mini Court 小法庭。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>前段时间把一个一直想做的小产品落了地，名字叫 <strong>Mini Court 小法庭</strong>。</p>
+<p>它不是一个特别宏大的项目，说白了就是围绕“生活纠纷裁决”这个场景，做一个能让用户发帖陈述、评论讨论，再由大模型给出初审和复审结果的 MVP。</p>
+<p>这篇不准备写成宣传文，而是把当时做这个东西时比较关键的技术和产品决策整理下来，留作后面复盘，也方便以后做类似产品时少走弯路。</p>
+<span id="more"></span>
+
+<h2 id="1-先定义产品边界：MVP-到底要解决什么"><a href="#1-先定义产品边界：MVP-到底要解决什么" class="headerlink" title="1. 先定义产品边界：MVP 到底要解决什么"></a>1. 先定义产品边界：MVP 到底要解决什么</h2><p>我做这个产品时，给自己定的边界很明确：</p>
+<h3 id="要做的"><a href="#要做的" class="headerlink" title="要做的"></a>要做的</h3><ul>
+<li>用户发帖陈述纠纷</li>
+<li>其他用户评论讨论</li>
+<li>基于用户原帖做一次初审</li>
+<li>融合评论区观点做一次复审</li>
+<li>支持结果分享</li>
+<li>留出后台治理能力</li>
+</ul>
+<h3 id="暂时不做的"><a href="#暂时不做的" class="headerlink" title="暂时不做的"></a>暂时不做的</h3><ul>
+<li>复杂社交关系</li>
+<li>长链路 IM</li>
+<li>多模型路由编排</li>
+<li>复杂推荐系统</li>
+<li>付费系统</li>
+</ul>
+<p>原因很简单：MVP 阶段最怕什么都想做，最后什么都做不完。</p>
+<p>所以我一开始就把核心链路定成：</p>
+<blockquote>
+<p>发帖陈述 → 评论讨论 → Bot1 初审 → Bot2 复审 → 分享传播</p>
+</blockquote>
+<p>只要这条链路是通的，这个产品就算站住了。</p>
+<h2 id="2-为什么这个场景适合-LLM"><a href="#2-为什么这个场景适合-LLM" class="headerlink" title="2. 为什么这个场景适合 LLM"></a>2. 为什么这个场景适合 LLM</h2><p>不是所有产品都应该硬套大模型。</p>
+<p>我觉得这个场景适合的原因主要有三点：</p>
+<h3 id="1-用户输入天然是开放文本"><a href="#1-用户输入天然是开放文本" class="headerlink" title="1. 用户输入天然是开放文本"></a>1. 用户输入天然是开放文本</h3><p>生活纠纷本来就很难结构化，适合让模型先做文本理解和归纳。</p>
+<h3 id="2-结果不是唯一正确答案"><a href="#2-结果不是唯一正确答案" class="headerlink" title="2. 结果不是唯一正确答案"></a>2. 结果不是唯一正确答案</h3><p>裁决类场景更适合做“观点整理 + 规则化表达”，而不是追求绝对标准答案。</p>
+<h3 id="3-评论区本身就是高价值上下文"><a href="#3-评论区本身就是高价值上下文" class="headerlink" title="3. 评论区本身就是高价值上下文"></a>3. 评论区本身就是高价值上下文</h3><p>用户评论能提供额外视角，这很适合做第二阶段裁决。</p>
+<p>所以我最后设计成了一个<strong>双阶段工作流</strong>：</p>
+<ul>
+<li><strong>Bot1</strong>：基于原始帖文生成初审结果；</li>
+<li><strong>Bot2</strong>：吸收评论区观点后生成复审结果。</li>
+</ul>
+<p>这样做的好处，是把“用户原始陈述”和“公共讨论补充”拆开处理，结果会更稳一些。</p>
+<h2 id="3-技术栈为什么这么选"><a href="#3-技术栈为什么这么选" class="headerlink" title="3. 技术栈为什么这么选"></a>3. 技术栈为什么这么选</h2><p>我最后选的是这套：</p>
+<ul>
+<li><strong>后端</strong>：NestJS</li>
+<li><strong>ORM</strong>：Prisma</li>
+<li><strong>数据库</strong>：PostgreSQL</li>
+<li><strong>反向代理</strong>：Nginx</li>
+<li><strong>部署</strong>：Docker Compose</li>
+<li><strong>LLM 接入</strong>：统一封装为服务层</li>
+</ul>
+<p>选择逻辑其实很务实。</p>
+<h3 id="NestJS"><a href="#NestJS" class="headerlink" title="NestJS"></a>NestJS</h3><p>适合快速把：</p>
+<ul>
+<li>用户系统</li>
+<li>帖子评论</li>
+<li>后台管理</li>
+<li>审计日志</li>
+<li>权限控制</li>
+</ul>
+<p>这几块都搭起来，模块化也比较清楚。</p>
+<h3 id="Prisma-PostgreSQL"><a href="#Prisma-PostgreSQL" class="headerlink" title="Prisma + PostgreSQL"></a>Prisma + PostgreSQL</h3><p>一方面开发体验好，另一方面对这种关系明确的业务数据很合适。后面做迁移、种子数据、后台管理都顺手。</p>
+<h3 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h3><p>MVP 阶段特别适合。服务不多，但需要稳定跑起来，Compose 管理就够了。</p>
+<h2 id="4-我当时拆出来的核心模块"><a href="#4-我当时拆出来的核心模块" class="headerlink" title="4. 我当时拆出来的核心模块"></a>4. 我当时拆出来的核心模块</h2><p>后端如果一开始不分模块，后面会越来越乱。</p>
+<p>我最后大概拆成了下面几块：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">src/</span><br><span class="line">  auth/           # 登录、鉴权、JWT</span><br><span class="line">  users/          # 用户信息</span><br><span class="line">  posts/          # 发帖、详情、列表</span><br><span class="line">  comments/       # 评论相关</span><br><span class="line">  judgments/      # 初审/复审结果</span><br><span class="line">  llm/            # 大模型调用封装</span><br><span class="line">  admin/          # 后台治理</span><br><span class="line">  rbac/           # 角色权限</span><br><span class="line">  logs/           # 审计日志</span><br><span class="line">  common/         # 公共响应、异常处理、工具函数</span><br></pre></td></tr></table></figure>
+
+<p>这样拆的目的不是为了“看起来高级”，而是为了后面两件事：</p>
+<ol>
+<li>改需求时不至于牵一发动全身；</li>
+<li>后台治理和用户主链路分离。</li>
+</ol>
+<h2 id="5-数据模型我会怎么设计"><a href="#5-数据模型我会怎么设计" class="headerlink" title="5. 数据模型我会怎么设计"></a>5. 数据模型我会怎么设计</h2><p>MVP 阶段不需要过度抽象，但几个核心表一定要先想清楚。</p>
+<p>我当时比较核心的实体大概有：</p>
+<h3 id="User"><a href="#User" class="headerlink" title="User"></a>User</h3><ul>
+<li>id</li>
+<li>nickname</li>
+<li>avatar</li>
+<li>role</li>
+<li>status</li>
+<li>createdAt</li>
+</ul>
+<h3 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h3><ul>
+<li>id</li>
+<li>userId</li>
+<li>title</li>
+<li>content</li>
+<li>status</li>
+<li>viewCount</li>
+<li>createdAt</li>
+</ul>
+<h3 id="Comment"><a href="#Comment" class="headerlink" title="Comment"></a>Comment</h3><ul>
+<li>id</li>
+<li>postId</li>
+<li>userId</li>
+<li>content</li>
+<li>status</li>
+<li>createdAt</li>
+</ul>
+<h3 id="Judgment"><a href="#Judgment" class="headerlink" title="Judgment"></a>Judgment</h3><ul>
+<li>id</li>
+<li>postId</li>
+<li>round（initial / final）</li>
+<li>inputSnapshot</li>
+<li>outputJson</li>
+<li>modelName</li>
+<li>createdAt</li>
+</ul>
+<h3 id="AdminLog"><a href="#AdminLog" class="headerlink" title="AdminLog"></a>AdminLog</h3><ul>
+<li>id</li>
+<li>adminId</li>
+<li>action</li>
+<li>targetType</li>
+<li>targetId</li>
+<li>detail</li>
+<li>createdAt</li>
+</ul>
+<p>这里我有一个明确要求：<strong>裁决结果尽量结构化。</strong></p>
+<p>也就是不要只存一整段自然语言，而是尽量让模型输出 JSON，再做展示层渲染。</p>
+<p>比如可以要求输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;summary&quot;</span><span class="punctuation">:</span> <span class="string">&quot;纠纷摘要&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;plaintiff_view&quot;</span><span class="punctuation">:</span> <span class="string">&quot;甲方主要观点&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;defendant_view&quot;</span><span class="punctuation">:</span> <span class="string">&quot;乙方主要观点&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;decision&quot;</span><span class="punctuation">:</span> <span class="string">&quot;初步裁决&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;reason&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;理由1&quot;</span><span class="punctuation">,</span> <span class="string">&quot;理由2&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;risk_hint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;风险提示&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样后面无论是前端展示、分享卡片、二次统计，都会方便很多。</p>
+<h2 id="6-双阶段裁决工作流怎么落地"><a href="#6-双阶段裁决工作流怎么落地" class="headerlink" title="6. 双阶段裁决工作流怎么落地"></a>6. 双阶段裁决工作流怎么落地</h2><p>这部分是我自己觉得最关键的地方。</p>
+<h3 id="第一阶段：Bot1-初审"><a href="#第一阶段：Bot1-初审" class="headerlink" title="第一阶段：Bot1 初审"></a>第一阶段：Bot1 初审</h3><p>输入内容：</p>
+<ul>
+<li>原帖标题</li>
+<li>原帖正文</li>
+<li>必要的用户补充信息</li>
+</ul>
+<p>输出内容：</p>
+<ul>
+<li>纠纷摘要</li>
+<li>双方争议点</li>
+<li>初步判断</li>
+<li>理由说明</li>
+</ul>
+<h3 id="第二阶段：Bot2-复审"><a href="#第二阶段：Bot2-复审" class="headerlink" title="第二阶段：Bot2 复审"></a>第二阶段：Bot2 复审</h3><p>输入内容：</p>
+<ul>
+<li>Bot1 的初审结果</li>
+<li>评论区若干高质量评论</li>
+<li>原始帖文摘要</li>
+</ul>
+<p>输出内容：</p>
+<ul>
+<li>最终复审意见</li>
+<li>是否采纳评论区新观点</li>
+<li>最终理由列表</li>
+<li>风险和建议</li>
+</ul>
+<p>这里最容易出问题的是评论区太乱，所以我当时做了几件事情来控成本和提稳定性：</p>
+<h4 id="1-截断"><a href="#1-截断" class="headerlink" title="1. 截断"></a>1. 截断</h4><p>评论太长就截断，不然 token 直接爆。</p>
+<h4 id="2-去重"><a href="#2-去重" class="headerlink" title="2. 去重"></a>2. 去重</h4><p>类似表达只保留一份，减少模型重复读取。</p>
+<h4 id="3-限条数"><a href="#3-限条数" class="headerlink" title="3. 限条数"></a>3. 限条数</h4><p>只取前 N 条有效评论，避免无意义堆料。</p>
+<h4 id="4-结果缓存"><a href="#4-结果缓存" class="headerlink" title="4. 结果缓存"></a>4. 结果缓存</h4><p>同一帖子的相同阶段结果，优先走缓存，降低重复调用成本。</p>
+<p>这一套做完以后，输出会稳定很多，费用也更可控。</p>
+<h2 id="7-后台治理为什么必须早点做"><a href="#7-后台治理为什么必须早点做" class="headerlink" title="7. 后台治理为什么必须早点做"></a>7. 后台治理为什么必须早点做</h2><p>做内容类产品，一个很常见的错误就是把后台治理放到最后。</p>
+<p>但实际上只要有用户发言，就一定会遇到：</p>
+<ul>
+<li>不当内容</li>
+<li>恶意刷帖</li>
+<li>重复评论</li>
+<li>管理员操作留痕</li>
+</ul>
+<p>所以我在 MVP 阶段就加了下面几项：</p>
+<h3 id="1-Admin-登录"><a href="#1-Admin-登录" class="headerlink" title="1. Admin 登录"></a>1. Admin 登录</h3><p>后台和普通用户逻辑分开，不混用权限。</p>
+<h3 id="2-RBAC"><a href="#2-RBAC" class="headerlink" title="2. RBAC"></a>2. RBAC</h3><p>至少区分超级管理员、内容管理员等角色。</p>
+<h3 id="3-内容下架"><a href="#3-内容下架" class="headerlink" title="3. 内容下架"></a>3. 内容下架</h3><p>帖子、评论都要支持状态切换。</p>
+<h3 id="4-审计日志"><a href="#4-审计日志" class="headerlink" title="4. 审计日志"></a>4. 审计日志</h3><p>谁在什么时候下架了什么内容，一定要有记录。</p>
+<p>MVP 可以简，但不能没有治理。</p>
+<h2 id="8-API-设计上，我会坚持的几个原则"><a href="#8-API-设计上，我会坚持的几个原则" class="headerlink" title="8. API 设计上，我会坚持的几个原则"></a>8. API 设计上，我会坚持的几个原则</h2><h3 id="1-前后端边界清楚"><a href="#1-前后端边界清楚" class="headerlink" title="1. 前后端边界清楚"></a>1. 前后端边界清楚</h3><p>不要把一堆业务逻辑写进 controller。</p>
+<h3 id="2-LLM-服务统一封装"><a href="#2-LLM-服务统一封装" class="headerlink" title="2. LLM 服务统一封装"></a>2. LLM 服务统一封装</h3><p>后面无论你换模型、换提示词、换重试逻辑，都不应该影响业务层。</p>
+<h3 id="3-响应格式统一"><a href="#3-响应格式统一" class="headerlink" title="3. 响应格式统一"></a>3. 响应格式统一</h3><p>成功和失败都走统一响应格式，前端处理会轻松很多。</p>
+<h3 id="4-状态字段提前预留"><a href="#4-状态字段提前预留" class="headerlink" title="4. 状态字段提前预留"></a>4. 状态字段提前预留</h3><p>像帖子状态、评论状态、裁决状态，别等以后再补。</p>
+<h2 id="9-一个最小可运行的部署方式"><a href="#9-一个最小可运行的部署方式" class="headerlink" title="9. 一个最小可运行的部署方式"></a>9. 一个最小可运行的部署方式</h2><p>MVP 阶段我更喜欢一台服务器先跑起来，再逐步优化。</p>
+<h3 id="docker-compose-yml-大致会包含"><a href="#docker-compose-yml-大致会包含" class="headerlink" title="docker-compose.yml 大致会包含"></a>docker-compose.yml 大致会包含</h3><ul>
+<li>app</li>
+<li>postgres</li>
+<li>nginx</li>
+</ul>
+<h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d</span><br><span class="line">npx prisma migrate deploy</span><br><span class="line">npx prisma db seed</span><br></pre></td></tr></table></figure>
+
+<h3 id="Nginx-负责"><a href="#Nginx-负责" class="headerlink" title="Nginx 负责"></a>Nginx 负责</h3><ul>
+<li>反向代理</li>
+<li>静态资源转发</li>
+<li>HTTPS 入口（如果后面加证书）</li>
+</ul>
+<p>这套方案的好处是：简单、直观、便于迁移。对个人 MVP 足够用了。</p>
+<h2 id="10-我做完以后最大的几个感受"><a href="#10-我做完以后最大的几个感受" class="headerlink" title="10. 我做完以后最大的几个感受"></a>10. 我做完以后最大的几个感受</h2><h2 id="第一，产品一定要先站在用户链路上看"><a href="#第一，产品一定要先站在用户链路上看" class="headerlink" title="第一，产品一定要先站在用户链路上看"></a>第一，产品一定要先站在用户链路上看</h2><p>不是你技术上能做什么，而是用户第一步进来到底会不会玩。</p>
+<p>如果核心链路不顺，再好的模型都只是摆设。</p>
+<h2 id="第二，大模型输出一定要尽可能结构化"><a href="#第二，大模型输出一定要尽可能结构化" class="headerlink" title="第二，大模型输出一定要尽可能结构化"></a>第二，大模型输出一定要尽可能结构化</h2><p>不然前端展示、缓存、二次处理都很麻烦。</p>
+<h2 id="第三，治理能力不是锦上添花"><a href="#第三，治理能力不是锦上添花" class="headerlink" title="第三，治理能力不是锦上添花"></a>第三，治理能力不是锦上添花</h2><p>一旦有 UGC，治理就是基础设施。</p>
+<h2 id="第四，MVP-最怕过度设计"><a href="#第四，MVP-最怕过度设计" class="headerlink" title="第四，MVP 最怕过度设计"></a>第四，MVP 最怕过度设计</h2><p>很多功能明明可以后面再做，但人就是忍不住想“一次做全”。</p>
+<p>这对个人开发尤其危险。</p>
+<h2 id="11-如果后面继续迭代，我会优先做什么"><a href="#11-如果后面继续迭代，我会优先做什么" class="headerlink" title="11. 如果后面继续迭代，我会优先做什么"></a>11. 如果后面继续迭代，我会优先做什么</h2><p>如果继续往下做，我大概率会优先补这几项：</p>
+<ul>
+<li>更细的评论筛选和质量评分；</li>
+<li>更可控的提示词和多轮重试机制；</li>
+<li>分享页优化；</li>
+<li>用户举报与审核流程；</li>
+<li>数据统计看板；</li>
+<li>更完善的异常监控。</li>
+</ul>
+<p>这些比一开始就上复杂推荐系统更实际。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>我做 Mini Court 这个项目时，一个很深的感受是：</p>
+<blockquote>
+<p>LLM 产品真正难的，往往不是把模型调起来，而是把“产品链路、数据结构、治理、成本、稳定性”这些工程问题一起压住。</p>
+</blockquote>
+<p>如果只会调用接口，那最多算做了一个 demo；只有当整个链路真的跑通，用户能用，结果可控，后台能管，部署能稳，这个东西才算一个像样的产品。</p>
+<p>这篇就先记到这里。后面如果把它继续迭代下去，再回来补更细的部分。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%A0%88/" rel="tag"># 栈</a>
+              <a href="/tags/LLM/" rel="tag"># LLM</a>
+              <a href="/tags/NestJS/" rel="tag"># NestJS</a>
+              <a href="/tags/Prisma/" rel="tag"># Prisma</a>
+              <a href="/tags/PostgreSQL/" rel="tag"># PostgreSQL</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/%E4%BA%A7%E5%93%81%E6%89%8B%E5%86%8C/" rel="tag"># 产品手册</a>
+              <a href="/tags/Mini-Court/" rel="tag"># Mini Court</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/02/12/2026-02-12-yan-jiu-sheng-shi-xi-jian-li-latexmo-ban-fen-xiang/" rel="prev" title="研究生实习简历 LaTeX 模板分享：一页纸就够，别把简历写成论文">
+      <i class="fa fa-chevron-left"></i> 研究生实习简历 LaTeX 模板分享：一页纸就够，别把简历写成论文
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/03/08/2026-03-08-ji-qi-xue-xi-di-yi-ci-zuo-ye-zheng-li/" rel="next" title="机器学习第一次作业整理">
+      机器学习第一次作业整理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%85%88%E5%AE%9A%E4%B9%89%E4%BA%A7%E5%93%81%E8%BE%B9%E7%95%8C%EF%BC%9AMVP-%E5%88%B0%E5%BA%95%E8%A6%81%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">1. 先定义产品边界：MVP 到底要解决什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%81%E5%81%9A%E7%9A%84"><span class="nav-number">1.1.</span> <span class="nav-text">要做的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%82%E6%97%B6%E4%B8%8D%E5%81%9A%E7%9A%84"><span class="nav-number">1.2.</span> <span class="nav-text">暂时不做的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B8%AA%E5%9C%BA%E6%99%AF%E9%80%82%E5%90%88-LLM"><span class="nav-number">2.</span> <span class="nav-text">2. 为什么这个场景适合 LLM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E5%A4%A9%E7%84%B6%E6%98%AF%E5%BC%80%E6%94%BE%E6%96%87%E6%9C%AC"><span class="nav-number">2.1.</span> <span class="nav-text">1. 用户输入天然是开放文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%BB%93%E6%9E%9C%E4%B8%8D%E6%98%AF%E5%94%AF%E4%B8%80%E6%AD%A3%E7%A1%AE%E7%AD%94%E6%A1%88"><span class="nav-number">2.2.</span> <span class="nav-text">2. 结果不是唯一正确答案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%9C%AC%E8%BA%AB%E5%B0%B1%E6%98%AF%E9%AB%98%E4%BB%B7%E5%80%BC%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">2.3.</span> <span class="nav-text">3. 评论区本身就是高价值上下文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8A%80%E6%9C%AF%E6%A0%88%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%80%89"><span class="nav-number">3.</span> <span class="nav-text">3. 技术栈为什么这么选</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NestJS"><span class="nav-number">3.1.</span> <span class="nav-text">NestJS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prisma-PostgreSQL"><span class="nav-number">3.2.</span> <span class="nav-text">Prisma + PostgreSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Compose"><span class="nav-number">3.3.</span> <span class="nav-text">Docker Compose</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%88%91%E5%BD%93%E6%97%B6%E6%8B%86%E5%87%BA%E6%9D%A5%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97"><span class="nav-number">4.</span> <span class="nav-text">4. 我当时拆出来的核心模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E6%88%91%E4%BC%9A%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text">5. 数据模型我会怎么设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#User"><span class="nav-number">5.1.</span> <span class="nav-text">User</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Post"><span class="nav-number">5.2.</span> <span class="nav-text">Post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comment"><span class="nav-number">5.3.</span> <span class="nav-text">Comment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Judgment"><span class="nav-number">5.4.</span> <span class="nav-text">Judgment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AdminLog"><span class="nav-number">5.5.</span> <span class="nav-text">AdminLog</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%8F%8C%E9%98%B6%E6%AE%B5%E8%A3%81%E5%86%B3%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%80%8E%E4%B9%88%E8%90%BD%E5%9C%B0"><span class="nav-number">6.</span> <span class="nav-text">6. 双阶段裁决工作流怎么落地</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9ABot1-%E5%88%9D%E5%AE%A1"><span class="nav-number">6.1.</span> <span class="nav-text">第一阶段：Bot1 初审</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9ABot2-%E5%A4%8D%E5%AE%A1"><span class="nav-number">6.2.</span> <span class="nav-text">第二阶段：Bot2 复审</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%90%8E%E5%8F%B0%E6%B2%BB%E7%90%86%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%85%E9%A1%BB%E6%97%A9%E7%82%B9%E5%81%9A"><span class="nav-number">7.</span> <span class="nav-text">7. 后台治理为什么必须早点做</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Admin-%E7%99%BB%E5%BD%95"><span class="nav-number">7.1.</span> <span class="nav-text">1. Admin 登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-RBAC"><span class="nav-number">7.2.</span> <span class="nav-text">2. RBAC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%86%85%E5%AE%B9%E4%B8%8B%E6%9E%B6"><span class="nav-number">7.3.</span> <span class="nav-text">3. 内容下架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%A1%E8%AE%A1%E6%97%A5%E5%BF%97"><span class="nav-number">7.4.</span> <span class="nav-text">4. 审计日志</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-API-%E8%AE%BE%E8%AE%A1%E4%B8%8A%EF%BC%8C%E6%88%91%E4%BC%9A%E5%9D%9A%E6%8C%81%E7%9A%84%E5%87%A0%E4%B8%AA%E5%8E%9F%E5%88%99"><span class="nav-number">8.</span> <span class="nav-text">8. API 设计上，我会坚持的几个原则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%89%8D%E5%90%8E%E7%AB%AF%E8%BE%B9%E7%95%8C%E6%B8%85%E6%A5%9A"><span class="nav-number">8.1.</span> <span class="nav-text">1. 前后端边界清楚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-LLM-%E6%9C%8D%E5%8A%A1%E7%BB%9F%E4%B8%80%E5%B0%81%E8%A3%85"><span class="nav-number">8.2.</span> <span class="nav-text">2. LLM 服务统一封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%93%8D%E5%BA%94%E6%A0%BC%E5%BC%8F%E7%BB%9F%E4%B8%80"><span class="nav-number">8.3.</span> <span class="nav-text">3. 响应格式统一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%8A%B6%E6%80%81%E5%AD%97%E6%AE%B5%E6%8F%90%E5%89%8D%E9%A2%84%E7%95%99"><span class="nav-number">8.4.</span> <span class="nav-text">4. 状态字段提前预留</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E4%B8%80%E4%B8%AA%E6%9C%80%E5%B0%8F%E5%8F%AF%E8%BF%90%E8%A1%8C%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><span class="nav-number">9.</span> <span class="nav-text">9. 一个最小可运行的部署方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-compose-yml-%E5%A4%A7%E8%87%B4%E4%BC%9A%E5%8C%85%E5%90%AB"><span class="nav-number">9.1.</span> <span class="nav-text">docker-compose.yml 大致会包含</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="nav-number">9.2.</span> <span class="nav-text">基本流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx-%E8%B4%9F%E8%B4%A3"><span class="nav-number">9.3.</span> <span class="nav-text">Nginx 负责</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E6%88%91%E5%81%9A%E5%AE%8C%E4%BB%A5%E5%90%8E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%87%A0%E4%B8%AA%E6%84%9F%E5%8F%97"><span class="nav-number">10.</span> <span class="nav-text">10. 我做完以后最大的几个感受</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%EF%BC%8C%E4%BA%A7%E5%93%81%E4%B8%80%E5%AE%9A%E8%A6%81%E5%85%88%E7%AB%99%E5%9C%A8%E7%94%A8%E6%88%B7%E9%93%BE%E8%B7%AF%E4%B8%8A%E7%9C%8B"><span class="nav-number">11.</span> <span class="nav-text">第一，产品一定要先站在用户链路上看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%EF%BC%8C%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E4%B8%80%E5%AE%9A%E8%A6%81%E5%B0%BD%E5%8F%AF%E8%83%BD%E7%BB%93%E6%9E%84%E5%8C%96"><span class="nav-number">12.</span> <span class="nav-text">第二，大模型输出一定要尽可能结构化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%EF%BC%8C%E6%B2%BB%E7%90%86%E8%83%BD%E5%8A%9B%E4%B8%8D%E6%98%AF%E9%94%A6%E4%B8%8A%E6%B7%BB%E8%8A%B1"><span class="nav-number">13.</span> <span class="nav-text">第三，治理能力不是锦上添花</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%EF%BC%8CMVP-%E6%9C%80%E6%80%95%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1"><span class="nav-number">14.</span> <span class="nav-text">第四，MVP 最怕过度设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E5%A6%82%E6%9E%9C%E5%90%8E%E9%9D%A2%E7%BB%A7%E7%BB%AD%E8%BF%AD%E4%BB%A3%EF%BC%8C%E6%88%91%E4%BC%9A%E4%BC%98%E5%85%88%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-number">15.</span> <span class="nav-text">11. 如果后面继续迭代，我会优先做什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">16.</span> <span class="nav-text">最后</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gao Youyi"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Gao Youyi</p>
+  <div class="site-description" itemprop="description">电子科技大学硕士研究生，关注时空预测、交通流预测、AI产品开发与个人成长。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">97</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/gao-youyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gao-youyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yygao@std.uestc.edu.cn" title="E-Mail → mailto:yygao@std.uestc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://gao-youyi.github.io/" title="Blog → https:&#x2F;&#x2F;gao-youyi.github.io"><i class="fa fa-globe fa-fw"></i>Blog</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gao-youyi.github.io/" title="https:&#x2F;&#x2F;gao-youyi.github.io">我的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/gao-youyi" title="https:&#x2F;&#x2F;github.com&#x2F;gao-youyi" rel="noopener" target="_blank">我的GitHub</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gao Youyi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

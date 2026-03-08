@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gao-youyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width_expanded":320,"width_dual_column":240},"copycode":true,"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="这篇文章整理 Markdown 最常用的基础语法，包括换行、强调、列表、代码块、链接与表格等内容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown 基础使用说明">
+<meta property="og:url" content="https://gao-youyi.github.io/2023/12/22/2023-12-22-markdown-ji-chu-shi-yong-shuo-ming/">
+<meta property="og:site_name" content="高友谊">
+<meta property="og:description" content="这篇文章整理 Markdown 最常用的基础语法，包括换行、强调、列表、代码块、链接与表格等内容。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-22T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-08T05:37:34.000Z">
+<meta property="article:author" content="Gao Youyi">
+<meta property="article:tag" content="Markdown">
+<meta property="article:tag" content="写作工具">
+<meta property="article:tag" content="语法">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://gao-youyi.github.io/2023/12/22/2023-12-22-markdown-ji-chu-shi-yong-shuo-ming/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Markdown 基础使用说明 | 高友谊</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">高友谊</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录科研、技术与思考</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">97</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">39</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gao-youyi.github.io/2023/12/22/2023-12-22-markdown-ji-chu-shi-yong-shuo-ming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Gao Youyi">
+      <meta itemprop="description" content="电子科技大学硕士研究生，关注时空预测、交通流预测、AI产品开发与个人成长。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高友谊">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Markdown 基础使用说明
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-22 12:00:00" itemprop="dateCreated datePublished" datetime="2023-12-22T12:00:00+08:00">2023-12-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-08 13:37:34" itemprop="dateModified" datetime="2026-03-08T13:37:34+08:00">2026-03-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">写作工具</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">这篇文章整理 Markdown 最常用的基础语法，包括换行、强调、列表、代码块、链接与表格等内容。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这篇文章整理 Markdown 最常用的基础语法，适合拿来当一份速查表。</p>
+<span id="more"></span>
+
+<h2 id="资源地址"><a href="#资源地址" class="headerlink" title="资源地址"></a>资源地址</h2><p>[置顶]链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1lfVn8xa-3xpJnDUVBtdqNQ?pwd=v3fk">点击前往某度网盘下载</a><br>视频教学：B站UID:508828019<br><u><strong>提示：这里只是基础部分，不包含数学公式，具体公式后面会补充</strong></u></p>
+<h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><h3 id="1，换行"><a href="#1，换行" class="headerlink" title="1，换行"></a>1，换行</h3><p>两种，一种是大换行，用于小标题的换行，直接 Enter即可；另一种用于一句话的换行，使用Shift+Enter</p>
+<h3 id="2，分割线"><a href="#2，分割线" class="headerlink" title="2，分割线"></a>2，分割线</h3><p>建议使用三个-符号＋Enter</p>
+<hr>
+<h3 id="3-文本内容"><a href="#3-文本内容" class="headerlink" title="3,文本内容"></a>3,文本内容</h3><pre><code>    (1)粗体
+        两种，可以使用两端加**，或者快捷键Ctrl+B
+
+    (2)删除线
+        虽然有快捷键Shift+Alt+5，但是一般仍建议使用两端加~~
+
+    (3)下划线
+        快捷键Ctrl+U,但我习惯html中的l两端加‘&lt;a&gt;’标签，U可以理解位Underline
+
+    (4)斜体
+        快捷键Ctrl+L,也可以使用两端加单个*
+
+    (5)高亮
+        没有快捷键,两端加==即可
+        ==示例文字=
+
+    **值得注意的是**：所有的标签都会遵循html的配对原则，也就是比如我们输入一个==,则编辑器会自动帮我们匹配到下一个\ ==，所以如我们输入数学的\*乘法时，会有可能引起下一个\*的配对，此时我们可以使用\\+符号的操作来规避自动配对，那我们如何打出\\符号呢，其实只要打两个\，即\\\，那么就可以保留一个\
+
+    (6)上下标和脚注
+        上标两端加\^,比如X^2^ 表示X的2次方
+        下标两端加\~,比如X~2~ 表示第2个X参数
+        脚注：先添加名词的标号，比如:这是一段很难理解的话[^1]，使用方法是\[\^序号]，解释部分同理
+
+    **需要注意的是，这两个一般只用在简单的上下标中，后面数学我们会提到**
+
+    (7)列表
+
+        **无序列表**：使用\*或\+或\-加空格即可
+        有序列表：使用数字\+ . \+空格
+        任务表：使用\+空格\+[ ]即可，**注意[ ]为英文输入且内部有一个空格**
+
+    **对于增加子列表，可以直接使用Tab即可，如果调整层级，可以使用Ctrl＋左或右小键**
+
+    (8) 代码嵌入
+        行内代码：内容两端加\`,比如`int a = 0; //初始化a变量 `
+        代码块：内容的开始和结束行加入\`\`\`,示例如下：
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def add_function(a,b)&#123;</span><br><span class="line">		return a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    (9)链接嵌入
+        域名跳转：使用/[名称]/+(网站地址)，比如[百度首页](www.baidu.com)
+        页面内容跳转：[名称任意]\(标题级别+标题名称)，如本文[点击跳转到基础语法](##基础语法)，可以写为\[点击跳转到基础语法]\(##基础语法)，**注意标题级别和标题明程中间没有空格**
+        本地图片插入：使用\!\[不显示]\(图片本地路径)，快捷键Ctrl+Shift+i,i可以理解位image
+
+    (10)表格插入
+            我建议只记住快捷键Ctrl+T即可，T可以理解为Table
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Markdown/" rel="tag"># Markdown</a>
+              <a href="/tags/%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7/" rel="tag"># 写作工具</a>
+              <a href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag"># 语法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/07/18/2023-07-18-2023-07-18-hexo-research-blog/" rel="prev" title="如何用 Hexo 打造一个科研博客">
+      <i class="fa fa-chevron-left"></i> 如何用 Hexo 打造一个科研博客
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/28/2024-04-28-ji-yu-shi-kong-jian-mo-de-jiao-tong-liu-yu-ce-suan-fa-yan-jiu-bi-ye-lun-wen-cao-gao/" rel="next" title="基于时空建模的交通流预测算法研究（毕业论文草稿）">
+      基于时空建模的交通流预测算法研究（毕业论文草稿） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E5%9C%B0%E5%9D%80"><span class="nav-number">1.</span> <span class="nav-text">资源地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%8C%E6%8D%A2%E8%A1%8C"><span class="nav-number">2.1.</span> <span class="nav-text">1，换行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%8C%E5%88%86%E5%89%B2%E7%BA%BF"><span class="nav-number">2.2.</span> <span class="nav-text">2，分割线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">2.3.</span> <span class="nav-text">3,文本内容</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gao Youyi"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Gao Youyi</p>
+  <div class="site-description" itemprop="description">电子科技大学硕士研究生，关注时空预测、交通流预测、AI产品开发与个人成长。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">97</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/gao-youyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gao-youyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yygao@std.uestc.edu.cn" title="E-Mail → mailto:yygao@std.uestc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://gao-youyi.github.io/" title="Blog → https:&#x2F;&#x2F;gao-youyi.github.io"><i class="fa fa-globe fa-fw"></i>Blog</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gao-youyi.github.io/" title="https:&#x2F;&#x2F;gao-youyi.github.io">我的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/gao-youyi" title="https:&#x2F;&#x2F;github.com&#x2F;gao-youyi" rel="noopener" target="_blank">我的GitHub</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gao Youyi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
