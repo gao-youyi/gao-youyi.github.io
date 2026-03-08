@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.2">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
@@ -17,19 +17,19 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"gao-youyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width_expanded":320,"width_dual_column":240},"copycode":true,"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="这篇把我做 Mini Court 时沉淀下来的一些东西整理成了一份偏实战的开发手册，适合拿来做同类 MVP 的参考。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mini Court 小法庭 MVP 开发手册：一个 LLM 场景化产品是怎么从 0 到 1 搭起来的">
-<meta property="og:url" content="http://example.com/2026/02/24/Mini-Court-%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/index.html">
-<meta property="og:site_name" content="高">
+<meta property="og:url" content="https://gao-youyi.github.io/2026/02/24/Mini-Court-%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/">
+<meta property="og:site_name" content="高友谊">
 <meta property="og:description" content="这篇把我做 Mini Court 时沉淀下来的一些东西整理成了一份偏实战的开发手册，适合拿来做同类 MVP 的参考。">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-02-24T13:10:00.000Z">
 <meta property="article:modified_time" content="2026-03-08T01:16:46.000Z">
-<meta property="article:author" content="Gao Xiaobai">
+<meta property="article:author" content="Gao Youyi">
 <meta property="article:tag" content="LLM">
 <meta property="article:tag" content="NestJS">
 <meta property="article:tag" content="Prisma">
@@ -39,7 +39,7 @@
 <meta property="article:tag" content="Mini Court">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2026/02/24/Mini-Court-%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/">
+<link rel="canonical" href="https://gao-youyi.github.io/2026/02/24/Mini-Court-%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/">
 
 
 <script id="page-configurations">
@@ -48,11 +48,11 @@
     sidebar: "",
     isHome : false,
     isPost : true,
-    lang   : 'en'
+    lang   : 'zh-CN'
   };
 </script>
 
-  <title>Mini Court 小法庭 MVP 开发手册：一个 LLM 场景化产品是怎么从 0 到 1 搭起来的 | 高</title>
+  <title>Mini Court 小法庭 MVP 开发手册：一个 LLM 场景化产品是怎么从 0 到 1 搭起来的 | 高友谊</title>
   
 
 
@@ -92,7 +92,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="切换导航栏">
       <span class="toggle-line toggle-line-first"></span>
       <span class="toggle-line toggle-line-middle"></span>
       <span class="toggle-line toggle-line-last"></span>
@@ -103,9 +103,10 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">高</h1>
+      <h1 class="site-title">高友谊</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
+      <p class="site-subtitle" itemprop="description">记录科研、技术与思考</p>
   </div>
 
   <div class="site-nav-right">
@@ -121,27 +122,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">84</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">42</span></a>
 
   </li>
   </ul>
@@ -154,10 +155,6 @@
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 
     <main class="main">
@@ -171,17 +168,17 @@
     
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/24/Mini-Court-%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gao-youyi.github.io/2026/02/24/Mini-Court-%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Gao Xiaobai">
-      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Gao Youyi">
+      <meta itemprop="description" content="电子科技大学硕士研究生，关注时空预测、交通流预测、AI产品开发与个人成长。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="高">
+      <meta itemprop="name" content="高友谊">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -193,22 +190,22 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">发表于</span>
 
-              <time title="Created: 2026-02-24 21:10:00" itemprop="dateCreated datePublished" datetime="2026-02-24T21:10:00+08:00">2026-02-24</time>
+              <time title="创建时间：2026-02-24 21:10:00" itemprop="dateCreated datePublished" datetime="2026-02-24T21:10:00+08:00">2026-02-24</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2026-03-08 09:16:46" itemprop="dateModified" datetime="2026-03-08T09:16:46+08:00">2026-03-08</time>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-08 09:16:46" itemprop="dateModified" datetime="2026-03-08T09:16:46+08:00">2026-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/%E4%BA%A7%E5%93%81%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">产品开发</span></a>
                 </span>
@@ -509,51 +506,77 @@
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          Table of Contents
+          文章目录
         </li>
         <li class="sidebar-nav-overview">
-          Overview
+          站点概览
         </li>
       </ul>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%85%88%E5%AE%9A%E4%B9%89%E4%BA%A7%E5%93%81%E8%BE%B9%E7%95%8C%EF%BC%9AMVP-%E5%88%B0%E5%BA%95%E8%A6%81%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">1. 先定义产品边界：MVP 到底要解决什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%81%E5%81%9A%E7%9A%84"><span class="nav-number">1.1.</span> <span class="nav-text">要做的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%82%E6%97%B6%E4%B8%8D%E5%81%9A%E7%9A%84"><span class="nav-number">1.2.</span> <span class="nav-text">暂时不做的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B8%AA%E5%9C%BA%E6%99%AF%E9%80%82%E5%90%88-LLM"><span class="nav-number">2.</span> <span class="nav-text">2. 为什么这个场景适合 LLM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E5%A4%A9%E7%84%B6%E6%98%AF%E5%BC%80%E6%94%BE%E6%96%87%E6%9C%AC"><span class="nav-number">2.1.</span> <span class="nav-text">1. 用户输入天然是开放文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%BB%93%E6%9E%9C%E4%B8%8D%E6%98%AF%E5%94%AF%E4%B8%80%E6%AD%A3%E7%A1%AE%E7%AD%94%E6%A1%88"><span class="nav-number">2.2.</span> <span class="nav-text">2. 结果不是唯一正确答案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%9C%AC%E8%BA%AB%E5%B0%B1%E6%98%AF%E9%AB%98%E4%BB%B7%E5%80%BC%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">2.3.</span> <span class="nav-text">3. 评论区本身就是高价值上下文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8A%80%E6%9C%AF%E6%A0%88%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%80%89"><span class="nav-number">3.</span> <span class="nav-text">3. 技术栈为什么这么选</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NestJS"><span class="nav-number">3.1.</span> <span class="nav-text">NestJS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prisma-PostgreSQL"><span class="nav-number">3.2.</span> <span class="nav-text">Prisma + PostgreSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Compose"><span class="nav-number">3.3.</span> <span class="nav-text">Docker Compose</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%88%91%E5%BD%93%E6%97%B6%E6%8B%86%E5%87%BA%E6%9D%A5%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97"><span class="nav-number">4.</span> <span class="nav-text">4. 我当时拆出来的核心模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E6%88%91%E4%BC%9A%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text">5. 数据模型我会怎么设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#User"><span class="nav-number">5.1.</span> <span class="nav-text">User</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Post"><span class="nav-number">5.2.</span> <span class="nav-text">Post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comment"><span class="nav-number">5.3.</span> <span class="nav-text">Comment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Judgment"><span class="nav-number">5.4.</span> <span class="nav-text">Judgment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AdminLog"><span class="nav-number">5.5.</span> <span class="nav-text">AdminLog</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%8F%8C%E9%98%B6%E6%AE%B5%E8%A3%81%E5%86%B3%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%80%8E%E4%B9%88%E8%90%BD%E5%9C%B0"><span class="nav-number">6.</span> <span class="nav-text">6. 双阶段裁决工作流怎么落地</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9ABot1-%E5%88%9D%E5%AE%A1"><span class="nav-number">6.1.</span> <span class="nav-text">第一阶段：Bot1 初审</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9ABot2-%E5%A4%8D%E5%AE%A1"><span class="nav-number">6.2.</span> <span class="nav-text">第二阶段：Bot2 复审</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%88%AA%E6%96%AD"><span class="nav-number">6.2.1.</span> <span class="nav-text">1. 截断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%8E%BB%E9%87%8D"><span class="nav-number">6.2.2.</span> <span class="nav-text">2. 去重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E9%99%90%E6%9D%A1%E6%95%B0"><span class="nav-number">6.2.3.</span> <span class="nav-text">3. 限条数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E7%BB%93%E6%9E%9C%E7%BC%93%E5%AD%98"><span class="nav-number">6.2.4.</span> <span class="nav-text">4. 结果缓存</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%90%8E%E5%8F%B0%E6%B2%BB%E7%90%86%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%85%E9%A1%BB%E6%97%A9%E7%82%B9%E5%81%9A"><span class="nav-number">7.</span> <span class="nav-text">7. 后台治理为什么必须早点做</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Admin-%E7%99%BB%E5%BD%95"><span class="nav-number">7.1.</span> <span class="nav-text">1. Admin 登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-RBAC"><span class="nav-number">7.2.</span> <span class="nav-text">2. RBAC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%86%85%E5%AE%B9%E4%B8%8B%E6%9E%B6"><span class="nav-number">7.3.</span> <span class="nav-text">3. 内容下架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%A1%E8%AE%A1%E6%97%A5%E5%BF%97"><span class="nav-number">7.4.</span> <span class="nav-text">4. 审计日志</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-API-%E8%AE%BE%E8%AE%A1%E4%B8%8A%EF%BC%8C%E6%88%91%E4%BC%9A%E5%9D%9A%E6%8C%81%E7%9A%84%E5%87%A0%E4%B8%AA%E5%8E%9F%E5%88%99"><span class="nav-number">8.</span> <span class="nav-text">8. API 设计上，我会坚持的几个原则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%89%8D%E5%90%8E%E7%AB%AF%E8%BE%B9%E7%95%8C%E6%B8%85%E6%A5%9A"><span class="nav-number">8.1.</span> <span class="nav-text">1. 前后端边界清楚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-LLM-%E6%9C%8D%E5%8A%A1%E7%BB%9F%E4%B8%80%E5%B0%81%E8%A3%85"><span class="nav-number">8.2.</span> <span class="nav-text">2. LLM 服务统一封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%93%8D%E5%BA%94%E6%A0%BC%E5%BC%8F%E7%BB%9F%E4%B8%80"><span class="nav-number">8.3.</span> <span class="nav-text">3. 响应格式统一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%8A%B6%E6%80%81%E5%AD%97%E6%AE%B5%E6%8F%90%E5%89%8D%E9%A2%84%E7%95%99"><span class="nav-number">8.4.</span> <span class="nav-text">4. 状态字段提前预留</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E4%B8%80%E4%B8%AA%E6%9C%80%E5%B0%8F%E5%8F%AF%E8%BF%90%E8%A1%8C%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><span class="nav-number">9.</span> <span class="nav-text">9. 一个最小可运行的部署方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-compose-yml-%E5%A4%A7%E8%87%B4%E4%BC%9A%E5%8C%85%E5%90%AB"><span class="nav-number">9.1.</span> <span class="nav-text">docker-compose.yml 大致会包含</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="nav-number">9.2.</span> <span class="nav-text">基本流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx-%E8%B4%9F%E8%B4%A3"><span class="nav-number">9.3.</span> <span class="nav-text">Nginx 负责</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E6%88%91%E5%81%9A%E5%AE%8C%E4%BB%A5%E5%90%8E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%87%A0%E4%B8%AA%E6%84%9F%E5%8F%97"><span class="nav-number">10.</span> <span class="nav-text">10. 我做完以后最大的几个感受</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%EF%BC%8C%E4%BA%A7%E5%93%81%E4%B8%80%E5%AE%9A%E8%A6%81%E5%85%88%E7%AB%99%E5%9C%A8%E7%94%A8%E6%88%B7%E9%93%BE%E8%B7%AF%E4%B8%8A%E7%9C%8B"><span class="nav-number">11.</span> <span class="nav-text">第一，产品一定要先站在用户链路上看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%EF%BC%8C%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E4%B8%80%E5%AE%9A%E8%A6%81%E5%B0%BD%E5%8F%AF%E8%83%BD%E7%BB%93%E6%9E%84%E5%8C%96"><span class="nav-number">12.</span> <span class="nav-text">第二，大模型输出一定要尽可能结构化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%EF%BC%8C%E6%B2%BB%E7%90%86%E8%83%BD%E5%8A%9B%E4%B8%8D%E6%98%AF%E9%94%A6%E4%B8%8A%E6%B7%BB%E8%8A%B1"><span class="nav-number">13.</span> <span class="nav-text">第三，治理能力不是锦上添花</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%EF%BC%8CMVP-%E6%9C%80%E6%80%95%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1"><span class="nav-number">14.</span> <span class="nav-text">第四，MVP 最怕过度设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E5%A6%82%E6%9E%9C%E5%90%8E%E9%9D%A2%E7%BB%A7%E7%BB%AD%E8%BF%AD%E4%BB%A3%EF%BC%8C%E6%88%91%E4%BC%9A%E4%BC%98%E5%85%88%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-number">15.</span> <span class="nav-text">11. 如果后面继续迭代，我会优先做什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">16.</span> <span class="nav-text">最后</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%85%88%E5%AE%9A%E4%B9%89%E4%BA%A7%E5%93%81%E8%BE%B9%E7%95%8C%EF%BC%9AMVP-%E5%88%B0%E5%BA%95%E8%A6%81%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">1. 先定义产品边界：MVP 到底要解决什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%81%E5%81%9A%E7%9A%84"><span class="nav-number">1.1.</span> <span class="nav-text">要做的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%82%E6%97%B6%E4%B8%8D%E5%81%9A%E7%9A%84"><span class="nav-number">1.2.</span> <span class="nav-text">暂时不做的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B8%AA%E5%9C%BA%E6%99%AF%E9%80%82%E5%90%88-LLM"><span class="nav-number">2.</span> <span class="nav-text">2. 为什么这个场景适合 LLM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E5%A4%A9%E7%84%B6%E6%98%AF%E5%BC%80%E6%94%BE%E6%96%87%E6%9C%AC"><span class="nav-number">2.1.</span> <span class="nav-text">1. 用户输入天然是开放文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%BB%93%E6%9E%9C%E4%B8%8D%E6%98%AF%E5%94%AF%E4%B8%80%E6%AD%A3%E7%A1%AE%E7%AD%94%E6%A1%88"><span class="nav-number">2.2.</span> <span class="nav-text">2. 结果不是唯一正确答案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%9C%AC%E8%BA%AB%E5%B0%B1%E6%98%AF%E9%AB%98%E4%BB%B7%E5%80%BC%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">2.3.</span> <span class="nav-text">3. 评论区本身就是高价值上下文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8A%80%E6%9C%AF%E6%A0%88%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%80%89"><span class="nav-number">3.</span> <span class="nav-text">3. 技术栈为什么这么选</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NestJS"><span class="nav-number">3.1.</span> <span class="nav-text">NestJS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prisma-PostgreSQL"><span class="nav-number">3.2.</span> <span class="nav-text">Prisma + PostgreSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Compose"><span class="nav-number">3.3.</span> <span class="nav-text">Docker Compose</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%88%91%E5%BD%93%E6%97%B6%E6%8B%86%E5%87%BA%E6%9D%A5%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97"><span class="nav-number">4.</span> <span class="nav-text">4. 我当时拆出来的核心模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E6%88%91%E4%BC%9A%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text">5. 数据模型我会怎么设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#User"><span class="nav-number">5.1.</span> <span class="nav-text">User</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Post"><span class="nav-number">5.2.</span> <span class="nav-text">Post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comment"><span class="nav-number">5.3.</span> <span class="nav-text">Comment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Judgment"><span class="nav-number">5.4.</span> <span class="nav-text">Judgment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AdminLog"><span class="nav-number">5.5.</span> <span class="nav-text">AdminLog</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%8F%8C%E9%98%B6%E6%AE%B5%E8%A3%81%E5%86%B3%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%80%8E%E4%B9%88%E8%90%BD%E5%9C%B0"><span class="nav-number">6.</span> <span class="nav-text">6. 双阶段裁决工作流怎么落地</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9ABot1-%E5%88%9D%E5%AE%A1"><span class="nav-number">6.1.</span> <span class="nav-text">第一阶段：Bot1 初审</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9ABot2-%E5%A4%8D%E5%AE%A1"><span class="nav-number">6.2.</span> <span class="nav-text">第二阶段：Bot2 复审</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%90%8E%E5%8F%B0%E6%B2%BB%E7%90%86%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%85%E9%A1%BB%E6%97%A9%E7%82%B9%E5%81%9A"><span class="nav-number">7.</span> <span class="nav-text">7. 后台治理为什么必须早点做</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Admin-%E7%99%BB%E5%BD%95"><span class="nav-number">7.1.</span> <span class="nav-text">1. Admin 登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-RBAC"><span class="nav-number">7.2.</span> <span class="nav-text">2. RBAC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%86%85%E5%AE%B9%E4%B8%8B%E6%9E%B6"><span class="nav-number">7.3.</span> <span class="nav-text">3. 内容下架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%A1%E8%AE%A1%E6%97%A5%E5%BF%97"><span class="nav-number">7.4.</span> <span class="nav-text">4. 审计日志</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-API-%E8%AE%BE%E8%AE%A1%E4%B8%8A%EF%BC%8C%E6%88%91%E4%BC%9A%E5%9D%9A%E6%8C%81%E7%9A%84%E5%87%A0%E4%B8%AA%E5%8E%9F%E5%88%99"><span class="nav-number">8.</span> <span class="nav-text">8. API 设计上，我会坚持的几个原则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%89%8D%E5%90%8E%E7%AB%AF%E8%BE%B9%E7%95%8C%E6%B8%85%E6%A5%9A"><span class="nav-number">8.1.</span> <span class="nav-text">1. 前后端边界清楚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-LLM-%E6%9C%8D%E5%8A%A1%E7%BB%9F%E4%B8%80%E5%B0%81%E8%A3%85"><span class="nav-number">8.2.</span> <span class="nav-text">2. LLM 服务统一封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%93%8D%E5%BA%94%E6%A0%BC%E5%BC%8F%E7%BB%9F%E4%B8%80"><span class="nav-number">8.3.</span> <span class="nav-text">3. 响应格式统一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%8A%B6%E6%80%81%E5%AD%97%E6%AE%B5%E6%8F%90%E5%89%8D%E9%A2%84%E7%95%99"><span class="nav-number">8.4.</span> <span class="nav-text">4. 状态字段提前预留</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E4%B8%80%E4%B8%AA%E6%9C%80%E5%B0%8F%E5%8F%AF%E8%BF%90%E8%A1%8C%E7%9A%84%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><span class="nav-number">9.</span> <span class="nav-text">9. 一个最小可运行的部署方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-compose-yml-%E5%A4%A7%E8%87%B4%E4%BC%9A%E5%8C%85%E5%90%AB"><span class="nav-number">9.1.</span> <span class="nav-text">docker-compose.yml 大致会包含</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="nav-number">9.2.</span> <span class="nav-text">基本流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx-%E8%B4%9F%E8%B4%A3"><span class="nav-number">9.3.</span> <span class="nav-text">Nginx 负责</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E6%88%91%E5%81%9A%E5%AE%8C%E4%BB%A5%E5%90%8E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%87%A0%E4%B8%AA%E6%84%9F%E5%8F%97"><span class="nav-number">10.</span> <span class="nav-text">10. 我做完以后最大的几个感受</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%EF%BC%8C%E4%BA%A7%E5%93%81%E4%B8%80%E5%AE%9A%E8%A6%81%E5%85%88%E7%AB%99%E5%9C%A8%E7%94%A8%E6%88%B7%E9%93%BE%E8%B7%AF%E4%B8%8A%E7%9C%8B"><span class="nav-number">11.</span> <span class="nav-text">第一，产品一定要先站在用户链路上看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%EF%BC%8C%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E4%B8%80%E5%AE%9A%E8%A6%81%E5%B0%BD%E5%8F%AF%E8%83%BD%E7%BB%93%E6%9E%84%E5%8C%96"><span class="nav-number">12.</span> <span class="nav-text">第二，大模型输出一定要尽可能结构化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%EF%BC%8C%E6%B2%BB%E7%90%86%E8%83%BD%E5%8A%9B%E4%B8%8D%E6%98%AF%E9%94%A6%E4%B8%8A%E6%B7%BB%E8%8A%B1"><span class="nav-number">13.</span> <span class="nav-text">第三，治理能力不是锦上添花</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%EF%BC%8CMVP-%E6%9C%80%E6%80%95%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1"><span class="nav-number">14.</span> <span class="nav-text">第四，MVP 最怕过度设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E5%A6%82%E6%9E%9C%E5%90%8E%E9%9D%A2%E7%BB%A7%E7%BB%AD%E8%BF%AD%E4%BB%A3%EF%BC%8C%E6%88%91%E4%BC%9A%E4%BC%98%E5%85%88%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-number">15.</span> <span class="nav-text">11. 如果后面继续迭代，我会优先做什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">16.</span> <span class="nav-text">最后</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Gao Xiaobai</p>
-  <div class="site-description" itemprop="description"></div>
+    <img class="site-author-image" itemprop="image" alt="Gao Youyi"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Gao Youyi</p>
+  <div class="site-description" itemprop="description">电子科技大学硕士研究生，关注时空预测、交通流预测、AI产品开发与个人成长。</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">13</span>
-        <span class="site-state-item-name">categories</span></a>
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">81</span>
-        <span class="site-state-item-name">tags</span></a>
+        <span class="site-state-item-count">84</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/gao-youyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gao-youyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yygao@std.uestc.edu.cn" title="E-Mail → mailto:yygao@std.uestc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://gao-youyi.github.io/" title="Blog → https:&#x2F;&#x2F;gao-youyi.github.io"><i class="fa fa-globe fa-fw"></i>Blog</a>
+      </span>
+  </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gao-youyi.github.io/" title="https:&#x2F;&#x2F;gao-youyi.github.io">我的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/gao-youyi" title="https:&#x2F;&#x2F;github.com&#x2F;gao-youyi" rel="noopener" target="_blank">我的GitHub</a>
+        </li>
+    </ul>
+  </div>
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -571,14 +594,14 @@
 
 <div class="copyright">
   
-  &copy; 
+  &copy; 2024 – 
   <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Gao Xiaobai</span>
+  <span class="author" itemprop="copyrightHolder">Gao Youyi</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
         
@@ -604,7 +627,7 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
@@ -632,5 +655,5 @@
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
