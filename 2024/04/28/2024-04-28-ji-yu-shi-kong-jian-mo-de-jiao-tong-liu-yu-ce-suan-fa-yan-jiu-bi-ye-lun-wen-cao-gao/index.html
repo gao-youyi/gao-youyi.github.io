@@ -27,8 +27,8 @@
 <meta property="og:site_name" content="高友谊">
 <meta property="og:description" content="这篇文章保存了本科阶段毕业论文的主体草稿，内容围绕交通流预测的研究背景、方法脉络与问题分析展开。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gao-youyi.github.io/2024/04/28/2024-04-28-ji-yu-shi-kong-jian-mo-de-jiao-tong-liu-yu-ce-suan-fa-yan-jiu-bi-ye-lun-wen-cao-gao/blog/root/source/_posts/images/Figure_1-1-17142086197601.png">
-<meta property="og:image" content="https://gao-youyi.github.io/2024/04/28/2024-04-28-ji-yu-shi-kong-jian-mo-de-jiao-tong-liu-yu-ce-suan-fa-yan-jiu-bi-ye-lun-wen-cao-gao/blog/root/source/_posts/images/sonser301_1_26__27.png">
+<meta property="og:image" content="d:/blog/root/source/_posts/images/Figure_1-1-17142086197601.png">
+<meta property="og:image" content="d:/blog/root/source/_posts/images/sonser301_1_26__27.png">
 <meta property="article:published_time" content="2024-04-28T04:00:00.000Z">
 <meta property="article:modified_time" content="2026-03-08T05:36:46.000Z">
 <meta property="article:author" content="Gao Youyi">
@@ -37,7 +37,7 @@
 <meta property="article:tag" content="毕业论文">
 <meta property="article:tag" content="图神经网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gao-youyi.github.io/2024/04/28/2024-04-28-ji-yu-shi-kong-jian-mo-de-jiao-tong-liu-yu-ce-suan-fa-yan-jiu-bi-ye-lun-wen-cao-gao/blog/root/source/_posts/images/Figure_1-1-17142086197601.png">
+<meta name="twitter:image" content="d:/blog/root/source/_posts/images/Figure_1-1-17142086197601.png">
 
 <link rel="canonical" href="https://gao-youyi.github.io/2024/04/28/2024-04-28-ji-yu-shi-kong-jian-mo-de-jiao-tong-liu-yu-ce-suan-fa-yan-jiu-bi-ye-lun-wen-cao-gao/">
 
@@ -132,17 +132,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">112</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">109</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">13</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">40</span></a>
 
   </li>
   </ul>
@@ -293,12 +293,12 @@
 <p>其中F代表交通流量（traffic flow），S代表交通速度（traffic speed），O代表道路占用率（traffic occupancy rate）。</p>
 <h5 id="1-2-1-1-时间不可区分性"><a href="#1-2-1-1-时间不可区分性" class="headerlink" title="1.2.1.1 时间不可区分性"></a>1.2.1.1 时间不可区分性</h5><p>如下图1-1所示，在时序预测中，存在窗口的概念。窗口（长度为H+F）分为两部分，其中H长度内的数据代表着历史数据（History），后F长度内的数据代表着未来数据（Future）。他们分别对应着机器学习的样本和真实值，即模型学习输入前H部分数据，尝试预测后F部分数据。在训练中，时间窗口每滑动一次，就会产生一个样本。然后再按照训练、验证、测试去划分原始数据集。</p>
 <p><strong>不同的变量和不同的时期会有不同的模式，最终可能会生成许多具有相似历史序列、但不同未来序列的样本。</strong></p>
-<p><img src="/2024/04/28/2024-04-28-ji-yu-shi-kong-jian-mo-de-jiao-tong-liu-yu-ce-suan-fa-yan-jiu-bi-ye-lun-wen-cao-gao/blog/root/source/_posts/images/Figure_1-1-17142086197601.png" alt="Figure_1-1"></p>
+<p><img src="D:/blog/root/source/_posts/images/Figure_1-1-17142086197601.png" alt="Figure_1-1"></p>
 <center>图 1-1 采样图示例</center>
 
 <p>如上图1-1所示，使用我们自己设计的**VisuaTraffic Suite[^tools]**工具绘制的，来自数据集PEMS04中的的两个传感器Sensor20和Sensor301记录的2018-01-26至2018-01-28三天的交通流变化。然后人工标记了三个滑动窗口$W_1,W_2,W3$,对于$W_2$对应的窗口，无论Sensor20，还是Sensor301，其H序列和F序列具有相同的时间模式，即随着时间的增加而减小。这是可以被理解的，首先是Sensor20和Sensor301是两个相邻的检测器，其次是它们具有相似的随时间减小的历史数据，按照传统的线性模型（如MLP）计算方式，其输出也就应该是随时间减小的未来数据。但是当滑动窗口来到$W_3$时，我们可以看到与之前的结论完全相悖的现象：Sensor20和Sensor301具有相似的随时间增加的历史H数据，但是其未来F数据却呈现出完全不同的趋势，Sensor20的数据随时间逐渐平稳，Sensor301的数据随时间继续增加。这对于传统的线性模型是具有很大迷惑性的：模型很难为这两个来自同一时间（如$W_3$窗口），但不同空间（如Sensor20和Sensor301）的相似的样本，产生迥异的预测结果。</p>
 <h5 id="1-2-1-2-空间不可区分性"><a href="#1-2-1-2-空间不可区分性" class="headerlink" title="1.2.1.2 空间不可区分性"></a>1.2.1.2 空间不可区分性</h5><p>交通预测中空间的不可分性主要指的是空间连续性。比如，某一主要道路的拥堵状况可能会影响到相邻道路的交通流量，当前Sensor未来F时间的流量不仅仅受到自身历史数据的影响，而且受周围其他Sensor的影响。这种空间上的连续性表明，交通状态的预测需要考虑相邻区域的交通状况。</p>
-<p><img src="/2024/04/28/2024-04-28-ji-yu-shi-kong-jian-mo-de-jiao-tong-liu-yu-ce-suan-fa-yan-jiu-bi-ye-lun-wen-cao-gao/blog/root/source/_posts/images/sonser301_1_26__27.png" alt="sonser301_1_26__27"></p>
+<p><img src="D:/blog/root/source/_posts/images/sonser301_1_26__27.png" alt="sonser301_1_26__27"></p>
 <center>图1-2 空间连续性示例</center>
 
 <p>如上图1-2所示，图1-2同样是使用我们自己设计的**VisuaTraffic Suite[^tools]**工具绘制的，来自数据集PEMS04中的的一个传感器Sensor301记录的2018-01-26至2018-01-27两天的交通流变化，我们选取这两天的每天的12：00至14：00为滑动窗口$W_4$，其中历史时间H为12：00至13：00，未来时间F为13：00至14：00，我们可以看到，在历史时间H上，同一个监测器Sensor301，交通流量都是随着时间的增加而直线式的上升的。这与我们的常识以及传统的线性模型（如MLP）的预测一致，即对于一个固定的路口，其每天的12：00至13：00（可能是上下班高峰期），车流量具有相似的模式，比如这里的随时间交通流量而增加。但是我们看到，在未来时间F上，1月26日Sensor301的交通流量突然开始直线下降，但是1月27日的交通流量则继续直线式增加，这就与我们的常识以及常规的线性模型预测相悖了。考虑到实际的物理世界，可能是在1-26日与Sensor301直接相连的监测器Sensor20处出现了特殊状况相关，事实上我们通过绘制Sensor20在2018-01-26日，12：00至14：00的交通流量也应证了这个猜想。类似的例子有很多，也就是说，当前监测器的数据不仅受到自身历史时间模式的影响，而且受到邻近，甚至更远处的一个或者多个监测器的数据影响。</p>
@@ -532,20 +532,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">13</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">112</span>
+        <span class="site-state-item-count">109</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
