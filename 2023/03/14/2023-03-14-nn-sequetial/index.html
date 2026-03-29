@@ -1,457 +1,170 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.2">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"gao-youyi.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width_expanded":320,"width_dual_column":240},"copycode":true,"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="import torch from torch import nn from torch.nn import Sequential, Conv2d, MaxPool2。">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>深度学习——nn.Sequential 的使用 | 高友谊</title><meta name="author" content="Gao Youyi"><meta name="copyright" content="Gao Youyi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="import torch from torch import nn from torch.nn import Sequential, Conv2d, MaxPool2。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习——nn.Sequential 的使用">
 <meta property="og:url" content="https://gao-youyi.github.io/2023/03/14/2023-03-14-nn-sequetial/">
 <meta property="og:site_name" content="高友谊">
 <meta property="og:description" content="import torch from torch import nn from torch.nn import Sequential, Conv2d, MaxPool2。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s3.bmp.ovh/imgs/2023/03/14/390ee079b83e40de.png">
+<meta property="og:image" content="https://gao-youyi.github.io/images/avatar.png">
 <meta property="article:published_time" content="2023-03-14T04:00:00.000Z">
 <meta property="article:modified_time" content="2026-03-08T05:36:46.000Z">
 <meta property="article:author" content="Gao Youyi">
-<meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="PyTorch">
+<meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="实践">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2023/03/14/390ee079b83e40de.png">
-
-<link rel="canonical" href="https://gao-youyi.github.io/2023/03/14/2023-03-14-nn-sequetial/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>深度学习——nn.Sequential 的使用 | 高友谊</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">高友谊</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">记录科研、技术与思考</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">109</span></a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">40</span></a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://gao-youyi.github.io/2023/03/14/2023-03-14-nn-sequetial/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Gao Youyi">
-      <meta itemprop="description" content="电子科技大学硕士研究生，关注时空预测、交通流预测、AI产品开发与个人成长。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="高友谊">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          深度学习——nn.Sequential 的使用
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-14 12:00:00" itemprop="dateCreated datePublished" datetime="2023-03-14T12:00:00+08:00">2023-03-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-08 13:36:46" itemprop="dateModified" datetime="2026-03-08T13:36:46+08:00">2026-03-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
-                </span>
-            </span>
-
-          
-            <div class="post-description">import torch from torch import nn from torch.nn import Sequential, Conv2d, MaxPool2。</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+<meta name="twitter:image" content="https://gao-youyi.github.io/images/avatar.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "深度学习——nn.Sequential 的使用",
+  "url": "https://gao-youyi.github.io/2023/03/14/2023-03-14-nn-sequetial/",
+  "image": "https://gao-youyi.github.io/images/avatar.png",
+  "datePublished": "2023-03-14T04:00:00.000Z",
+  "dateModified": "2026-03-08T05:36:46.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Gao Youyi",
+      "url": "https://gao-youyi.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gao-youyi.github.io/2023/03/14/2023-03-14-nn-sequetial/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
       
-        <p>这篇文章主要记录 <strong>深度学习——nn.Sequential 的使用</strong> 的学习过程，方便后续快速回顾核心概念、代码写法与实验细节。</p>
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '深度学习——nn.Sequential 的使用',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="高友谊" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">109</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">高友谊</span></a><a class="nav-page-title" href="/"><span class="site-name">深度学习——nn.Sequential 的使用</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">深度学习——nn.Sequential 的使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-14T04:00:00.000Z" title="发表于 2023-03-14 12:00:00">2023-03-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-08T05:36:46.000Z" title="更新于 2026-03-08 13:36:46">2026-03-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">200</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>这篇文章主要记录 <strong>深度学习——nn.Sequential 的使用</strong> 的学习过程，方便后续快速回顾核心概念、代码写法与实验细节。</p>
 <span id="more"></span>
 
 <h3 id="目标流程"><a href="#目标流程" class="headerlink" title="目标流程"></a>目标流程</h3><p><img src="https://s3.bmp.ovh/imgs/2023/03/14/390ee079b83e40de.png" alt="流程解析"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import torch</span><br><span class="line">from torch import nn</span><br><span class="line">from torch.nn import Sequential, Conv2d, MaxPool2d, Flatten, Linear</span><br><span class="line"></span><br><span class="line">class MyNN(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(MyNN, self).__init__()</span><br><span class="line">        # Sequential组织多个卷积等操作，相当于transforms中的compose</span><br><span class="line">        self.module1 = Sequential(</span><br><span class="line">            Conv2d(3, 32, 5, padding=2),</span><br><span class="line">            MaxPool2d(2),</span><br><span class="line">            Conv2d(32, 32, 5, padding=2),</span><br><span class="line">            MaxPool2d(2),</span><br><span class="line">            Conv2d(32, 64, 5, padding=2),</span><br><span class="line">            MaxPool2d(2),</span><br><span class="line">            Flatten(),</span><br><span class="line">            Linear(1024, 64),</span><br><span class="line">            Linear(64, 10)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        x = self.module1(x)</span><br><span class="line">        return x</span><br><span class="line"></span><br><span class="line">mynn = MyNN()</span><br><span class="line">print(mynn)</span><br><span class="line"></span><br><span class="line"># https://www.w3cschool.cn/pytorch/pytorch-skug3bpf.html,查看张量的四个属性</span><br><span class="line"># torch.ones函数返回全1的张量，tensor数据类型</span><br><span class="line"></span><br><span class="line"># 生成一个64Batch，3Channel，32Width, 32Height的源数据</span><br><span class="line">input = torch.ones((64, 3, 32, 32))</span><br><span class="line"></span><br><span class="line"># 卷积池化等操作</span><br><span class="line">output = mynn(input)</span><br><span class="line"></span><br><span class="line"># 查看结果</span><br><span class="line">print(output.shape)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-    </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
-              <a href="/tags/PyTorch/" rel="tag"># PyTorch</a>
-              <a href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag"># 实践</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2023/03/04/2023-03-04-nn-reluhe-nn-sigmoid/" rel="prev" title="深度学习——nn.ReLU 和 nn.Sigmoid 的使用">
-      <i class="fa fa-chevron-left"></i> 深度学习——nn.ReLU 和 nn.Sigmoid 的使用
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/03/14/2023-03-14-model-train-cifar10/" rel="next" title="PyTorch 实战：使用 CPU 训练与测试 CIFAR10">
-      PyTorch 实战：使用 CPU 训练与测试 CIFAR10 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">目标流程</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Gao Youyi"
-      src="/images/avatar.png">
-  <p class="site-author-name" itemprop="name">Gao Youyi</p>
-  <div class="site-description" itemprop="description">电子科技大学硕士研究生，关注时空预测、交通流预测、AI产品开发与个人成长。</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">40</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">14</span>
-        <span class="site-state-item-name">分类</span>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">109</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/gao-youyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gao-youyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:yygao@std.uestc.edu.cn" title="E-Mail → mailto:yygao@std.uestc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://gao-youyi.github.io/" title="Blog → https:&#x2F;&#x2F;gao-youyi.github.io"><i class="fa fa-globe fa-fw"></i>Blog</a>
-      </span>
-  </div>
-
-
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="https://gao-youyi.github.io/" title="https:&#x2F;&#x2F;gao-youyi.github.io">我的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/gao-youyi" title="https:&#x2F;&#x2F;github.com&#x2F;gao-youyi" rel="noopener" target="_blank">我的GitHub</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-        <div class="back-to-top motion-element">
-          <i class="fa fa-arrow-up"></i>
-          <span>0%</span>
-        </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2024 – 
-  <span itemprop="copyrightYear">2026</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Gao Youyi</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-</html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://gao-youyi.github.io">Gao Youyi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://gao-youyi.github.io/2023/03/14/2023-03-14-nn-sequetial/">https://gao-youyi.github.io/2023/03/14/2023-03-14-nn-sequetial/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://gao-youyi.github.io" target="_blank">高友谊</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PyTorch/">PyTorch</a><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/%E5%AE%9E%E8%B7%B5/">实践</a></div><div class="post-share"><div class="social-share" data-image="/images/avatar.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/03/14/2023-03-14-model-train-cifar10/" title="PyTorch 实战：使用 CPU 训练与测试 CIFAR10"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">PyTorch 实战：使用 CPU 训练与测试 CIFAR10</div></div><div class="info-2"><div class="info-item-1">这篇文章主要记录 PyTorch 实战：使用 CPU 训练与测试 CIFAR10 的学习过程，方便后续快速回顾核心概念、代码写法与实验细节。   核心代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132# 第一次完整的训练过程import torchvisionimport torchimport torch.nnfrom torch import nnfrom torch.nn import Sequential, Conv2d, MaxPool2d, Fla...</div></div></div></a><a class="pagination-related" href="/2023/03/04/2023-03-04-nn-reluhe-nn-sigmoid/" title="深度学习——nn.ReLU 和 nn.Sigmoid 的使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">深度学习——nn.ReLU 和 nn.Sigmoid 的使用</div></div><div class="info-2"><div class="info-item-1">这篇文章主要记录 深度学习——nn.ReLU 和 nn.Sigmoid 的使用 的学习过程，方便后续快速回顾核心概念、代码写法与实验细节。   核心代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647import torchimport torchvisionfrom torch import nnfrom torch.nn import MaxPool2d, Sigmoid, ReLUfrom torch.utils.data import DataLoaderfrom torch.utils.tensorboard import SummaryWriter# 引入非线性函数的作用# 真实世界有些原始数据本身就是线性不可分的，必须要对原始空间进行一定的非线性操作# 对于回归问题也可以同样运用高数的思维，把回归看成分类问题的无限细分，当极限存在时，分类也就成为了回归问题。# 定义神经网络操作class MySigmoid(nn.Module):    def ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/03/04/2023-03-04-nn-reluhe-nn-sigmoid/" title="深度学习——nn.ReLU 和 nn.Sigmoid 的使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-04</div><div class="info-item-2">深度学习——nn.ReLU 和 nn.Sigmoid 的使用</div></div><div class="info-2"><div class="info-item-1">这篇文章主要记录 深度学习——nn.ReLU 和 nn.Sigmoid 的使用 的学习过程，方便后续快速回顾核心概念、代码写法与实验细节。   核心代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647import torchimport torchvisionfrom torch import nnfrom torch.nn import MaxPool2d, Sigmoid, ReLUfrom torch.utils.data import DataLoaderfrom torch.utils.tensorboard import SummaryWriter# 引入非线性函数的作用# 真实世界有些原始数据本身就是线性不可分的，必须要对原始空间进行一定的非线性操作# 对于回归问题也可以同样运用高数的思维，把回归看成分类问题的无限细分，当极限存在时，分类也就成为了回归问题。# 定义神经网络操作class MySigmoid(nn.Module):    def ...</div></div></div></a><a class="pagination-related" href="/2023/03/14/2023-03-14-model-train-cifar10/" title="PyTorch 实战：使用 CPU 训练与测试 CIFAR10"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-14</div><div class="info-item-2">PyTorch 实战：使用 CPU 训练与测试 CIFAR10</div></div><div class="info-2"><div class="info-item-1">这篇文章主要记录 PyTorch 实战：使用 CPU 训练与测试 CIFAR10 的学习过程，方便后续快速回顾核心概念、代码写法与实验细节。   核心代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132# 第一次完整的训练过程import torchvisionimport torchimport torch.nnfrom torch import nnfrom torch.nn import Sequential, Conv2d, MaxPool2d, Fla...</div></div></div></a><a class="pagination-related" href="/2023/03/02/2023-03-02-nn-conv2dxue-xi/" title="深度学习——nn.Conv2d 的使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-02</div><div class="info-item-2">深度学习——nn.Conv2d 的使用</div></div><div class="info-2"><div class="info-item-1">这篇文章主要记录 深度学习——nn.Conv2d 的使用 的学习过程，方便后续快速回顾核心概念、代码写法与实验细节。   核心代码123456789101112131415161718192021222324252627282930313233343536373839404142import torchvisionfrom torch import nnfrom torch.nn import Conv2dfrom torch.utils.data import DataLoaderfrom torch.utils.tensorboard import SummaryWriter# 采集源数据dataset = torchvision.datasets.CIFAR10(&quot;test-conv2d&quot;, train=False, transform=torchvision.transforms.ToTensor(),                                       download=True)dataloader = DataLoader...</div></div></div></a><a class="pagination-related" href="/2023/03/03/2023-03-03-nn-maxpool/" title="深度学习——nn.MaxPool2d 的使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-03</div><div class="info-item-2">深度学习——nn.MaxPool2d 的使用</div></div><div class="info-2"><div class="info-item-1">这篇文章主要记录 深度学习——nn.MaxPool2d 的使用 的学习过程，方便后续快速回顾核心概念、代码写法与实验细节。   核心代码123456789101112131415161718192021222324252627282930313233343536373839404142434445import torchimport torchvisionfrom torch import nnfrom torch.nn import MaxPool2dfrom torch.utils.data import DataLoaderfrom torch.utils.tensorboard import SummaryWriter# 池化的作用是为了：降维、去除冗余信息、对特征进行压缩、简化网络复杂度、减小计算量、减小内存消耗# 定义神经网络操作class Mypool(nn.Module):    def __init__(self):        super(Mypool, self).__init__()        # 池化操作        # self.maxpool...</div></div></div></a><a class="pagination-related" href="/2023/03/01/2023-03-01-nn-module/" title="深度学习——nn.Module 的使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-01</div><div class="info-item-2">深度学习——nn.Module 的使用</div></div><div class="info-2"><div class="info-item-1">这篇文章主要记录 深度学习——nn.Module 的使用 的学习过程，方便后续快速回顾核心概念、代码写法与实验细节。   核心代码1234567891011121314151617181920212223242526272829303132333435363738394041424344import torchimport torch.nn.functional as F# 测试covolution的工作机制# 输入数据input = torch.tensor([    [1, 2, 0, 3, 1],    [0, 1, 2, 3, 1],    [1, 2, 1, 0, 0],    [5, 2, 3, 1, 1],    [2, 1, 0, 1, 1]])# 卷积核kernel = torch.tensor([    [1, 2, 1],    [0, 1, 0],    [2, 1, 0]])# 查看输入是否符合要求print(input.shape)print(kernel.shape)# 不符合数据要求的使用reshape函数行转换input = torch.resh...</div></div></div></a><a class="pagination-related" href="/2023/03/16/2023-03-16-model-train-cifar10-gpu/" title="PyTorch 实战：使用 GPU 训练与测试 CIFAR10"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-16</div><div class="info-item-2">PyTorch 实战：使用 GPU 训练与测试 CIFAR10</div></div><div class="info-2"><div class="info-item-1">这篇文章主要记录 PyTorch 实战：使用 GPU 训练与测试 CIFAR10 的学习过程，方便后续快速回顾核心概念、代码写法与实验细节。   核心代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153# 第一种方法调用GPU训练模型# 需要对三个地方调用cuda()# 分别是，网络模型，数据，损失函数# 第二种是先定义设备，后在相关的模...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Gao Youyi</div><div class="author-info-description">电子科技大学硕士研究生</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">109</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gao-youyi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/gao-youyi" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:yygao27@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！记录科研、技术与思考</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">目标流程</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/28/2026-03-28/" title="联调测试文章">联调测试文章</a><time datetime="2026-03-28T07:28:04.000Z" title="发表于 2026-03-28 15:28:04">2026-03-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/26/2026-03-26/" title="今日速记 2026-03-26">今日速记 2026-03-26</a><time datetime="2026-03-26T13:15:25.000Z" title="发表于 2026-03-26 21:15:25">2026-03-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/24/2026-02-24-mini-court-kai-fa-shou-ce/" title="Mini Court 小法庭 MVP 开发手册：一个 LLM 场景化产品是怎么从 0 到 1 搭起来的">Mini Court 小法庭 MVP 开发手册：一个 LLM 场景化产品是怎么从 0 到 1 搭起来的</a><time datetime="2026-02-24T13:10:00.000Z" title="发表于 2026-02-24 21:10:00">2026-02-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/2026-02-12-yan-jiu-sheng-shi-xi-jian-li-latexmo-ban-fen-xiang/" title="研究生实习简历 LaTeX 模板分享：一页纸就够，别把简历写成论文">研究生实习简历 LaTeX 模板分享：一页纸就够，别把简历写成论文</a><time datetime="2026-02-12T12:40:00.000Z" title="发表于 2026-02-12 20:40:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/08/2026-01-08-leetcode-hot100shua-ti-jing-yan/" title="LeetCode Hot100 刷题经验：不是刷完 100 道就够了，而是要形成模板">LeetCode Hot100 刷题经验：不是刷完 100 道就够了，而是要形成模板</a><time datetime="2026-01-08T14:35:00.000Z" title="发表于 2026-01-08 22:35:00">2026-01-08</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By Gao Youyi</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 5.4.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div><div class="footer_custom_text">记录科研、技术与思考</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章..." type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"hijiki"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
