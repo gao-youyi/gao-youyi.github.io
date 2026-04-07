@@ -33,6 +33,14 @@
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
+    <loc>https://gao-youyi.github.io/2022/10/30/2022-10-30-xian-xing-biao-suan-fa-shi-li/</loc>
+    <lastmod>2026-03-08</lastmod>
+  </url>
+  <url>
+    <loc>https://gao-youyi.github.io/2022/10/29/2022-10-29-ke-yi-zi-dong-zeng-chang-de-shun-xu-biao/</loc>
+    <lastmod>2026-03-08</lastmod>
+  </url>
+  <url>
     <loc>https://gao-youyi.github.io/2022/10/31/2022-10-31-dan-xun-huan-lian-biao/</loc>
     <lastmod>2026-03-08</lastmod>
   </url>
@@ -41,19 +49,7 @@
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
-    <loc>https://gao-youyi.github.io/2022/10/29/2022-10-29-ke-yi-zi-dong-zeng-chang-de-shun-xu-biao/</loc>
-    <lastmod>2026-03-08</lastmod>
-  </url>
-  <url>
-    <loc>https://gao-youyi.github.io/2022/10/30/2022-10-30-xian-xing-biao-suan-fa-shi-li/</loc>
-    <lastmod>2026-03-08</lastmod>
-  </url>
-  <url>
     <loc>https://gao-youyi.github.io/2022/11/01/2022-11-01-shuang-xiang-lian-biao-he-shuang-xiang-xun-huan-lian-biao/</loc>
-    <lastmod>2026-03-08</lastmod>
-  </url>
-  <url>
-    <loc>https://gao-youyi.github.io/2022/11/03/2022-11-03-chuan-de-liang-chong-shi-xian/</loc>
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
@@ -61,7 +57,7 @@
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
-    <loc>https://gao-youyi.github.io/2022/11/06/2022-11-06-di-gui/</loc>
+    <loc>https://gao-youyi.github.io/2022/11/03/2022-11-03-chuan-de-liang-chong-shi-xian/</loc>
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
@@ -69,19 +65,7 @@
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
-    <loc>https://gao-youyi.github.io/2022/11/07/2022-11-07-dui-lie-de-liang-chong-shi-xian/</loc>
-    <lastmod>2026-03-08</lastmod>
-  </url>
-  <url>
-    <loc>https://gao-youyi.github.io/2022/11/11/2022-11-11-2022-11-11-hexo-writing-guide/</loc>
-    <lastmod>2026-03-08</lastmod>
-  </url>
-  <url>
-    <loc>https://gao-youyi.github.io/2023/02/28/2023-02-28-transformsshi-yong/</loc>
-    <lastmod>2026-03-08</lastmod>
-  </url>
-  <url>
-    <loc>https://gao-youyi.github.io/2022/11/07/2022-11-07-er-cha-shu-he-shu-de-xiang-guan-gai-nian/</loc>
+    <loc>https://gao-youyi.github.io/2022/11/06/2022-11-06-di-gui/</loc>
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
@@ -89,15 +73,27 @@
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
+    <loc>https://gao-youyi.github.io/2022/11/07/2022-11-07-dui-lie-de-liang-chong-shi-xian/</loc>
+    <lastmod>2026-03-08</lastmod>
+  </url>
+  <url>
+    <loc>https://gao-youyi.github.io/2022/11/07/2022-11-07-er-cha-shu-he-shu-de-xiang-guan-gai-nian/</loc>
+    <lastmod>2026-03-08</lastmod>
+  </url>
+  <url>
+    <loc>https://gao-youyi.github.io/2023/02/28/2023-02-28-transformsshi-yong/</loc>
+    <lastmod>2026-03-08</lastmod>
+  </url>
+  <url>
     <loc>https://gao-youyi.github.io/2023/03/01/2023-03-01-nn-module/</loc>
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
-    <loc>https://gao-youyi.github.io/2023/03/03/2023-03-03-nn-maxpool/</loc>
+    <loc>https://gao-youyi.github.io/2023/03/02/2023-03-02-nn-conv2dxue-xi/</loc>
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
-    <loc>https://gao-youyi.github.io/2023/03/02/2023-03-02-nn-conv2dxue-xi/</loc>
+    <loc>https://gao-youyi.github.io/2022/11/11/2022-11-11-2022-11-11-hexo-writing-guide/</loc>
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
@@ -106,6 +102,10 @@
   </url>
   <url>
     <loc>https://gao-youyi.github.io/2023/03/14/2023-03-14-model-train-cifar10/</loc>
+    <lastmod>2026-03-08</lastmod>
+  </url>
+  <url>
+    <loc>https://gao-youyi.github.io/2023/03/03/2023-03-03-nn-maxpool/</loc>
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
@@ -157,11 +157,11 @@
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
-    <loc>https://gao-youyi.github.io/2026/02/12/2026-02-12-yan-jiu-sheng-shi-xi-jian-li-latexmo-ban-fen-xiang/</loc>
+    <loc>https://gao-youyi.github.io/2026/02/24/2026-02-24-mini-court-kai-fa-shou-ce/</loc>
     <lastmod>2026-03-08</lastmod>
   </url>
   <url>
-    <loc>https://gao-youyi.github.io/2026/02/24/2026-02-24-mini-court-kai-fa-shou-ce/</loc>
+    <loc>https://gao-youyi.github.io/2026/02/12/2026-02-12-yan-jiu-sheng-shi-xi-jian-li-latexmo-ban-fen-xiang/</loc>
     <lastmod>2026-03-08</lastmod>
   </url>
 </urlset> 
