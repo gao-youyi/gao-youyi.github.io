@@ -1,27 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>C和数据结构——线性表问题实例</title>
-    <url>/2022/10/30/2022-10-30-xian-xing-biao-suan-fa-shi-li/</url>
-    <content><![CDATA[<p>这篇文章围绕 <strong>C和数据结构——线性表问题实例</strong> 做一份便于复习和查阅的整理，内容以概念梳理、代码实现和关键细节为主。</p>
-<span id="more"></span>
-
-<h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/*example1:</span><br><span class="line">交换一个数组中最大的元素和最小的元素</span><br><span class="line">元素为整数*/</span><br><span class="line">#include &quot;hanshu.h&quot;</span><br><span class="line">//定义core函数，交换作用</span><br><span class="line">void swap(ElementType &amp;x, ElementType &amp;y)</span><br><span class="line">&#123; //记住传入的是地址</span><br><span class="line">    //常用的交换思路</span><br><span class="line">    ElementType tmp = x;</span><br><span class="line">    x = y;</span><br><span class="line">    y = tmp;</span><br><span class="line">&#125;</span><br><span class="line">//遍历，交换，只用遍历一遍，相对简单</span><br><span class="line">void SwapMaxMin(SqList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">    int i, maxi, mini;</span><br><span class="line">    maxi = mini = 0;</span><br><span class="line">    for (i = 1; i &lt; L.length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if (L.elem[i] &gt; L.elem[maxi])</span><br><span class="line">            maxi = i;</span><br><span class="line">        else if (L.elem[i] &lt; L.elem[mini])</span><br><span class="line">        &#123;</span><br><span class="line">            mini = i;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(L.elem[maxi], L.elem[mini]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/*example2:</span><br><span class="line">删除线性表中自i个元素起的k个元素*/</span><br><span class="line"></span><br><span class="line">void DeleteK(SqList &amp;L, i, k)</span><br><span class="line">&#123;</span><br><span class="line">    ElemType e;</span><br><span class="line">    int tmp = i + k;</span><br><span class="line"></span><br><span class="line">    int j;</span><br><span class="line">    //判断数据是否合法</span><br><span class="line">    if (i &lt; 1 || k &lt; 1 || L.length &lt; (i + k - 1))</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;\n数据不足，输入有误&quot;);</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    /*思路一：定位后一个一个的删除</span><br><span class="line">    for (; i &lt;= tmp;i++)&#123;</span><br><span class="line">        ListDelete_Sq(L, i, e);</span><br><span class="line">    &#125;*/</span><br><span class="line">    //思路二：一次行删除k个单位的数据</span><br><span class="line">    for (j = i + k - 1; j &lt; L.length; j++) //一直让k+i后的元素链接到i的后面</span><br><span class="line">        L.elem[j - k] = L.elem[j];</span><br><span class="line">    L.length -= k;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*example3:</span><br><span class="line">将顺序表中所有的奇数移动到偶数前面的算法，每个元素都是</span><br><span class="line">互不相等的整数，要求时间最少，空间复杂度最小</span><br><span class="line"></span><br><span class="line">两头同时进行扫描。当i=j时，作为扫描完成的条件，当i为偶数的时候，交换</span><br><span class="line">i和j的位置</span><br><span class="line">*/</span><br><span class="line">//选择排序</span><br><span class="line">void Move(SqList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">    int i = 0, j = L.length - 1;</span><br><span class="line">    while (i &lt; j)</span><br><span class="line">    &#123;</span><br><span class="line">        while (L.elem[i] % 2 == 1)</span><br><span class="line">            i++; //一直找到一个偶数</span><br><span class="line">        while (L.elem[j] % 2 == 0)</span><br><span class="line">            j--;   //一直找到一个偶数</span><br><span class="line">        if (i &lt; j) //交换</span><br><span class="line">            swap(L.elem[i], L.elem[j]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/* example4：</span><br><span class="line"></span><br><span class="line">删除顺序表中的所有值为负的元素，已知L中值为负的元素可能</span><br><span class="line">有多个</span><br><span class="line">//sovel1:重建一个表，遍历，当找到符合要求的元素的时候就将</span><br><span class="line">它放在新的表中</span><br><span class="line">//solve2：遍历，利用SqlistDelete函数，一个一个的删除</span><br><span class="line">*/</span><br><span class="line">void(Sqlist &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">    //没必要建立一个新的，自己给自己赋值就行了  Sqlist tmp;</span><br><span class="line">    int i = 0, j = 0;</span><br><span class="line">    while (L.elem[i] &gt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">        L.elem[j] = L.elem[i]; //赋值</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    L.length = j; //修改表中参数</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*example5：</span><br><span class="line">将顺序表中的整数序列循环左移p个位置，即将表中的数据序列</span><br><span class="line">从x0,x1,x2,x3,x4,...xn-1，变换为xp,xp+1,xp+2,xp+3...,xn-1,x0,x1,x2....xp-1;</span><br><span class="line">*/</span><br><span class="line">void reverse(int R[], int m, int n) //先将R[m....n]逆置</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    int tmp;</span><br><span class="line">    for (i = 0; i &lt; (n - m + 1) / 2; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp = R[m + i]; //将R[m+i]与R[n-i]进行交换</span><br><span class="line">        R[m + i] = R[n - i];</span><br><span class="line">        R[n - i] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int ListReverse(int R[], int n, int p) //循环左移</span><br><span class="line">&#123;</span><br><span class="line">    if (p &lt;= 0 || p &gt;= n)</span><br><span class="line">        return 0;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        reverse(R, 0, p - 1);</span><br><span class="line">        reverse(R, p, n - 1);</span><br><span class="line">        reverse(R, 0, n - 1);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法与数据结构</category>
-      </categories>
-      <tags>
-        <tag>数据结构</tag>
-        <tag>C语言</tag>
-        <tag>C++</tag>
-        <tag>顺序表</tag>
-        <tag>算法</tag>
-        <tag>线性表</tag>
-        <tag>排序</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C和数据结构——线性表</title>
     <url>/2022/10/28/2022-10-28-xian-xing-biao/</url>
     <content><![CDATA[<p>这篇文章围绕 <strong>C和数据结构——线性表</strong> 做一份便于复习和查阅的整理，内容以概念梳理、代码实现和关键细节为主。</p>
@@ -60,12 +39,12 @@
       </tags>
   </entry>
   <entry>
-    <title>C和数据结构——单循环链表</title>
-    <url>/2022/10/31/2022-10-31-dan-xun-huan-lian-biao/</url>
-    <content><![CDATA[<p>这篇文章围绕 <strong>C和数据结构——单循环链表</strong> 做一份便于复习和查阅的整理，内容以概念梳理、代码实现和关键细节为主。</p>
+    <title>C和数据结构——线性表问题实例</title>
+    <url>/2022/10/30/2022-10-30-xian-xing-biao-suan-fa-shi-li/</url>
+    <content><![CDATA[<p>这篇文章围绕 <strong>C和数据结构——线性表问题实例</strong> 做一份便于复习和查阅的整理，内容以概念梳理、代码实现和关键细节为主。</p>
 <span id="more"></span>
 
-<h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef int ElemType;</span><br><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">    ElemType data;     //数据域</span><br><span class="line">    struct node *next; //指针域</span><br><span class="line">&#125; LNode, *LinkList;</span><br><span class="line"></span><br><span class="line">//初始化单循环链表</span><br><span class="line">int InitList_cl(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">    L = (LinkList)malloc(sizeof(LNode));</span><br><span class="line">    if (!L)</span><br><span class="line">        exit(OVERFLOW);</span><br><span class="line">    L-&gt;next = L; //这里可以对比以下单链表的初始化</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//求单循环链表的长度</span><br><span class="line">int ListLength(LinkList L)</span><br><span class="line">&#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    LinkList p = L-&gt;next;</span><br><span class="line">    while (p != L) //这里就只是把求单链表的条件换了一下</span><br><span class="line">    &#123;</span><br><span class="line">        i++;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    return i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*example1:</span><br><span class="line">    求单循环链表中所有值为x的结点的个数</span><br><span class="line">    */</span><br><span class="line">int CountNode(LNode *L, ElemType x)</span><br><span class="line">&#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    LNode *p = L-&gt;next;</span><br><span class="line">    while (p != L) //可以对比以下单链表</span><br><span class="line">    &#123;</span><br><span class="line">        if (p-&gt;data == x)</span><br><span class="line">            i++;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    return i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//删除结点值为x的结点</span><br><span class="line">int Delallx(LNode *&amp;L, ElemType x)</span><br><span class="line">&#123;</span><br><span class="line">    LNode *pre = L, *p = L-&gt;next;</span><br><span class="line">    while (p &amp;&amp; p-&gt;data == x)</span><br><span class="line">    &#123;</span><br><span class="line">        pre-&gt;next = p-&gt;next; //</span><br><span class="line">        free(p);             //</span><br><span class="line">        p = pre-&gt;next;       //</span><br><span class="line">    &#125;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 解决约瑟夫问题：此时的ElemType date 表示小孩的标号</span><br><span class="line">//这里采用不带头节点的单循环链表</span><br><span class="line">void CreateList(LinkList *&amp;L, int n) //创建链表</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    LinkList *p, *tc; //tc指向尾节点</span><br><span class="line">    L = (LinkList *)malloc(sizeof(LinkList));</span><br><span class="line">    L-&gt;data = 1; //先建立一个只有一个data为1结点的单链表</span><br><span class="line">    tc = L;</span><br><span class="line">    for (i = 2; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        p = (LinkList *)malloc(sizeof(LinkList));</span><br><span class="line">        p-&gt;data = i;  //建立一个存放编号i的结点</span><br><span class="line">        tc-&gt;next = p; //尾插法，将p放在表的尾部，保证顺序输出；</span><br><span class="line">        tc = p;       //tc成为尾部</span><br><span class="line">    &#125;</span><br><span class="line">    tc-&gt;next = L; //首结点为L;</span><br><span class="line">&#125;</span><br><span class="line">void Joseph(int n, int m)</span><br><span class="line">&#123;</span><br><span class="line">    int i, j;</span><br><span class="line">    LinkList *L, *p, *q;</span><br><span class="line">    CreateList(L, n);</span><br><span class="line">    for (i = 1; i &lt; n; i++) //报数，直到m-1;</span><br><span class="line">    &#123;</span><br><span class="line">        p = L;</span><br><span class="line">        j = 1;</span><br><span class="line">        while (j &lt; m - 1)</span><br><span class="line">        &#123;</span><br><span class="line">            j++;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        q = p-&gt;next;           //q指向第m个结点</span><br><span class="line">        printf(&quot;%d&quot;, q-&gt;data); //结点出列</span><br><span class="line">        p-&gt;next = q-&gt;next;     //删除q结点</span><br><span class="line">        free(q);</span><br><span class="line">        L = p-&gt;next; //从下一个结点开始继续报数</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">/*example1:</span><br><span class="line">交换一个数组中最大的元素和最小的元素</span><br><span class="line">元素为整数*/</span><br><span class="line">#include &quot;hanshu.h&quot;</span><br><span class="line">//定义core函数，交换作用</span><br><span class="line">void swap(ElementType &amp;x, ElementType &amp;y)</span><br><span class="line">&#123; //记住传入的是地址</span><br><span class="line">    //常用的交换思路</span><br><span class="line">    ElementType tmp = x;</span><br><span class="line">    x = y;</span><br><span class="line">    y = tmp;</span><br><span class="line">&#125;</span><br><span class="line">//遍历，交换，只用遍历一遍，相对简单</span><br><span class="line">void SwapMaxMin(SqList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">    int i, maxi, mini;</span><br><span class="line">    maxi = mini = 0;</span><br><span class="line">    for (i = 1; i &lt; L.length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if (L.elem[i] &gt; L.elem[maxi])</span><br><span class="line">            maxi = i;</span><br><span class="line">        else if (L.elem[i] &lt; L.elem[mini])</span><br><span class="line">        &#123;</span><br><span class="line">            mini = i;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(L.elem[maxi], L.elem[mini]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/*example2:</span><br><span class="line">删除线性表中自i个元素起的k个元素*/</span><br><span class="line"></span><br><span class="line">void DeleteK(SqList &amp;L, i, k)</span><br><span class="line">&#123;</span><br><span class="line">    ElemType e;</span><br><span class="line">    int tmp = i + k;</span><br><span class="line"></span><br><span class="line">    int j;</span><br><span class="line">    //判断数据是否合法</span><br><span class="line">    if (i &lt; 1 || k &lt; 1 || L.length &lt; (i + k - 1))</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;\n数据不足，输入有误&quot;);</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    /*思路一：定位后一个一个的删除</span><br><span class="line">    for (; i &lt;= tmp;i++)&#123;</span><br><span class="line">        ListDelete_Sq(L, i, e);</span><br><span class="line">    &#125;*/</span><br><span class="line">    //思路二：一次行删除k个单位的数据</span><br><span class="line">    for (j = i + k - 1; j &lt; L.length; j++) //一直让k+i后的元素链接到i的后面</span><br><span class="line">        L.elem[j - k] = L.elem[j];</span><br><span class="line">    L.length -= k;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*example3:</span><br><span class="line">将顺序表中所有的奇数移动到偶数前面的算法，每个元素都是</span><br><span class="line">互不相等的整数，要求时间最少，空间复杂度最小</span><br><span class="line"></span><br><span class="line">两头同时进行扫描。当i=j时，作为扫描完成的条件，当i为偶数的时候，交换</span><br><span class="line">i和j的位置</span><br><span class="line">*/</span><br><span class="line">//选择排序</span><br><span class="line">void Move(SqList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">    int i = 0, j = L.length - 1;</span><br><span class="line">    while (i &lt; j)</span><br><span class="line">    &#123;</span><br><span class="line">        while (L.elem[i] % 2 == 1)</span><br><span class="line">            i++; //一直找到一个偶数</span><br><span class="line">        while (L.elem[j] % 2 == 0)</span><br><span class="line">            j--;   //一直找到一个偶数</span><br><span class="line">        if (i &lt; j) //交换</span><br><span class="line">            swap(L.elem[i], L.elem[j]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/* example4：</span><br><span class="line"></span><br><span class="line">删除顺序表中的所有值为负的元素，已知L中值为负的元素可能</span><br><span class="line">有多个</span><br><span class="line">//sovel1:重建一个表，遍历，当找到符合要求的元素的时候就将</span><br><span class="line">它放在新的表中</span><br><span class="line">//solve2：遍历，利用SqlistDelete函数，一个一个的删除</span><br><span class="line">*/</span><br><span class="line">void(Sqlist &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">    //没必要建立一个新的，自己给自己赋值就行了  Sqlist tmp;</span><br><span class="line">    int i = 0, j = 0;</span><br><span class="line">    while (L.elem[i] &gt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">        L.elem[j] = L.elem[i]; //赋值</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    L.length = j; //修改表中参数</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*example5：</span><br><span class="line">将顺序表中的整数序列循环左移p个位置，即将表中的数据序列</span><br><span class="line">从x0,x1,x2,x3,x4,...xn-1，变换为xp,xp+1,xp+2,xp+3...,xn-1,x0,x1,x2....xp-1;</span><br><span class="line">*/</span><br><span class="line">void reverse(int R[], int m, int n) //先将R[m....n]逆置</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    int tmp;</span><br><span class="line">    for (i = 0; i &lt; (n - m + 1) / 2; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp = R[m + i]; //将R[m+i]与R[n-i]进行交换</span><br><span class="line">        R[m + i] = R[n - i];</span><br><span class="line">        R[n - i] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int ListReverse(int R[], int n, int p) //循环左移</span><br><span class="line">&#123;</span><br><span class="line">    if (p &lt;= 0 || p &gt;= n)</span><br><span class="line">        return 0;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        reverse(R, 0, p - 1);</span><br><span class="line">        reverse(R, p, n - 1);</span><br><span class="line">        reverse(R, 0, n - 1);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法与数据结构</category>
@@ -74,17 +53,19 @@
         <tag>数据结构</tag>
         <tag>C语言</tag>
         <tag>C++</tag>
+        <tag>顺序表</tag>
+        <tag>线性表</tag>
         <tag>算法</tag>
-        <tag>链表</tag>
+        <tag>排序</tag>
       </tags>
   </entry>
   <entry>
-    <title>C和数据结构——双向链表和双向循环链表</title>
-    <url>/2022/11/01/2022-11-01-shuang-xiang-lian-biao-he-shuang-xiang-xun-huan-lian-biao/</url>
-    <content><![CDATA[<p>这篇文章围绕 <strong>C和数据结构——双向链表和双向循环链表</strong> 做一份便于复习和查阅的整理，内容以概念梳理、代码实现和关键细节为主。</p>
+    <title>C和数据结构——单循环链表</title>
+    <url>/2022/10/31/2022-10-31-dan-xun-huan-lian-biao/</url>
+    <content><![CDATA[<p>这篇文章围绕 <strong>C和数据结构——单循环链表</strong> 做一份便于复习和查阅的整理，内容以概念梳理、代码实现和关键细节为主。</p>
 <span id="more"></span>
 
-<h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">/*前驱和后继都能进行遍历的线性链表</span><br><span class="line">1，使用两个指针表示结点的逻辑关系</span><br><span class="line">2，前驱结点指针域prior</span><br><span class="line">3,后继结点指针域next</span><br><span class="line">4,不作特别指出，这里的双向链表都是带头结点的双向循环链表</span><br><span class="line">*/</span><br><span class="line">typedef int Elemtype;</span><br><span class="line">typedef struct DuLNode</span><br><span class="line">&#123;</span><br><span class="line">    Elemtype data;</span><br><span class="line">    struct DULNode *prior, *next;</span><br><span class="line"></span><br><span class="line">&#125; DuLNode, *DuLNode;</span><br><span class="line"></span><br><span class="line">//双向循环链表求长度</span><br><span class="line">int ListLength(DuLNode L)</span><br><span class="line">&#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    DuLNode p = L-&gt;next;</span><br><span class="line">    while (p) //只用检测p的尾节点是否为空就可以</span><br><span class="line">    &#123;</span><br><span class="line">        i++;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    return i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//插入操作</span><br><span class="line">//这里的插入顺序真的很重要哦</span><br><span class="line">/*p--s--q</span><br><span class="line">1,将s的next指向p-&gt;next;</span><br><span class="line">2,若p不是最后的结点，将q的prior指向s</span><br><span class="line">3，将s的Prior指针域指向p;</span><br><span class="line">4,将p的next指针域指向s；</span><br><span class="line">    */</span><br><span class="line">int ListInsert(DuLNode L, int i, Elemtype e)</span><br><span class="line">&#123;</span><br><span class="line">    DuLNode p, s;</span><br><span class="line">    if (i &lt; 1 || i &gt; ListLength(L) + 1) //判断数据是否合法</span><br><span class="line">        return 0;</span><br><span class="line">    p = GetElemP(L, i - 1); //找到第i个元素的前驱指针p,</span><br><span class="line">    if (p)                  //判断找到的位置是否正确</span><br><span class="line">        return 0;</span><br><span class="line">    s = (DuLNode)malloc(sizeof(DuLNode)); //申请的新节点，存放e</span><br><span class="line">    if (!s)</span><br><span class="line">    &#123;</span><br><span class="line">        exit(OVERFLOW);</span><br><span class="line">    &#125;</span><br><span class="line">    //进行链接操作</span><br><span class="line">    s-&gt;data = e;</span><br><span class="line">    s-&gt;prior = p-&gt;next; //这一步要放在前面，避免p为尾节点</span><br><span class="line">    p-&gt;next-&gt;prior = s;</span><br><span class="line">    p-&gt;next = s;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//删除结点</span><br><span class="line">int ListDelete(DuLNode L, int i, Elemtype &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">    DuLNode p;</span><br><span class="line">    if (i &lt; 1) //判断数据是否合法</span><br><span class="line">        return 0;</span><br><span class="line">    p = GetElemP(L, i); //找到i结点的位置</span><br><span class="line">    if (!p)             //判断找到的位置是否正确</span><br><span class="line">        return 0;</span><br><span class="line">    e = p-&gt;data;               //先将数据保存下来，可以省略这一步</span><br><span class="line">    p-&gt;prior-&gt;next = p-&gt;next;  //链接后继</span><br><span class="line">    p-&gt;next-&gt;prior = p-&gt;prior; //链接前驱</span><br><span class="line">    free(p);                   //释放</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef int ElemType;</span><br><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">    ElemType data;     //数据域</span><br><span class="line">    struct node *next; //指针域</span><br><span class="line">&#125; LNode, *LinkList;</span><br><span class="line"></span><br><span class="line">//初始化单循环链表</span><br><span class="line">int InitList_cl(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">    L = (LinkList)malloc(sizeof(LNode));</span><br><span class="line">    if (!L)</span><br><span class="line">        exit(OVERFLOW);</span><br><span class="line">    L-&gt;next = L; //这里可以对比以下单链表的初始化</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//求单循环链表的长度</span><br><span class="line">int ListLength(LinkList L)</span><br><span class="line">&#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    LinkList p = L-&gt;next;</span><br><span class="line">    while (p != L) //这里就只是把求单链表的条件换了一下</span><br><span class="line">    &#123;</span><br><span class="line">        i++;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    return i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*example1:</span><br><span class="line">    求单循环链表中所有值为x的结点的个数</span><br><span class="line">    */</span><br><span class="line">int CountNode(LNode *L, ElemType x)</span><br><span class="line">&#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    LNode *p = L-&gt;next;</span><br><span class="line">    while (p != L) //可以对比以下单链表</span><br><span class="line">    &#123;</span><br><span class="line">        if (p-&gt;data == x)</span><br><span class="line">            i++;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    return i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//删除结点值为x的结点</span><br><span class="line">int Delallx(LNode *&amp;L, ElemType x)</span><br><span class="line">&#123;</span><br><span class="line">    LNode *pre = L, *p = L-&gt;next;</span><br><span class="line">    while (p &amp;&amp; p-&gt;data == x)</span><br><span class="line">    &#123;</span><br><span class="line">        pre-&gt;next = p-&gt;next; //</span><br><span class="line">        free(p);             //</span><br><span class="line">        p = pre-&gt;next;       //</span><br><span class="line">    &#125;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 解决约瑟夫问题：此时的ElemType date 表示小孩的标号</span><br><span class="line">//这里采用不带头节点的单循环链表</span><br><span class="line">void CreateList(LinkList *&amp;L, int n) //创建链表</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    LinkList *p, *tc; //tc指向尾节点</span><br><span class="line">    L = (LinkList *)malloc(sizeof(LinkList));</span><br><span class="line">    L-&gt;data = 1; //先建立一个只有一个data为1结点的单链表</span><br><span class="line">    tc = L;</span><br><span class="line">    for (i = 2; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        p = (LinkList *)malloc(sizeof(LinkList));</span><br><span class="line">        p-&gt;data = i;  //建立一个存放编号i的结点</span><br><span class="line">        tc-&gt;next = p; //尾插法，将p放在表的尾部，保证顺序输出；</span><br><span class="line">        tc = p;       //tc成为尾部</span><br><span class="line">    &#125;</span><br><span class="line">    tc-&gt;next = L; //首结点为L;</span><br><span class="line">&#125;</span><br><span class="line">void Joseph(int n, int m)</span><br><span class="line">&#123;</span><br><span class="line">    int i, j;</span><br><span class="line">    LinkList *L, *p, *q;</span><br><span class="line">    CreateList(L, n);</span><br><span class="line">    for (i = 1; i &lt; n; i++) //报数，直到m-1;</span><br><span class="line">    &#123;</span><br><span class="line">        p = L;</span><br><span class="line">        j = 1;</span><br><span class="line">        while (j &lt; m - 1)</span><br><span class="line">        &#123;</span><br><span class="line">            j++;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        q = p-&gt;next;           //q指向第m个结点</span><br><span class="line">        printf(&quot;%d&quot;, q-&gt;data); //结点出列</span><br><span class="line">        p-&gt;next = q-&gt;next;     //删除q结点</span><br><span class="line">        free(q);</span><br><span class="line">        L = p-&gt;next; //从下一个结点开始继续报数</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法与数据结构</category>
@@ -115,6 +96,25 @@
         <tag>算法</tag>
         <tag>链表</tag>
         <tag>实例</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C和数据结构——双向链表和双向循环链表</title>
+    <url>/2022/11/01/2022-11-01-shuang-xiang-lian-biao-he-shuang-xiang-xun-huan-lian-biao/</url>
+    <content><![CDATA[<p>这篇文章围绕 <strong>C和数据结构——双向链表和双向循环链表</strong> 做一份便于复习和查阅的整理，内容以概念梳理、代码实现和关键细节为主。</p>
+<span id="more"></span>
+
+<h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">/*前驱和后继都能进行遍历的线性链表</span><br><span class="line">1，使用两个指针表示结点的逻辑关系</span><br><span class="line">2，前驱结点指针域prior</span><br><span class="line">3,后继结点指针域next</span><br><span class="line">4,不作特别指出，这里的双向链表都是带头结点的双向循环链表</span><br><span class="line">*/</span><br><span class="line">typedef int Elemtype;</span><br><span class="line">typedef struct DuLNode</span><br><span class="line">&#123;</span><br><span class="line">    Elemtype data;</span><br><span class="line">    struct DULNode *prior, *next;</span><br><span class="line"></span><br><span class="line">&#125; DuLNode, *DuLNode;</span><br><span class="line"></span><br><span class="line">//双向循环链表求长度</span><br><span class="line">int ListLength(DuLNode L)</span><br><span class="line">&#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    DuLNode p = L-&gt;next;</span><br><span class="line">    while (p) //只用检测p的尾节点是否为空就可以</span><br><span class="line">    &#123;</span><br><span class="line">        i++;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    return i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//插入操作</span><br><span class="line">//这里的插入顺序真的很重要哦</span><br><span class="line">/*p--s--q</span><br><span class="line">1,将s的next指向p-&gt;next;</span><br><span class="line">2,若p不是最后的结点，将q的prior指向s</span><br><span class="line">3，将s的Prior指针域指向p;</span><br><span class="line">4,将p的next指针域指向s；</span><br><span class="line">    */</span><br><span class="line">int ListInsert(DuLNode L, int i, Elemtype e)</span><br><span class="line">&#123;</span><br><span class="line">    DuLNode p, s;</span><br><span class="line">    if (i &lt; 1 || i &gt; ListLength(L) + 1) //判断数据是否合法</span><br><span class="line">        return 0;</span><br><span class="line">    p = GetElemP(L, i - 1); //找到第i个元素的前驱指针p,</span><br><span class="line">    if (p)                  //判断找到的位置是否正确</span><br><span class="line">        return 0;</span><br><span class="line">    s = (DuLNode)malloc(sizeof(DuLNode)); //申请的新节点，存放e</span><br><span class="line">    if (!s)</span><br><span class="line">    &#123;</span><br><span class="line">        exit(OVERFLOW);</span><br><span class="line">    &#125;</span><br><span class="line">    //进行链接操作</span><br><span class="line">    s-&gt;data = e;</span><br><span class="line">    s-&gt;prior = p-&gt;next; //这一步要放在前面，避免p为尾节点</span><br><span class="line">    p-&gt;next-&gt;prior = s;</span><br><span class="line">    p-&gt;next = s;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//删除结点</span><br><span class="line">int ListDelete(DuLNode L, int i, Elemtype &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">    DuLNode p;</span><br><span class="line">    if (i &lt; 1) //判断数据是否合法</span><br><span class="line">        return 0;</span><br><span class="line">    p = GetElemP(L, i); //找到i结点的位置</span><br><span class="line">    if (!p)             //判断找到的位置是否正确</span><br><span class="line">        return 0;</span><br><span class="line">    e = p-&gt;data;               //先将数据保存下来，可以省略这一步</span><br><span class="line">    p-&gt;prior-&gt;next = p-&gt;next;  //链接后继</span><br><span class="line">    p-&gt;next-&gt;prior = p-&gt;prior; //链接前驱</span><br><span class="line">    free(p);                   //释放</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法与数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>C语言</tag>
+        <tag>C++</tag>
+        <tag>算法</tag>
+        <tag>链表</tag>
       </tags>
   </entry>
   <entry>
@@ -210,6 +210,31 @@
       </tags>
   </entry>
   <entry>
+    <title>C和数据结构——队列的两种实现</title>
+    <url>/2022/11/07/2022-11-07-dui-lie-de-liang-chong-shi-xian/</url>
+    <content><![CDATA[<p>这篇文章围绕 <strong>C和数据结构——队列的两种实现</strong> 做一份便于复习和查阅的整理，内容以概念梳理、代码实现和关键细节为主。</p>
+<span id="more"></span>
+
+<h4 id="静态"><a href="#静态" class="headerlink" title="静态"></a>静态</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/*</span><br><span class="line">插入：进队：队尾</span><br><span class="line">删除：出队：队头</span><br><span class="line">可以想象一下啊买东西排队的情况</span><br><span class="line">First In First Out</span><br><span class="line">F I F O</span><br><span class="line">允许插入的一端成为队尾，允许删除的一端称为队头。</span><br><span class="line">所以我们再学习这一部分知识的时候一定要对头插法和</span><br><span class="line">尾插法有着熟练的掌握！</span><br><span class="line"></span><br><span class="line">！！！模型一：！！！</span><br><span class="line">front： 头指针，指向队列头元素</span><br><span class="line">rear:  尾指针，指向尾元素的下一个</span><br><span class="line">队空条件：front == rear</span><br><span class="line">队满条件：rear - front ==0</span><br><span class="line">这里读者可以自己试试几种队满和对空的情况</span><br><span class="line"></span><br><span class="line">通过不断的测试，我们发现，如果仅仅根据rear =MAXSIZE</span><br><span class="line">判断队满的情况是不合理的，因为再实际的生活和问题中我们知道</span><br><span class="line">，一个队伍可以站多少人，完全取决于总的人数，也就是MAXSIZE</span><br><span class="line">，而不是取决于最后一个人是不是站在了某一个地方，也就是rear==MAXSIZE</span><br><span class="line">，如果那样的话，显然会造成存储空间的大大浪费，所以，</span><br><span class="line">模型二：</span><br><span class="line">我们这里不妨1设想，即使使用数组，数组也是一个循环或者说是一个front 和</span><br><span class="line">rear连在一起环状数组，数组的下标同样成立，比如，当MAXSIZE=5,front =4时</span><br><span class="line">,按照道理说此时的rear已经起码为5了（其实按照道理是不可以的），也就是说不能再进队了，</span><br><span class="line">但是可以想到，在front 的前面应该还有4个位置，所以根据循环数组</span><br><span class="line">的假设，我们知道此时的rear应该是rear = 1，而不是5，可以继续</span><br><span class="line">在top处入队，假设此时处于4的位置元素为a,=进入新的元素b,之后，</span><br><span class="line">b就在4的位置了，而a就在0的位置了，此时相应的rear的位置应该为1，也就是</span><br><span class="line">队头指针进一：front=(front+) MOD MAXSIZE</span><br><span class="line">队尾元素进一： rear = (rear+1) MOD MAXSIZE,</span><br><span class="line">而不是简单的加一操作了。</span><br><span class="line">如此继续进行入队，我们发现：</span><br><span class="line">当队满的时候，front = rear但是不等于0，而且不同的入队和出队的情况下，队满的</span><br><span class="line">情况也不一样，最为头疼的是，我们好像没法判断队空了，因为此时队空和队满都</span><br><span class="line">是front = rear,!!所以，为了可以区分这个问题我们</span><br><span class="line">规定：</span><br><span class="line">1，当rear = front时，队空</span><br><span class="line">2，当(rear+1)MOD MAXSIZE = front 时，队满</span><br><span class="line">由2的规定我们不难发现，按照这种情况下的队满，不是真正意义上的队满，</span><br><span class="line">比如此时rear = 3，front  = 4，由2的规定，我们知道已经满足，但是</span><br><span class="line">由于rear并不会指向元素，所以当队满的时候，实际上还是可以加入一个</span><br><span class="line">元素，但是不得不说，这个相对于模型一已经有巨大的改进了；</span><br><span class="line">可以归纳如下：</span><br><span class="line">队空：Q.front == Q.rear</span><br><span class="line">对满： (Q.rear+1)%MAXSIZE == Q.front</span><br><span class="line">进队： Q.data[Q.rear]=x; Q.rear =(Q.rear+1)%MAXSIZE;</span><br><span class="line">出队： x=Q.data[Q.front]; Q.front = (Q.front+1)%MAXSIZE;</span><br><span class="line">模型三：</span><br><span class="line">可以设置一个flag标识，每次</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">//静态存储</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#define MAX_SIZE 20</span><br><span class="line">typedef char ElemType;</span><br><span class="line">//typedef struct</span><br><span class="line">//&#123;</span><br><span class="line">//    ElemType data[MAX_SIZE]; //所有元素</span><br><span class="line">//    int front, raer;         //队尾和队头</span><br><span class="line">//&#125; SqQueue;</span><br><span class="line">#define MAXQSIZE 100 //最大的队列长度+1</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    ElemType *base; //用来初始化分配空间</span><br><span class="line">    int front;</span><br><span class="line">    int rear;</span><br><span class="line"></span><br><span class="line">&#125; SqQueue;</span><br><span class="line"></span><br><span class="line">//初始化队列</span><br><span class="line">void InitQueue(SqQueue &amp;Q)</span><br><span class="line">&#123;</span><br><span class="line">    Q.base = (ElemType *)malloc(MAXQSIZE * sizeof(ElemType));</span><br><span class="line">    if (!Q.base)</span><br><span class="line">        exit(OVERFLOW); //判断是否分配成功</span><br><span class="line">    Q.front = Q.rear = 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//销毁队列</span><br><span class="line">void DestroyQueue(SqQueue Q)</span><br><span class="line">&#123;</span><br><span class="line">    if (Q.base)</span><br><span class="line">    //如果队不是空</span><br><span class="line">    &#123;</span><br><span class="line">        free(Q.base);</span><br><span class="line">        Q.base = NULL;</span><br><span class="line">        Q.front = Q.rear = 0; //这里的表参数也要改变</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//入队列</span><br><span class="line">int EnQueue(SqQueue &amp;Q,ElemType e&#123;</span><br><span class="line">    if ((Q.rear + 1) % MAXQSIZE == Q.front)</span><br><span class="line">        return 0; //判断是否队满</span><br><span class="line">    Q.base[Q.rear] = 0;</span><br><span class="line">    Q.rear = (Q.rear + 1) % MAXQSIZE;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//出队</span><br><span class="line">int DeQueue(SqQueue &amp;Q,Elemtype &amp;e)&#123;</span><br><span class="line">    if (Q.front == Q.rear) //如果为空，删除并返回队头元素</span><br><span class="line">        return 0;          //否则返回0</span><br><span class="line">    e = Q.base[Q.front];</span><br><span class="line">    Q.front = (Q.front + 1) % MAXQSIZE;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//取队头元素</span><br><span class="line">int GetHead(SqQueue Q,Elemtype &amp;e)&#123;</span><br><span class="line">    if (Q.front == Q.rear)</span><br><span class="line">        return 0;</span><br><span class="line">    e = Q.base[Q.front];</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//判断队空</span><br><span class="line">int QueueEmpty(SqQueue Q)&#123;</span><br><span class="line">    if (Q.front == Q.rear)</span><br><span class="line">        return 1;</span><br><span class="line">    else</span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//求队列中元素的个数(循环队列)</span><br><span class="line">int QueueLength(SqQueue Q)&#123;</span><br><span class="line">    /*其实我自己的想法是根据队满条件建立循环，但是总结发现</span><br><span class="line">    这个方法确实成立，而且很简便*/</span><br><span class="line">    return (Q.rear - Q.front + MAXQSIZE) % MAXQSIZE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*如果只有front队头指针，一个计数器count, 大小为MAXSIZE的</span><br><span class="line">环形数组，问</span><br><span class="line">1，最多可以容纳多少元素</span><br><span class="line">2，设计相关算法*/</span><br><span class="line">#define MaxSize 10</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    int data[MaxSize];</span><br><span class="line">    int front;</span><br><span class="line">    int count;</span><br><span class="line">&#125;SQ;</span><br><span class="line">//SQ为空：sq.count == 0;</span><br><span class="line">//队满： sq.count == MaxSize;</span><br><span class="line">//队尾元素的位置： (sq.front +sq.count)%MaxSize;</span><br><span class="line"></span><br><span class="line">//初始化</span><br><span class="line">void InitSQ(SQ &amp;qu)&#123;</span><br><span class="line">    qu.front = qu.count = 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//销毁队列不需要，因为没有malloc</span><br><span class="line"></span><br><span class="line">//入队</span><br><span class="line">int EnSQ(SQ &amp;sq,int x)&#123;</span><br><span class="line">    if (sq.count == MaxSize)</span><br><span class="line">        return 0;</span><br><span class="line">    sq.data[(sq.front + sq.count) % MaxSize] = x;</span><br><span class="line">    sq.count++; //计数器</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//出队</span><br><span class="line">int DeSQ(SQ &amp;sq,int &amp;x)&#123;</span><br><span class="line">    if (sq.count == 0)</span><br><span class="line">        return 0;</span><br><span class="line">    x = sq.data[sq.front];</span><br><span class="line">    sq.front = (sq.front + 1) % MaxSize; //重要</span><br><span class="line">    sq.count--;                          //计数器</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//取队头元素</span><br><span class="line">int GetSQ(SQ sq,int &amp;x)&#123;</span><br><span class="line">    if (sq.count == 0) //判断队是否为空</span><br><span class="line">        return 0;</span><br><span class="line">    x = sq.data[sq.front];</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//判断队空</span><br><span class="line">int SQEmpty(SQ sq)&#123;</span><br><span class="line">    if (sq.count == 0)</span><br><span class="line">        return 1; //如果队空，返回1；</span><br><span class="line">    else</span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="链队列"><a href="#链队列" class="headerlink" title="链队列"></a>链队列</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">//带有头结点的单链表</span><br><span class="line">//数据结点</span><br><span class="line"></span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    char data;          //存放对元素</span><br><span class="line">    struct QNode *next; //指向下一结点</span><br><span class="line">&#125; QNode, *QueuePtr;</span><br><span class="line"></span><br><span class="line">//链队结点</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    QNode *front; //队头指针，删除使用</span><br><span class="line">    QNode *rear;  //队尾指针，加入使用</span><br><span class="line">&#125; LinkQueue;</span><br><span class="line"></span><br><span class="line">//判断条件</span><br><span class="line">//队空：Q.front-&gt;next==NULL</span><br><span class="line">//队满：基本不可能</span><br><span class="line">//进队: 同链表，创建结点。插入队尾，并由Q.rear指向它，也就是尾插法</span><br><span class="line">//出队；删除队头的结点</span><br><span class="line"></span><br><span class="line">//初始化链队列</span><br><span class="line">void InitQueueLink(LinkQueue &amp;Q)</span><br><span class="line">&#123;</span><br><span class="line">    if (!Q.front = Q.rear = (QueuePtr)malloc(sizeof(QNode)))</span><br><span class="line">        exit(OVERFLOW);</span><br><span class="line">    Q.front-&gt;next = NULL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//销毁队列</span><br><span class="line">void DestroyQueue(LinkQueue &amp;Q)</span><br><span class="line">&#123;</span><br><span class="line">    while (Q.front) //这是一个循环，rear是front的同步指针，来循环遍历删除</span><br><span class="line">    &#123;</span><br><span class="line">        Q.rear = Q.front-&gt;next;</span><br><span class="line">        free(Q.front);</span><br><span class="line">        Q.front = Q.rear;</span><br><span class="line">    &#125;</span><br><span class="line">    Q.front = Q.rear = NULL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//入队列</span><br><span class="line">void EnQueue(LinkQueue &amp;Q, char e)</span><br><span class="line">&#123;</span><br><span class="line">    QueuePtr p; //存放新的元素</span><br><span class="line">    if (!p = (QueuePtr)malloc(sizeof(QNode)))</span><br><span class="line">        exit(OVERFLOW); //这句话不但申请了空间，还进行了检查</span><br><span class="line">    p-&gt;data = e;</span><br><span class="line">    p-&gt;next = NULL;</span><br><span class="line">    Q.rear-&gt;next = p; //链接</span><br><span class="line">    Q.rear = p;       //更新rear位置</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//出队列,其实就是头插法</span><br><span class="line">int DeQueue(LinkQueue &amp;Q, char &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">    QueuePtr p;</span><br><span class="line">    if (Q.front == Q.rear)</span><br><span class="line">        return 0;</span><br><span class="line">    p = Q.front-&gt;next;       //让p和首元素在指向同一块区域，也就是找到要释放的地方</span><br><span class="line">    e = p-&gt;data;             //将数据存在p中</span><br><span class="line">    Q.front-&gt;next = p-&gt;next; //将front 链接到要释放的地方的后面</span><br><span class="line">    if (Q.rear == p)         //如果只有一个元素的话，队列为空</span><br><span class="line">        Q.rear = Q.front;</span><br><span class="line">    free(p); //释放p和它对应的结点</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//取队头元素</span><br><span class="line">int GetHead(LinkQueue Q, char &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">    QueuePtr p; //这里不定义这个指针也行，但是要保证队不为空，此时直接e = Q.front-&gt;next-&gt;data;</span><br><span class="line">    if (Q.rear = Q.front)</span><br><span class="line">    &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    p = Q.front-&gt;next;</span><br><span class="line">    e = p-&gt;data;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//判断队空</span><br><span class="line">int QueueEmpty(LinkQueue Q)</span><br><span class="line">&#123;</span><br><span class="line">    if (!Q.front-&gt;next == NULL)</span><br><span class="line">        return 0;</span><br><span class="line">    else</span><br><span class="line">        return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*实例：</span><br><span class="line">使用不带头结点的循环链表来表示队列，Q是这样的链表中尾节点指针</span><br><span class="line">基于此，给出入队和出队算法</span><br><span class="line">*/</span><br><span class="line">//审题：虽然=题目没有设置队头结点。但是由于是循环单链表，reae-&gt;next就是首结点</span><br><span class="line">//同理，如果Q.rear == NULL;那么队列为空；</span><br><span class="line">//如果Q.rear-&gt;next  == Q,那就是只有一个结点</span><br><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">    char data;         //数据域</span><br><span class="line">    struct node *next; //指针域</span><br><span class="line">&#125; QNode;               //结点数据类型</span><br><span class="line"></span><br><span class="line">//入队列</span><br><span class="line">void EnterQueue(QNode *&amp;Q, char x)</span><br><span class="line">&#123;</span><br><span class="line">    QNode *s;</span><br><span class="line">    s = (QNode *)malloc(sizeof(QNode));</span><br><span class="line">    s-&gt;data = x;</span><br><span class="line">    if (Q == NULL) //如果原队为空，那就原地打转一次</span><br><span class="line">    &#123;</span><br><span class="line">        Q = s;</span><br><span class="line">        Q-&gt;next = Q;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        s-&gt;next = Q-&gt;next; //先让s指向首元素</span><br><span class="line">        Q-&gt;next = s;       //链接</span><br><span class="line">        Q = s;             //更新尾结点的位置</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//出队列</span><br><span class="line">int ExitQueue(QNode *&amp;Q, char &amp;x)</span><br><span class="line">&#123;</span><br><span class="line">    QNode *s;</span><br><span class="line">    if (Q == NULL) //队为空的情况</span><br><span class="line">        return 0;</span><br><span class="line">    if (Q-&gt;next == Q) //只有一个结点的情况</span><br><span class="line">    &#123;</span><br><span class="line">        x = Q-&gt;data;</span><br><span class="line">        free(Q);</span><br><span class="line">        Q = NULL;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        s = Q-&gt;next; //让s和首元素的位置一样</span><br><span class="line">        x = s-&gt;data;</span><br><span class="line">        Q-&gt;next = s-&gt;next; //链接</span><br><span class="line">        free(s);           //释放</span><br><span class="line">    &#125;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法与数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>C语言</tag>
+        <tag>C++</tag>
+        <tag>算法</tag>
+        <tag>链表</tag>
+        <tag>实例</tag>
+        <tag>数组</tag>
+        <tag>队列</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C和数据结构——栈的两种实现和应用</title>
     <url>/2022/11/05/2022-11-05-zhan-de-shi-xian-he-jian-dan-ying-yong/</url>
     <content><![CDATA[<p>这篇文章围绕 <strong>C和数据结构——栈的两种实现和应用</strong> 做一份便于复习和查阅的整理，内容以概念梳理、代码实现和关键细节为主。</p>
@@ -258,8 +283,8 @@
         <tag>算法</tag>
         <tag>链表</tag>
         <tag>实例</tag>
-        <tag>树</tag>
         <tag>队列</tag>
+        <tag>树</tag>
       </tags>
   </entry>
   <entry>
@@ -284,31 +309,6 @@
       </tags>
   </entry>
   <entry>
-    <title>C和数据结构——队列的两种实现</title>
-    <url>/2022/11/07/2022-11-07-dui-lie-de-liang-chong-shi-xian/</url>
-    <content><![CDATA[<p>这篇文章围绕 <strong>C和数据结构——队列的两种实现</strong> 做一份便于复习和查阅的整理，内容以概念梳理、代码实现和关键细节为主。</p>
-<span id="more"></span>
-
-<h4 id="静态"><a href="#静态" class="headerlink" title="静态"></a>静态</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/*</span><br><span class="line">插入：进队：队尾</span><br><span class="line">删除：出队：队头</span><br><span class="line">可以想象一下啊买东西排队的情况</span><br><span class="line">First In First Out</span><br><span class="line">F I F O</span><br><span class="line">允许插入的一端成为队尾，允许删除的一端称为队头。</span><br><span class="line">所以我们再学习这一部分知识的时候一定要对头插法和</span><br><span class="line">尾插法有着熟练的掌握！</span><br><span class="line"></span><br><span class="line">！！！模型一：！！！</span><br><span class="line">front： 头指针，指向队列头元素</span><br><span class="line">rear:  尾指针，指向尾元素的下一个</span><br><span class="line">队空条件：front == rear</span><br><span class="line">队满条件：rear - front ==0</span><br><span class="line">这里读者可以自己试试几种队满和对空的情况</span><br><span class="line"></span><br><span class="line">通过不断的测试，我们发现，如果仅仅根据rear =MAXSIZE</span><br><span class="line">判断队满的情况是不合理的，因为再实际的生活和问题中我们知道</span><br><span class="line">，一个队伍可以站多少人，完全取决于总的人数，也就是MAXSIZE</span><br><span class="line">，而不是取决于最后一个人是不是站在了某一个地方，也就是rear==MAXSIZE</span><br><span class="line">，如果那样的话，显然会造成存储空间的大大浪费，所以，</span><br><span class="line">模型二：</span><br><span class="line">我们这里不妨1设想，即使使用数组，数组也是一个循环或者说是一个front 和</span><br><span class="line">rear连在一起环状数组，数组的下标同样成立，比如，当MAXSIZE=5,front =4时</span><br><span class="line">,按照道理说此时的rear已经起码为5了（其实按照道理是不可以的），也就是说不能再进队了，</span><br><span class="line">但是可以想到，在front 的前面应该还有4个位置，所以根据循环数组</span><br><span class="line">的假设，我们知道此时的rear应该是rear = 1，而不是5，可以继续</span><br><span class="line">在top处入队，假设此时处于4的位置元素为a,=进入新的元素b,之后，</span><br><span class="line">b就在4的位置了，而a就在0的位置了，此时相应的rear的位置应该为1，也就是</span><br><span class="line">队头指针进一：front=(front+) MOD MAXSIZE</span><br><span class="line">队尾元素进一： rear = (rear+1) MOD MAXSIZE,</span><br><span class="line">而不是简单的加一操作了。</span><br><span class="line">如此继续进行入队，我们发现：</span><br><span class="line">当队满的时候，front = rear但是不等于0，而且不同的入队和出队的情况下，队满的</span><br><span class="line">情况也不一样，最为头疼的是，我们好像没法判断队空了，因为此时队空和队满都</span><br><span class="line">是front = rear,!!所以，为了可以区分这个问题我们</span><br><span class="line">规定：</span><br><span class="line">1，当rear = front时，队空</span><br><span class="line">2，当(rear+1)MOD MAXSIZE = front 时，队满</span><br><span class="line">由2的规定我们不难发现，按照这种情况下的队满，不是真正意义上的队满，</span><br><span class="line">比如此时rear = 3，front  = 4，由2的规定，我们知道已经满足，但是</span><br><span class="line">由于rear并不会指向元素，所以当队满的时候，实际上还是可以加入一个</span><br><span class="line">元素，但是不得不说，这个相对于模型一已经有巨大的改进了；</span><br><span class="line">可以归纳如下：</span><br><span class="line">队空：Q.front == Q.rear</span><br><span class="line">对满： (Q.rear+1)%MAXSIZE == Q.front</span><br><span class="line">进队： Q.data[Q.rear]=x; Q.rear =(Q.rear+1)%MAXSIZE;</span><br><span class="line">出队： x=Q.data[Q.front]; Q.front = (Q.front+1)%MAXSIZE;</span><br><span class="line">模型三：</span><br><span class="line">可以设置一个flag标识，每次</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">//静态存储</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#define MAX_SIZE 20</span><br><span class="line">typedef char ElemType;</span><br><span class="line">//typedef struct</span><br><span class="line">//&#123;</span><br><span class="line">//    ElemType data[MAX_SIZE]; //所有元素</span><br><span class="line">//    int front, raer;         //队尾和队头</span><br><span class="line">//&#125; SqQueue;</span><br><span class="line">#define MAXQSIZE 100 //最大的队列长度+1</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    ElemType *base; //用来初始化分配空间</span><br><span class="line">    int front;</span><br><span class="line">    int rear;</span><br><span class="line"></span><br><span class="line">&#125; SqQueue;</span><br><span class="line"></span><br><span class="line">//初始化队列</span><br><span class="line">void InitQueue(SqQueue &amp;Q)</span><br><span class="line">&#123;</span><br><span class="line">    Q.base = (ElemType *)malloc(MAXQSIZE * sizeof(ElemType));</span><br><span class="line">    if (!Q.base)</span><br><span class="line">        exit(OVERFLOW); //判断是否分配成功</span><br><span class="line">    Q.front = Q.rear = 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//销毁队列</span><br><span class="line">void DestroyQueue(SqQueue Q)</span><br><span class="line">&#123;</span><br><span class="line">    if (Q.base)</span><br><span class="line">    //如果队不是空</span><br><span class="line">    &#123;</span><br><span class="line">        free(Q.base);</span><br><span class="line">        Q.base = NULL;</span><br><span class="line">        Q.front = Q.rear = 0; //这里的表参数也要改变</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//入队列</span><br><span class="line">int EnQueue(SqQueue &amp;Q,ElemType e&#123;</span><br><span class="line">    if ((Q.rear + 1) % MAXQSIZE == Q.front)</span><br><span class="line">        return 0; //判断是否队满</span><br><span class="line">    Q.base[Q.rear] = 0;</span><br><span class="line">    Q.rear = (Q.rear + 1) % MAXQSIZE;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//出队</span><br><span class="line">int DeQueue(SqQueue &amp;Q,Elemtype &amp;e)&#123;</span><br><span class="line">    if (Q.front == Q.rear) //如果为空，删除并返回队头元素</span><br><span class="line">        return 0;          //否则返回0</span><br><span class="line">    e = Q.base[Q.front];</span><br><span class="line">    Q.front = (Q.front + 1) % MAXQSIZE;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//取队头元素</span><br><span class="line">int GetHead(SqQueue Q,Elemtype &amp;e)&#123;</span><br><span class="line">    if (Q.front == Q.rear)</span><br><span class="line">        return 0;</span><br><span class="line">    e = Q.base[Q.front];</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//判断队空</span><br><span class="line">int QueueEmpty(SqQueue Q)&#123;</span><br><span class="line">    if (Q.front == Q.rear)</span><br><span class="line">        return 1;</span><br><span class="line">    else</span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//求队列中元素的个数(循环队列)</span><br><span class="line">int QueueLength(SqQueue Q)&#123;</span><br><span class="line">    /*其实我自己的想法是根据队满条件建立循环，但是总结发现</span><br><span class="line">    这个方法确实成立，而且很简便*/</span><br><span class="line">    return (Q.rear - Q.front + MAXQSIZE) % MAXQSIZE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*如果只有front队头指针，一个计数器count, 大小为MAXSIZE的</span><br><span class="line">环形数组，问</span><br><span class="line">1，最多可以容纳多少元素</span><br><span class="line">2，设计相关算法*/</span><br><span class="line">#define MaxSize 10</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    int data[MaxSize];</span><br><span class="line">    int front;</span><br><span class="line">    int count;</span><br><span class="line">&#125;SQ;</span><br><span class="line">//SQ为空：sq.count == 0;</span><br><span class="line">//队满： sq.count == MaxSize;</span><br><span class="line">//队尾元素的位置： (sq.front +sq.count)%MaxSize;</span><br><span class="line"></span><br><span class="line">//初始化</span><br><span class="line">void InitSQ(SQ &amp;qu)&#123;</span><br><span class="line">    qu.front = qu.count = 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//销毁队列不需要，因为没有malloc</span><br><span class="line"></span><br><span class="line">//入队</span><br><span class="line">int EnSQ(SQ &amp;sq,int x)&#123;</span><br><span class="line">    if (sq.count == MaxSize)</span><br><span class="line">        return 0;</span><br><span class="line">    sq.data[(sq.front + sq.count) % MaxSize] = x;</span><br><span class="line">    sq.count++; //计数器</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//出队</span><br><span class="line">int DeSQ(SQ &amp;sq,int &amp;x)&#123;</span><br><span class="line">    if (sq.count == 0)</span><br><span class="line">        return 0;</span><br><span class="line">    x = sq.data[sq.front];</span><br><span class="line">    sq.front = (sq.front + 1) % MaxSize; //重要</span><br><span class="line">    sq.count--;                          //计数器</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//取队头元素</span><br><span class="line">int GetSQ(SQ sq,int &amp;x)&#123;</span><br><span class="line">    if (sq.count == 0) //判断队是否为空</span><br><span class="line">        return 0;</span><br><span class="line">    x = sq.data[sq.front];</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//判断队空</span><br><span class="line">int SQEmpty(SQ sq)&#123;</span><br><span class="line">    if (sq.count == 0)</span><br><span class="line">        return 1; //如果队空，返回1；</span><br><span class="line">    else</span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h4 id="链队列"><a href="#链队列" class="headerlink" title="链队列"></a>链队列</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">//带有头结点的单链表</span><br><span class="line">//数据结点</span><br><span class="line"></span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    char data;          //存放对元素</span><br><span class="line">    struct QNode *next; //指向下一结点</span><br><span class="line">&#125; QNode, *QueuePtr;</span><br><span class="line"></span><br><span class="line">//链队结点</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    QNode *front; //队头指针，删除使用</span><br><span class="line">    QNode *rear;  //队尾指针，加入使用</span><br><span class="line">&#125; LinkQueue;</span><br><span class="line"></span><br><span class="line">//判断条件</span><br><span class="line">//队空：Q.front-&gt;next==NULL</span><br><span class="line">//队满：基本不可能</span><br><span class="line">//进队: 同链表，创建结点。插入队尾，并由Q.rear指向它，也就是尾插法</span><br><span class="line">//出队；删除队头的结点</span><br><span class="line"></span><br><span class="line">//初始化链队列</span><br><span class="line">void InitQueueLink(LinkQueue &amp;Q)</span><br><span class="line">&#123;</span><br><span class="line">    if (!Q.front = Q.rear = (QueuePtr)malloc(sizeof(QNode)))</span><br><span class="line">        exit(OVERFLOW);</span><br><span class="line">    Q.front-&gt;next = NULL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//销毁队列</span><br><span class="line">void DestroyQueue(LinkQueue &amp;Q)</span><br><span class="line">&#123;</span><br><span class="line">    while (Q.front) //这是一个循环，rear是front的同步指针，来循环遍历删除</span><br><span class="line">    &#123;</span><br><span class="line">        Q.rear = Q.front-&gt;next;</span><br><span class="line">        free(Q.front);</span><br><span class="line">        Q.front = Q.rear;</span><br><span class="line">    &#125;</span><br><span class="line">    Q.front = Q.rear = NULL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//入队列</span><br><span class="line">void EnQueue(LinkQueue &amp;Q, char e)</span><br><span class="line">&#123;</span><br><span class="line">    QueuePtr p; //存放新的元素</span><br><span class="line">    if (!p = (QueuePtr)malloc(sizeof(QNode)))</span><br><span class="line">        exit(OVERFLOW); //这句话不但申请了空间，还进行了检查</span><br><span class="line">    p-&gt;data = e;</span><br><span class="line">    p-&gt;next = NULL;</span><br><span class="line">    Q.rear-&gt;next = p; //链接</span><br><span class="line">    Q.rear = p;       //更新rear位置</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//出队列,其实就是头插法</span><br><span class="line">int DeQueue(LinkQueue &amp;Q, char &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">    QueuePtr p;</span><br><span class="line">    if (Q.front == Q.rear)</span><br><span class="line">        return 0;</span><br><span class="line">    p = Q.front-&gt;next;       //让p和首元素在指向同一块区域，也就是找到要释放的地方</span><br><span class="line">    e = p-&gt;data;             //将数据存在p中</span><br><span class="line">    Q.front-&gt;next = p-&gt;next; //将front 链接到要释放的地方的后面</span><br><span class="line">    if (Q.rear == p)         //如果只有一个元素的话，队列为空</span><br><span class="line">        Q.rear = Q.front;</span><br><span class="line">    free(p); //释放p和它对应的结点</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//取队头元素</span><br><span class="line">int GetHead(LinkQueue Q, char &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">    QueuePtr p; //这里不定义这个指针也行，但是要保证队不为空，此时直接e = Q.front-&gt;next-&gt;data;</span><br><span class="line">    if (Q.rear = Q.front)</span><br><span class="line">    &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    p = Q.front-&gt;next;</span><br><span class="line">    e = p-&gt;data;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//判断队空</span><br><span class="line">int QueueEmpty(LinkQueue Q)</span><br><span class="line">&#123;</span><br><span class="line">    if (!Q.front-&gt;next == NULL)</span><br><span class="line">        return 0;</span><br><span class="line">    else</span><br><span class="line">        return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*实例：</span><br><span class="line">使用不带头结点的循环链表来表示队列，Q是这样的链表中尾节点指针</span><br><span class="line">基于此，给出入队和出队算法</span><br><span class="line">*/</span><br><span class="line">//审题：虽然=题目没有设置队头结点。但是由于是循环单链表，reae-&gt;next就是首结点</span><br><span class="line">//同理，如果Q.rear == NULL;那么队列为空；</span><br><span class="line">//如果Q.rear-&gt;next  == Q,那就是只有一个结点</span><br><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">    char data;         //数据域</span><br><span class="line">    struct node *next; //指针域</span><br><span class="line">&#125; QNode;               //结点数据类型</span><br><span class="line"></span><br><span class="line">//入队列</span><br><span class="line">void EnterQueue(QNode *&amp;Q, char x)</span><br><span class="line">&#123;</span><br><span class="line">    QNode *s;</span><br><span class="line">    s = (QNode *)malloc(sizeof(QNode));</span><br><span class="line">    s-&gt;data = x;</span><br><span class="line">    if (Q == NULL) //如果原队为空，那就原地打转一次</span><br><span class="line">    &#123;</span><br><span class="line">        Q = s;</span><br><span class="line">        Q-&gt;next = Q;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        s-&gt;next = Q-&gt;next; //先让s指向首元素</span><br><span class="line">        Q-&gt;next = s;       //链接</span><br><span class="line">        Q = s;             //更新尾结点的位置</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//出队列</span><br><span class="line">int ExitQueue(QNode *&amp;Q, char &amp;x)</span><br><span class="line">&#123;</span><br><span class="line">    QNode *s;</span><br><span class="line">    if (Q == NULL) //队为空的情况</span><br><span class="line">        return 0;</span><br><span class="line">    if (Q-&gt;next == Q) //只有一个结点的情况</span><br><span class="line">    &#123;</span><br><span class="line">        x = Q-&gt;data;</span><br><span class="line">        free(Q);</span><br><span class="line">        Q = NULL;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        s = Q-&gt;next; //让s和首元素的位置一样</span><br><span class="line">        x = s-&gt;data;</span><br><span class="line">        Q-&gt;next = s-&gt;next; //链接</span><br><span class="line">        free(s);           //释放</span><br><span class="line">    &#125;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法与数据结构</category>
-      </categories>
-      <tags>
-        <tag>数据结构</tag>
-        <tag>C语言</tag>
-        <tag>C++</tag>
-        <tag>算法</tag>
-        <tag>链表</tag>
-        <tag>实例</tag>
-        <tag>数组</tag>
-        <tag>队列</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>深度学习——nn.Module 的使用</title>
     <url>/2023/03/01/2023-03-01-nn-module/</url>
     <content><![CDATA[<p>这篇文章主要记录 <strong>深度学习——nn.Module 的使用</strong> 的学习过程，方便后续快速回顾核心概念、代码写法与实验细节。</p>
@@ -323,6 +323,55 @@
         <tag>深度学习</tag>
         <tag>PyTorch</tag>
         <tag>Module</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo 中如何正确写博客（完整指南）</title>
+    <url>/2022/11/11/2022-11-11-2022-11-11-hexo-writing-guide/</url>
+    <content><![CDATA[<p>Hexo 是一个轻量级静态博客框架，通过 <strong>Markdown + Node.js</strong> 就可以快速搭建个人博客。</p>
+<p>本文总结了 Hexo 写博客时最常用的操作方法。</p>
+<span id="more"></span>
+
+<h2 id="创建分类页"><a href="#创建分类页" class="headerlink" title="创建分类页"></a>创建分类页</h2><p>在博客根目录执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<p>然后打开：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source/categories/index.md</span><br></pre></td></tr></table></figure>
+
+<p>修改为：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">分类</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022-11-11</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">categories</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">categories</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="创建标签页"><a href="#创建标签页" class="headerlink" title="创建标签页"></a>创建标签页</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+
+<p>修改：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">标签</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022-11-11</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">tags</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new post <span class="string">&quot;我的第一篇博客&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>生成：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source/_posts/我的第一篇博客.md</span><br></pre></td></tr></table></figure>
+
+<p>文章头部格式：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">文章标题</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022-11-11 10:30:00</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">文章摘要</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Hexo</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">教程</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><p>将图片放入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source/images/</span><br></pre></td></tr></table></figure>
+
+<p>然后写：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">示意图</span>](<span class="link">/images/example.png</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="发布博客"><a href="#发布博客" class="headerlink" title="发布博客"></a>发布博客</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>博客就会自动部署到 GitHub Pages。</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Markdown</tag>
+        <tag>博客</tag>
+        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
@@ -381,55 +430,6 @@
         <tag>PyTorch</tag>
         <tag>CIFAR10</tag>
         <tag>MaxPool2d</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo 中如何正确写博客（完整指南）</title>
-    <url>/2022/11/11/2022-11-11-2022-11-11-hexo-writing-guide/</url>
-    <content><![CDATA[<p>Hexo 是一个轻量级静态博客框架，通过 <strong>Markdown + Node.js</strong> 就可以快速搭建个人博客。</p>
-<p>本文总结了 Hexo 写博客时最常用的操作方法。</p>
-<span id="more"></span>
-
-<h2 id="创建分类页"><a href="#创建分类页" class="headerlink" title="创建分类页"></a>创建分类页</h2><p>在博客根目录执行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
-
-<p>然后打开：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source/categories/index.md</span><br></pre></td></tr></table></figure>
-
-<p>修改为：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">分类</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022-11-11</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">categories</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">categories</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="创建标签页"><a href="#创建标签页" class="headerlink" title="创建标签页"></a>创建标签页</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
-
-<p>修改：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">标签</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022-11-11</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">tags</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new post <span class="string">&quot;我的第一篇博客&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>生成：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source/_posts/我的第一篇博客.md</span><br></pre></td></tr></table></figure>
-
-<p>文章头部格式：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">文章标题</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022-11-11 10:30:00</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">文章摘要</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Hexo</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">教程</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><p>将图片放入：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source/images/</span><br></pre></td></tr></table></figure>
-
-<p>然后写：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">示意图</span>](<span class="link">/images/example.png</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="发布博客"><a href="#发布博客" class="headerlink" title="发布博客"></a>发布博客</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<p>博客就会自动部署到 GitHub Pages。</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Markdown</tag>
-        <tag>博客</tag>
-        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
@@ -493,42 +493,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo 博客主题美化与配置指南</title>
-    <url>/2023/06/20/2023-06-20-2023-06-20-hexo-theme-custom/</url>
-    <content><![CDATA[<p>Hexo 的主题系统非常灵活，可以快速改变博客外观。</p>
-<span id="more"></span>
-
-<h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><p>例如安装 NexT：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
-
-<p>修改 <code>_config.yml</code>：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="修改菜单"><a href="#修改菜单" class="headerlink" title="修改菜单"></a>修改菜单</h2><p>在主题配置文件中修改：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="修改头像"><a href="#修改头像" class="headerlink" title="修改头像"></a>修改头像</h2><p>将头像放入：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source/images/avatar.png</span><br></pre></td></tr></table></figure>
-
-<p>配置：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">avatar:</span> <span class="string">/images/avatar.png</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="自定义样式"><a href="#自定义样式" class="headerlink" title="自定义样式"></a>自定义样式</h2><p>可以修改：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">themes/next/source/css</span><br></pre></td></tr></table></figure>
-
-<p>来自定义颜色与字体。</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>博客</tag>
-        <tag>教程</tag>
-        <tag>主题</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何用 Hexo 打造一个科研博客</title>
     <url>/2023/07/18/2023-07-18-2023-07-18-hexo-research-blog/</url>
     <content><![CDATA[<p>对于计算机研究生来说，一个技术博客非常有价值。</p>
@@ -574,169 +538,39 @@
       </tags>
   </entry>
   <entry>
-    <title>保研学校怎么选：我会怎么比较电子科大、中山大学和西安交大</title>
-    <url>/2024/09/02/2024-09-02-bao-yan-xue-xiao-zen-yao-xuan/</url>
-    <content><![CDATA[<p>每年到预推免这个阶段，最常见的问题不是“我要不要保”，而是“这几个学校到底怎么选”。</p>
-<p>尤其是手里同时有几种风格完全不同的 offer 时，人特别容易乱。</p>
-<p>我自己一路看下来，有个感受很明显：<strong>很多人嘴上在选学校，实际上在同时选城市、导师、方向、毕业难度和未来生活方式。</strong></p>
+    <title>Hexo 博客主题美化与配置指南</title>
+    <url>/2023/06/20/2023-06-20-2023-06-20-hexo-theme-custom/</url>
+    <content><![CDATA[<p>Hexo 的主题系统非常灵活，可以快速改变博客外观。</p>
 <span id="more"></span>
 
-<p>所以这篇不搞那种一刀切排名，我就按照我自己的价值排序，聊聊如果是我，在电子科大、中山大学、西安交大这类学校之间会怎么比较。</p>
-<h2 id="先说结论：不要只按学校名气排序"><a href="#先说结论：不要只按学校名气排序" class="headerlink" title="先说结论：不要只按学校名气排序"></a>先说结论：不要只按学校名气排序</h2><p>保研不是高考。</p>
-<p>高考更像“先上车再说”，但保研已经到了专业方向更细、导师差异更大、个人目标更具体的阶段。这个时候如果你还只盯着学校名字，后面很容易后悔。</p>
-<p>我自己更认可的判断顺序是：</p>
-<h3 id="如果你以后想认真做科研"><a href="#如果你以后想认真做科研" class="headerlink" title="如果你以后想认真做科研"></a>如果你以后想认真做科研</h3><p><strong>导师 &gt; 方向 &gt; 组会氛围 &gt; 学校平台 &gt; 城市</strong></p>
-<h3 id="如果你以后更偏就业"><a href="#如果你以后更偏就业" class="headerlink" title="如果你以后更偏就业"></a>如果你以后更偏就业</h3><p><strong>城市 &gt; 实习资源 &gt; 学校牌子 &gt; 导师是否放养 &gt; 方向匹配</strong></p>
-<p>这两套排序不能混着用。很多人的纠结，根本原因就是既想科研舒服，又想实习自由，还想学校名头最响，最后当然选不出来。</p>
-<h2 id="我会重点看哪几个维度"><a href="#我会重点看哪几个维度" class="headerlink" title="我会重点看哪几个维度"></a>我会重点看哪几个维度</h2><h2 id="1-导师到底靠不靠谱"><a href="#1-导师到底靠不靠谱" class="headerlink" title="1. 导师到底靠不靠谱"></a>1. 导师到底靠不靠谱</h2><p>这个问题永远排在前面。</p>
-<p>因为同一所学校里，不同导师带来的体验差距，往往大于学校之间的差距。</p>
-<p>我问导师时，最关心下面这几件事：</p>
-<ul>
-<li>老师有没有稳定方向，不是今天做这个明天做那个；</li>
-<li>组里学生毕业情况怎么样；</li>
-<li>是真指导还是纯放羊；</li>
-<li>能不能给学生真实的项目、论文、实习机会；</li>
-<li>老师对硕士的预期是什么。</li>
-</ul>
-<p>尤其是硕士，别光听“老师很厉害”，你更该问的是：</p>
-<blockquote>
-<p>他对硕士到底上不上心？</p>
-</blockquote>
-<p>有些老师非常强，但资源主要给博士；有些老师名气没那么夸张，但愿意带学生、给方向、帮你快速起步。对硕士来说，后者未必差。</p>
-<h2 id="2-方向适不适合你"><a href="#2-方向适不适合你" class="headerlink" title="2. 方向适不适合你"></a>2. 方向适不适合你</h2><p>保研阶段特别容易犯一个错：为了学校 title，硬去一个自己并不想做的方向。</p>
-<p>我一直觉得这件事性价比很低。</p>
-<p>比如你本科是软件工程、计算机背景，自己做过开发、算法、项目，也明确想走 AI、时空数据挖掘、系统开发这些路线，那你突然为了名头转去一个完全不熟、也不喜欢的方向，最后大概率会很痛苦。</p>
-<p>研究生不是只读三年课表，它会很大程度影响你后面：</p>
-<ul>
-<li>论文写什么；</li>
-<li>实习怎么找；</li>
-<li>秋招怎么讲自己的经历；</li>
-<li>毕业后去工业界还是继续读博。</li>
-</ul>
-<p>所以学校可以略有高低，但方向别偏得太离谱。</p>
-<h2 id="3-城市是不是你想长期待的地方"><a href="#3-城市是不是你想长期待的地方" class="headerlink" title="3. 城市是不是你想长期待的地方"></a>3. 城市是不是你想长期待的地方</h2><p>这个事情很多同学现在不愿意承认，但等研究生读到一半就会发现很现实。</p>
-<p>城市会影响：</p>
-<ul>
-<li>实习机会</li>
-<li>校友资源</li>
-<li>就业密度</li>
-<li>生活成本</li>
-<li>你未来是不是愿意留下来</li>
-</ul>
-<p>如果你很看重互联网、AI 企业、实习便利性，那珠三角和成都这种地方，对很多计算机同学确实会更舒服一些。</p>
-<p>如果你更偏学术环境、工科平台、传统强校氛围，那西安这样的城市也有它的优势。</p>
-<p>没有绝对好坏，关键是你认不认这个账。</p>
-<h2 id="具体说说这三类学校，我会怎么想"><a href="#具体说说这三类学校，我会怎么想" class="headerlink" title="具体说说这三类学校，我会怎么想"></a>具体说说这三类学校，我会怎么想</h2><p>下面只是我个人的取舍逻辑，不是标准答案。</p>
-<h2 id="一、电子科技大学：适合目标相对明确、希望路径比较稳的人"><a href="#一、电子科技大学：适合目标相对明确、希望路径比较稳的人" class="headerlink" title="一、电子科技大学：适合目标相对明确、希望路径比较稳的人"></a>一、电子科技大学：适合目标相对明确、希望路径比较稳的人</h2><p>如果你本身就是电子信息、计算机、软件这条线的同学，那电子科大很多时候是一个很稳的选择。</p>
-<p>我自己对它最大的感受是：</p>
-<ul>
-<li>工科氛围比较统一；</li>
-<li>相关方向资源集中；</li>
-<li>在电子信息、计算机、AI 这几个方向里，认可度比较直接；</li>
-<li>成都生活体验不错，节奏相对也没那么绷。</li>
-</ul>
-<p>如果你想做的方向本来就和它强项一致，比如 AI、网络安全、软件、电子信息，那么它不是那种“看起来惊艳但落地一般”的学校，而是比较务实。</p>
-<p>尤其对西南地区发展、想兼顾读研体验和后续就业的人来说，这个选择往往不亏。</p>
-<p>但电子科大也不是没有前提：</p>
-<h3 id="前提是你要挑对老师"><a href="#前提是你要挑对老师" class="headerlink" title="前提是你要挑对老师"></a>前提是你要挑对老师</h3><p>如果老师不合适，学校优势也会被抵消很多。</p>
-<h2 id="二、中山大学：城市资源和综合平台，是它很强的一张牌"><a href="#二、中山大学：城市资源和综合平台，是它很强的一张牌" class="headerlink" title="二、中山大学：城市资源和综合平台，是它很强的一张牌"></a>二、中山大学：城市资源和综合平台，是它很强的一张牌</h2><p>中大给我的感觉，是一种比较典型的“综合型强校 + 区域资源优势”的组合。</p>
-<p>如果你比较看重这些：</p>
-<ul>
-<li>广州、深圳一带的实习便利；</li>
-<li>更开放的综合校平台；</li>
-<li>学校整体名头在更广泛语境下的认可度；</li>
-<li>以后想在华南发展；</li>
-</ul>
-<p>那中大是很值得认真考虑的。</p>
-<p>尤其对于计算机同学来说，华南地区的产业连接是实打实存在的。研究生阶段你哪怕不是每学期都去实习，身边的信息密度也会更高。</p>
-<p>但中大同样要看具体学院、具体方向、具体老师。</p>
-<p>不能因为“中大两个字”就默认所有实验室体验都一样。说到底，最后带你三年的不是学校 logo，而是具体那个组。</p>
-<h2 id="三、西安交通大学：平台硬、底子强，适合认工科训练的人"><a href="#三、西安交通大学：平台硬、底子强，适合认工科训练的人" class="headerlink" title="三、西安交通大学：平台硬、底子强，适合认工科训练的人"></a>三、西安交通大学：平台硬、底子强，适合认工科训练的人</h2><p>西交这类学校给人的感觉，通常是底盘很稳。</p>
-<p>它的优点不一定是“互联网叙事最强”，但在传统强校体系里，平台、校风、工科训练、整体认可度都很能打。</p>
-<p>如果你是这种类型：</p>
-<ul>
-<li>希望研究生阶段训练更扎实；</li>
-<li>对学校整体气质有认同；</li>
-<li>能接受城市节奏和地理位置；</li>
-<li>更在意长期平台而不是短期热闹；</li>
-</ul>
-<p>那西交是完全值得选的。</p>
-<p>尤其很多同学本科阶段信息比较碎，研究生反而需要一个更稳、更能把基本功重新拉起来的环境，这类学校会更适合。</p>
-<h2 id="那到底怎么选？我会用一个很土但很好用的方法"><a href="#那到底怎么选？我会用一个很土但很好用的方法" class="headerlink" title="那到底怎么选？我会用一个很土但很好用的方法"></a>那到底怎么选？我会用一个很土但很好用的方法</h2><p>我一般会给每个学校按下面五项打分：</p>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>我会看什么</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>导师</td>
-<td>带人方式、毕业情况、资源投入</td>
-</tr>
-<tr>
-<td>方向</td>
-<td>和我过去经历、未来计划是否一致</td>
-</tr>
-<tr>
-<td>城市</td>
-<td>实习、就业、生活成本、是否愿意长期待</td>
-</tr>
-<tr>
-<td>平台</td>
-<td>学校和学院在目标赛道的认可度</td>
-</tr>
-<tr>
-<td>个人体验</td>
-<td>校园氛围、同门状态、自己是否真想去</td>
-</tr>
-</tbody></table>
-<p>然后你会发现，很多纠结其实一算就出来了。</p>
-<h2 id="三种常见情况，我的建议分别是"><a href="#三种常见情况，我的建议分别是" class="headerlink" title="三种常见情况，我的建议分别是"></a>三种常见情况，我的建议分别是</h2><h3 id="1-你想读博，或者至少想认真做科研"><a href="#1-你想读博，或者至少想认真做科研" class="headerlink" title="1. 你想读博，或者至少想认真做科研"></a>1. 你想读博，或者至少想认真做科研</h3><p>那就别被城市和学校名头带着跑。</p>
-<p>直接重点看：</p>
-<ul>
-<li>老师近几年方向稳不稳；</li>
-<li>组里有没有靠谱师兄师姐；</li>
-<li>硕士能不能发东西；</li>
-<li>你自己对这个方向有没有耐心。</li>
-</ul>
-<p>这个时候，<strong>适合的老师比“更响的校名”重要很多。</strong></p>
-<h3 id="2-你大概率硕士毕业就工作"><a href="#2-你大概率硕士毕业就工作" class="headerlink" title="2. 你大概率硕士毕业就工作"></a>2. 你大概率硕士毕业就工作</h3><p>那就别假装自己只看学术。</p>
-<p>你应该重点看：</p>
-<ul>
-<li>城市和实习资源；</li>
-<li>组里对外实习的态度；</li>
-<li>学校在目标行业的认可度；</li>
-<li>你能不能做出方便秋招讲述的项目或论文。</li>
-</ul>
-<p>说白了，工作导向的人，研究生三年最怕的不是学校一般，而是<strong>把自己锁进一个既没产出、又没实习的组里</strong>。</p>
-<h3 id="3-你现在根本没想清楚"><a href="#3-你现在根本没想清楚" class="headerlink" title="3. 你现在根本没想清楚"></a>3. 你现在根本没想清楚</h3><p>那就选更稳、更通用的。</p>
-<p>比如方向别太偏，老师别太极端，城市别太封闭，学校平台别太窄。给自己留余地，比赌一个听起来很厉害但自己并不理解的选择更重要。</p>
-<h2 id="最后再说一句很现实的话"><a href="#最后再说一句很现实的话" class="headerlink" title="最后再说一句很现实的话"></a>最后再说一句很现实的话</h2><p>保研选学校这件事，到最后很少有“完美答案”。</p>
-<p>真正好的选择，通常是那个：</p>
-<ul>
-<li>你大致知道自己为什么选它；</li>
-<li>你能接受它的代价；</li>
-<li>它能服务你未来两三年的核心目标。</li>
-</ul>
-<p>如果是我，我不会只问“电子科大、中山大学、西安交大谁更好”，我会先问自己：</p>
-<blockquote>
-<p>我研究生三年到底想换来什么？</p>
-</blockquote>
-<p>这个问题想明白了，学校就没那么难选了。</p>
+<h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><p>例如安装 NexT：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+
+<p>修改 <code>_config.yml</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改菜单"><a href="#修改菜单" class="headerlink" title="修改菜单"></a>修改菜单</h2><p>在主题配置文件中修改：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改头像"><a href="#修改头像" class="headerlink" title="修改头像"></a>修改头像</h2><p>将头像放入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source/images/avatar.png</span><br></pre></td></tr></table></figure>
+
+<p>配置：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">avatar:</span> <span class="string">/images/avatar.png</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义样式"><a href="#自定义样式" class="headerlink" title="自定义样式"></a>自定义样式</h2><p>可以修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">themes/next/source/css</span><br></pre></td></tr></table></figure>
+
+<p>来自定义颜色与字体。</p>
 ]]></content>
       <categories>
-        <category>保研</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>科研</tag>
-        <tag>研究生</tag>
-        <tag>保研</tag>
-        <tag>推免</tag>
-        <tag>学校选择</tag>
-        <tag>电子科技大学</tag>
-        <tag>中山大学</tag>
-        <tag>西安交通大学</tag>
+        <tag>Hexo</tag>
+        <tag>博客</tag>
+        <tag>教程</tag>
+        <tag>主题</tag>
       </tags>
   </entry>
   <entry>
@@ -970,11 +804,359 @@
         <tag>科研</tag>
         <tag>保研</tag>
         <tag>推免</tag>
-        <tag>电子科技大学</tag>
         <tag>简历</tag>
         <tag>预推免</tag>
         <tag>夏令营</tag>
+        <tag>电子科技大学</tag>
         <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>保研面试题和笔试题怎么准备：把时间花在最容易出分的地方</title>
+    <url>/2024/09/10/2024-09-10-bao-yan-mian-shi-he-bi-shi-zhun-bei/</url>
+    <content><![CDATA[<p>保研准备里，最容易让人焦虑的就是面试和笔试。</p>
+<p>一方面你总觉得自己什么都不会，另一方面网上经验帖越看越吓人：英语口语、项目深挖、算法题、408、机器学习、开放题……像什么都可能考。</p>
+<p>但我自己的体会是，<strong>保研准备最怕的不是不会，而是复习顺序错了</strong>。</p>
+<span id="more"></span>
+
+<p>时间本来就紧，如果你上来就去啃最偏最难的东西，最后很可能基础没复盘到，项目也没讲顺，面试一问三不知。</p>
+<p>这篇我就按“真正能提分”的逻辑来讲。</p>
+<h2 id="一、先分清：面试和笔试考的不是一回事"><a href="#一、先分清：面试和笔试考的不是一回事" class="headerlink" title="一、先分清：面试和笔试考的不是一回事"></a>一、先分清：面试和笔试考的不是一回事</h2><h3 id="面试更看三件事"><a href="#面试更看三件事" class="headerlink" title="面试更看三件事"></a>面试更看三件事</h3><ol>
+<li>你是不是你简历上写的那个人；</li>
+<li>你基础是否过关；</li>
+<li>你表达是否清楚，值不值得招。</li>
+</ol>
+<h3 id="笔试更看两件事"><a href="#笔试更看两件事" class="headerlink" title="笔试更看两件事"></a>笔试更看两件事</h3><ol>
+<li>你有没有系统复习过基础；</li>
+<li>你写题速度稳不稳。</li>
+</ol>
+<p>所以不要拿准备笔试的方法去准备面试，也别拿背自我介绍的方式去赌笔试。</p>
+<h2 id="二、面试准备，我建议优先搞定这四块"><a href="#二、面试准备，我建议优先搞定这四块" class="headerlink" title="二、面试准备，我建议优先搞定这四块"></a>二、面试准备，我建议优先搞定这四块</h2><h2 id="1-自我介绍：一分钟和三分钟都要有"><a href="#1-自我介绍：一分钟和三分钟都要有" class="headerlink" title="1. 自我介绍：一分钟和三分钟都要有"></a>1. 自我介绍：一分钟和三分钟都要有</h2><p>很多人觉得自我介绍很简单，实际上这里最容易翻车。</p>
+<p>因为老师对你的第一印象，往往就来自这里。</p>
+<p>我建议准备两个版本：</p>
+<h3 id="一分钟版本"><a href="#一分钟版本" class="headerlink" title="一分钟版本"></a>一分钟版本</h3><p>适合老师打断式面试，快速讲清：</p>
+<ul>
+<li>我是谁</li>
+<li>本科哪里</li>
+<li>主要做过什么</li>
+<li>为什么来这个方向</li>
+</ul>
+<h3 id="三分钟版本"><a href="#三分钟版本" class="headerlink" title="三分钟版本"></a>三分钟版本</h3><p>适合老师愿意听你展开的时候，讲清：</p>
+<ul>
+<li>基本背景</li>
+<li>代表性项目 / 竞赛 / 科研</li>
+<li>你对研究生阶段的规划</li>
+</ul>
+<p>有一点很重要：<strong>不要背得像朗诵。</strong></p>
+<p>你只需要把逻辑顺熟，而不是逐字背稿。面试里最怕的是老师一插话，你整个人就断电。</p>
+<h2 id="2-项目和科研：这是最容易被深挖的部分"><a href="#2-项目和科研：这是最容易被深挖的部分" class="headerlink" title="2. 项目和科研：这是最容易被深挖的部分"></a>2. 项目和科研：这是最容易被深挖的部分</h2><p>对于大部分计算机同学，面试真正拉差距的地方，其实不是八股，而是你自己写在简历上的东西。</p>
+<p>如果你写了项目、竞赛、科研，就默认老师可以顺着一直问下去。</p>
+<p>比如下面这些问题，真的非常常见：</p>
+<ul>
+<li>这个项目你具体负责什么？</li>
+<li>为什么选这个技术方案？</li>
+<li>你这个模型 / 系统和别人的区别在哪里？</li>
+<li>遇到过什么 bug 或瓶颈？</li>
+<li>结果有没有量化指标？</li>
+<li>如果让你继续做，你下一步打算怎么改？</li>
+</ul>
+<p>所以我非常建议每个项目都自己提前过一遍，至少把下面四个点写在纸上：</p>
+<ol>
+<li>背景：这个问题是什么；</li>
+<li>方案：你用了什么方法；</li>
+<li>工作：你自己做了哪部分；</li>
+<li>结果：最后效果如何。</li>
+</ol>
+<p>你能把这四句说通顺，面试就已经稳很多了。</p>
+<h2 id="3-基础课：别想着全会，先保住高频题"><a href="#3-基础课：别想着全会，先保住高频题" class="headerlink" title="3. 基础课：别想着全会，先保住高频题"></a>3. 基础课：别想着全会，先保住高频题</h2><p>如果你是计算机 / 软件方向，我觉得高频基础主要就是这些：</p>
+<ul>
+<li>数据结构</li>
+<li>计算机网络</li>
+<li>操作系统</li>
+<li>数据库</li>
+<li>少量机器学习 / 深度学习基础（如果你报的是 AI 方向）</li>
+</ul>
+<p>老师不一定会问得特别深，但很爱问“够不够基本”。</p>
+<h3 id="我自己建议优先准备的问题"><a href="#我自己建议优先准备的问题" class="headerlink" title="我自己建议优先准备的问题"></a>我自己建议优先准备的问题</h3><h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><ul>
+<li>数组和链表区别</li>
+<li>栈和队列应用场景</li>
+<li>二叉树遍历</li>
+<li>堆、哈希表、红黑树大概用途</li>
+<li>常见排序复杂度</li>
+</ul>
+<h4 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h4><ul>
+<li>TCP 和 UDP 区别</li>
+<li>三次握手、四次挥手</li>
+<li>为什么要有 TIME_WAIT</li>
+<li>HTTP 和 HTTPS 区别</li>
+<li>GET 和 POST 区别</li>
+</ul>
+<h4 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h4><ul>
+<li>进程和线程区别</li>
+<li>并发和并行</li>
+<li>死锁条件</li>
+<li>虚拟内存</li>
+<li>页式管理的基本概念</li>
+</ul>
+<h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><ul>
+<li>索引是什么</li>
+<li>B+ 树为什么适合数据库索引</li>
+<li>事务 ACID</li>
+<li>隔离级别</li>
+<li>left join / inner join</li>
+</ul>
+<h4 id="AI-方向附加题"><a href="#AI-方向附加题" class="headerlink" title="AI 方向附加题"></a>AI 方向附加题</h4><ul>
+<li>过拟合是什么，怎么缓解</li>
+<li>BatchNorm / Dropout 的作用</li>
+<li>卷积和全连接的区别</li>
+<li>attention 的基本理解</li>
+<li>评价指标 MAE / RMSE / Accuracy 的区别</li>
+</ul>
+<p>你不需要每道题都讲成教科书，但至少要说得出关键词和基本逻辑。</p>
+<h2 id="4-英语：别神化，也别摆烂"><a href="#4-英语：别神化，也别摆烂" class="headerlink" title="4. 英语：别神化，也别摆烂"></a>4. 英语：别神化，也别摆烂</h2><p>英语在很多面试里没有大家想的那么夸张，但也确实不能完全不准备。</p>
+<p>常见就是三类：</p>
+<ul>
+<li>英文自我介绍</li>
+<li>英文问答（为什么选这个方向 / 为什么选我们学校）</li>
+<li>文献或关键词简单翻译</li>
+</ul>
+<p>我建议至少准备下面几句：</p>
+<ul>
+<li>本科背景</li>
+<li>研究兴趣</li>
+<li>一个代表性项目</li>
+<li>为什么想来这个实验室 / 学校</li>
+</ul>
+<p>能顺畅说完就够了，别追求口音，也别追求特别高级的表达。</p>
+<h2 id="三、笔试准备，我建议分成三层"><a href="#三、笔试准备，我建议分成三层" class="headerlink" title="三、笔试准备，我建议分成三层"></a>三、笔试准备，我建议分成三层</h2><h2 id="第一层：算法题基本盘"><a href="#第一层：算法题基本盘" class="headerlink" title="第一层：算法题基本盘"></a>第一层：算法题基本盘</h2><p>很多学校笔试里都会有代码题，难度通常不会到竞赛级，但会要求你思路清楚、编码不太拉跨。</p>
+<p>我建议至少把这些题型过一遍：</p>
+<ul>
+<li>双指针</li>
+<li>二分</li>
+<li>哈希</li>
+<li>链表</li>
+<li>栈和队列</li>
+<li>二叉树遍历</li>
+<li>DFS / BFS</li>
+<li>简单动态规划</li>
+</ul>
+<p>如果时间特别少，就优先刷 LeetCode 经典高频题，不要盲目追求数量。</p>
+<h2 id="第二层：408-核心概念"><a href="#第二层：408-核心概念" class="headerlink" title="第二层：408 核心概念"></a>第二层：408 核心概念</h2><p>不是让你把考研四门从头到尾再学一遍，而是把常见概念题捡起来。</p>
+<p>比如：</p>
+<ul>
+<li>时间复杂度怎么分析</li>
+<li>死锁和同步互斥</li>
+<li>TCP 流程</li>
+<li>数据库索引和事务</li>
+<li>基本组成原理里最常见的几个概念</li>
+</ul>
+<p>有些学校的笔试喜欢出选择、填空，这部分就是白给分，别丢。</p>
+<h2 id="第三层：方向相关题"><a href="#第三层：方向相关题" class="headerlink" title="第三层：方向相关题"></a>第三层：方向相关题</h2><p>如果你报的是 AI、数据挖掘、模式识别这些方向，那还可以补一点：</p>
+<ul>
+<li>机器学习基础概念</li>
+<li>常见损失函数</li>
+<li>梯度下降</li>
+<li>CNN / RNN / Transformer 的基本差别</li>
+</ul>
+<p>不用卷太深，重点还是“听起来你确实学过”。</p>
+<h2 id="四、如果时间只剩一周，我会怎么排"><a href="#四、如果时间只剩一周，我会怎么排" class="headerlink" title="四、如果时间只剩一周，我会怎么排"></a>四、如果时间只剩一周，我会怎么排</h2><p>这是我自己更推荐的一种排法。</p>
+<h3 id="第-1～2-天：梳理简历"><a href="#第-1～2-天：梳理简历" class="headerlink" title="第 1～2 天：梳理简历"></a>第 1～2 天：梳理简历</h3><p>把自我介绍、项目、科研、竞赛全部顺一遍。</p>
+<h3 id="第-3～4-天：复习高频基础课"><a href="#第-3～4-天：复习高频基础课" class="headerlink" title="第 3～4 天：复习高频基础课"></a>第 3～4 天：复习高频基础课</h3><p>每天两门，重点过高频问答。</p>
+<h3 id="第-5-天：刷几道常见算法题"><a href="#第-5-天：刷几道常见算法题" class="headerlink" title="第 5 天：刷几道常见算法题"></a>第 5 天：刷几道常见算法题</h3><p>别贪多，重点是手感恢复。</p>
+<h3 id="第-6-天：英语和模拟问答"><a href="#第-6-天：英语和模拟问答" class="headerlink" title="第 6 天：英语和模拟问答"></a>第 6 天：英语和模拟问答</h3><p>找同学互问，或者自己录音。</p>
+<h3 id="第-7-天：查漏补缺"><a href="#第-7-天：查漏补缺" class="headerlink" title="第 7 天：查漏补缺"></a>第 7 天：查漏补缺</h3><p>把自己最容易卡壳的点再补一下。</p>
+<h2 id="五、我觉得最没必要做的几件事"><a href="#五、我觉得最没必要做的几件事" class="headerlink" title="五、我觉得最没必要做的几件事"></a>五、我觉得最没必要做的几件事</h2><h3 id="1-临时抱佛脚去看特别偏的知识"><a href="#1-临时抱佛脚去看特别偏的知识" class="headerlink" title="1. 临时抱佛脚去看特别偏的知识"></a>1. 临时抱佛脚去看特别偏的知识</h3><p>高频还没稳，先别碰太偏的。</p>
+<h3 id="2-一直收集经验帖，不开始输出"><a href="#2-一直收集经验帖，不开始输出" class="headerlink" title="2. 一直收集经验帖，不开始输出"></a>2. 一直收集经验帖，不开始输出</h3><p>经验帖看十篇，不如自己张口讲十遍。</p>
+<h3 id="3-只会背答案，不会解释"><a href="#3-只会背答案，不会解释" class="headerlink" title="3. 只会背答案，不会解释"></a>3. 只会背答案，不会解释</h3><p>老师一追问“为什么”，你就容易崩。</p>
+<h3 id="4-简历上写太满"><a href="#4-简历上写太满" class="headerlink" title="4. 简历上写太满"></a>4. 简历上写太满</h3><p>你写了，老师就敢问。没把握接住的内容少写。</p>
+<h2 id="六、保研面试本质上考什么"><a href="#六、保研面试本质上考什么" class="headerlink" title="六、保研面试本质上考什么"></a>六、保研面试本质上考什么</h2><p>我现在越来越觉得，保研面试真正考的，不是你是不是全知全能，而是：</p>
+<ul>
+<li>你有没有基本功；</li>
+<li>你做过的事情是不是你自己真做的；</li>
+<li>你是不是一个沟通正常、逻辑在线、能培养的人。</li>
+</ul>
+<p>所以别被网上那些“神仙面经”吓到。</p>
+<p>大部分同学只要把高频问题准备扎实，把自己简历讲顺，把算法手感找回来，就已经能超过很多只会焦虑的人了。</p>
+<p>保研不是在一场面试里证明自己是天才，而是在有限时间里，把自己准备成一个<strong>可信、清楚、能继续培养</strong>的人。做到这一点，其实就很够了。</p>
+]]></content>
+      <categories>
+        <category>保研</category>
+      </categories>
+      <tags>
+        <tag>保研</tag>
+        <tag>简历</tag>
+        <tag>预推免</tag>
+        <tag>面试</tag>
+        <tag>推免面试</tag>
+        <tag>推免笔试</tag>
+        <tag>计算机</tag>
+        <tag>软件工程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>保研学校怎么选：我会怎么比较电子科大、中山大学和西安交大</title>
+    <url>/2024/09/02/2024-09-02-bao-yan-xue-xiao-zen-yao-xuan/</url>
+    <content><![CDATA[<p>每年到预推免这个阶段，最常见的问题不是“我要不要保”，而是“这几个学校到底怎么选”。</p>
+<p>尤其是手里同时有几种风格完全不同的 offer 时，人特别容易乱。</p>
+<p>我自己一路看下来，有个感受很明显：<strong>很多人嘴上在选学校，实际上在同时选城市、导师、方向、毕业难度和未来生活方式。</strong></p>
+<span id="more"></span>
+
+<p>所以这篇不搞那种一刀切排名，我就按照我自己的价值排序，聊聊如果是我，在电子科大、中山大学、西安交大这类学校之间会怎么比较。</p>
+<h2 id="先说结论：不要只按学校名气排序"><a href="#先说结论：不要只按学校名气排序" class="headerlink" title="先说结论：不要只按学校名气排序"></a>先说结论：不要只按学校名气排序</h2><p>保研不是高考。</p>
+<p>高考更像“先上车再说”，但保研已经到了专业方向更细、导师差异更大、个人目标更具体的阶段。这个时候如果你还只盯着学校名字，后面很容易后悔。</p>
+<p>我自己更认可的判断顺序是：</p>
+<h3 id="如果你以后想认真做科研"><a href="#如果你以后想认真做科研" class="headerlink" title="如果你以后想认真做科研"></a>如果你以后想认真做科研</h3><p><strong>导师 &gt; 方向 &gt; 组会氛围 &gt; 学校平台 &gt; 城市</strong></p>
+<h3 id="如果你以后更偏就业"><a href="#如果你以后更偏就业" class="headerlink" title="如果你以后更偏就业"></a>如果你以后更偏就业</h3><p><strong>城市 &gt; 实习资源 &gt; 学校牌子 &gt; 导师是否放养 &gt; 方向匹配</strong></p>
+<p>这两套排序不能混着用。很多人的纠结，根本原因就是既想科研舒服，又想实习自由，还想学校名头最响，最后当然选不出来。</p>
+<h2 id="我会重点看哪几个维度"><a href="#我会重点看哪几个维度" class="headerlink" title="我会重点看哪几个维度"></a>我会重点看哪几个维度</h2><h2 id="1-导师到底靠不靠谱"><a href="#1-导师到底靠不靠谱" class="headerlink" title="1. 导师到底靠不靠谱"></a>1. 导师到底靠不靠谱</h2><p>这个问题永远排在前面。</p>
+<p>因为同一所学校里，不同导师带来的体验差距，往往大于学校之间的差距。</p>
+<p>我问导师时，最关心下面这几件事：</p>
+<ul>
+<li>老师有没有稳定方向，不是今天做这个明天做那个；</li>
+<li>组里学生毕业情况怎么样；</li>
+<li>是真指导还是纯放羊；</li>
+<li>能不能给学生真实的项目、论文、实习机会；</li>
+<li>老师对硕士的预期是什么。</li>
+</ul>
+<p>尤其是硕士，别光听“老师很厉害”，你更该问的是：</p>
+<blockquote>
+<p>他对硕士到底上不上心？</p>
+</blockquote>
+<p>有些老师非常强，但资源主要给博士；有些老师名气没那么夸张，但愿意带学生、给方向、帮你快速起步。对硕士来说，后者未必差。</p>
+<h2 id="2-方向适不适合你"><a href="#2-方向适不适合你" class="headerlink" title="2. 方向适不适合你"></a>2. 方向适不适合你</h2><p>保研阶段特别容易犯一个错：为了学校 title，硬去一个自己并不想做的方向。</p>
+<p>我一直觉得这件事性价比很低。</p>
+<p>比如你本科是软件工程、计算机背景，自己做过开发、算法、项目，也明确想走 AI、时空数据挖掘、系统开发这些路线，那你突然为了名头转去一个完全不熟、也不喜欢的方向，最后大概率会很痛苦。</p>
+<p>研究生不是只读三年课表，它会很大程度影响你后面：</p>
+<ul>
+<li>论文写什么；</li>
+<li>实习怎么找；</li>
+<li>秋招怎么讲自己的经历；</li>
+<li>毕业后去工业界还是继续读博。</li>
+</ul>
+<p>所以学校可以略有高低，但方向别偏得太离谱。</p>
+<h2 id="3-城市是不是你想长期待的地方"><a href="#3-城市是不是你想长期待的地方" class="headerlink" title="3. 城市是不是你想长期待的地方"></a>3. 城市是不是你想长期待的地方</h2><p>这个事情很多同学现在不愿意承认，但等研究生读到一半就会发现很现实。</p>
+<p>城市会影响：</p>
+<ul>
+<li>实习机会</li>
+<li>校友资源</li>
+<li>就业密度</li>
+<li>生活成本</li>
+<li>你未来是不是愿意留下来</li>
+</ul>
+<p>如果你很看重互联网、AI 企业、实习便利性，那珠三角和成都这种地方，对很多计算机同学确实会更舒服一些。</p>
+<p>如果你更偏学术环境、工科平台、传统强校氛围，那西安这样的城市也有它的优势。</p>
+<p>没有绝对好坏，关键是你认不认这个账。</p>
+<h2 id="具体说说这三类学校，我会怎么想"><a href="#具体说说这三类学校，我会怎么想" class="headerlink" title="具体说说这三类学校，我会怎么想"></a>具体说说这三类学校，我会怎么想</h2><p>下面只是我个人的取舍逻辑，不是标准答案。</p>
+<h2 id="一、电子科技大学：适合目标相对明确、希望路径比较稳的人"><a href="#一、电子科技大学：适合目标相对明确、希望路径比较稳的人" class="headerlink" title="一、电子科技大学：适合目标相对明确、希望路径比较稳的人"></a>一、电子科技大学：适合目标相对明确、希望路径比较稳的人</h2><p>如果你本身就是电子信息、计算机、软件这条线的同学，那电子科大很多时候是一个很稳的选择。</p>
+<p>我自己对它最大的感受是：</p>
+<ul>
+<li>工科氛围比较统一；</li>
+<li>相关方向资源集中；</li>
+<li>在电子信息、计算机、AI 这几个方向里，认可度比较直接；</li>
+<li>成都生活体验不错，节奏相对也没那么绷。</li>
+</ul>
+<p>如果你想做的方向本来就和它强项一致，比如 AI、网络安全、软件、电子信息，那么它不是那种“看起来惊艳但落地一般”的学校，而是比较务实。</p>
+<p>尤其对西南地区发展、想兼顾读研体验和后续就业的人来说，这个选择往往不亏。</p>
+<p>但电子科大也不是没有前提：</p>
+<h3 id="前提是你要挑对老师"><a href="#前提是你要挑对老师" class="headerlink" title="前提是你要挑对老师"></a>前提是你要挑对老师</h3><p>如果老师不合适，学校优势也会被抵消很多。</p>
+<h2 id="二、中山大学：城市资源和综合平台，是它很强的一张牌"><a href="#二、中山大学：城市资源和综合平台，是它很强的一张牌" class="headerlink" title="二、中山大学：城市资源和综合平台，是它很强的一张牌"></a>二、中山大学：城市资源和综合平台，是它很强的一张牌</h2><p>中大给我的感觉，是一种比较典型的“综合型强校 + 区域资源优势”的组合。</p>
+<p>如果你比较看重这些：</p>
+<ul>
+<li>广州、深圳一带的实习便利；</li>
+<li>更开放的综合校平台；</li>
+<li>学校整体名头在更广泛语境下的认可度；</li>
+<li>以后想在华南发展；</li>
+</ul>
+<p>那中大是很值得认真考虑的。</p>
+<p>尤其对于计算机同学来说，华南地区的产业连接是实打实存在的。研究生阶段你哪怕不是每学期都去实习，身边的信息密度也会更高。</p>
+<p>但中大同样要看具体学院、具体方向、具体老师。</p>
+<p>不能因为“中大两个字”就默认所有实验室体验都一样。说到底，最后带你三年的不是学校 logo，而是具体那个组。</p>
+<h2 id="三、西安交通大学：平台硬、底子强，适合认工科训练的人"><a href="#三、西安交通大学：平台硬、底子强，适合认工科训练的人" class="headerlink" title="三、西安交通大学：平台硬、底子强，适合认工科训练的人"></a>三、西安交通大学：平台硬、底子强，适合认工科训练的人</h2><p>西交这类学校给人的感觉，通常是底盘很稳。</p>
+<p>它的优点不一定是“互联网叙事最强”，但在传统强校体系里，平台、校风、工科训练、整体认可度都很能打。</p>
+<p>如果你是这种类型：</p>
+<ul>
+<li>希望研究生阶段训练更扎实；</li>
+<li>对学校整体气质有认同；</li>
+<li>能接受城市节奏和地理位置；</li>
+<li>更在意长期平台而不是短期热闹；</li>
+</ul>
+<p>那西交是完全值得选的。</p>
+<p>尤其很多同学本科阶段信息比较碎，研究生反而需要一个更稳、更能把基本功重新拉起来的环境，这类学校会更适合。</p>
+<h2 id="那到底怎么选？我会用一个很土但很好用的方法"><a href="#那到底怎么选？我会用一个很土但很好用的方法" class="headerlink" title="那到底怎么选？我会用一个很土但很好用的方法"></a>那到底怎么选？我会用一个很土但很好用的方法</h2><p>我一般会给每个学校按下面五项打分：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>我会看什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>导师</td>
+<td>带人方式、毕业情况、资源投入</td>
+</tr>
+<tr>
+<td>方向</td>
+<td>和我过去经历、未来计划是否一致</td>
+</tr>
+<tr>
+<td>城市</td>
+<td>实习、就业、生活成本、是否愿意长期待</td>
+</tr>
+<tr>
+<td>平台</td>
+<td>学校和学院在目标赛道的认可度</td>
+</tr>
+<tr>
+<td>个人体验</td>
+<td>校园氛围、同门状态、自己是否真想去</td>
+</tr>
+</tbody></table>
+<p>然后你会发现，很多纠结其实一算就出来了。</p>
+<h2 id="三种常见情况，我的建议分别是"><a href="#三种常见情况，我的建议分别是" class="headerlink" title="三种常见情况，我的建议分别是"></a>三种常见情况，我的建议分别是</h2><h3 id="1-你想读博，或者至少想认真做科研"><a href="#1-你想读博，或者至少想认真做科研" class="headerlink" title="1. 你想读博，或者至少想认真做科研"></a>1. 你想读博，或者至少想认真做科研</h3><p>那就别被城市和学校名头带着跑。</p>
+<p>直接重点看：</p>
+<ul>
+<li>老师近几年方向稳不稳；</li>
+<li>组里有没有靠谱师兄师姐；</li>
+<li>硕士能不能发东西；</li>
+<li>你自己对这个方向有没有耐心。</li>
+</ul>
+<p>这个时候，<strong>适合的老师比“更响的校名”重要很多。</strong></p>
+<h3 id="2-你大概率硕士毕业就工作"><a href="#2-你大概率硕士毕业就工作" class="headerlink" title="2. 你大概率硕士毕业就工作"></a>2. 你大概率硕士毕业就工作</h3><p>那就别假装自己只看学术。</p>
+<p>你应该重点看：</p>
+<ul>
+<li>城市和实习资源；</li>
+<li>组里对外实习的态度；</li>
+<li>学校在目标行业的认可度；</li>
+<li>你能不能做出方便秋招讲述的项目或论文。</li>
+</ul>
+<p>说白了，工作导向的人，研究生三年最怕的不是学校一般，而是<strong>把自己锁进一个既没产出、又没实习的组里</strong>。</p>
+<h3 id="3-你现在根本没想清楚"><a href="#3-你现在根本没想清楚" class="headerlink" title="3. 你现在根本没想清楚"></a>3. 你现在根本没想清楚</h3><p>那就选更稳、更通用的。</p>
+<p>比如方向别太偏，老师别太极端，城市别太封闭，学校平台别太窄。给自己留余地，比赌一个听起来很厉害但自己并不理解的选择更重要。</p>
+<h2 id="最后再说一句很现实的话"><a href="#最后再说一句很现实的话" class="headerlink" title="最后再说一句很现实的话"></a>最后再说一句很现实的话</h2><p>保研选学校这件事，到最后很少有“完美答案”。</p>
+<p>真正好的选择，通常是那个：</p>
+<ul>
+<li>你大致知道自己为什么选它；</li>
+<li>你能接受它的代价；</li>
+<li>它能服务你未来两三年的核心目标。</li>
+</ul>
+<p>如果是我，我不会只问“电子科大、中山大学、西安交大谁更好”，我会先问自己：</p>
+<blockquote>
+<p>我研究生三年到底想换来什么？</p>
+</blockquote>
+<p>这个问题想明白了，学校就没那么难选了。</p>
+]]></content>
+      <categories>
+        <category>保研</category>
+      </categories>
+      <tags>
+        <tag>科研</tag>
+        <tag>研究生</tag>
+        <tag>保研</tag>
+        <tag>推免</tag>
+        <tag>电子科技大学</tag>
+        <tag>学校选择</tag>
+        <tag>中山大学</tag>
+        <tag>西安交通大学</tag>
       </tags>
   </entry>
   <entry>
@@ -1196,764 +1378,6 @@
         <tag>时空预测</tag>
         <tag>毕业论文</tag>
         <tag>图神经网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>保研面试题和笔试题怎么准备：把时间花在最容易出分的地方</title>
-    <url>/2024/09/10/2024-09-10-bao-yan-mian-shi-he-bi-shi-zhun-bei/</url>
-    <content><![CDATA[<p>保研准备里，最容易让人焦虑的就是面试和笔试。</p>
-<p>一方面你总觉得自己什么都不会，另一方面网上经验帖越看越吓人：英语口语、项目深挖、算法题、408、机器学习、开放题……像什么都可能考。</p>
-<p>但我自己的体会是，<strong>保研准备最怕的不是不会，而是复习顺序错了</strong>。</p>
-<span id="more"></span>
-
-<p>时间本来就紧，如果你上来就去啃最偏最难的东西，最后很可能基础没复盘到，项目也没讲顺，面试一问三不知。</p>
-<p>这篇我就按“真正能提分”的逻辑来讲。</p>
-<h2 id="一、先分清：面试和笔试考的不是一回事"><a href="#一、先分清：面试和笔试考的不是一回事" class="headerlink" title="一、先分清：面试和笔试考的不是一回事"></a>一、先分清：面试和笔试考的不是一回事</h2><h3 id="面试更看三件事"><a href="#面试更看三件事" class="headerlink" title="面试更看三件事"></a>面试更看三件事</h3><ol>
-<li>你是不是你简历上写的那个人；</li>
-<li>你基础是否过关；</li>
-<li>你表达是否清楚，值不值得招。</li>
-</ol>
-<h3 id="笔试更看两件事"><a href="#笔试更看两件事" class="headerlink" title="笔试更看两件事"></a>笔试更看两件事</h3><ol>
-<li>你有没有系统复习过基础；</li>
-<li>你写题速度稳不稳。</li>
-</ol>
-<p>所以不要拿准备笔试的方法去准备面试，也别拿背自我介绍的方式去赌笔试。</p>
-<h2 id="二、面试准备，我建议优先搞定这四块"><a href="#二、面试准备，我建议优先搞定这四块" class="headerlink" title="二、面试准备，我建议优先搞定这四块"></a>二、面试准备，我建议优先搞定这四块</h2><h2 id="1-自我介绍：一分钟和三分钟都要有"><a href="#1-自我介绍：一分钟和三分钟都要有" class="headerlink" title="1. 自我介绍：一分钟和三分钟都要有"></a>1. 自我介绍：一分钟和三分钟都要有</h2><p>很多人觉得自我介绍很简单，实际上这里最容易翻车。</p>
-<p>因为老师对你的第一印象，往往就来自这里。</p>
-<p>我建议准备两个版本：</p>
-<h3 id="一分钟版本"><a href="#一分钟版本" class="headerlink" title="一分钟版本"></a>一分钟版本</h3><p>适合老师打断式面试，快速讲清：</p>
-<ul>
-<li>我是谁</li>
-<li>本科哪里</li>
-<li>主要做过什么</li>
-<li>为什么来这个方向</li>
-</ul>
-<h3 id="三分钟版本"><a href="#三分钟版本" class="headerlink" title="三分钟版本"></a>三分钟版本</h3><p>适合老师愿意听你展开的时候，讲清：</p>
-<ul>
-<li>基本背景</li>
-<li>代表性项目 / 竞赛 / 科研</li>
-<li>你对研究生阶段的规划</li>
-</ul>
-<p>有一点很重要：<strong>不要背得像朗诵。</strong></p>
-<p>你只需要把逻辑顺熟，而不是逐字背稿。面试里最怕的是老师一插话，你整个人就断电。</p>
-<h2 id="2-项目和科研：这是最容易被深挖的部分"><a href="#2-项目和科研：这是最容易被深挖的部分" class="headerlink" title="2. 项目和科研：这是最容易被深挖的部分"></a>2. 项目和科研：这是最容易被深挖的部分</h2><p>对于大部分计算机同学，面试真正拉差距的地方，其实不是八股，而是你自己写在简历上的东西。</p>
-<p>如果你写了项目、竞赛、科研，就默认老师可以顺着一直问下去。</p>
-<p>比如下面这些问题，真的非常常见：</p>
-<ul>
-<li>这个项目你具体负责什么？</li>
-<li>为什么选这个技术方案？</li>
-<li>你这个模型 / 系统和别人的区别在哪里？</li>
-<li>遇到过什么 bug 或瓶颈？</li>
-<li>结果有没有量化指标？</li>
-<li>如果让你继续做，你下一步打算怎么改？</li>
-</ul>
-<p>所以我非常建议每个项目都自己提前过一遍，至少把下面四个点写在纸上：</p>
-<ol>
-<li>背景：这个问题是什么；</li>
-<li>方案：你用了什么方法；</li>
-<li>工作：你自己做了哪部分；</li>
-<li>结果：最后效果如何。</li>
-</ol>
-<p>你能把这四句说通顺，面试就已经稳很多了。</p>
-<h2 id="3-基础课：别想着全会，先保住高频题"><a href="#3-基础课：别想着全会，先保住高频题" class="headerlink" title="3. 基础课：别想着全会，先保住高频题"></a>3. 基础课：别想着全会，先保住高频题</h2><p>如果你是计算机 / 软件方向，我觉得高频基础主要就是这些：</p>
-<ul>
-<li>数据结构</li>
-<li>计算机网络</li>
-<li>操作系统</li>
-<li>数据库</li>
-<li>少量机器学习 / 深度学习基础（如果你报的是 AI 方向）</li>
-</ul>
-<p>老师不一定会问得特别深，但很爱问“够不够基本”。</p>
-<h3 id="我自己建议优先准备的问题"><a href="#我自己建议优先准备的问题" class="headerlink" title="我自己建议优先准备的问题"></a>我自己建议优先准备的问题</h3><h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><ul>
-<li>数组和链表区别</li>
-<li>栈和队列应用场景</li>
-<li>二叉树遍历</li>
-<li>堆、哈希表、红黑树大概用途</li>
-<li>常见排序复杂度</li>
-</ul>
-<h4 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h4><ul>
-<li>TCP 和 UDP 区别</li>
-<li>三次握手、四次挥手</li>
-<li>为什么要有 TIME_WAIT</li>
-<li>HTTP 和 HTTPS 区别</li>
-<li>GET 和 POST 区别</li>
-</ul>
-<h4 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h4><ul>
-<li>进程和线程区别</li>
-<li>并发和并行</li>
-<li>死锁条件</li>
-<li>虚拟内存</li>
-<li>页式管理的基本概念</li>
-</ul>
-<h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><ul>
-<li>索引是什么</li>
-<li>B+ 树为什么适合数据库索引</li>
-<li>事务 ACID</li>
-<li>隔离级别</li>
-<li>left join / inner join</li>
-</ul>
-<h4 id="AI-方向附加题"><a href="#AI-方向附加题" class="headerlink" title="AI 方向附加题"></a>AI 方向附加题</h4><ul>
-<li>过拟合是什么，怎么缓解</li>
-<li>BatchNorm / Dropout 的作用</li>
-<li>卷积和全连接的区别</li>
-<li>attention 的基本理解</li>
-<li>评价指标 MAE / RMSE / Accuracy 的区别</li>
-</ul>
-<p>你不需要每道题都讲成教科书，但至少要说得出关键词和基本逻辑。</p>
-<h2 id="4-英语：别神化，也别摆烂"><a href="#4-英语：别神化，也别摆烂" class="headerlink" title="4. 英语：别神化，也别摆烂"></a>4. 英语：别神化，也别摆烂</h2><p>英语在很多面试里没有大家想的那么夸张，但也确实不能完全不准备。</p>
-<p>常见就是三类：</p>
-<ul>
-<li>英文自我介绍</li>
-<li>英文问答（为什么选这个方向 / 为什么选我们学校）</li>
-<li>文献或关键词简单翻译</li>
-</ul>
-<p>我建议至少准备下面几句：</p>
-<ul>
-<li>本科背景</li>
-<li>研究兴趣</li>
-<li>一个代表性项目</li>
-<li>为什么想来这个实验室 / 学校</li>
-</ul>
-<p>能顺畅说完就够了，别追求口音，也别追求特别高级的表达。</p>
-<h2 id="三、笔试准备，我建议分成三层"><a href="#三、笔试准备，我建议分成三层" class="headerlink" title="三、笔试准备，我建议分成三层"></a>三、笔试准备，我建议分成三层</h2><h2 id="第一层：算法题基本盘"><a href="#第一层：算法题基本盘" class="headerlink" title="第一层：算法题基本盘"></a>第一层：算法题基本盘</h2><p>很多学校笔试里都会有代码题，难度通常不会到竞赛级，但会要求你思路清楚、编码不太拉跨。</p>
-<p>我建议至少把这些题型过一遍：</p>
-<ul>
-<li>双指针</li>
-<li>二分</li>
-<li>哈希</li>
-<li>链表</li>
-<li>栈和队列</li>
-<li>二叉树遍历</li>
-<li>DFS / BFS</li>
-<li>简单动态规划</li>
-</ul>
-<p>如果时间特别少，就优先刷 LeetCode 经典高频题，不要盲目追求数量。</p>
-<h2 id="第二层：408-核心概念"><a href="#第二层：408-核心概念" class="headerlink" title="第二层：408 核心概念"></a>第二层：408 核心概念</h2><p>不是让你把考研四门从头到尾再学一遍，而是把常见概念题捡起来。</p>
-<p>比如：</p>
-<ul>
-<li>时间复杂度怎么分析</li>
-<li>死锁和同步互斥</li>
-<li>TCP 流程</li>
-<li>数据库索引和事务</li>
-<li>基本组成原理里最常见的几个概念</li>
-</ul>
-<p>有些学校的笔试喜欢出选择、填空，这部分就是白给分，别丢。</p>
-<h2 id="第三层：方向相关题"><a href="#第三层：方向相关题" class="headerlink" title="第三层：方向相关题"></a>第三层：方向相关题</h2><p>如果你报的是 AI、数据挖掘、模式识别这些方向，那还可以补一点：</p>
-<ul>
-<li>机器学习基础概念</li>
-<li>常见损失函数</li>
-<li>梯度下降</li>
-<li>CNN / RNN / Transformer 的基本差别</li>
-</ul>
-<p>不用卷太深，重点还是“听起来你确实学过”。</p>
-<h2 id="四、如果时间只剩一周，我会怎么排"><a href="#四、如果时间只剩一周，我会怎么排" class="headerlink" title="四、如果时间只剩一周，我会怎么排"></a>四、如果时间只剩一周，我会怎么排</h2><p>这是我自己更推荐的一种排法。</p>
-<h3 id="第-1～2-天：梳理简历"><a href="#第-1～2-天：梳理简历" class="headerlink" title="第 1～2 天：梳理简历"></a>第 1～2 天：梳理简历</h3><p>把自我介绍、项目、科研、竞赛全部顺一遍。</p>
-<h3 id="第-3～4-天：复习高频基础课"><a href="#第-3～4-天：复习高频基础课" class="headerlink" title="第 3～4 天：复习高频基础课"></a>第 3～4 天：复习高频基础课</h3><p>每天两门，重点过高频问答。</p>
-<h3 id="第-5-天：刷几道常见算法题"><a href="#第-5-天：刷几道常见算法题" class="headerlink" title="第 5 天：刷几道常见算法题"></a>第 5 天：刷几道常见算法题</h3><p>别贪多，重点是手感恢复。</p>
-<h3 id="第-6-天：英语和模拟问答"><a href="#第-6-天：英语和模拟问答" class="headerlink" title="第 6 天：英语和模拟问答"></a>第 6 天：英语和模拟问答</h3><p>找同学互问，或者自己录音。</p>
-<h3 id="第-7-天：查漏补缺"><a href="#第-7-天：查漏补缺" class="headerlink" title="第 7 天：查漏补缺"></a>第 7 天：查漏补缺</h3><p>把自己最容易卡壳的点再补一下。</p>
-<h2 id="五、我觉得最没必要做的几件事"><a href="#五、我觉得最没必要做的几件事" class="headerlink" title="五、我觉得最没必要做的几件事"></a>五、我觉得最没必要做的几件事</h2><h3 id="1-临时抱佛脚去看特别偏的知识"><a href="#1-临时抱佛脚去看特别偏的知识" class="headerlink" title="1. 临时抱佛脚去看特别偏的知识"></a>1. 临时抱佛脚去看特别偏的知识</h3><p>高频还没稳，先别碰太偏的。</p>
-<h3 id="2-一直收集经验帖，不开始输出"><a href="#2-一直收集经验帖，不开始输出" class="headerlink" title="2. 一直收集经验帖，不开始输出"></a>2. 一直收集经验帖，不开始输出</h3><p>经验帖看十篇，不如自己张口讲十遍。</p>
-<h3 id="3-只会背答案，不会解释"><a href="#3-只会背答案，不会解释" class="headerlink" title="3. 只会背答案，不会解释"></a>3. 只会背答案，不会解释</h3><p>老师一追问“为什么”，你就容易崩。</p>
-<h3 id="4-简历上写太满"><a href="#4-简历上写太满" class="headerlink" title="4. 简历上写太满"></a>4. 简历上写太满</h3><p>你写了，老师就敢问。没把握接住的内容少写。</p>
-<h2 id="六、保研面试本质上考什么"><a href="#六、保研面试本质上考什么" class="headerlink" title="六、保研面试本质上考什么"></a>六、保研面试本质上考什么</h2><p>我现在越来越觉得，保研面试真正考的，不是你是不是全知全能，而是：</p>
-<ul>
-<li>你有没有基本功；</li>
-<li>你做过的事情是不是你自己真做的；</li>
-<li>你是不是一个沟通正常、逻辑在线、能培养的人。</li>
-</ul>
-<p>所以别被网上那些“神仙面经”吓到。</p>
-<p>大部分同学只要把高频问题准备扎实，把自己简历讲顺，把算法手感找回来，就已经能超过很多只会焦虑的人了。</p>
-<p>保研不是在一场面试里证明自己是天才，而是在有限时间里，把自己准备成一个<strong>可信、清楚、能继续培养</strong>的人。做到这一点，其实就很够了。</p>
-]]></content>
-      <categories>
-        <category>保研</category>
-      </categories>
-      <tags>
-        <tag>保研</tag>
-        <tag>简历</tag>
-        <tag>预推免</tag>
-        <tag>面试</tag>
-        <tag>推免面试</tag>
-        <tag>推免笔试</tag>
-        <tag>计算机</tag>
-        <tag>软件工程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>机器学习第一次作业整理</title>
-    <url>/2025/03/08/2025-03-08-ji-qi-xue-xi-di-yi-ci-zuo-ye-zheng-li/</url>
-    <content><![CDATA[<p>这篇文章记录机器学习课程第一次作业的整理结果，主要覆盖基础概念问答和一个简单的贝叶斯定理计算题。</p>
-<span id="more"></span>
-
-<h2 id="1-机器学习的三要素及监督学习与非监督学习的区别"><a href="#1-机器学习的三要素及监督学习与非监督学习的区别" class="headerlink" title="1. 机器学习的三要素及监督学习与非监督学习的区别"></a>1. 机器学习的三要素及监督学习与非监督学习的区别</h2><p><strong>机器学习的三要素：</strong></p>
-<ol>
-<li><strong>模型</strong>：定义输入到输出的映射关系（假设空间）</li>
-<li><strong>策略</strong>：构建目标函数（损失函数+正则化项）</li>
-<li><strong>算法</strong>：求解最优参数的优化方法（如梯度下降</li>
-</ol>
-<p><strong>监督学习与非监督学习的区别：</strong></p>
-<ul>
-<li><p><strong>监督学习（Supervised Learning）：</strong></p>
-<p><strong>定义：</strong> 在训练过程中，模型使用带有标签的数据进行学习，即每个训练样本都有对应的目标输出。</p>
-<p><strong>目标：</strong> 学习输入与输出之间的映射关系，用于预测新数据的标签。</p>
-<p><strong>应用场景：</strong> 分类（如垃圾邮件检测）、回归（如房价预测）。</p>
-</li>
-<li><p><strong>非监督学习（Unsupervised Learning）：</strong></p>
-<p><strong>定义：</strong> 模型在训练过程中仅使用输入数据，没有对应的标签信息。</p>
-<p><strong>目标：</strong> 挖掘数据的内在结构、模式或分布，如聚类、降维。</p>
-<p><strong>应用场景：</strong> 客户细分、图像压缩、异常检测。</p>
-</li>
-</ul>
-<h2 id="2-过拟合的表现、原因及避免方法"><a href="#2-过拟合的表现、原因及避免方法" class="headerlink" title="2. 过拟合的表现、原因及避免方法"></a>2. 过拟合的表现、原因及避免方法</h2><p><strong>过拟合的表现：</strong></p>
-<ol>
-<li><strong>训练误差低，测试误差高：</strong> 模型在训练数据上表现优异，但在新数据或验证集上表现较差。</li>
-<li><strong>模型复杂度高：</strong> 拟合了训练数据中的噪声或异常点，而不是捕捉数据的总体趋势。</li>
-</ol>
-<p><strong>过拟合的原因：</strong></p>
-<ol>
-<li><strong>模型过于复杂：</strong> 参数过多，模型能力过强，能够拟合训练数据中的噪声。</li>
-<li><strong>训练数据不足：</strong> 数据量不足以支撑复杂模型的训练，导致模型过度依赖有限的样本。</li>
-<li><strong>噪声数据：</strong> 训练数据中存在大量噪声或异常点，导致模型学习到不具普适性的特征。</li>
-</ol>
-<p><strong>避免过拟合的方法：</strong></p>
-<ol>
-<li><strong>简化模型：</strong> 选择较为简单的模型，减少模型的复杂度和参数数量。</li>
-<li><strong>正则化（Regularization）：</strong> 在损失函数中加入惩罚项，如L1正则化、L2正则化，限制模型参数的大小。</li>
-<li><strong>增加训练数据：</strong> 获取更多的训练样本，以提高模型的泛化能力。</li>
-<li><strong>数据增强：</strong> 通过数据变换（如旋转、翻转）扩充训练数据集，增加模型的鲁棒性。</li>
-<li><strong>交叉验证（Cross-Validation）：</strong> 使用交叉验证评估模型性能，选择泛化能力更强的模型。</li>
-<li><strong>提前停止（Early Stopping）：</strong> 在验证误差开始上升时停止训练，防止模型在训练集上过度拟合。</li>
-</ol>
-<h2 id="3-贝叶斯定理应用计算"><a href="#3-贝叶斯定理应用计算" class="headerlink" title="3. 贝叶斯定理应用计算"></a>3. 贝叶斯定理应用计算</h2><p><strong>已知条件：</strong></p>
-<ul>
-<li>P(阳性|癌症) = 80% = 0.8</li>
-<li>P(阴性|非癌症) = 90% = 0.9 ⇒ P(阳性|非癌症) = 1 - 0.9 = 0.1</li>
-<li>P(癌症) = 1% = 0.01 ⇒ P(非癌症) = 99% = 0.99</li>
-</ul>
-<p><strong>求解：</strong> P(癌症|阳性)</p>
-<p>根据贝叶斯定理：<br>$$<br>P(癌症|阳性) = \frac{P(阳性|癌症) \cdot P(癌症)}{P(阳性)}<br>$$<br>其中：<br>$$<br>P(阳性) = P(阳性|癌症) \cdot P(癌症) + P(阳性|非癌症) \cdot P(非癌症)<br>$$<br>代入数值计算：<br>$$<br>P(阳性) = 0.8 \times 0.01 + 0.1 \times 0.99 = 0.008 + 0.099 = 0.107<br>$$<br>因此：<br>$$<br>P(癌症|阳性) = \frac{0.8 \times 0.01}{0.107} \approx \frac{0.008}{0.107} \approx 0.074766<br>$$<br>即，约7.48%。</p>
-<h2 id="4-极大似然估计与最大后验估计及共轭先验"><a href="#4-极大似然估计与最大后验估计及共轭先验" class="headerlink" title="4. 极大似然估计与最大后验估计及共轭先验"></a>4. 极大似然估计与最大后验估计及共轭先验</h2><p><strong>极大似然估计（Maximum Likelihood Estimation, MLE）：</strong></p>
-<ul>
-<li><p><strong>定义：</strong> 在给定数据的条件下，选择使得观测数据出现概率最大的参数值。</p>
-</li>
-<li><p><strong>特点：</strong>仅依赖于数据，忽略先验信息。计算简单，广泛应用于参数估计。</p>
-</li>
-<li><p><strong>公式：</strong><br>$$<br>\hat{\theta}<em>{MLE} = \arg\max</em>{\theta} P(\text{数据}|\theta)<br>$$</p>
-</li>
-</ul>
-<p><strong>最大后验估计（Maximum A Posteriori Estimation, MAP）：</strong></p>
-<ul>
-<li><p><strong>定义：</strong> 在给定数据和先验概率分布的条件下，选择使得参数的后验概率最大的参数值。</p>
-</li>
-<li><p><strong>特点：</strong>综合考虑数据和先验信息。能够在数据不足时引入先验知识，增强模型的泛化能力。</p>
-</li>
-<li><p><strong>公式：</strong><br>$$<br>\hat{\theta}<em>{MAP} = \arg\max</em>{\theta} P(\theta|\text{数据}) = \arg\max_{\theta} P(\text{数据}|\theta) P(\theta)<br>$$</p>
-</li>
-</ul>
-<p><strong>极大似然估计与最大后验估计的联系与区别：</strong></p>
-<ul>
-<li><strong>联系：</strong> 两者都旨在通过观测数据估计参数，优化目标函数中包含数据的部分。</li>
-<li><strong>区别：</strong> MLE仅依赖于数据，忽略先验；MAP则结合了先验信息，适用于存在先验知识或数据不足的情况。</li>
-</ul>
-<p><strong>共轭先验（Conjugate Prior）：</strong></p>
-<ul>
-<li><strong>定义：</strong> 在贝叶斯统计中，当先验分布和似然函数的形式结合后，后验分布与先验分布属于同一分布族时，称该先验为共轭先验。</li>
-<li><strong>特点：</strong> 计算简便，因后验分布与先验分布同类，参数更新简单。</li>
-</ul>
-<p><strong>伯努利分布的共轭先验：</strong></p>
-<ul>
-<li>伯努利分布用于描述二项试验的成功概率，其共轭先验是 <strong>Beta 分布</strong>。</li>
-<li><strong>解释：</strong> 如果数据服从伯努利分布，且先验分布为Beta分布，则后验分布仍为Beta分布，参数通过数据更新。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>课程作业</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>课程作业</tag>
-        <tag>过拟合</tag>
-        <tag>贝叶斯定理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>研究生三年怎么规划：别把自己活成“每天都很忙，但最后没东西”</title>
-    <url>/2025/01/15/2025-01-15-yan-jiu-sheng-san-nian-de-gui-hua/</url>
-    <content><![CDATA[<p>保研结束以后，很多人会突然进入一种奇怪的状态：</p>
-<p>以前天天焦虑排名和推免名额，现在名额定了，反而不知道接下来该干什么。</p>
-<p>我自己也有过这个阶段。后来想明白了一件事：<strong>研究生三年最怕的不是忙，而是忙得没有累计。</strong></p>
-<span id="more"></span>
-
-<p>看起来每天都在干活，但三年一过，论文不成体系，项目讲不清，实习没留下结果，生活也被弄得一团糟，那才是最亏的。</p>
-<p>这篇就按我现在认可的思路，写一个尽量务实的三年规划。</p>
-<h2 id="先说我的基本判断"><a href="#先说我的基本判断" class="headerlink" title="先说我的基本判断"></a>先说我的基本判断</h2><p>如果你是计算机、软件、AI 方向的硕士，研究生三年通常绕不开四件事：</p>
-<ul>
-<li>科研</li>
-<li>实习 / 就业准备</li>
-<li>技术能力积累</li>
-<li>个人生活与身心状态</li>
-</ul>
-<p>这四个东西不是对立的，但也绝对不可能同时拉满。</p>
-<p>所以研究生规划最重要的，不是列一个非常满的计划表，而是确定：</p>
-<blockquote>
-<p>这三年里，你最想换来的核心结果是什么？</p>
-</blockquote>
-<p>对我自己来说，大概会是下面几个关键词：</p>
-<ul>
-<li>在一个明确方向上做出像样的成果；</li>
-<li>形成自己能拿得出手的技术栈；</li>
-<li>给就业和未来留足选择权；</li>
-<li>不把自己读到只剩疲惫。</li>
-</ul>
-<h2 id="第一阶段：研一，先把地基打起来"><a href="#第一阶段：研一，先把地基打起来" class="headerlink" title="第一阶段：研一，先把地基打起来"></a>第一阶段：研一，先把地基打起来</h2><p>我一直觉得，研一最重要的不是急着“出成果”，而是先把自己从本科那种比较散的状态拉到研究状态。</p>
-<h3 id="1-把方向尽快收敛"><a href="#1-把方向尽快收敛" class="headerlink" title="1. 把方向尽快收敛"></a>1. 把方向尽快收敛</h3><p>很多同学研一最大的问题，就是今天看 A，明天看 B，哪个热点都想蹭一下，最后没有一个方向真扎进去。</p>
-<p>如果是我自己，我会尽量在研一上学期就确定一个相对稳定的主线。</p>
-<p>比如我现在比较明确偏向时空预测、交通流量预测、鲁棒学习这类方向，那后面的论文阅读、实验复现、课程作业，最好都尽量往这一条主线上靠。</p>
-<p>方向一旦收敛，很多事情都会顺起来。</p>
-<h3 id="2-把论文阅读能力拉起来"><a href="#2-把论文阅读能力拉起来" class="headerlink" title="2. 把论文阅读能力拉起来"></a>2. 把论文阅读能力拉起来</h3><p>本科阶段很多人做项目多，真正系统读论文其实不够。</p>
-<p>研一一定要补这个短板。</p>
-<p>我更推荐的方式不是“每天硬读十篇”，而是：</p>
-<ul>
-<li>找一条主线方向；</li>
-<li>从经典工作开始看；</li>
-<li>记录问题定义、模型结构、评价指标和缺点；</li>
-<li>看完之后自己复述。</li>
-</ul>
-<p>如果你读完一篇文章，只会说“这个模型好强”，那其实还不算读懂。</p>
-<h3 id="3-学会复现，而不是只会跑通代码"><a href="#3-学会复现，而不是只会跑通代码" class="headerlink" title="3. 学会复现，而不是只会跑通代码"></a>3. 学会复现，而不是只会跑通代码</h3><p>真正有价值的复现，不是把环境配好然后按回车。</p>
-<p>而是你要知道：</p>
-<ul>
-<li>数据怎么处理的；</li>
-<li>模型输入输出是什么；</li>
-<li>关键模块起了什么作用；</li>
-<li>指标为什么这样变化；</li>
-<li>如果结果不一致，问题可能出在哪。</li>
-</ul>
-<p>这一步其实特别锻炼人。很多后面能自己做改进的人，都是在这里开始建立感觉的。</p>
-<h3 id="4-形成自己的工具链"><a href="#4-形成自己的工具链" class="headerlink" title="4. 形成自己的工具链"></a>4. 形成自己的工具链</h3><p>研一一定要尽快把这些东西用顺：</p>
-<ul>
-<li>Linux</li>
-<li>Git</li>
-<li>Python / PyTorch</li>
-<li>LaTeX</li>
-<li>实验记录方式</li>
-<li>服务器使用规范</li>
-</ul>
-<p>这些看起来不起眼，但它们决定了你后面做事的效率。</p>
-<h2 id="第二阶段：研二，开始真正出东西"><a href="#第二阶段：研二，开始真正出东西" class="headerlink" title="第二阶段：研二，开始真正出东西"></a>第二阶段：研二，开始真正出东西</h2><p>如果说研一是在搭台子，那研二就是要往台上摆东西了。</p>
-<h3 id="1-论文、项目、竞赛，至少有一条主线能打"><a href="#1-论文、项目、竞赛，至少有一条主线能打" class="headerlink" title="1. 论文、项目、竞赛，至少有一条主线能打"></a>1. 论文、项目、竞赛，至少有一条主线能打</h3><p>研二很容易陷入“样样都碰一点”。</p>
-<p>但我的建议是，<strong>必须有一条主线</strong>。</p>
-<p>比如：</p>
-<ul>
-<li>论文主线：围绕一个问题连续做几轮实验，逐步形成投稿；</li>
-<li>项目主线：围绕一个系统或产品从原型做到可用；</li>
-<li>竞赛主线：把竞赛和研究方向结合起来，别只为了拿证书。</li>
-</ul>
-<p>就我自己的情况来说，我会更倾向把科研主线和工程能力绑在一起。因为单纯只有论文，或者单纯只有工程，对后面找工作都不一定是最舒服的。</p>
-<h3 id="2-开始考虑实习，但别实习成逃避科研"><a href="#2-开始考虑实习，但别实习成逃避科研" class="headerlink" title="2. 开始考虑实习，但别实习成逃避科研"></a>2. 开始考虑实习，但别实习成逃避科研</h3><p>很多计算机同学到了研二都会纠结要不要实习。</p>
-<p>我一直觉得，实习不是问题，问题是你去实习是为了什么。</p>
-<p>如果你去实习是为了：</p>
-<ul>
-<li>验证自己是不是适合工业界；</li>
-<li>增加秋招筹码；</li>
-<li>理解真实业务和工程流程；</li>
-</ul>
-<p>那非常值。</p>
-<p>但如果你只是因为科研做不下去，就把实习当成避难所，最后很可能两边都做得一般。</p>
-<p>所以我更认同的方式是：</p>
-<blockquote>
-<p>先把一条研究主线立住，再去找能互相增益的实习。</p>
-</blockquote>
-<h3 id="3-学会和导师、组会、同门打交道"><a href="#3-学会和导师、组会、同门打交道" class="headerlink" title="3. 学会和导师、组会、同门打交道"></a>3. 学会和导师、组会、同门打交道</h3><p>研究生不是闭门修仙。</p>
-<p>很多资源，都是你在正常合作和交流中慢慢得到的。包括：</p>
-<ul>
-<li>师兄师姐留下来的经验；</li>
-<li>组里现成的代码和数据流程；</li>
-<li>投稿、答辩、项目申报的细节；</li>
-<li>甚至就业信息和内推机会。</li>
-</ul>
-<p>你不一定要特别社交，但至少别把自己活成孤岛。</p>
-<h2 id="第三阶段：研三，把结果收拢出来"><a href="#第三阶段：研三，把结果收拢出来" class="headerlink" title="第三阶段：研三，把结果收拢出来"></a>第三阶段：研三，把结果收拢出来</h2><p>很多同学的问题，不是前两年没干活，而是到了研三收不拢。</p>
-<p>所以研三最重要的事情其实是：<strong>收口</strong>。</p>
-<h3 id="1-把论文、项目、毕业要求按优先级排清楚"><a href="#1-把论文、项目、毕业要求按优先级排清楚" class="headerlink" title="1. 把论文、项目、毕业要求按优先级排清楚"></a>1. 把论文、项目、毕业要求按优先级排清楚</h3><p>不要等到最后一个学期才突然发现：</p>
-<ul>
-<li>论文还没投出去；</li>
-<li>毕设材料不完整；</li>
-<li>简历没有统一版本；</li>
-<li>秋招故事线讲不清。</li>
-</ul>
-<p>我建议研三一开始就列一个非常明确的清单：</p>
-<ul>
-<li>必须完成的毕业项；</li>
-<li>需要继续推进的研究项；</li>
-<li>需要对外展示的项目 / 经历；</li>
-<li>就业 / 读博 / 选调分别要准备什么。</li>
-</ul>
-<h3 id="2-秋招和毕业不是对立关系"><a href="#2-秋招和毕业不是对立关系" class="headerlink" title="2. 秋招和毕业不是对立关系"></a>2. 秋招和毕业不是对立关系</h3><p>尤其是计算机硕士，很多人会觉得一准备秋招就没法做毕业，或者一做毕业就没法找工作。</p>
-<p>其实关键不在于二选一，而在于你之前有没有提前准备。</p>
-<p>如果你前两年做的事情足够成体系，秋招时反而很好讲：</p>
-<ul>
-<li>研究方向是什么；</li>
-<li>做过哪些项目；</li>
-<li>用过哪些技术；</li>
-<li>解决过什么问题。</li>
-</ul>
-<p>最怕的是前两年全是碎片，到了秋招才开始临时拼故事。</p>
-<h2 id="我现在会怎么安排自己的三条线"><a href="#我现在会怎么安排自己的三条线" class="headerlink" title="我现在会怎么安排自己的三条线"></a>我现在会怎么安排自己的三条线</h2><p>如果按我自己的偏好，我大概会把三年拆成三条并行线：</p>
-<h3 id="第一条：科研线"><a href="#第一条：科研线" class="headerlink" title="第一条：科研线"></a>第一条：科研线</h3><p>围绕时空预测这个主方向，尽量形成：</p>
-<ul>
-<li>一条稳定问题定义；</li>
-<li>一套能自己推进的实验流程；</li>
-<li>至少一篇能说得过去的成果。</li>
-</ul>
-<h3 id="第二条：工程线"><a href="#第二条：工程线" class="headerlink" title="第二条：工程线"></a>第二条：工程线</h3><p>保持自己不是只会看论文的人。</p>
-<p>比如继续做一些：</p>
-<ul>
-<li>全栈产品原型</li>
-<li>模型落地部署</li>
-<li>数据处理与服务搭建</li>
-<li>LLM 场景化应用</li>
-</ul>
-<p>我很认同一个观点：计算机硕士最好既能谈模型，也能谈系统。</p>
-<h3 id="第三条：生活线"><a href="#第三条：生活线" class="headerlink" title="第三条：生活线"></a>第三条：生活线</h3><p>这个以前我不太重视，后来越来越觉得重要。</p>
-<p>研究生阶段如果完全没有生活，最后不一定会更高产，反而可能长期低状态。</p>
-<p>所以我会有意识保留：</p>
-<ul>
-<li>阅读</li>
-<li>运动 / 骑行</li>
-<li>旅行</li>
-<li>适度兼职或现实社会接触</li>
-</ul>
-<p>这些东西不是浪费时间，很多时候反而会帮你把整个人从“只会卷”的状态里拉出来。</p>
-<h2 id="有几件事，我现在觉得一定要避免"><a href="#有几件事，我现在觉得一定要避免" class="headerlink" title="有几件事，我现在觉得一定要避免"></a>有几件事，我现在觉得一定要避免</h2><h3 id="1-被所有任务牵着走"><a href="#1-被所有任务牵着走" class="headerlink" title="1. 被所有任务牵着走"></a>1. 被所有任务牵着走</h3><p>谁来找你做一点，你都接，最后你会发现自己的主线全没了。</p>
-<h3 id="2-不做记录"><a href="#2-不做记录" class="headerlink" title="2. 不做记录"></a>2. 不做记录</h3><p>做过什么、踩过什么坑、读过什么论文，不记录的话，三个月后基本重新来。</p>
-<h3 id="3-把焦虑误当努力"><a href="#3-把焦虑误当努力" class="headerlink" title="3. 把焦虑误当努力"></a>3. 把焦虑误当努力</h3><p>天天担心论文、担心毕业、担心就业，不等于真的在推进。</p>
-<h3 id="4-只盯着毕业最低要求"><a href="#4-只盯着毕业最低要求" class="headerlink" title="4. 只盯着毕业最低要求"></a>4. 只盯着毕业最低要求</h3><p>最低要求通常只保证你能毕业，不保证你后面好过。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>研究生三年并不长。</p>
-<p>真正拉开差距的，不是某一周熬了多少夜，而是你有没有持续把时间压到一条值得积累的主线上。</p>
-<p>我现在越来越不相信那种“什么都要”的规划了。相反，我更愿意相信一种更稳的方式：</p>
-<ul>
-<li>主线清楚；</li>
-<li>节奏稳定；</li>
-<li>留有余地；</li>
-<li>最后能交出像样的结果。</li>
-</ul>
-<p>这样读完三年，人才不会散。</p>
-]]></content>
-      <categories>
-        <category>保研</category>
-      </categories>
-      <tags>
-        <tag>科研</tag>
-        <tag>研究生</tag>
-        <tag>实习</tag>
-        <tag>保研</tag>
-        <tag>推免</tag>
-        <tag>电子科技大学</tag>
-        <tag>学业规划</tag>
-        <tag>时间管理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>交通流量预测这几年在研究什么：从“堆模型”到“做鲁棒性”</title>
-    <url>/2025/06/18/2025-06-18-jiao-tong-liu-liang-yu-ce-de-yan-jiu-jin-zhan/</url>
-    <content><![CDATA[<p>最近这段时间，我比较集中的精力都放在交通流量预测这个方向上。</p>
-<p>一开始看这条线的时候，很容易有一种错觉：好像大家都在不停换新模型名，今天 GNN，明天 Transformer，后天再加几个注意力模块，论文就又多了一批。</p>
-<p>但看多了以后会发现，这个方向其实有一条挺清楚的主线：<strong>大家一直在想办法更好地刻画时空依赖，并且让模型更贴近真实交通系统的复杂性。</strong></p>
-<span id="more"></span>
-
-<p>这篇不打算写成严格综述，更像是我现阶段的理解整理。对我自己来说，写下来比单纯把论文名字记在脑子里更有用。</p>
-<h2 id="1-这个问题到底难在哪"><a href="#1-这个问题到底难在哪" class="headerlink" title="1. 这个问题到底难在哪"></a>1. 这个问题到底难在哪</h2><p>交通流量预测表面上看只是时间序列预测，但真做起来，麻烦比普通单变量序列多得多。</p>
-<p>主要难在几个地方：</p>
-<ul>
-<li><strong>空间相关性</strong>：一个路段不独立，周边路网会传导影响；</li>
-<li><strong>时间依赖性</strong>：短期波动、周期规律、节假日效应会叠在一起；</li>
-<li><strong>动态变化</strong>：早晚高峰、事故、天气、施工，都会让分布发生偏移；</li>
-<li><strong>数据不完美</strong>：传感器缺失、噪声、节点宕机，这些在真实场景里非常常见。</li>
-</ul>
-<p>所以这个方向不是简单把“预测未来 12 个点”做出来就行，更关键的是：</p>
-<blockquote>
-<p>你对真实交通系统的不确定性，考虑得够不够。</p>
-</blockquote>
-<h2 id="2-早期方法：先把时序建起来"><a href="#2-早期方法：先把时序建起来" class="headerlink" title="2. 早期方法：先把时序建起来"></a>2. 早期方法：先把时序建起来</h2><p>比较早期的工作，很多还是统计学习和传统机器学习路线，比如：</p>
-<ul>
-<li>ARIMA</li>
-<li>SVR</li>
-<li>历史平均法</li>
-</ul>
-<p>这些方法的优点是解释性强、实现简单，但对复杂时空关系的表达能力明显不够。尤其当路网规模一大、交通状态变化更复杂时，效果就比较吃力了。</p>
-<p>但我觉得这些方法也不是完全过时。它们有两个价值：</p>
-<ol>
-<li>让你更清楚问题的基本结构；</li>
-<li>作为 baseline 时，能提醒你别把一个本来就不难的问题包装得太玄。</li>
-</ol>
-<h2 id="3-深度学习阶段：先解决“时间”，再补“空间”"><a href="#3-深度学习阶段：先解决“时间”，再补“空间”" class="headerlink" title="3. 深度学习阶段：先解决“时间”，再补“空间”"></a>3. 深度学习阶段：先解决“时间”，再补“空间”</h2><p>后来比较自然的一步，就是把 RNN、LSTM 这些序列模型引进来。</p>
-<p>这一阶段的核心贡献，是让模型更好地去拟合长短期时间依赖。</p>
-<p>但很快大家就发现，仅仅把每个监测点当成一条独立序列来建模，还是不够。因为交通不是孤立的点，而是有路网拓扑关系的系统。</p>
-<p>于是后面就进入了一个非常关键的阶段：</p>
-<h2 id="4-GNN-时代：把路网结构显式建模"><a href="#4-GNN-时代：把路网结构显式建模" class="headerlink" title="4. GNN 时代：把路网结构显式建模"></a>4. GNN 时代：把路网结构显式建模</h2><p>这一阶段基本奠定了后续很多工作的框架。</p>
-<p>比较典型的思路，就是把传感器或路段看成图上的节点，然后：</p>
-<ul>
-<li>用图卷积或图传播建模空间依赖；</li>
-<li>用时序模块建模时间变化；</li>
-<li>再把两者结合起来做预测。</li>
-</ul>
-<p>这类工作为什么影响大？</p>
-<p>因为它第一次比较系统地把“空间关系”这件事纳入到了模型主干里，而不是只靠人工特征去补。</p>
-<p>我自己看这类工作时，会特别关注两点：</p>
-<h3 id="（1）图是怎么构造的"><a href="#（1）图是怎么构造的" class="headerlink" title="（1）图是怎么构造的"></a>（1）图是怎么构造的</h3><ul>
-<li>按物理距离构图？</li>
-<li>按道路连接关系构图？</li>
-<li>按数据相关性动态构图？</li>
-</ul>
-<p>不同构图方式对应的是不同假设。</p>
-<h3 id="（2）时间和空间是怎么融合的"><a href="#（2）时间和空间是怎么融合的" class="headerlink" title="（2）时间和空间是怎么融合的"></a>（2）时间和空间是怎么融合的</h3><p>有些是先时序后空间，有些是交替堆叠，有些是并行建模。这个地方其实很能体现一个模型到底是在“拼模块”，还是对问题真的有理解。</p>
-<h2 id="5-Attention-Transformer-进来以后，重点变成了“长距离依赖”和“全局关系”"><a href="#5-Attention-Transformer-进来以后，重点变成了“长距离依赖”和“全局关系”" class="headerlink" title="5. Attention / Transformer 进来以后，重点变成了“长距离依赖”和“全局关系”"></a>5. Attention / Transformer 进来以后，重点变成了“长距离依赖”和“全局关系”</h2><p>GNN 路线跑起来以后，后面的一个明显趋势就是 attention 机制越来越多。</p>
-<p>这也不难理解。因为交通系统里确实存在一些：</p>
-<ul>
-<li>远距离但强关联的点；</li>
-<li>不固定的动态依赖；</li>
-<li>不同时间尺度上的全局模式。</li>
-</ul>
-<p>Transformer 类方法在这里的吸引力很大，原因主要有两个：</p>
-<ol>
-<li>更擅长建模长程依赖；</li>
-<li>不需要像 RNN 那样顺序递推，训练并行性更好。</li>
-</ol>
-<p>但我自己的感受是，这一类方法也带来一个很常见的问题：</p>
-<blockquote>
-<p>模型越来越大，结构越来越复杂，但不一定更贴近真实部署场景。</p>
-</blockquote>
-<p>尤其交通预测这个方向，很多时候不只是拼一个 leaderboard 数字，还要考虑推理效率、显存占用、部署成本。这个问题往后会越来越重要。</p>
-<h2 id="6-这两年我觉得真正值得重视的方向，不只是“效果更高”，而是“问题更真”"><a href="#6-这两年我觉得真正值得重视的方向，不只是“效果更高”，而是“问题更真”" class="headerlink" title="6. 这两年我觉得真正值得重视的方向，不只是“效果更高”，而是“问题更真”"></a>6. 这两年我觉得真正值得重视的方向，不只是“效果更高”，而是“问题更真”</h2><p>如果让我说这几年我最感兴趣的一条变化，那不是单纯谁又把 MAE 压低了一点，而是很多工作开始更认真地面对真实世界的数据问题。</p>
-<p>比如：</p>
-<h3 id="1-缺失值与异常值"><a href="#1-缺失值与异常值" class="headerlink" title="1. 缺失值与异常值"></a>1. 缺失值与异常值</h3><p>真实传感器数据经常有：</p>
-<ul>
-<li>随机缺失</li>
-<li>连续缺失</li>
-<li>噪声污染</li>
-<li>采集异常</li>
-</ul>
-<p>如果模型只在非常干净的数据上表现好，那它的实用价值其实有限。</p>
-<h3 id="2-鲁棒性"><a href="#2-鲁棒性" class="headerlink" title="2. 鲁棒性"></a>2. 鲁棒性</h3><p>这也是我自己现在比较关心的点。</p>
-<p>交通流量预测不是“静态 benchmark 游戏”。传感器长时间宕机、局部区域观测失真、不同扰动同时出现，这些情况在现实中太正常了。</p>
-<p>所以我越来越觉得，一个模型值不值得做，不只是看正常测试集表现，还要看：</p>
-<ul>
-<li>噪声下稳不稳；</li>
-<li>缺失下崩不崩；</li>
-<li>参数量是不是太夸张；</li>
-<li>是否真的有推广价值。</li>
-</ul>
-<p>这也是为什么我现在看论文时，会特别在意是否有系统的鲁棒性评测，而不是只放一个标准测试集结果就结束。</p>
-<h3 id="3-泛化能力"><a href="#3-泛化能力" class="headerlink" title="3. 泛化能力"></a>3. 泛化能力</h3><p>同一个模型在 PeMS04、PeMS07、PeMS08 上好，不代表换一个城市、换一个采样条件还能好。</p>
-<p>如何提升跨区域、跨分布、跨采样条件的泛化能力，我觉得后面会一直是重点。</p>
-<h2 id="7-另一个很容易被忽视的问题：评价方式本身"><a href="#7-另一个很容易被忽视的问题：评价方式本身" class="headerlink" title="7. 另一个很容易被忽视的问题：评价方式本身"></a>7. 另一个很容易被忽视的问题：评价方式本身</h2><p>做交通流量预测，大家最熟悉的指标通常就是 MAE、RMSE、MAPE 这些。</p>
-<p>这些指标当然重要，但有时候也会掩盖一些问题。</p>
-<p>比如：</p>
-<ul>
-<li>平均指标看着不错，但高峰时段预测很差；</li>
-<li>模型在大多数节点上正常，但在关键节点崩得厉害；</li>
-<li>模型只在某类数据分布下有效。</li>
-</ul>
-<p>所以我现在会更关注一个问题：</p>
-<blockquote>
-<p>这个模型到底在哪些场景下强，在哪些场景下弱？</p>
-</blockquote>
-<p>如果只盯着平均分数，很容易忽略真正值得优化的地方。</p>
-<h2 id="8-我自己目前更认同的一条研究思路"><a href="#8-我自己目前更认同的一条研究思路" class="headerlink" title="8. 我自己目前更认同的一条研究思路"></a>8. 我自己目前更认同的一条研究思路</h2><p>如果只说我个人偏好，我现在更认可下面这种路线：</p>
-<ul>
-<li>主干结构尽量别太臃肿；</li>
-<li>时空依赖建模要明确，不要纯堆模块；</li>
-<li>对噪声、缺失、节点异常要有明确考虑；</li>
-<li>评测不能只看单一干净场景；</li>
-<li>最终最好还能兼顾参数量、速度和显存。</li>
-</ul>
-<p>说白了，就是我不太想把交通流量预测做成“谁把结构堆得更复杂”的比赛，而更想做成：</p>
-<blockquote>
-<p>在真实扰动条件下，模型还能不能稳稳地给出可用预测。</p>
-</blockquote>
-<h2 id="9-对刚入门这个方向的同学，我的建议"><a href="#9-对刚入门这个方向的同学，我的建议" class="headerlink" title="9. 对刚入门这个方向的同学，我的建议"></a>9. 对刚入门这个方向的同学，我的建议</h2><p>如果你刚开始看交通流量预测，我很建议按下面顺序走：</p>
-<h3 id="第一步：先搞清楚问题定义和数据集"><a href="#第一步：先搞清楚问题定义和数据集" class="headerlink" title="第一步：先搞清楚问题定义和数据集"></a>第一步：先搞清楚问题定义和数据集</h3><p>别一上来就看模型细节。</p>
-<h3 id="第二步：从经典模型一路往后看"><a href="#第二步：从经典模型一路往后看" class="headerlink" title="第二步：从经典模型一路往后看"></a>第二步：从经典模型一路往后看</h3><p>这样你会知道每一代方法到底在解决什么痛点。</p>
-<h3 id="第三步：自己动手复现几个代表模型"><a href="#第三步：自己动手复现几个代表模型" class="headerlink" title="第三步：自己动手复现几个代表模型"></a>第三步：自己动手复现几个代表模型</h3><p>不复现，很容易停留在“看懂摘要”的阶段。</p>
-<h3 id="第四步：找到你真正想解决的问题"><a href="#第四步：找到你真正想解决的问题" class="headerlink" title="第四步：找到你真正想解决的问题"></a>第四步：找到你真正想解决的问题</h3><p>是长程依赖？是动态图？是多尺度？还是鲁棒性？</p>
-<p>只有问题意识立住了，后面做研究才不会一直被论文名带着跑。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>交通流量预测这个方向表面上卷模型，实际上卷的是你对真实问题的理解深度。</p>
-<p>至少对我自己来说，我现在越来越不想只追一个更花的结构名字了。相比之下，我更关心的是：</p>
-<ul>
-<li>这个问题是不是现实中真会遇到；</li>
-<li>这个改进是不是有明确逻辑；</li>
-<li>这个模型是不是足够稳、足够省、足够能落地。</li>
-</ul>
-<p>如果后面真能沿着这条线继续往下做，我觉得这件事会比单纯刷一个更高分数更有意思。</p>
-]]></content>
-      <categories>
-        <category>科研</category>
-      </categories>
-      <tags>
-        <tag>深度学习</tag>
-        <tag>科研</tag>
-        <tag>交通流预测</tag>
-        <tag>时空预测</tag>
-        <tag>图神经网络</tag>
-        <tag>交通流量预测</tag>
-        <tag>Transformer</tag>
-        <tag>GNN</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我是怎么补金融知识的：给计算机背景同学的一条务实路线</title>
-    <url>/2025/10/12/2025-10-12-jin-rong-ling-yu-zhi-shi-de-xue-xi/</url>
-    <content><![CDATA[<p>这两年我陆续在看一些金融相关的东西，也自己做过一点很小规模的实践。</p>
-<p>一开始我以为，凭计算机背景去学金融，会天然有优势。后来发现优势确实有，但前提是你别上来就想着“写个策略然后暴打市场”。</p>
-<p>市场不是 LeetCode，也不是 Kaggle。</p>
-<span id="more"></span>
-
-<p>尤其是 A 股这种环境，很多时候你以为自己在做理性分析，最后其实是在给情绪找理由。所以这篇不讲神话，也不讲一夜暴富，我只讲我现在觉得比较务实的一条学习路线。</p>
-<h2 id="1-先把目标想清楚：你学金融是为了什么"><a href="#1-先把目标想清楚：你学金融是为了什么" class="headerlink" title="1. 先把目标想清楚：你学金融是为了什么"></a>1. 先把目标想清楚：你学金融是为了什么</h2><p>我觉得这个问题必须先回答。</p>
-<p>因为“学金融”这三个字太大了，里面其实混着很多完全不同的目标：</p>
-<ul>
-<li>想提高自己的理财能力；</li>
-<li>想看懂宏观和市场新闻；</li>
-<li>想做基本面投资；</li>
-<li>想做量化交易；</li>
-<li>想以后转去金融科技或相关行业。</li>
-</ul>
-<p>目标不同，路径会差很多。</p>
-<p>如果你只是想让自己的钱不要乱花、乱投，那根本没必要一开始就去啃随机过程和衍生品定价。</p>
-<h2 id="2-我现在比较认可的顺序：先常识，再报表，再市场，再策略"><a href="#2-我现在比较认可的顺序：先常识，再报表，再市场，再策略" class="headerlink" title="2. 我现在比较认可的顺序：先常识，再报表，再市场，再策略"></a>2. 我现在比较认可的顺序：先常识，再报表，再市场，再策略</h2><p>很多人一开始就想找“哪只股票能涨”。</p>
-<p>我现在反而觉得，这几乎是最没意义的起点。</p>
-<p>因为如果你连：</p>
-<ul>
-<li>一家公司怎么赚钱；</li>
-<li>财务报表在讲什么；</li>
-<li>市场为什么会大幅波动；</li>
-<li>风险控制为什么比选股更重要；</li>
-</ul>
-<p>这些都没概念，那你后面做的很多判断，本质上都是拍脑袋。</p>
-<p>所以我给自己的顺序是：</p>
-<h2 id="第一层：金融常识"><a href="#第一层：金融常识" class="headerlink" title="第一层：金融常识"></a>第一层：金融常识</h2><p>这一层不求深，但必须有。</p>
-<p>至少要搞清楚：</p>
-<ul>
-<li>股票、基金、债券分别是什么；</li>
-<li>一级市场和二级市场是什么；</li>
-<li>指数是什么意思；</li>
-<li>估值大概怎么理解；</li>
-<li>牛熊市为什么会形成；</li>
-<li>利率、汇率、通胀对资产价格的大致影响。</li>
-</ul>
-<p>这一层的目标，不是让你会分析，而是让你别被最表面的说法带跑。</p>
-<h2 id="第二层：财务报表"><a href="#第二层：财务报表" class="headerlink" title="第二层：财务报表"></a>第二层：财务报表</h2><p>这个部分我觉得非常重要。</p>
-<p>很多人一聊股票，就聊题材、情绪、消息面，但如果长期一点看，一家公司值不值得拿，最后还是要回到它本身。</p>
-<p>所以报表至少得会看这三张：</p>
-<ul>
-<li>资产负债表</li>
-<li>利润表</li>
-<li>现金流量表</li>
-</ul>
-<p>我不是金融科班，刚开始也看得很慢。但看多了以后会发现，很多东西其实都能和常识对上：</p>
-<ul>
-<li>公司赚的钱是真赚到手了，还是只是账面利润；</li>
-<li>现金流是不是健康；</li>
-<li>负债结构稳不稳；</li>
-<li>应收账款高不高；</li>
-<li>利润增长到底靠主营业务还是靠别的东西撑着。</li>
-</ul>
-<p>如果连这个都不看，只靠K线和短视频消息做判断，我觉得心里很难有底。</p>
-<h2 id="第三层：市场机制和人性"><a href="#第三层：市场机制和人性" class="headerlink" title="第三层：市场机制和人性"></a>第三层：市场机制和人性</h2><p>我现在越来越觉得，市场很多时候不是“你知道得多就一定赢”，而是“你能不能比别人更稳定”。</p>
-<p>这里面有两块都很重要：</p>
-<h3 id="一块是机制"><a href="#一块是机制" class="headerlink" title="一块是机制"></a>一块是机制</h3><ul>
-<li>交易规则</li>
-<li>涨跌停制度</li>
-<li>资金结构</li>
-<li>政策影响</li>
-<li>流动性变化</li>
-</ul>
-<h3 id="一块是人性"><a href="#一块是人性" class="headerlink" title="一块是人性"></a>一块是人性</h3><ul>
-<li>追涨杀跌</li>
-<li>损失厌恶</li>
-<li>幻觉控制</li>
-<li>群体情绪</li>
-</ul>
-<p>尤其在高波动市场里，人性因素的破坏力太强了。很多人不是因为不会分析亏钱，而是因为<strong>明明有计划，最后还是手痒</strong>。</p>
-<h2 id="3-计算机背景的人，真正优势在哪里"><a href="#3-计算机背景的人，真正优势在哪里" class="headerlink" title="3. 计算机背景的人，真正优势在哪里"></a>3. 计算机背景的人，真正优势在哪里</h2><p>我觉得优势主要有三点。</p>
-<h3 id="1-更容易接受数据和概率"><a href="#1-更容易接受数据和概率" class="headerlink" title="1. 更容易接受数据和概率"></a>1. 更容易接受数据和概率</h3><p>计算机背景的人，通常不太排斥量化、统计、回测这些东西。至少在理解“没有任何策略能永远正确”这件事上，会相对自然一点。</p>
-<h3 id="2-更容易搭建自己的信息系统"><a href="#2-更容易搭建自己的信息系统" class="headerlink" title="2. 更容易搭建自己的信息系统"></a>2. 更容易搭建自己的信息系统</h3><p>比如你可以：</p>
-<ul>
-<li>用 Python 做数据清洗和可视化；</li>
-<li>自己记录交易日志；</li>
-<li>统计自己在哪些场景最容易犯错；</li>
-<li>把阅读、财报、宏观信息整理成结构化笔记。</li>
-</ul>
-<p>这个事情很重要。很多人学金融最后失败，不是知识不够，而是信息输入太乱。</p>
-<h3 id="3-对“量化”更容易祛魅"><a href="#3-对“量化”更容易祛魅" class="headerlink" title="3. 对“量化”更容易祛魅"></a>3. 对“量化”更容易祛魅</h3><p>真正学过一点算法和工程的人，反而不太容易被“神秘量化策略”唬住。</p>
-<p>因为你会本能地问几个问题：</p>
-<ul>
-<li>数据有没有未来函数；</li>
-<li>样本外表现怎么样；</li>
-<li>回测是不是过拟合；</li>
-<li>交易成本和滑点怎么算；</li>
-<li>策略是不是一上线就失效。</li>
-</ul>
-<p>这些问题问出来，很多所谓神策略就没那么神了。</p>
-<h2 id="4-但也正因为是计算机背景，更容易踩两个坑"><a href="#4-但也正因为是计算机背景，更容易踩两个坑" class="headerlink" title="4. 但也正因为是计算机背景，更容易踩两个坑"></a>4. 但也正因为是计算机背景，更容易踩两个坑</h2><h2 id="坑一：太迷信模型"><a href="#坑一：太迷信模型" class="headerlink" title="坑一：太迷信模型"></a>坑一：太迷信模型</h2><p>模型当然重要，但金融市场不是一个稳定闭环系统。</p>
-<p>同样一套方法，在不同制度、不同周期、不同情绪环境下，表现可能完全不同。你不能用做课程作业的思路，去理解市场。</p>
-<h2 id="坑二：太想一步到位做量化"><a href="#坑二：太想一步到位做量化" class="headerlink" title="坑二：太想一步到位做量化"></a>坑二：太想一步到位做量化</h2><p>我非常不建议一开始就幻想“我先学点 Python，然后搞个量化策略实现财富自由”。</p>
-<p>不是说不能做，而是绝大多数人此时连市场基本认知都不够，结果只能变成：</p>
-<ul>
-<li>指标堆一堆；</li>
-<li>回测很好看；</li>
-<li>实盘一做就变形。</li>
-</ul>
-<p>我现在的看法很直接：</p>
-<blockquote>
-<p>没有基本面认知、没有风险意识、没有市场常识之前，量化大概率只是高级一点的自我感动。</p>
-</blockquote>
-<h2 id="5-我自己现在怎么学"><a href="#5-我自己现在怎么学" class="headerlink" title="5. 我自己现在怎么学"></a>5. 我自己现在怎么学</h2><p>如果按我现在的节奏，大概是这样：</p>
-<h3 id="第一条线：读基础书和公开资料"><a href="#第一条线：读基础书和公开资料" class="headerlink" title="第一条线：读基础书和公开资料"></a>第一条线：读基础书和公开资料</h3><p>不是为了考证，而是为了建立一个正常的知识框架。</p>
-<h3 id="第二条线：看公司和看报表"><a href="#第二条线：看公司和看报表" class="headerlink" title="第二条线：看公司和看报表"></a>第二条线：看公司和看报表</h3><p>哪怕先只看少数几个行业，也比广撒网强。</p>
-<h3 id="第三条线：小资金实践"><a href="#第三条线：小资金实践" class="headerlink" title="第三条线：小资金实践"></a>第三条线：小资金实践</h3><p>不用一开始投入很多，重点是观察自己在真实波动下会不会变形。</p>
-<h3 id="第四条线：写记录"><a href="#第四条线：写记录" class="headerlink" title="第四条线：写记录"></a>第四条线：写记录</h3><p>记录这件事特别重要。</p>
-<p>比如：</p>
-<ul>
-<li>我为什么买；</li>
-<li>当时的逻辑是什么；</li>
-<li>结果怎样；</li>
-<li>错在分析，还是错在执行；</li>
-<li>有没有被情绪带偏。</li>
-</ul>
-<p>长期下来，你会比只看收益率更了解自己。</p>
-<h2 id="6-如果你也想从零开始，我建议这样入门"><a href="#6-如果你也想从零开始，我建议这样入门" class="headerlink" title="6. 如果你也想从零开始，我建议这样入门"></a>6. 如果你也想从零开始，我建议这样入门</h2><h3 id="第一步：先学基本概念"><a href="#第一步：先学基本概念" class="headerlink" title="第一步：先学基本概念"></a>第一步：先学基本概念</h3><p>别着急开户乱买。</p>
-<h3 id="第二步：补财务报表"><a href="#第二步：补财务报表" class="headerlink" title="第二步：补财务报表"></a>第二步：补财务报表</h3><p>至少能看懂一家公司的基本面框架。</p>
-<h3 id="第三步：理解市场运行机制"><a href="#第三步：理解市场运行机制" class="headerlink" title="第三步：理解市场运行机制"></a>第三步：理解市场运行机制</h3><p>别把所有涨跌都归因于“庄家”两个字。</p>
-<h3 id="第四步：少量实践-复盘"><a href="#第四步：少量实践-复盘" class="headerlink" title="第四步：少量实践 + 复盘"></a>第四步：少量实践 + 复盘</h3><p>用实践校验自己的认知。</p>
-<h3 id="第五步：再考虑要不要往量化走"><a href="#第五步：再考虑要不要往量化走" class="headerlink" title="第五步：再考虑要不要往量化走"></a>第五步：再考虑要不要往量化走</h3><p>这时候你再学数据接口、回测框架、因子分析，会更稳一些。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>我现在对金融学习的态度，反而比一开始更保守了。</p>
-<p>不是因为它没用，而是因为它太容易让人把“知道一些术语”和“真正理解风险”混为一谈。</p>
-<p>对计算机背景的人来说，学金融是很有价值的。它能帮你重新理解公司、行业、社会运转，也能帮助你管理自己的钱。</p>
-<p>但前提是别急，别神化，别总想着捷径。</p>
-<p>真正靠谱的路，通常都很土：</p>
-<ul>
-<li>先把常识补齐；</li>
-<li>再把框架搭起来；</li>
-<li>用小规模实践校验；</li>
-<li>最后慢慢形成自己的判断。</li>
-</ul>
-<p>这条路不性感，但我觉得更不容易把自己学歪。</p>
-]]></content>
-      <categories>
-        <category>算法刷题</category>
-      </categories>
-      <tags>
-        <tag>计算机</tag>
-        <tag>过拟合</tag>
-        <tag>金融</tag>
-        <tag>投资</tag>
-        <tag>学习方法</tag>
-        <tag>量化</tag>
-        <tag>A股</tag>
-        <tag>LeetCode</tag>
       </tags>
   </entry>
   <entry>
@@ -2284,6 +1708,971 @@
       </tags>
   </entry>
   <entry>
+    <title>机器学习第一次作业整理</title>
+    <url>/2025/03/08/2025-03-08-ji-qi-xue-xi-di-yi-ci-zuo-ye-zheng-li/</url>
+    <content><![CDATA[<p>这篇文章记录机器学习课程第一次作业的整理结果，主要覆盖基础概念问答和一个简单的贝叶斯定理计算题。</p>
+<span id="more"></span>
+
+<h2 id="1-机器学习的三要素及监督学习与非监督学习的区别"><a href="#1-机器学习的三要素及监督学习与非监督学习的区别" class="headerlink" title="1. 机器学习的三要素及监督学习与非监督学习的区别"></a>1. 机器学习的三要素及监督学习与非监督学习的区别</h2><p><strong>机器学习的三要素：</strong></p>
+<ol>
+<li><strong>模型</strong>：定义输入到输出的映射关系（假设空间）</li>
+<li><strong>策略</strong>：构建目标函数（损失函数+正则化项）</li>
+<li><strong>算法</strong>：求解最优参数的优化方法（如梯度下降</li>
+</ol>
+<p><strong>监督学习与非监督学习的区别：</strong></p>
+<ul>
+<li><p><strong>监督学习（Supervised Learning）：</strong></p>
+<p><strong>定义：</strong> 在训练过程中，模型使用带有标签的数据进行学习，即每个训练样本都有对应的目标输出。</p>
+<p><strong>目标：</strong> 学习输入与输出之间的映射关系，用于预测新数据的标签。</p>
+<p><strong>应用场景：</strong> 分类（如垃圾邮件检测）、回归（如房价预测）。</p>
+</li>
+<li><p><strong>非监督学习（Unsupervised Learning）：</strong></p>
+<p><strong>定义：</strong> 模型在训练过程中仅使用输入数据，没有对应的标签信息。</p>
+<p><strong>目标：</strong> 挖掘数据的内在结构、模式或分布，如聚类、降维。</p>
+<p><strong>应用场景：</strong> 客户细分、图像压缩、异常检测。</p>
+</li>
+</ul>
+<h2 id="2-过拟合的表现、原因及避免方法"><a href="#2-过拟合的表现、原因及避免方法" class="headerlink" title="2. 过拟合的表现、原因及避免方法"></a>2. 过拟合的表现、原因及避免方法</h2><p><strong>过拟合的表现：</strong></p>
+<ol>
+<li><strong>训练误差低，测试误差高：</strong> 模型在训练数据上表现优异，但在新数据或验证集上表现较差。</li>
+<li><strong>模型复杂度高：</strong> 拟合了训练数据中的噪声或异常点，而不是捕捉数据的总体趋势。</li>
+</ol>
+<p><strong>过拟合的原因：</strong></p>
+<ol>
+<li><strong>模型过于复杂：</strong> 参数过多，模型能力过强，能够拟合训练数据中的噪声。</li>
+<li><strong>训练数据不足：</strong> 数据量不足以支撑复杂模型的训练，导致模型过度依赖有限的样本。</li>
+<li><strong>噪声数据：</strong> 训练数据中存在大量噪声或异常点，导致模型学习到不具普适性的特征。</li>
+</ol>
+<p><strong>避免过拟合的方法：</strong></p>
+<ol>
+<li><strong>简化模型：</strong> 选择较为简单的模型，减少模型的复杂度和参数数量。</li>
+<li><strong>正则化（Regularization）：</strong> 在损失函数中加入惩罚项，如L1正则化、L2正则化，限制模型参数的大小。</li>
+<li><strong>增加训练数据：</strong> 获取更多的训练样本，以提高模型的泛化能力。</li>
+<li><strong>数据增强：</strong> 通过数据变换（如旋转、翻转）扩充训练数据集，增加模型的鲁棒性。</li>
+<li><strong>交叉验证（Cross-Validation）：</strong> 使用交叉验证评估模型性能，选择泛化能力更强的模型。</li>
+<li><strong>提前停止（Early Stopping）：</strong> 在验证误差开始上升时停止训练，防止模型在训练集上过度拟合。</li>
+</ol>
+<h2 id="3-贝叶斯定理应用计算"><a href="#3-贝叶斯定理应用计算" class="headerlink" title="3. 贝叶斯定理应用计算"></a>3. 贝叶斯定理应用计算</h2><p><strong>已知条件：</strong></p>
+<ul>
+<li>P(阳性|癌症) = 80% = 0.8</li>
+<li>P(阴性|非癌症) = 90% = 0.9 ⇒ P(阳性|非癌症) = 1 - 0.9 = 0.1</li>
+<li>P(癌症) = 1% = 0.01 ⇒ P(非癌症) = 99% = 0.99</li>
+</ul>
+<p><strong>求解：</strong> P(癌症|阳性)</p>
+<p>根据贝叶斯定理：<br>$$<br>P(癌症|阳性) = \frac{P(阳性|癌症) \cdot P(癌症)}{P(阳性)}<br>$$<br>其中：<br>$$<br>P(阳性) = P(阳性|癌症) \cdot P(癌症) + P(阳性|非癌症) \cdot P(非癌症)<br>$$<br>代入数值计算：<br>$$<br>P(阳性) = 0.8 \times 0.01 + 0.1 \times 0.99 = 0.008 + 0.099 = 0.107<br>$$<br>因此：<br>$$<br>P(癌症|阳性) = \frac{0.8 \times 0.01}{0.107} \approx \frac{0.008}{0.107} \approx 0.074766<br>$$<br>即，约7.48%。</p>
+<h2 id="4-极大似然估计与最大后验估计及共轭先验"><a href="#4-极大似然估计与最大后验估计及共轭先验" class="headerlink" title="4. 极大似然估计与最大后验估计及共轭先验"></a>4. 极大似然估计与最大后验估计及共轭先验</h2><p><strong>极大似然估计（Maximum Likelihood Estimation, MLE）：</strong></p>
+<ul>
+<li><p><strong>定义：</strong> 在给定数据的条件下，选择使得观测数据出现概率最大的参数值。</p>
+</li>
+<li><p><strong>特点：</strong>仅依赖于数据，忽略先验信息。计算简单，广泛应用于参数估计。</p>
+</li>
+<li><p><strong>公式：</strong><br>$$<br>\hat{\theta}<em>{MLE} = \arg\max</em>{\theta} P(\text{数据}|\theta)<br>$$</p>
+</li>
+</ul>
+<p><strong>最大后验估计（Maximum A Posteriori Estimation, MAP）：</strong></p>
+<ul>
+<li><p><strong>定义：</strong> 在给定数据和先验概率分布的条件下，选择使得参数的后验概率最大的参数值。</p>
+</li>
+<li><p><strong>特点：</strong>综合考虑数据和先验信息。能够在数据不足时引入先验知识，增强模型的泛化能力。</p>
+</li>
+<li><p><strong>公式：</strong><br>$$<br>\hat{\theta}<em>{MAP} = \arg\max</em>{\theta} P(\theta|\text{数据}) = \arg\max_{\theta} P(\text{数据}|\theta) P(\theta)<br>$$</p>
+</li>
+</ul>
+<p><strong>极大似然估计与最大后验估计的联系与区别：</strong></p>
+<ul>
+<li><strong>联系：</strong> 两者都旨在通过观测数据估计参数，优化目标函数中包含数据的部分。</li>
+<li><strong>区别：</strong> MLE仅依赖于数据，忽略先验；MAP则结合了先验信息，适用于存在先验知识或数据不足的情况。</li>
+</ul>
+<p><strong>共轭先验（Conjugate Prior）：</strong></p>
+<ul>
+<li><strong>定义：</strong> 在贝叶斯统计中，当先验分布和似然函数的形式结合后，后验分布与先验分布属于同一分布族时，称该先验为共轭先验。</li>
+<li><strong>特点：</strong> 计算简便，因后验分布与先验分布同类，参数更新简单。</li>
+</ul>
+<p><strong>伯努利分布的共轭先验：</strong></p>
+<ul>
+<li>伯努利分布用于描述二项试验的成功概率，其共轭先验是 <strong>Beta 分布</strong>。</li>
+<li><strong>解释：</strong> 如果数据服从伯努利分布，且先验分布为Beta分布，则后验分布仍为Beta分布，参数通过数据更新。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>课程作业</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>课程作业</tag>
+        <tag>过拟合</tag>
+        <tag>贝叶斯定理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>交通流量预测这几年在研究什么：从“堆模型”到“做鲁棒性”</title>
+    <url>/2025/06/18/2025-06-18-jiao-tong-liu-liang-yu-ce-de-yan-jiu-jin-zhan/</url>
+    <content><![CDATA[<p>最近这段时间，我比较集中的精力都放在交通流量预测这个方向上。</p>
+<p>一开始看这条线的时候，很容易有一种错觉：好像大家都在不停换新模型名，今天 GNN，明天 Transformer，后天再加几个注意力模块，论文就又多了一批。</p>
+<p>但看多了以后会发现，这个方向其实有一条挺清楚的主线：<strong>大家一直在想办法更好地刻画时空依赖，并且让模型更贴近真实交通系统的复杂性。</strong></p>
+<span id="more"></span>
+
+<p>这篇不打算写成严格综述，更像是我现阶段的理解整理。对我自己来说，写下来比单纯把论文名字记在脑子里更有用。</p>
+<h2 id="1-这个问题到底难在哪"><a href="#1-这个问题到底难在哪" class="headerlink" title="1. 这个问题到底难在哪"></a>1. 这个问题到底难在哪</h2><p>交通流量预测表面上看只是时间序列预测，但真做起来，麻烦比普通单变量序列多得多。</p>
+<p>主要难在几个地方：</p>
+<ul>
+<li><strong>空间相关性</strong>：一个路段不独立，周边路网会传导影响；</li>
+<li><strong>时间依赖性</strong>：短期波动、周期规律、节假日效应会叠在一起；</li>
+<li><strong>动态变化</strong>：早晚高峰、事故、天气、施工，都会让分布发生偏移；</li>
+<li><strong>数据不完美</strong>：传感器缺失、噪声、节点宕机，这些在真实场景里非常常见。</li>
+</ul>
+<p>所以这个方向不是简单把“预测未来 12 个点”做出来就行，更关键的是：</p>
+<blockquote>
+<p>你对真实交通系统的不确定性，考虑得够不够。</p>
+</blockquote>
+<h2 id="2-早期方法：先把时序建起来"><a href="#2-早期方法：先把时序建起来" class="headerlink" title="2. 早期方法：先把时序建起来"></a>2. 早期方法：先把时序建起来</h2><p>比较早期的工作，很多还是统计学习和传统机器学习路线，比如：</p>
+<ul>
+<li>ARIMA</li>
+<li>SVR</li>
+<li>历史平均法</li>
+</ul>
+<p>这些方法的优点是解释性强、实现简单，但对复杂时空关系的表达能力明显不够。尤其当路网规模一大、交通状态变化更复杂时，效果就比较吃力了。</p>
+<p>但我觉得这些方法也不是完全过时。它们有两个价值：</p>
+<ol>
+<li>让你更清楚问题的基本结构；</li>
+<li>作为 baseline 时，能提醒你别把一个本来就不难的问题包装得太玄。</li>
+</ol>
+<h2 id="3-深度学习阶段：先解决“时间”，再补“空间”"><a href="#3-深度学习阶段：先解决“时间”，再补“空间”" class="headerlink" title="3. 深度学习阶段：先解决“时间”，再补“空间”"></a>3. 深度学习阶段：先解决“时间”，再补“空间”</h2><p>后来比较自然的一步，就是把 RNN、LSTM 这些序列模型引进来。</p>
+<p>这一阶段的核心贡献，是让模型更好地去拟合长短期时间依赖。</p>
+<p>但很快大家就发现，仅仅把每个监测点当成一条独立序列来建模，还是不够。因为交通不是孤立的点，而是有路网拓扑关系的系统。</p>
+<p>于是后面就进入了一个非常关键的阶段：</p>
+<h2 id="4-GNN-时代：把路网结构显式建模"><a href="#4-GNN-时代：把路网结构显式建模" class="headerlink" title="4. GNN 时代：把路网结构显式建模"></a>4. GNN 时代：把路网结构显式建模</h2><p>这一阶段基本奠定了后续很多工作的框架。</p>
+<p>比较典型的思路，就是把传感器或路段看成图上的节点，然后：</p>
+<ul>
+<li>用图卷积或图传播建模空间依赖；</li>
+<li>用时序模块建模时间变化；</li>
+<li>再把两者结合起来做预测。</li>
+</ul>
+<p>这类工作为什么影响大？</p>
+<p>因为它第一次比较系统地把“空间关系”这件事纳入到了模型主干里，而不是只靠人工特征去补。</p>
+<p>我自己看这类工作时，会特别关注两点：</p>
+<h3 id="（1）图是怎么构造的"><a href="#（1）图是怎么构造的" class="headerlink" title="（1）图是怎么构造的"></a>（1）图是怎么构造的</h3><ul>
+<li>按物理距离构图？</li>
+<li>按道路连接关系构图？</li>
+<li>按数据相关性动态构图？</li>
+</ul>
+<p>不同构图方式对应的是不同假设。</p>
+<h3 id="（2）时间和空间是怎么融合的"><a href="#（2）时间和空间是怎么融合的" class="headerlink" title="（2）时间和空间是怎么融合的"></a>（2）时间和空间是怎么融合的</h3><p>有些是先时序后空间，有些是交替堆叠，有些是并行建模。这个地方其实很能体现一个模型到底是在“拼模块”，还是对问题真的有理解。</p>
+<h2 id="5-Attention-Transformer-进来以后，重点变成了“长距离依赖”和“全局关系”"><a href="#5-Attention-Transformer-进来以后，重点变成了“长距离依赖”和“全局关系”" class="headerlink" title="5. Attention / Transformer 进来以后，重点变成了“长距离依赖”和“全局关系”"></a>5. Attention / Transformer 进来以后，重点变成了“长距离依赖”和“全局关系”</h2><p>GNN 路线跑起来以后，后面的一个明显趋势就是 attention 机制越来越多。</p>
+<p>这也不难理解。因为交通系统里确实存在一些：</p>
+<ul>
+<li>远距离但强关联的点；</li>
+<li>不固定的动态依赖；</li>
+<li>不同时间尺度上的全局模式。</li>
+</ul>
+<p>Transformer 类方法在这里的吸引力很大，原因主要有两个：</p>
+<ol>
+<li>更擅长建模长程依赖；</li>
+<li>不需要像 RNN 那样顺序递推，训练并行性更好。</li>
+</ol>
+<p>但我自己的感受是，这一类方法也带来一个很常见的问题：</p>
+<blockquote>
+<p>模型越来越大，结构越来越复杂，但不一定更贴近真实部署场景。</p>
+</blockquote>
+<p>尤其交通预测这个方向，很多时候不只是拼一个 leaderboard 数字，还要考虑推理效率、显存占用、部署成本。这个问题往后会越来越重要。</p>
+<h2 id="6-这两年我觉得真正值得重视的方向，不只是“效果更高”，而是“问题更真”"><a href="#6-这两年我觉得真正值得重视的方向，不只是“效果更高”，而是“问题更真”" class="headerlink" title="6. 这两年我觉得真正值得重视的方向，不只是“效果更高”，而是“问题更真”"></a>6. 这两年我觉得真正值得重视的方向，不只是“效果更高”，而是“问题更真”</h2><p>如果让我说这几年我最感兴趣的一条变化，那不是单纯谁又把 MAE 压低了一点，而是很多工作开始更认真地面对真实世界的数据问题。</p>
+<p>比如：</p>
+<h3 id="1-缺失值与异常值"><a href="#1-缺失值与异常值" class="headerlink" title="1. 缺失值与异常值"></a>1. 缺失值与异常值</h3><p>真实传感器数据经常有：</p>
+<ul>
+<li>随机缺失</li>
+<li>连续缺失</li>
+<li>噪声污染</li>
+<li>采集异常</li>
+</ul>
+<p>如果模型只在非常干净的数据上表现好，那它的实用价值其实有限。</p>
+<h3 id="2-鲁棒性"><a href="#2-鲁棒性" class="headerlink" title="2. 鲁棒性"></a>2. 鲁棒性</h3><p>这也是我自己现在比较关心的点。</p>
+<p>交通流量预测不是“静态 benchmark 游戏”。传感器长时间宕机、局部区域观测失真、不同扰动同时出现，这些情况在现实中太正常了。</p>
+<p>所以我越来越觉得，一个模型值不值得做，不只是看正常测试集表现，还要看：</p>
+<ul>
+<li>噪声下稳不稳；</li>
+<li>缺失下崩不崩；</li>
+<li>参数量是不是太夸张；</li>
+<li>是否真的有推广价值。</li>
+</ul>
+<p>这也是为什么我现在看论文时，会特别在意是否有系统的鲁棒性评测，而不是只放一个标准测试集结果就结束。</p>
+<h3 id="3-泛化能力"><a href="#3-泛化能力" class="headerlink" title="3. 泛化能力"></a>3. 泛化能力</h3><p>同一个模型在 PeMS04、PeMS07、PeMS08 上好，不代表换一个城市、换一个采样条件还能好。</p>
+<p>如何提升跨区域、跨分布、跨采样条件的泛化能力，我觉得后面会一直是重点。</p>
+<h2 id="7-另一个很容易被忽视的问题：评价方式本身"><a href="#7-另一个很容易被忽视的问题：评价方式本身" class="headerlink" title="7. 另一个很容易被忽视的问题：评价方式本身"></a>7. 另一个很容易被忽视的问题：评价方式本身</h2><p>做交通流量预测，大家最熟悉的指标通常就是 MAE、RMSE、MAPE 这些。</p>
+<p>这些指标当然重要，但有时候也会掩盖一些问题。</p>
+<p>比如：</p>
+<ul>
+<li>平均指标看着不错，但高峰时段预测很差；</li>
+<li>模型在大多数节点上正常，但在关键节点崩得厉害；</li>
+<li>模型只在某类数据分布下有效。</li>
+</ul>
+<p>所以我现在会更关注一个问题：</p>
+<blockquote>
+<p>这个模型到底在哪些场景下强，在哪些场景下弱？</p>
+</blockquote>
+<p>如果只盯着平均分数，很容易忽略真正值得优化的地方。</p>
+<h2 id="8-我自己目前更认同的一条研究思路"><a href="#8-我自己目前更认同的一条研究思路" class="headerlink" title="8. 我自己目前更认同的一条研究思路"></a>8. 我自己目前更认同的一条研究思路</h2><p>如果只说我个人偏好，我现在更认可下面这种路线：</p>
+<ul>
+<li>主干结构尽量别太臃肿；</li>
+<li>时空依赖建模要明确，不要纯堆模块；</li>
+<li>对噪声、缺失、节点异常要有明确考虑；</li>
+<li>评测不能只看单一干净场景；</li>
+<li>最终最好还能兼顾参数量、速度和显存。</li>
+</ul>
+<p>说白了，就是我不太想把交通流量预测做成“谁把结构堆得更复杂”的比赛，而更想做成：</p>
+<blockquote>
+<p>在真实扰动条件下，模型还能不能稳稳地给出可用预测。</p>
+</blockquote>
+<h2 id="9-对刚入门这个方向的同学，我的建议"><a href="#9-对刚入门这个方向的同学，我的建议" class="headerlink" title="9. 对刚入门这个方向的同学，我的建议"></a>9. 对刚入门这个方向的同学，我的建议</h2><p>如果你刚开始看交通流量预测，我很建议按下面顺序走：</p>
+<h3 id="第一步：先搞清楚问题定义和数据集"><a href="#第一步：先搞清楚问题定义和数据集" class="headerlink" title="第一步：先搞清楚问题定义和数据集"></a>第一步：先搞清楚问题定义和数据集</h3><p>别一上来就看模型细节。</p>
+<h3 id="第二步：从经典模型一路往后看"><a href="#第二步：从经典模型一路往后看" class="headerlink" title="第二步：从经典模型一路往后看"></a>第二步：从经典模型一路往后看</h3><p>这样你会知道每一代方法到底在解决什么痛点。</p>
+<h3 id="第三步：自己动手复现几个代表模型"><a href="#第三步：自己动手复现几个代表模型" class="headerlink" title="第三步：自己动手复现几个代表模型"></a>第三步：自己动手复现几个代表模型</h3><p>不复现，很容易停留在“看懂摘要”的阶段。</p>
+<h3 id="第四步：找到你真正想解决的问题"><a href="#第四步：找到你真正想解决的问题" class="headerlink" title="第四步：找到你真正想解决的问题"></a>第四步：找到你真正想解决的问题</h3><p>是长程依赖？是动态图？是多尺度？还是鲁棒性？</p>
+<p>只有问题意识立住了，后面做研究才不会一直被论文名带着跑。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>交通流量预测这个方向表面上卷模型，实际上卷的是你对真实问题的理解深度。</p>
+<p>至少对我自己来说，我现在越来越不想只追一个更花的结构名字了。相比之下，我更关心的是：</p>
+<ul>
+<li>这个问题是不是现实中真会遇到；</li>
+<li>这个改进是不是有明确逻辑；</li>
+<li>这个模型是不是足够稳、足够省、足够能落地。</li>
+</ul>
+<p>如果后面真能沿着这条线继续往下做，我觉得这件事会比单纯刷一个更高分数更有意思。</p>
+]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>科研</tag>
+        <tag>交通流预测</tag>
+        <tag>时空预测</tag>
+        <tag>图神经网络</tag>
+        <tag>交通流量预测</tag>
+        <tag>Transformer</tag>
+        <tag>GNN</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>研究生三年怎么规划：别把自己活成“每天都很忙，但最后没东西”</title>
+    <url>/2025/01/15/2025-01-15-yan-jiu-sheng-san-nian-de-gui-hua/</url>
+    <content><![CDATA[<p>保研结束以后，很多人会突然进入一种奇怪的状态：</p>
+<p>以前天天焦虑排名和推免名额，现在名额定了，反而不知道接下来该干什么。</p>
+<p>我自己也有过这个阶段。后来想明白了一件事：<strong>研究生三年最怕的不是忙，而是忙得没有累计。</strong></p>
+<span id="more"></span>
+
+<p>看起来每天都在干活，但三年一过，论文不成体系，项目讲不清，实习没留下结果，生活也被弄得一团糟，那才是最亏的。</p>
+<p>这篇就按我现在认可的思路，写一个尽量务实的三年规划。</p>
+<h2 id="先说我的基本判断"><a href="#先说我的基本判断" class="headerlink" title="先说我的基本判断"></a>先说我的基本判断</h2><p>如果你是计算机、软件、AI 方向的硕士，研究生三年通常绕不开四件事：</p>
+<ul>
+<li>科研</li>
+<li>实习 / 就业准备</li>
+<li>技术能力积累</li>
+<li>个人生活与身心状态</li>
+</ul>
+<p>这四个东西不是对立的，但也绝对不可能同时拉满。</p>
+<p>所以研究生规划最重要的，不是列一个非常满的计划表，而是确定：</p>
+<blockquote>
+<p>这三年里，你最想换来的核心结果是什么？</p>
+</blockquote>
+<p>对我自己来说，大概会是下面几个关键词：</p>
+<ul>
+<li>在一个明确方向上做出像样的成果；</li>
+<li>形成自己能拿得出手的技术栈；</li>
+<li>给就业和未来留足选择权；</li>
+<li>不把自己读到只剩疲惫。</li>
+</ul>
+<h2 id="第一阶段：研一，先把地基打起来"><a href="#第一阶段：研一，先把地基打起来" class="headerlink" title="第一阶段：研一，先把地基打起来"></a>第一阶段：研一，先把地基打起来</h2><p>我一直觉得，研一最重要的不是急着“出成果”，而是先把自己从本科那种比较散的状态拉到研究状态。</p>
+<h3 id="1-把方向尽快收敛"><a href="#1-把方向尽快收敛" class="headerlink" title="1. 把方向尽快收敛"></a>1. 把方向尽快收敛</h3><p>很多同学研一最大的问题，就是今天看 A，明天看 B，哪个热点都想蹭一下，最后没有一个方向真扎进去。</p>
+<p>如果是我自己，我会尽量在研一上学期就确定一个相对稳定的主线。</p>
+<p>比如我现在比较明确偏向时空预测、交通流量预测、鲁棒学习这类方向，那后面的论文阅读、实验复现、课程作业，最好都尽量往这一条主线上靠。</p>
+<p>方向一旦收敛，很多事情都会顺起来。</p>
+<h3 id="2-把论文阅读能力拉起来"><a href="#2-把论文阅读能力拉起来" class="headerlink" title="2. 把论文阅读能力拉起来"></a>2. 把论文阅读能力拉起来</h3><p>本科阶段很多人做项目多，真正系统读论文其实不够。</p>
+<p>研一一定要补这个短板。</p>
+<p>我更推荐的方式不是“每天硬读十篇”，而是：</p>
+<ul>
+<li>找一条主线方向；</li>
+<li>从经典工作开始看；</li>
+<li>记录问题定义、模型结构、评价指标和缺点；</li>
+<li>看完之后自己复述。</li>
+</ul>
+<p>如果你读完一篇文章，只会说“这个模型好强”，那其实还不算读懂。</p>
+<h3 id="3-学会复现，而不是只会跑通代码"><a href="#3-学会复现，而不是只会跑通代码" class="headerlink" title="3. 学会复现，而不是只会跑通代码"></a>3. 学会复现，而不是只会跑通代码</h3><p>真正有价值的复现，不是把环境配好然后按回车。</p>
+<p>而是你要知道：</p>
+<ul>
+<li>数据怎么处理的；</li>
+<li>模型输入输出是什么；</li>
+<li>关键模块起了什么作用；</li>
+<li>指标为什么这样变化；</li>
+<li>如果结果不一致，问题可能出在哪。</li>
+</ul>
+<p>这一步其实特别锻炼人。很多后面能自己做改进的人，都是在这里开始建立感觉的。</p>
+<h3 id="4-形成自己的工具链"><a href="#4-形成自己的工具链" class="headerlink" title="4. 形成自己的工具链"></a>4. 形成自己的工具链</h3><p>研一一定要尽快把这些东西用顺：</p>
+<ul>
+<li>Linux</li>
+<li>Git</li>
+<li>Python / PyTorch</li>
+<li>LaTeX</li>
+<li>实验记录方式</li>
+<li>服务器使用规范</li>
+</ul>
+<p>这些看起来不起眼，但它们决定了你后面做事的效率。</p>
+<h2 id="第二阶段：研二，开始真正出东西"><a href="#第二阶段：研二，开始真正出东西" class="headerlink" title="第二阶段：研二，开始真正出东西"></a>第二阶段：研二，开始真正出东西</h2><p>如果说研一是在搭台子，那研二就是要往台上摆东西了。</p>
+<h3 id="1-论文、项目、竞赛，至少有一条主线能打"><a href="#1-论文、项目、竞赛，至少有一条主线能打" class="headerlink" title="1. 论文、项目、竞赛，至少有一条主线能打"></a>1. 论文、项目、竞赛，至少有一条主线能打</h3><p>研二很容易陷入“样样都碰一点”。</p>
+<p>但我的建议是，<strong>必须有一条主线</strong>。</p>
+<p>比如：</p>
+<ul>
+<li>论文主线：围绕一个问题连续做几轮实验，逐步形成投稿；</li>
+<li>项目主线：围绕一个系统或产品从原型做到可用；</li>
+<li>竞赛主线：把竞赛和研究方向结合起来，别只为了拿证书。</li>
+</ul>
+<p>就我自己的情况来说，我会更倾向把科研主线和工程能力绑在一起。因为单纯只有论文，或者单纯只有工程，对后面找工作都不一定是最舒服的。</p>
+<h3 id="2-开始考虑实习，但别实习成逃避科研"><a href="#2-开始考虑实习，但别实习成逃避科研" class="headerlink" title="2. 开始考虑实习，但别实习成逃避科研"></a>2. 开始考虑实习，但别实习成逃避科研</h3><p>很多计算机同学到了研二都会纠结要不要实习。</p>
+<p>我一直觉得，实习不是问题，问题是你去实习是为了什么。</p>
+<p>如果你去实习是为了：</p>
+<ul>
+<li>验证自己是不是适合工业界；</li>
+<li>增加秋招筹码；</li>
+<li>理解真实业务和工程流程；</li>
+</ul>
+<p>那非常值。</p>
+<p>但如果你只是因为科研做不下去，就把实习当成避难所，最后很可能两边都做得一般。</p>
+<p>所以我更认同的方式是：</p>
+<blockquote>
+<p>先把一条研究主线立住，再去找能互相增益的实习。</p>
+</blockquote>
+<h3 id="3-学会和导师、组会、同门打交道"><a href="#3-学会和导师、组会、同门打交道" class="headerlink" title="3. 学会和导师、组会、同门打交道"></a>3. 学会和导师、组会、同门打交道</h3><p>研究生不是闭门修仙。</p>
+<p>很多资源，都是你在正常合作和交流中慢慢得到的。包括：</p>
+<ul>
+<li>师兄师姐留下来的经验；</li>
+<li>组里现成的代码和数据流程；</li>
+<li>投稿、答辩、项目申报的细节；</li>
+<li>甚至就业信息和内推机会。</li>
+</ul>
+<p>你不一定要特别社交，但至少别把自己活成孤岛。</p>
+<h2 id="第三阶段：研三，把结果收拢出来"><a href="#第三阶段：研三，把结果收拢出来" class="headerlink" title="第三阶段：研三，把结果收拢出来"></a>第三阶段：研三，把结果收拢出来</h2><p>很多同学的问题，不是前两年没干活，而是到了研三收不拢。</p>
+<p>所以研三最重要的事情其实是：<strong>收口</strong>。</p>
+<h3 id="1-把论文、项目、毕业要求按优先级排清楚"><a href="#1-把论文、项目、毕业要求按优先级排清楚" class="headerlink" title="1. 把论文、项目、毕业要求按优先级排清楚"></a>1. 把论文、项目、毕业要求按优先级排清楚</h3><p>不要等到最后一个学期才突然发现：</p>
+<ul>
+<li>论文还没投出去；</li>
+<li>毕设材料不完整；</li>
+<li>简历没有统一版本；</li>
+<li>秋招故事线讲不清。</li>
+</ul>
+<p>我建议研三一开始就列一个非常明确的清单：</p>
+<ul>
+<li>必须完成的毕业项；</li>
+<li>需要继续推进的研究项；</li>
+<li>需要对外展示的项目 / 经历；</li>
+<li>就业 / 读博 / 选调分别要准备什么。</li>
+</ul>
+<h3 id="2-秋招和毕业不是对立关系"><a href="#2-秋招和毕业不是对立关系" class="headerlink" title="2. 秋招和毕业不是对立关系"></a>2. 秋招和毕业不是对立关系</h3><p>尤其是计算机硕士，很多人会觉得一准备秋招就没法做毕业，或者一做毕业就没法找工作。</p>
+<p>其实关键不在于二选一，而在于你之前有没有提前准备。</p>
+<p>如果你前两年做的事情足够成体系，秋招时反而很好讲：</p>
+<ul>
+<li>研究方向是什么；</li>
+<li>做过哪些项目；</li>
+<li>用过哪些技术；</li>
+<li>解决过什么问题。</li>
+</ul>
+<p>最怕的是前两年全是碎片，到了秋招才开始临时拼故事。</p>
+<h2 id="我现在会怎么安排自己的三条线"><a href="#我现在会怎么安排自己的三条线" class="headerlink" title="我现在会怎么安排自己的三条线"></a>我现在会怎么安排自己的三条线</h2><p>如果按我自己的偏好，我大概会把三年拆成三条并行线：</p>
+<h3 id="第一条：科研线"><a href="#第一条：科研线" class="headerlink" title="第一条：科研线"></a>第一条：科研线</h3><p>围绕时空预测这个主方向，尽量形成：</p>
+<ul>
+<li>一条稳定问题定义；</li>
+<li>一套能自己推进的实验流程；</li>
+<li>至少一篇能说得过去的成果。</li>
+</ul>
+<h3 id="第二条：工程线"><a href="#第二条：工程线" class="headerlink" title="第二条：工程线"></a>第二条：工程线</h3><p>保持自己不是只会看论文的人。</p>
+<p>比如继续做一些：</p>
+<ul>
+<li>全栈产品原型</li>
+<li>模型落地部署</li>
+<li>数据处理与服务搭建</li>
+<li>LLM 场景化应用</li>
+</ul>
+<p>我很认同一个观点：计算机硕士最好既能谈模型，也能谈系统。</p>
+<h3 id="第三条：生活线"><a href="#第三条：生活线" class="headerlink" title="第三条：生活线"></a>第三条：生活线</h3><p>这个以前我不太重视，后来越来越觉得重要。</p>
+<p>研究生阶段如果完全没有生活，最后不一定会更高产，反而可能长期低状态。</p>
+<p>所以我会有意识保留：</p>
+<ul>
+<li>阅读</li>
+<li>运动 / 骑行</li>
+<li>旅行</li>
+<li>适度兼职或现实社会接触</li>
+</ul>
+<p>这些东西不是浪费时间，很多时候反而会帮你把整个人从“只会卷”的状态里拉出来。</p>
+<h2 id="有几件事，我现在觉得一定要避免"><a href="#有几件事，我现在觉得一定要避免" class="headerlink" title="有几件事，我现在觉得一定要避免"></a>有几件事，我现在觉得一定要避免</h2><h3 id="1-被所有任务牵着走"><a href="#1-被所有任务牵着走" class="headerlink" title="1. 被所有任务牵着走"></a>1. 被所有任务牵着走</h3><p>谁来找你做一点，你都接，最后你会发现自己的主线全没了。</p>
+<h3 id="2-不做记录"><a href="#2-不做记录" class="headerlink" title="2. 不做记录"></a>2. 不做记录</h3><p>做过什么、踩过什么坑、读过什么论文，不记录的话，三个月后基本重新来。</p>
+<h3 id="3-把焦虑误当努力"><a href="#3-把焦虑误当努力" class="headerlink" title="3. 把焦虑误当努力"></a>3. 把焦虑误当努力</h3><p>天天担心论文、担心毕业、担心就业，不等于真的在推进。</p>
+<h3 id="4-只盯着毕业最低要求"><a href="#4-只盯着毕业最低要求" class="headerlink" title="4. 只盯着毕业最低要求"></a>4. 只盯着毕业最低要求</h3><p>最低要求通常只保证你能毕业，不保证你后面好过。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>研究生三年并不长。</p>
+<p>真正拉开差距的，不是某一周熬了多少夜，而是你有没有持续把时间压到一条值得积累的主线上。</p>
+<p>我现在越来越不相信那种“什么都要”的规划了。相反，我更愿意相信一种更稳的方式：</p>
+<ul>
+<li>主线清楚；</li>
+<li>节奏稳定；</li>
+<li>留有余地；</li>
+<li>最后能交出像样的结果。</li>
+</ul>
+<p>这样读完三年，人才不会散。</p>
+]]></content>
+      <categories>
+        <category>保研</category>
+      </categories>
+      <tags>
+        <tag>科研</tag>
+        <tag>研究生</tag>
+        <tag>实习</tag>
+        <tag>保研</tag>
+        <tag>推免</tag>
+        <tag>电子科技大学</tag>
+        <tag>学业规划</tag>
+        <tag>时间管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode Hot100 刷题经验：不是刷完 100 道就够了，而是要形成模板</title>
+    <url>/2026/01/08/2026-01-08-leetcode-hot100shua-ti-jing-yan/</url>
+    <content><![CDATA[<p>我最近又把 LeetCode Hot100 过了一遍。</p>
+<p>不是因为它有多神，而是因为到研究生阶段你会发现：算法题这东西，一段时间不碰，手感掉得非常快。尤其是平时做科研、写工程代码比较多的时候，脑子会更习惯“大系统逻辑”，反而不够敏感于题目里的局部结构。</p>
+<span id="more"></span>
+
+<p>所以这篇不写“我刷了多少题”，只写我觉得真正有用的经验。</p>
+<h2 id="1-Hot100-不是题单，是模板训练集"><a href="#1-Hot100-不是题单，是模板训练集" class="headerlink" title="1. Hot100 不是题单，是模板训练集"></a>1. Hot100 不是题单，是模板训练集</h2><p>很多人刷 Hot100 的方式是：</p>
+<ul>
+<li>做一道</li>
+<li>过一道</li>
+<li>收藏一道</li>
+<li>然后下一道</li>
+</ul>
+<p>最后刷完了，问他双指针模板是什么、二叉树 DFS 怎么快速写、动态规划怎么定义状态，还是卡住。</p>
+<p>这就说明，你刷的是题，不是方法。</p>
+<p>我现在更认可的一种说法是：</p>
+<blockquote>
+<p>Hot100 的价值，不在于 100 这个数字，而在于它能帮你把高频题型压缩成有限的思维模板。</p>
+</blockquote>
+<h2 id="2-我会把-Hot100-分成这几类来刷"><a href="#2-我会把-Hot100-分成这几类来刷" class="headerlink" title="2. 我会把 Hot100 分成这几类来刷"></a>2. 我会把 Hot100 分成这几类来刷</h2><h2 id="第一类：哈希-数组-双指针"><a href="#第一类：哈希-数组-双指针" class="headerlink" title="第一类：哈希 / 数组 / 双指针"></a>第一类：哈希 / 数组 / 双指针</h2><p>这一类是最适合恢复手感的。</p>
+<p>因为它们通常：</p>
+<ul>
+<li>代码量不大；</li>
+<li>反馈快；</li>
+<li>容易建立“看题识型”的感觉。</li>
+</ul>
+<p>像这些思路一定要练熟：</p>
+<ul>
+<li>两数之和：哈希</li>
+<li>三数之和：排序 + 双指针</li>
+<li>盛最多水的容器：对撞双指针</li>
+<li>移动零：快慢指针</li>
+</ul>
+<p>如果这一类都经常卡，那后面更复杂的题型大概率也会乱。</p>
+<h2 id="第二类：链表"><a href="#第二类：链表" class="headerlink" title="第二类：链表"></a>第二类：链表</h2><p>链表题最大的特点不是难，而是特别容易写乱。</p>
+<p>我自己的习惯是，把链表题统一先想清楚三件事：</p>
+<ol>
+<li>要不要 dummy 节点；</li>
+<li>当前操作涉及几个指针；</li>
+<li>修改指针前有没有保存后继。</li>
+</ol>
+<p>像反转链表、合并链表、删除倒数第 N 个结点、环形链表，这几道其实就能把常见套路覆盖掉很多。</p>
+<h2 id="第三类：栈-队列-单调栈"><a href="#第三类：栈-队列-单调栈" class="headerlink" title="第三类：栈 / 队列 / 单调栈"></a>第三类：栈 / 队列 / 单调栈</h2><p>这一类题一旦模板形成，速度会提得很明显。</p>
+<p>尤其是：</p>
+<ul>
+<li>有效括号</li>
+<li>最小栈</li>
+<li>每日温度</li>
+<li>柱状图中最大的矩形</li>
+</ul>
+<p>这里我最大的体会是：</p>
+<blockquote>
+<p>单调栈不难，难的是你没把“维护什么单调性”这句话想明白。</p>
+</blockquote>
+<h2 id="第四类：二叉树"><a href="#第四类：二叉树" class="headerlink" title="第四类：二叉树"></a>第四类：二叉树</h2><p>二叉树是 Hot100 的大头之一，也是最容易让人看起来会、实际写起来慢的部分。</p>
+<p>我会强行把自己训练成看到树题先问：</p>
+<ul>
+<li>这是前中后序哪种 DFS；</li>
+<li>要不要层序 BFS；</li>
+<li>这是“遍历型递归”还是“分解型递归”；</li>
+<li>返回值到底代表什么。</li>
+</ul>
+<p>比如：</p>
+<ul>
+<li>最大深度</li>
+<li>对称二叉树</li>
+<li>二叉树展开为链表</li>
+<li>最近公共祖先</li>
+</ul>
+<p>这些题表面不同，但很多时候底层思路是通的。</p>
+<h2 id="第五类：回溯"><a href="#第五类：回溯" class="headerlink" title="第五类：回溯"></a>第五类：回溯</h2><p>回溯题非常适合练代码组织能力。</p>
+<p>我的经验是，不要一上来就怕。先把这几个元素固定下来：</p>
+<ul>
+<li>路径 path</li>
+<li>选择列表 choices</li>
+<li>结束条件</li>
+<li>回退动作</li>
+</ul>
+<p>子集、全排列、组合总和、括号生成，这一套顺下来以后，回溯基本盘就差不多有了。</p>
+<h2 id="第六类：动态规划"><a href="#第六类：动态规划" class="headerlink" title="第六类：动态规划"></a>第六类：动态规划</h2><p>很多人怕 DP，其实根本原因通常不是不会转移，而是不知道状态该怎么定义。</p>
+<p>我自己现在做 DP 题，强迫自己先写这四句：</p>
+<ol>
+<li><code>dp[i]</code> / <code>dp[i][j]</code> 表示什么；</li>
+<li>初始值是什么；</li>
+<li>转移从哪里来；</li>
+<li>最终答案取哪里。</li>
+</ol>
+<p>像：</p>
+<ul>
+<li>爬楼梯</li>
+<li>打家劫舍</li>
+<li>最长递增子序列</li>
+<li>零钱兑换</li>
+<li>编辑距离</li>
+</ul>
+<p>这些题并不一定一遍就秒，但只要你把状态定义练出来，后面会顺很多。</p>
+<h2 id="第七类：图-BFS-二分-堆"><a href="#第七类：图-BFS-二分-堆" class="headerlink" title="第七类：图 / BFS / 二分 / 堆"></a>第七类：图 / BFS / 二分 / 堆</h2><p>这一类在面试里也常见，而且常和前面题型交叉。</p>
+<p>比如：</p>
+<ul>
+<li>岛屿数量：DFS / BFS</li>
+<li>腐烂的橘子：多源 BFS</li>
+<li>搜索旋转排序数组：二分</li>
+<li>数组中的第 K 个最大元素：堆 / 快排思想</li>
+</ul>
+<p>这里我比较建议按“场景”记，而不是按题号记。</p>
+<h2 id="3-我现在刷题，基本只做三件事"><a href="#3-我现在刷题，基本只做三件事" class="headerlink" title="3. 我现在刷题，基本只做三件事"></a>3. 我现在刷题，基本只做三件事</h2><h2 id="1-归类"><a href="#1-归类" class="headerlink" title="1. 归类"></a>1. 归类</h2><p>每做完一道题，我都会给它贴一个主标签：</p>
+<ul>
+<li>双指针</li>
+<li>哈希</li>
+<li>树 DFS</li>
+<li>回溯</li>
+<li>DP</li>
+<li>二分</li>
+</ul>
+<p>这样后面复习的时候，不是重做整本题单，而是按题型补弱项。</p>
+<h2 id="2-总结模板"><a href="#2-总结模板" class="headerlink" title="2. 总结模板"></a>2. 总结模板</h2><p>比如我会专门维护一些非常短的模板：</p>
+<ul>
+<li>二叉树递归模板</li>
+<li>层序遍历模板</li>
+<li>回溯模板</li>
+<li>二分模板</li>
+<li>单调栈模板</li>
+<li>链表 dummy 模板</li>
+</ul>
+<p>模板不是为了背代码，而是为了在高压场景下快速起手。</p>
+<h2 id="3-二刷和三刷"><a href="#3-二刷和三刷" class="headerlink" title="3. 二刷和三刷"></a>3. 二刷和三刷</h2><p>一道题一遍做出来，不代表你真的会。</p>
+<p>尤其是面试常考题，最好过几天再做一次。只有到了你能在比较短时间内重新写出来，才算真的内化。</p>
+<h2 id="4-我觉得最容易踩的坑"><a href="#4-我觉得最容易踩的坑" class="headerlink" title="4. 我觉得最容易踩的坑"></a>4. 我觉得最容易踩的坑</h2><h2 id="坑一：盲目追数量"><a href="#坑一：盲目追数量" class="headerlink" title="坑一：盲目追数量"></a>坑一：盲目追数量</h2><p>刷 300 道但没有形成方法，不如把 Hot100 真正吃透。</p>
+<h2 id="坑二：只看题解，不自己写"><a href="#坑二：只看题解，不自己写" class="headerlink" title="坑二：只看题解，不自己写"></a>坑二：只看题解，不自己写</h2><p>看懂和写出来之间，差得非常多。</p>
+<h2 id="坑三：语言细节不熟"><a href="#坑三：语言细节不熟" class="headerlink" title="坑三：语言细节不熟"></a>坑三：语言细节不熟</h2><p>尤其是 C++ / Python 常用容器、排序、自定义比较器、堆、哈希表的写法，不熟的话会影响你整场状态。</p>
+<h2 id="坑四：不会复盘"><a href="#坑四：不会复盘" class="headerlink" title="坑四：不会复盘"></a>坑四：不会复盘</h2><p>卡过的题如果不记录，下次还会卡在同一个地方。</p>
+<h2 id="5-如果是为了实习-秋招，我建议怎么安排"><a href="#5-如果是为了实习-秋招，我建议怎么安排" class="headerlink" title="5. 如果是为了实习 / 秋招，我建议怎么安排"></a>5. 如果是为了实习 / 秋招，我建议怎么安排</h2><p>如果你是为了找实习或者秋招面试，我会建议：</p>
+<h3 id="第一阶段：Hot100-过一遍，建立模板"><a href="#第一阶段：Hot100-过一遍，建立模板" class="headerlink" title="第一阶段：Hot100 过一遍，建立模板"></a>第一阶段：Hot100 过一遍，建立模板</h3><p>别急着求快。</p>
+<h3 id="第二阶段：按题型补短板"><a href="#第二阶段：按题型补短板" class="headerlink" title="第二阶段：按题型补短板"></a>第二阶段：按题型补短板</h3><p>哪一类老错，就集中练哪一类。</p>
+<h3 id="第三阶段：限时训练"><a href="#第三阶段：限时训练" class="headerlink" title="第三阶段：限时训练"></a>第三阶段：限时训练</h3><p>模拟真实面试节奏，练表达和代码书写速度。</p>
+<h3 id="第四阶段：回看高频经典题"><a href="#第四阶段：回看高频经典题" class="headerlink" title="第四阶段：回看高频经典题"></a>第四阶段：回看高频经典题</h3><p>不要把所有时间都花在新题上，经典题的收益通常更高。</p>
+<h2 id="6-我现在对刷题这件事的看法"><a href="#6-我现在对刷题这件事的看法" class="headerlink" title="6. 我现在对刷题这件事的看法"></a>6. 我现在对刷题这件事的看法</h2><p>以前我会觉得，刷题就是一种“必须忍受”的门槛。</p>
+<p>现在反而觉得，它至少有两个好处：</p>
+<ul>
+<li>让你在有限时间里快速恢复基础数据结构和算法直觉；</li>
+<li>让你的代码组织能力变得更干净。</li>
+</ul>
+<p>当然，刷题不能替代真实开发，也不能替代系统设计和工程经验。但如果你目标里包含实习、秋招、技术面试，那 Hot100 的性价比依然很高。</p>
+<p>最后还是那句话：</p>
+<blockquote>
+<p>不要把刷完 100 道当成终点。</p>
+</blockquote>
+<p>真正有用的是，你最后有没有在脑子里形成一套“看到题目就能迅速归类、起手、推进”的模板体系。这个东西，才会在面试那几分钟真正救你。</p>
+]]></content>
+      <categories>
+        <category>算法刷题</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>算法</tag>
+        <tag>研究生</tag>
+        <tag>面试</tag>
+        <tag>LeetCode</tag>
+        <tag>Hot100</tag>
+        <tag>实习准备</tag>
+        <tag>秋招</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mini Court 小法庭 MVP 开发手册：一个 LLM 场景化产品是怎么从 0 到 1 搭起来的</title>
+    <url>/2026/02/24/2026-02-24-mini-court-kai-fa-shou-ce/</url>
+    <content><![CDATA[<p>前段时间把一个一直想做的小产品落了地，名字叫 <strong>Mini Court 小法庭</strong>。</p>
+<p>它不是一个特别宏大的项目，说白了就是围绕“生活纠纷裁决”这个场景，做一个能让用户发帖陈述、评论讨论，再由大模型给出初审和复审结果的 MVP。</p>
+<p>这篇不准备写成宣传文，而是把当时做这个东西时比较关键的技术和产品决策整理下来，留作后面复盘，也方便以后做类似产品时少走弯路。</p>
+<span id="more"></span>
+
+<h2 id="1-先定义产品边界：MVP-到底要解决什么"><a href="#1-先定义产品边界：MVP-到底要解决什么" class="headerlink" title="1. 先定义产品边界：MVP 到底要解决什么"></a>1. 先定义产品边界：MVP 到底要解决什么</h2><p>我做这个产品时，给自己定的边界很明确：</p>
+<h3 id="要做的"><a href="#要做的" class="headerlink" title="要做的"></a>要做的</h3><ul>
+<li>用户发帖陈述纠纷</li>
+<li>其他用户评论讨论</li>
+<li>基于用户原帖做一次初审</li>
+<li>融合评论区观点做一次复审</li>
+<li>支持结果分享</li>
+<li>留出后台治理能力</li>
+</ul>
+<h3 id="暂时不做的"><a href="#暂时不做的" class="headerlink" title="暂时不做的"></a>暂时不做的</h3><ul>
+<li>复杂社交关系</li>
+<li>长链路 IM</li>
+<li>多模型路由编排</li>
+<li>复杂推荐系统</li>
+<li>付费系统</li>
+</ul>
+<p>原因很简单：MVP 阶段最怕什么都想做，最后什么都做不完。</p>
+<p>所以我一开始就把核心链路定成：</p>
+<blockquote>
+<p>发帖陈述 → 评论讨论 → Bot1 初审 → Bot2 复审 → 分享传播</p>
+</blockquote>
+<p>只要这条链路是通的，这个产品就算站住了。</p>
+<h2 id="2-为什么这个场景适合-LLM"><a href="#2-为什么这个场景适合-LLM" class="headerlink" title="2. 为什么这个场景适合 LLM"></a>2. 为什么这个场景适合 LLM</h2><p>不是所有产品都应该硬套大模型。</p>
+<p>我觉得这个场景适合的原因主要有三点：</p>
+<h3 id="1-用户输入天然是开放文本"><a href="#1-用户输入天然是开放文本" class="headerlink" title="1. 用户输入天然是开放文本"></a>1. 用户输入天然是开放文本</h3><p>生活纠纷本来就很难结构化，适合让模型先做文本理解和归纳。</p>
+<h3 id="2-结果不是唯一正确答案"><a href="#2-结果不是唯一正确答案" class="headerlink" title="2. 结果不是唯一正确答案"></a>2. 结果不是唯一正确答案</h3><p>裁决类场景更适合做“观点整理 + 规则化表达”，而不是追求绝对标准答案。</p>
+<h3 id="3-评论区本身就是高价值上下文"><a href="#3-评论区本身就是高价值上下文" class="headerlink" title="3. 评论区本身就是高价值上下文"></a>3. 评论区本身就是高价值上下文</h3><p>用户评论能提供额外视角，这很适合做第二阶段裁决。</p>
+<p>所以我最后设计成了一个<strong>双阶段工作流</strong>：</p>
+<ul>
+<li><strong>Bot1</strong>：基于原始帖文生成初审结果；</li>
+<li><strong>Bot2</strong>：吸收评论区观点后生成复审结果。</li>
+</ul>
+<p>这样做的好处，是把“用户原始陈述”和“公共讨论补充”拆开处理，结果会更稳一些。</p>
+<h2 id="3-技术栈为什么这么选"><a href="#3-技术栈为什么这么选" class="headerlink" title="3. 技术栈为什么这么选"></a>3. 技术栈为什么这么选</h2><p>我最后选的是这套：</p>
+<ul>
+<li><strong>后端</strong>：NestJS</li>
+<li><strong>ORM</strong>：Prisma</li>
+<li><strong>数据库</strong>：PostgreSQL</li>
+<li><strong>反向代理</strong>：Nginx</li>
+<li><strong>部署</strong>：Docker Compose</li>
+<li><strong>LLM 接入</strong>：统一封装为服务层</li>
+</ul>
+<p>选择逻辑其实很务实。</p>
+<h3 id="NestJS"><a href="#NestJS" class="headerlink" title="NestJS"></a>NestJS</h3><p>适合快速把：</p>
+<ul>
+<li>用户系统</li>
+<li>帖子评论</li>
+<li>后台管理</li>
+<li>审计日志</li>
+<li>权限控制</li>
+</ul>
+<p>这几块都搭起来，模块化也比较清楚。</p>
+<h3 id="Prisma-PostgreSQL"><a href="#Prisma-PostgreSQL" class="headerlink" title="Prisma + PostgreSQL"></a>Prisma + PostgreSQL</h3><p>一方面开发体验好，另一方面对这种关系明确的业务数据很合适。后面做迁移、种子数据、后台管理都顺手。</p>
+<h3 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h3><p>MVP 阶段特别适合。服务不多，但需要稳定跑起来，Compose 管理就够了。</p>
+<h2 id="4-我当时拆出来的核心模块"><a href="#4-我当时拆出来的核心模块" class="headerlink" title="4. 我当时拆出来的核心模块"></a>4. 我当时拆出来的核心模块</h2><p>后端如果一开始不分模块，后面会越来越乱。</p>
+<p>我最后大概拆成了下面几块：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">src/</span><br><span class="line">  auth/           # 登录、鉴权、JWT</span><br><span class="line">  users/          # 用户信息</span><br><span class="line">  posts/          # 发帖、详情、列表</span><br><span class="line">  comments/       # 评论相关</span><br><span class="line">  judgments/      # 初审/复审结果</span><br><span class="line">  llm/            # 大模型调用封装</span><br><span class="line">  admin/          # 后台治理</span><br><span class="line">  rbac/           # 角色权限</span><br><span class="line">  logs/           # 审计日志</span><br><span class="line">  common/         # 公共响应、异常处理、工具函数</span><br></pre></td></tr></table></figure>
+
+<p>这样拆的目的不是为了“看起来高级”，而是为了后面两件事：</p>
+<ol>
+<li>改需求时不至于牵一发动全身；</li>
+<li>后台治理和用户主链路分离。</li>
+</ol>
+<h2 id="5-数据模型我会怎么设计"><a href="#5-数据模型我会怎么设计" class="headerlink" title="5. 数据模型我会怎么设计"></a>5. 数据模型我会怎么设计</h2><p>MVP 阶段不需要过度抽象，但几个核心表一定要先想清楚。</p>
+<p>我当时比较核心的实体大概有：</p>
+<h3 id="User"><a href="#User" class="headerlink" title="User"></a>User</h3><ul>
+<li>id</li>
+<li>nickname</li>
+<li>avatar</li>
+<li>role</li>
+<li>status</li>
+<li>createdAt</li>
+</ul>
+<h3 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h3><ul>
+<li>id</li>
+<li>userId</li>
+<li>title</li>
+<li>content</li>
+<li>status</li>
+<li>viewCount</li>
+<li>createdAt</li>
+</ul>
+<h3 id="Comment"><a href="#Comment" class="headerlink" title="Comment"></a>Comment</h3><ul>
+<li>id</li>
+<li>postId</li>
+<li>userId</li>
+<li>content</li>
+<li>status</li>
+<li>createdAt</li>
+</ul>
+<h3 id="Judgment"><a href="#Judgment" class="headerlink" title="Judgment"></a>Judgment</h3><ul>
+<li>id</li>
+<li>postId</li>
+<li>round（initial / final）</li>
+<li>inputSnapshot</li>
+<li>outputJson</li>
+<li>modelName</li>
+<li>createdAt</li>
+</ul>
+<h3 id="AdminLog"><a href="#AdminLog" class="headerlink" title="AdminLog"></a>AdminLog</h3><ul>
+<li>id</li>
+<li>adminId</li>
+<li>action</li>
+<li>targetType</li>
+<li>targetId</li>
+<li>detail</li>
+<li>createdAt</li>
+</ul>
+<p>这里我有一个明确要求：<strong>裁决结果尽量结构化。</strong></p>
+<p>也就是不要只存一整段自然语言，而是尽量让模型输出 JSON，再做展示层渲染。</p>
+<p>比如可以要求输出：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;summary&quot;</span><span class="punctuation">:</span> <span class="string">&quot;纠纷摘要&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;plaintiff_view&quot;</span><span class="punctuation">:</span> <span class="string">&quot;甲方主要观点&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;defendant_view&quot;</span><span class="punctuation">:</span> <span class="string">&quot;乙方主要观点&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;decision&quot;</span><span class="punctuation">:</span> <span class="string">&quot;初步裁决&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;reason&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;理由1&quot;</span><span class="punctuation">,</span> <span class="string">&quot;理由2&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;risk_hint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;风险提示&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样后面无论是前端展示、分享卡片、二次统计，都会方便很多。</p>
+<h2 id="6-双阶段裁决工作流怎么落地"><a href="#6-双阶段裁决工作流怎么落地" class="headerlink" title="6. 双阶段裁决工作流怎么落地"></a>6. 双阶段裁决工作流怎么落地</h2><p>这部分是我自己觉得最关键的地方。</p>
+<h3 id="第一阶段：Bot1-初审"><a href="#第一阶段：Bot1-初审" class="headerlink" title="第一阶段：Bot1 初审"></a>第一阶段：Bot1 初审</h3><p>输入内容：</p>
+<ul>
+<li>原帖标题</li>
+<li>原帖正文</li>
+<li>必要的用户补充信息</li>
+</ul>
+<p>输出内容：</p>
+<ul>
+<li>纠纷摘要</li>
+<li>双方争议点</li>
+<li>初步判断</li>
+<li>理由说明</li>
+</ul>
+<h3 id="第二阶段：Bot2-复审"><a href="#第二阶段：Bot2-复审" class="headerlink" title="第二阶段：Bot2 复审"></a>第二阶段：Bot2 复审</h3><p>输入内容：</p>
+<ul>
+<li>Bot1 的初审结果</li>
+<li>评论区若干高质量评论</li>
+<li>原始帖文摘要</li>
+</ul>
+<p>输出内容：</p>
+<ul>
+<li>最终复审意见</li>
+<li>是否采纳评论区新观点</li>
+<li>最终理由列表</li>
+<li>风险和建议</li>
+</ul>
+<p>这里最容易出问题的是评论区太乱，所以我当时做了几件事情来控成本和提稳定性：</p>
+<h4 id="1-截断"><a href="#1-截断" class="headerlink" title="1. 截断"></a>1. 截断</h4><p>评论太长就截断，不然 token 直接爆。</p>
+<h4 id="2-去重"><a href="#2-去重" class="headerlink" title="2. 去重"></a>2. 去重</h4><p>类似表达只保留一份，减少模型重复读取。</p>
+<h4 id="3-限条数"><a href="#3-限条数" class="headerlink" title="3. 限条数"></a>3. 限条数</h4><p>只取前 N 条有效评论，避免无意义堆料。</p>
+<h4 id="4-结果缓存"><a href="#4-结果缓存" class="headerlink" title="4. 结果缓存"></a>4. 结果缓存</h4><p>同一帖子的相同阶段结果，优先走缓存，降低重复调用成本。</p>
+<p>这一套做完以后，输出会稳定很多，费用也更可控。</p>
+<h2 id="7-后台治理为什么必须早点做"><a href="#7-后台治理为什么必须早点做" class="headerlink" title="7. 后台治理为什么必须早点做"></a>7. 后台治理为什么必须早点做</h2><p>做内容类产品，一个很常见的错误就是把后台治理放到最后。</p>
+<p>但实际上只要有用户发言，就一定会遇到：</p>
+<ul>
+<li>不当内容</li>
+<li>恶意刷帖</li>
+<li>重复评论</li>
+<li>管理员操作留痕</li>
+</ul>
+<p>所以我在 MVP 阶段就加了下面几项：</p>
+<h3 id="1-Admin-登录"><a href="#1-Admin-登录" class="headerlink" title="1. Admin 登录"></a>1. Admin 登录</h3><p>后台和普通用户逻辑分开，不混用权限。</p>
+<h3 id="2-RBAC"><a href="#2-RBAC" class="headerlink" title="2. RBAC"></a>2. RBAC</h3><p>至少区分超级管理员、内容管理员等角色。</p>
+<h3 id="3-内容下架"><a href="#3-内容下架" class="headerlink" title="3. 内容下架"></a>3. 内容下架</h3><p>帖子、评论都要支持状态切换。</p>
+<h3 id="4-审计日志"><a href="#4-审计日志" class="headerlink" title="4. 审计日志"></a>4. 审计日志</h3><p>谁在什么时候下架了什么内容，一定要有记录。</p>
+<p>MVP 可以简，但不能没有治理。</p>
+<h2 id="8-API-设计上，我会坚持的几个原则"><a href="#8-API-设计上，我会坚持的几个原则" class="headerlink" title="8. API 设计上，我会坚持的几个原则"></a>8. API 设计上，我会坚持的几个原则</h2><h3 id="1-前后端边界清楚"><a href="#1-前后端边界清楚" class="headerlink" title="1. 前后端边界清楚"></a>1. 前后端边界清楚</h3><p>不要把一堆业务逻辑写进 controller。</p>
+<h3 id="2-LLM-服务统一封装"><a href="#2-LLM-服务统一封装" class="headerlink" title="2. LLM 服务统一封装"></a>2. LLM 服务统一封装</h3><p>后面无论你换模型、换提示词、换重试逻辑，都不应该影响业务层。</p>
+<h3 id="3-响应格式统一"><a href="#3-响应格式统一" class="headerlink" title="3. 响应格式统一"></a>3. 响应格式统一</h3><p>成功和失败都走统一响应格式，前端处理会轻松很多。</p>
+<h3 id="4-状态字段提前预留"><a href="#4-状态字段提前预留" class="headerlink" title="4. 状态字段提前预留"></a>4. 状态字段提前预留</h3><p>像帖子状态、评论状态、裁决状态，别等以后再补。</p>
+<h2 id="9-一个最小可运行的部署方式"><a href="#9-一个最小可运行的部署方式" class="headerlink" title="9. 一个最小可运行的部署方式"></a>9. 一个最小可运行的部署方式</h2><p>MVP 阶段我更喜欢一台服务器先跑起来，再逐步优化。</p>
+<h3 id="docker-compose-yml-大致会包含"><a href="#docker-compose-yml-大致会包含" class="headerlink" title="docker-compose.yml 大致会包含"></a>docker-compose.yml 大致会包含</h3><ul>
+<li>app</li>
+<li>postgres</li>
+<li>nginx</li>
+</ul>
+<h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker compose up -d</span><br><span class="line">npx prisma migrate deploy</span><br><span class="line">npx prisma db seed</span><br></pre></td></tr></table></figure>
+
+<h3 id="Nginx-负责"><a href="#Nginx-负责" class="headerlink" title="Nginx 负责"></a>Nginx 负责</h3><ul>
+<li>反向代理</li>
+<li>静态资源转发</li>
+<li>HTTPS 入口（如果后面加证书）</li>
+</ul>
+<p>这套方案的好处是：简单、直观、便于迁移。对个人 MVP 足够用了。</p>
+<h2 id="10-我做完以后最大的几个感受"><a href="#10-我做完以后最大的几个感受" class="headerlink" title="10. 我做完以后最大的几个感受"></a>10. 我做完以后最大的几个感受</h2><h2 id="第一，产品一定要先站在用户链路上看"><a href="#第一，产品一定要先站在用户链路上看" class="headerlink" title="第一，产品一定要先站在用户链路上看"></a>第一，产品一定要先站在用户链路上看</h2><p>不是你技术上能做什么，而是用户第一步进来到底会不会玩。</p>
+<p>如果核心链路不顺，再好的模型都只是摆设。</p>
+<h2 id="第二，大模型输出一定要尽可能结构化"><a href="#第二，大模型输出一定要尽可能结构化" class="headerlink" title="第二，大模型输出一定要尽可能结构化"></a>第二，大模型输出一定要尽可能结构化</h2><p>不然前端展示、缓存、二次处理都很麻烦。</p>
+<h2 id="第三，治理能力不是锦上添花"><a href="#第三，治理能力不是锦上添花" class="headerlink" title="第三，治理能力不是锦上添花"></a>第三，治理能力不是锦上添花</h2><p>一旦有 UGC，治理就是基础设施。</p>
+<h2 id="第四，MVP-最怕过度设计"><a href="#第四，MVP-最怕过度设计" class="headerlink" title="第四，MVP 最怕过度设计"></a>第四，MVP 最怕过度设计</h2><p>很多功能明明可以后面再做，但人就是忍不住想“一次做全”。</p>
+<p>这对个人开发尤其危险。</p>
+<h2 id="11-如果后面继续迭代，我会优先做什么"><a href="#11-如果后面继续迭代，我会优先做什么" class="headerlink" title="11. 如果后面继续迭代，我会优先做什么"></a>11. 如果后面继续迭代，我会优先做什么</h2><p>如果继续往下做，我大概率会优先补这几项：</p>
+<ul>
+<li>更细的评论筛选和质量评分；</li>
+<li>更可控的提示词和多轮重试机制；</li>
+<li>分享页优化；</li>
+<li>用户举报与审核流程；</li>
+<li>数据统计看板；</li>
+<li>更完善的异常监控。</li>
+</ul>
+<p>这些比一开始就上复杂推荐系统更实际。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>我做 Mini Court 这个项目时，一个很深的感受是：</p>
+<blockquote>
+<p>LLM 产品真正难的，往往不是把模型调起来，而是把“产品链路、数据结构、治理、成本、稳定性”这些工程问题一起压住。</p>
+</blockquote>
+<p>如果只会调用接口，那最多算做了一个 demo；只有当整个链路真的跑通，用户能用，结果可控，后台能管，部署能稳，这个东西才算一个像样的产品。</p>
+<p>这篇就先记到这里。后面如果把它继续迭代下去，再回来补更细的部分。</p>
+]]></content>
+      <categories>
+        <category>产品开发</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
+        <tag>LLM</tag>
+        <tag>NestJS</tag>
+        <tag>Prisma</tag>
+        <tag>PostgreSQL</tag>
+        <tag>Docker</tag>
+        <tag>产品手册</tag>
+        <tag>Mini Court</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我是怎么补金融知识的：给计算机背景同学的一条务实路线</title>
+    <url>/2025/10/12/2025-10-12-jin-rong-ling-yu-zhi-shi-de-xue-xi/</url>
+    <content><![CDATA[<p>这两年我陆续在看一些金融相关的东西，也自己做过一点很小规模的实践。</p>
+<p>一开始我以为，凭计算机背景去学金融，会天然有优势。后来发现优势确实有，但前提是你别上来就想着“写个策略然后暴打市场”。</p>
+<p>市场不是 LeetCode，也不是 Kaggle。</p>
+<span id="more"></span>
+
+<p>尤其是 A 股这种环境，很多时候你以为自己在做理性分析，最后其实是在给情绪找理由。所以这篇不讲神话，也不讲一夜暴富，我只讲我现在觉得比较务实的一条学习路线。</p>
+<h2 id="1-先把目标想清楚：你学金融是为了什么"><a href="#1-先把目标想清楚：你学金融是为了什么" class="headerlink" title="1. 先把目标想清楚：你学金融是为了什么"></a>1. 先把目标想清楚：你学金融是为了什么</h2><p>我觉得这个问题必须先回答。</p>
+<p>因为“学金融”这三个字太大了，里面其实混着很多完全不同的目标：</p>
+<ul>
+<li>想提高自己的理财能力；</li>
+<li>想看懂宏观和市场新闻；</li>
+<li>想做基本面投资；</li>
+<li>想做量化交易；</li>
+<li>想以后转去金融科技或相关行业。</li>
+</ul>
+<p>目标不同，路径会差很多。</p>
+<p>如果你只是想让自己的钱不要乱花、乱投，那根本没必要一开始就去啃随机过程和衍生品定价。</p>
+<h2 id="2-我现在比较认可的顺序：先常识，再报表，再市场，再策略"><a href="#2-我现在比较认可的顺序：先常识，再报表，再市场，再策略" class="headerlink" title="2. 我现在比较认可的顺序：先常识，再报表，再市场，再策略"></a>2. 我现在比较认可的顺序：先常识，再报表，再市场，再策略</h2><p>很多人一开始就想找“哪只股票能涨”。</p>
+<p>我现在反而觉得，这几乎是最没意义的起点。</p>
+<p>因为如果你连：</p>
+<ul>
+<li>一家公司怎么赚钱；</li>
+<li>财务报表在讲什么；</li>
+<li>市场为什么会大幅波动；</li>
+<li>风险控制为什么比选股更重要；</li>
+</ul>
+<p>这些都没概念，那你后面做的很多判断，本质上都是拍脑袋。</p>
+<p>所以我给自己的顺序是：</p>
+<h2 id="第一层：金融常识"><a href="#第一层：金融常识" class="headerlink" title="第一层：金融常识"></a>第一层：金融常识</h2><p>这一层不求深，但必须有。</p>
+<p>至少要搞清楚：</p>
+<ul>
+<li>股票、基金、债券分别是什么；</li>
+<li>一级市场和二级市场是什么；</li>
+<li>指数是什么意思；</li>
+<li>估值大概怎么理解；</li>
+<li>牛熊市为什么会形成；</li>
+<li>利率、汇率、通胀对资产价格的大致影响。</li>
+</ul>
+<p>这一层的目标，不是让你会分析，而是让你别被最表面的说法带跑。</p>
+<h2 id="第二层：财务报表"><a href="#第二层：财务报表" class="headerlink" title="第二层：财务报表"></a>第二层：财务报表</h2><p>这个部分我觉得非常重要。</p>
+<p>很多人一聊股票，就聊题材、情绪、消息面，但如果长期一点看，一家公司值不值得拿，最后还是要回到它本身。</p>
+<p>所以报表至少得会看这三张：</p>
+<ul>
+<li>资产负债表</li>
+<li>利润表</li>
+<li>现金流量表</li>
+</ul>
+<p>我不是金融科班，刚开始也看得很慢。但看多了以后会发现，很多东西其实都能和常识对上：</p>
+<ul>
+<li>公司赚的钱是真赚到手了，还是只是账面利润；</li>
+<li>现金流是不是健康；</li>
+<li>负债结构稳不稳；</li>
+<li>应收账款高不高；</li>
+<li>利润增长到底靠主营业务还是靠别的东西撑着。</li>
+</ul>
+<p>如果连这个都不看，只靠K线和短视频消息做判断，我觉得心里很难有底。</p>
+<h2 id="第三层：市场机制和人性"><a href="#第三层：市场机制和人性" class="headerlink" title="第三层：市场机制和人性"></a>第三层：市场机制和人性</h2><p>我现在越来越觉得，市场很多时候不是“你知道得多就一定赢”，而是“你能不能比别人更稳定”。</p>
+<p>这里面有两块都很重要：</p>
+<h3 id="一块是机制"><a href="#一块是机制" class="headerlink" title="一块是机制"></a>一块是机制</h3><ul>
+<li>交易规则</li>
+<li>涨跌停制度</li>
+<li>资金结构</li>
+<li>政策影响</li>
+<li>流动性变化</li>
+</ul>
+<h3 id="一块是人性"><a href="#一块是人性" class="headerlink" title="一块是人性"></a>一块是人性</h3><ul>
+<li>追涨杀跌</li>
+<li>损失厌恶</li>
+<li>幻觉控制</li>
+<li>群体情绪</li>
+</ul>
+<p>尤其在高波动市场里，人性因素的破坏力太强了。很多人不是因为不会分析亏钱，而是因为<strong>明明有计划，最后还是手痒</strong>。</p>
+<h2 id="3-计算机背景的人，真正优势在哪里"><a href="#3-计算机背景的人，真正优势在哪里" class="headerlink" title="3. 计算机背景的人，真正优势在哪里"></a>3. 计算机背景的人，真正优势在哪里</h2><p>我觉得优势主要有三点。</p>
+<h3 id="1-更容易接受数据和概率"><a href="#1-更容易接受数据和概率" class="headerlink" title="1. 更容易接受数据和概率"></a>1. 更容易接受数据和概率</h3><p>计算机背景的人，通常不太排斥量化、统计、回测这些东西。至少在理解“没有任何策略能永远正确”这件事上，会相对自然一点。</p>
+<h3 id="2-更容易搭建自己的信息系统"><a href="#2-更容易搭建自己的信息系统" class="headerlink" title="2. 更容易搭建自己的信息系统"></a>2. 更容易搭建自己的信息系统</h3><p>比如你可以：</p>
+<ul>
+<li>用 Python 做数据清洗和可视化；</li>
+<li>自己记录交易日志；</li>
+<li>统计自己在哪些场景最容易犯错；</li>
+<li>把阅读、财报、宏观信息整理成结构化笔记。</li>
+</ul>
+<p>这个事情很重要。很多人学金融最后失败，不是知识不够，而是信息输入太乱。</p>
+<h3 id="3-对“量化”更容易祛魅"><a href="#3-对“量化”更容易祛魅" class="headerlink" title="3. 对“量化”更容易祛魅"></a>3. 对“量化”更容易祛魅</h3><p>真正学过一点算法和工程的人，反而不太容易被“神秘量化策略”唬住。</p>
+<p>因为你会本能地问几个问题：</p>
+<ul>
+<li>数据有没有未来函数；</li>
+<li>样本外表现怎么样；</li>
+<li>回测是不是过拟合；</li>
+<li>交易成本和滑点怎么算；</li>
+<li>策略是不是一上线就失效。</li>
+</ul>
+<p>这些问题问出来，很多所谓神策略就没那么神了。</p>
+<h2 id="4-但也正因为是计算机背景，更容易踩两个坑"><a href="#4-但也正因为是计算机背景，更容易踩两个坑" class="headerlink" title="4. 但也正因为是计算机背景，更容易踩两个坑"></a>4. 但也正因为是计算机背景，更容易踩两个坑</h2><h2 id="坑一：太迷信模型"><a href="#坑一：太迷信模型" class="headerlink" title="坑一：太迷信模型"></a>坑一：太迷信模型</h2><p>模型当然重要，但金融市场不是一个稳定闭环系统。</p>
+<p>同样一套方法，在不同制度、不同周期、不同情绪环境下，表现可能完全不同。你不能用做课程作业的思路，去理解市场。</p>
+<h2 id="坑二：太想一步到位做量化"><a href="#坑二：太想一步到位做量化" class="headerlink" title="坑二：太想一步到位做量化"></a>坑二：太想一步到位做量化</h2><p>我非常不建议一开始就幻想“我先学点 Python，然后搞个量化策略实现财富自由”。</p>
+<p>不是说不能做，而是绝大多数人此时连市场基本认知都不够，结果只能变成：</p>
+<ul>
+<li>指标堆一堆；</li>
+<li>回测很好看；</li>
+<li>实盘一做就变形。</li>
+</ul>
+<p>我现在的看法很直接：</p>
+<blockquote>
+<p>没有基本面认知、没有风险意识、没有市场常识之前，量化大概率只是高级一点的自我感动。</p>
+</blockquote>
+<h2 id="5-我自己现在怎么学"><a href="#5-我自己现在怎么学" class="headerlink" title="5. 我自己现在怎么学"></a>5. 我自己现在怎么学</h2><p>如果按我现在的节奏，大概是这样：</p>
+<h3 id="第一条线：读基础书和公开资料"><a href="#第一条线：读基础书和公开资料" class="headerlink" title="第一条线：读基础书和公开资料"></a>第一条线：读基础书和公开资料</h3><p>不是为了考证，而是为了建立一个正常的知识框架。</p>
+<h3 id="第二条线：看公司和看报表"><a href="#第二条线：看公司和看报表" class="headerlink" title="第二条线：看公司和看报表"></a>第二条线：看公司和看报表</h3><p>哪怕先只看少数几个行业，也比广撒网强。</p>
+<h3 id="第三条线：小资金实践"><a href="#第三条线：小资金实践" class="headerlink" title="第三条线：小资金实践"></a>第三条线：小资金实践</h3><p>不用一开始投入很多，重点是观察自己在真实波动下会不会变形。</p>
+<h3 id="第四条线：写记录"><a href="#第四条线：写记录" class="headerlink" title="第四条线：写记录"></a>第四条线：写记录</h3><p>记录这件事特别重要。</p>
+<p>比如：</p>
+<ul>
+<li>我为什么买；</li>
+<li>当时的逻辑是什么；</li>
+<li>结果怎样；</li>
+<li>错在分析，还是错在执行；</li>
+<li>有没有被情绪带偏。</li>
+</ul>
+<p>长期下来，你会比只看收益率更了解自己。</p>
+<h2 id="6-如果你也想从零开始，我建议这样入门"><a href="#6-如果你也想从零开始，我建议这样入门" class="headerlink" title="6. 如果你也想从零开始，我建议这样入门"></a>6. 如果你也想从零开始，我建议这样入门</h2><h3 id="第一步：先学基本概念"><a href="#第一步：先学基本概念" class="headerlink" title="第一步：先学基本概念"></a>第一步：先学基本概念</h3><p>别着急开户乱买。</p>
+<h3 id="第二步：补财务报表"><a href="#第二步：补财务报表" class="headerlink" title="第二步：补财务报表"></a>第二步：补财务报表</h3><p>至少能看懂一家公司的基本面框架。</p>
+<h3 id="第三步：理解市场运行机制"><a href="#第三步：理解市场运行机制" class="headerlink" title="第三步：理解市场运行机制"></a>第三步：理解市场运行机制</h3><p>别把所有涨跌都归因于“庄家”两个字。</p>
+<h3 id="第四步：少量实践-复盘"><a href="#第四步：少量实践-复盘" class="headerlink" title="第四步：少量实践 + 复盘"></a>第四步：少量实践 + 复盘</h3><p>用实践校验自己的认知。</p>
+<h3 id="第五步：再考虑要不要往量化走"><a href="#第五步：再考虑要不要往量化走" class="headerlink" title="第五步：再考虑要不要往量化走"></a>第五步：再考虑要不要往量化走</h3><p>这时候你再学数据接口、回测框架、因子分析，会更稳一些。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>我现在对金融学习的态度，反而比一开始更保守了。</p>
+<p>不是因为它没用，而是因为它太容易让人把“知道一些术语”和“真正理解风险”混为一谈。</p>
+<p>对计算机背景的人来说，学金融是很有价值的。它能帮你重新理解公司、行业、社会运转，也能帮助你管理自己的钱。</p>
+<p>但前提是别急，别神化，别总想着捷径。</p>
+<p>真正靠谱的路，通常都很土：</p>
+<ul>
+<li>先把常识补齐；</li>
+<li>再把框架搭起来；</li>
+<li>用小规模实践校验；</li>
+<li>最后慢慢形成自己的判断。</li>
+</ul>
+<p>这条路不性感，但我觉得更不容易把自己学歪。</p>
+]]></content>
+      <categories>
+        <category>算法刷题</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
+        <tag>过拟合</tag>
+        <tag>LeetCode</tag>
+        <tag>金融</tag>
+        <tag>投资</tag>
+        <tag>学习方法</tag>
+        <tag>量化</tag>
+        <tag>A股</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>接了一个医学生毕设的数据分析项目，我是怎么把生存分析做成可复现交付的</title>
     <url>/2026/01/01/2026-01-01-medical_survival_analysis_project_blog/</url>
     <content><![CDATA[<p>这篇文章记录一个我实际接手过的医学数据分析项目。</p>
@@ -2582,174 +2971,27 @@
       </tags>
   </entry>
   <entry>
-    <title>LeetCode Hot100 刷题经验：不是刷完 100 道就够了，而是要形成模板</title>
-    <url>/2026/01/08/2026-01-08-leetcode-hot100shua-ti-jing-yan/</url>
-    <content><![CDATA[<p>我最近又把 LeetCode Hot100 过了一遍。</p>
-<p>不是因为它有多神，而是因为到研究生阶段你会发现：算法题这东西，一段时间不碰，手感掉得非常快。尤其是平时做科研、写工程代码比较多的时候，脑子会更习惯“大系统逻辑”，反而不够敏感于题目里的局部结构。</p>
-<span id="more"></span>
-
-<p>所以这篇不写“我刷了多少题”，只写我觉得真正有用的经验。</p>
-<h2 id="1-Hot100-不是题单，是模板训练集"><a href="#1-Hot100-不是题单，是模板训练集" class="headerlink" title="1. Hot100 不是题单，是模板训练集"></a>1. Hot100 不是题单，是模板训练集</h2><p>很多人刷 Hot100 的方式是：</p>
-<ul>
-<li>做一道</li>
-<li>过一道</li>
-<li>收藏一道</li>
-<li>然后下一道</li>
-</ul>
-<p>最后刷完了，问他双指针模板是什么、二叉树 DFS 怎么快速写、动态规划怎么定义状态，还是卡住。</p>
-<p>这就说明，你刷的是题，不是方法。</p>
-<p>我现在更认可的一种说法是：</p>
-<blockquote>
-<p>Hot100 的价值，不在于 100 这个数字，而在于它能帮你把高频题型压缩成有限的思维模板。</p>
-</blockquote>
-<h2 id="2-我会把-Hot100-分成这几类来刷"><a href="#2-我会把-Hot100-分成这几类来刷" class="headerlink" title="2. 我会把 Hot100 分成这几类来刷"></a>2. 我会把 Hot100 分成这几类来刷</h2><h2 id="第一类：哈希-数组-双指针"><a href="#第一类：哈希-数组-双指针" class="headerlink" title="第一类：哈希 / 数组 / 双指针"></a>第一类：哈希 / 数组 / 双指针</h2><p>这一类是最适合恢复手感的。</p>
-<p>因为它们通常：</p>
-<ul>
-<li>代码量不大；</li>
-<li>反馈快；</li>
-<li>容易建立“看题识型”的感觉。</li>
-</ul>
-<p>像这些思路一定要练熟：</p>
-<ul>
-<li>两数之和：哈希</li>
-<li>三数之和：排序 + 双指针</li>
-<li>盛最多水的容器：对撞双指针</li>
-<li>移动零：快慢指针</li>
-</ul>
-<p>如果这一类都经常卡，那后面更复杂的题型大概率也会乱。</p>
-<h2 id="第二类：链表"><a href="#第二类：链表" class="headerlink" title="第二类：链表"></a>第二类：链表</h2><p>链表题最大的特点不是难，而是特别容易写乱。</p>
-<p>我自己的习惯是，把链表题统一先想清楚三件事：</p>
-<ol>
-<li>要不要 dummy 节点；</li>
-<li>当前操作涉及几个指针；</li>
-<li>修改指针前有没有保存后继。</li>
-</ol>
-<p>像反转链表、合并链表、删除倒数第 N 个结点、环形链表，这几道其实就能把常见套路覆盖掉很多。</p>
-<h2 id="第三类：栈-队列-单调栈"><a href="#第三类：栈-队列-单调栈" class="headerlink" title="第三类：栈 / 队列 / 单调栈"></a>第三类：栈 / 队列 / 单调栈</h2><p>这一类题一旦模板形成，速度会提得很明显。</p>
-<p>尤其是：</p>
-<ul>
-<li>有效括号</li>
-<li>最小栈</li>
-<li>每日温度</li>
-<li>柱状图中最大的矩形</li>
-</ul>
-<p>这里我最大的体会是：</p>
-<blockquote>
-<p>单调栈不难，难的是你没把“维护什么单调性”这句话想明白。</p>
-</blockquote>
-<h2 id="第四类：二叉树"><a href="#第四类：二叉树" class="headerlink" title="第四类：二叉树"></a>第四类：二叉树</h2><p>二叉树是 Hot100 的大头之一，也是最容易让人看起来会、实际写起来慢的部分。</p>
-<p>我会强行把自己训练成看到树题先问：</p>
-<ul>
-<li>这是前中后序哪种 DFS；</li>
-<li>要不要层序 BFS；</li>
-<li>这是“遍历型递归”还是“分解型递归”；</li>
-<li>返回值到底代表什么。</li>
-</ul>
-<p>比如：</p>
-<ul>
-<li>最大深度</li>
-<li>对称二叉树</li>
-<li>二叉树展开为链表</li>
-<li>最近公共祖先</li>
-</ul>
-<p>这些题表面不同，但很多时候底层思路是通的。</p>
-<h2 id="第五类：回溯"><a href="#第五类：回溯" class="headerlink" title="第五类：回溯"></a>第五类：回溯</h2><p>回溯题非常适合练代码组织能力。</p>
-<p>我的经验是，不要一上来就怕。先把这几个元素固定下来：</p>
-<ul>
-<li>路径 path</li>
-<li>选择列表 choices</li>
-<li>结束条件</li>
-<li>回退动作</li>
-</ul>
-<p>子集、全排列、组合总和、括号生成，这一套顺下来以后，回溯基本盘就差不多有了。</p>
-<h2 id="第六类：动态规划"><a href="#第六类：动态规划" class="headerlink" title="第六类：动态规划"></a>第六类：动态规划</h2><p>很多人怕 DP，其实根本原因通常不是不会转移，而是不知道状态该怎么定义。</p>
-<p>我自己现在做 DP 题，强迫自己先写这四句：</p>
-<ol>
-<li><code>dp[i]</code> / <code>dp[i][j]</code> 表示什么；</li>
-<li>初始值是什么；</li>
-<li>转移从哪里来；</li>
-<li>最终答案取哪里。</li>
-</ol>
-<p>像：</p>
-<ul>
-<li>爬楼梯</li>
-<li>打家劫舍</li>
-<li>最长递增子序列</li>
-<li>零钱兑换</li>
-<li>编辑距离</li>
-</ul>
-<p>这些题并不一定一遍就秒，但只要你把状态定义练出来，后面会顺很多。</p>
-<h2 id="第七类：图-BFS-二分-堆"><a href="#第七类：图-BFS-二分-堆" class="headerlink" title="第七类：图 / BFS / 二分 / 堆"></a>第七类：图 / BFS / 二分 / 堆</h2><p>这一类在面试里也常见，而且常和前面题型交叉。</p>
-<p>比如：</p>
-<ul>
-<li>岛屿数量：DFS / BFS</li>
-<li>腐烂的橘子：多源 BFS</li>
-<li>搜索旋转排序数组：二分</li>
-<li>数组中的第 K 个最大元素：堆 / 快排思想</li>
-</ul>
-<p>这里我比较建议按“场景”记，而不是按题号记。</p>
-<h2 id="3-我现在刷题，基本只做三件事"><a href="#3-我现在刷题，基本只做三件事" class="headerlink" title="3. 我现在刷题，基本只做三件事"></a>3. 我现在刷题，基本只做三件事</h2><h2 id="1-归类"><a href="#1-归类" class="headerlink" title="1. 归类"></a>1. 归类</h2><p>每做完一道题，我都会给它贴一个主标签：</p>
-<ul>
-<li>双指针</li>
-<li>哈希</li>
-<li>树 DFS</li>
-<li>回溯</li>
-<li>DP</li>
-<li>二分</li>
-</ul>
-<p>这样后面复习的时候，不是重做整本题单，而是按题型补弱项。</p>
-<h2 id="2-总结模板"><a href="#2-总结模板" class="headerlink" title="2. 总结模板"></a>2. 总结模板</h2><p>比如我会专门维护一些非常短的模板：</p>
-<ul>
-<li>二叉树递归模板</li>
-<li>层序遍历模板</li>
-<li>回溯模板</li>
-<li>二分模板</li>
-<li>单调栈模板</li>
-<li>链表 dummy 模板</li>
-</ul>
-<p>模板不是为了背代码，而是为了在高压场景下快速起手。</p>
-<h2 id="3-二刷和三刷"><a href="#3-二刷和三刷" class="headerlink" title="3. 二刷和三刷"></a>3. 二刷和三刷</h2><p>一道题一遍做出来，不代表你真的会。</p>
-<p>尤其是面试常考题，最好过几天再做一次。只有到了你能在比较短时间内重新写出来，才算真的内化。</p>
-<h2 id="4-我觉得最容易踩的坑"><a href="#4-我觉得最容易踩的坑" class="headerlink" title="4. 我觉得最容易踩的坑"></a>4. 我觉得最容易踩的坑</h2><h2 id="坑一：盲目追数量"><a href="#坑一：盲目追数量" class="headerlink" title="坑一：盲目追数量"></a>坑一：盲目追数量</h2><p>刷 300 道但没有形成方法，不如把 Hot100 真正吃透。</p>
-<h2 id="坑二：只看题解，不自己写"><a href="#坑二：只看题解，不自己写" class="headerlink" title="坑二：只看题解，不自己写"></a>坑二：只看题解，不自己写</h2><p>看懂和写出来之间，差得非常多。</p>
-<h2 id="坑三：语言细节不熟"><a href="#坑三：语言细节不熟" class="headerlink" title="坑三：语言细节不熟"></a>坑三：语言细节不熟</h2><p>尤其是 C++ / Python 常用容器、排序、自定义比较器、堆、哈希表的写法，不熟的话会影响你整场状态。</p>
-<h2 id="坑四：不会复盘"><a href="#坑四：不会复盘" class="headerlink" title="坑四：不会复盘"></a>坑四：不会复盘</h2><p>卡过的题如果不记录，下次还会卡在同一个地方。</p>
-<h2 id="5-如果是为了实习-秋招，我建议怎么安排"><a href="#5-如果是为了实习-秋招，我建议怎么安排" class="headerlink" title="5. 如果是为了实习 / 秋招，我建议怎么安排"></a>5. 如果是为了实习 / 秋招，我建议怎么安排</h2><p>如果你是为了找实习或者秋招面试，我会建议：</p>
-<h3 id="第一阶段：Hot100-过一遍，建立模板"><a href="#第一阶段：Hot100-过一遍，建立模板" class="headerlink" title="第一阶段：Hot100 过一遍，建立模板"></a>第一阶段：Hot100 过一遍，建立模板</h3><p>别急着求快。</p>
-<h3 id="第二阶段：按题型补短板"><a href="#第二阶段：按题型补短板" class="headerlink" title="第二阶段：按题型补短板"></a>第二阶段：按题型补短板</h3><p>哪一类老错，就集中练哪一类。</p>
-<h3 id="第三阶段：限时训练"><a href="#第三阶段：限时训练" class="headerlink" title="第三阶段：限时训练"></a>第三阶段：限时训练</h3><p>模拟真实面试节奏，练表达和代码书写速度。</p>
-<h3 id="第四阶段：回看高频经典题"><a href="#第四阶段：回看高频经典题" class="headerlink" title="第四阶段：回看高频经典题"></a>第四阶段：回看高频经典题</h3><p>不要把所有时间都花在新题上，经典题的收益通常更高。</p>
-<h2 id="6-我现在对刷题这件事的看法"><a href="#6-我现在对刷题这件事的看法" class="headerlink" title="6. 我现在对刷题这件事的看法"></a>6. 我现在对刷题这件事的看法</h2><p>以前我会觉得，刷题就是一种“必须忍受”的门槛。</p>
-<p>现在反而觉得，它至少有两个好处：</p>
-<ul>
-<li>让你在有限时间里快速恢复基础数据结构和算法直觉；</li>
-<li>让你的代码组织能力变得更干净。</li>
-</ul>
-<p>当然，刷题不能替代真实开发，也不能替代系统设计和工程经验。但如果你目标里包含实习、秋招、技术面试，那 Hot100 的性价比依然很高。</p>
-<p>最后还是那句话：</p>
-<blockquote>
-<p>不要把刷完 100 道当成终点。</p>
-</blockquote>
-<p>真正有用的是，你最后有没有在脑子里形成一套“看到题目就能迅速归类、起手、推进”的模板体系。这个东西，才会在面试那几分钟真正救你。</p>
-]]></content>
-      <categories>
-        <category>算法刷题</category>
-      </categories>
-      <tags>
-        <tag>数据结构</tag>
-        <tag>算法</tag>
-        <tag>研究生</tag>
-        <tag>面试</tag>
-        <tag>LeetCode</tag>
-        <tag>Hot100</tag>
-        <tag>实习准备</tag>
-        <tag>秋招</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>今日速记 2026-03-26</title>
     <url>/2026/03/26/2026-03-26/</url>
     <content><![CDATA[<h2 id="1-test"><a href="#1-test" class="headerlink" title="1.test"></a>1.test</h2>]]></content>
+      <categories>
+        <category>日常记录</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>联调测试文章</title>
+    <url>/2026/03/28/2026-03-28/</url>
+    <content><![CDATA[<h2 id="1-这是我的一个自动更新博客测试"><a href="#1-这是我的一个自动更新博客测试" class="headerlink" title="1. 这是我的一个自动更新博客测试"></a>1. 这是我的一个自动更新博客测试</h2><ul>
+<li>结论：可以提醒</li>
+<li>要点：11</li>
+<li>行动：111</li>
+</ul>
+<h2 id="2-细节1111"><a href="#2-细节1111" class="headerlink" title="2. 细节1111"></a>2. 细节1111</h2><p>1111</p>
+<h2 id="3-参考1111"><a href="#3-参考1111" class="headerlink" title="3. 参考1111"></a>3. 参考1111</h2>]]></content>
       <categories>
         <category>日常记录</category>
       </categories>
@@ -2883,248 +3125,6 @@
         <tag>面试</tag>
         <tag>求职</tag>
         <tag>模板分享</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>联调测试文章</title>
-    <url>/2026/03/28/2026-03-28/</url>
-    <content><![CDATA[<h2 id="1-这是我的一个自动更新博客测试"><a href="#1-这是我的一个自动更新博客测试" class="headerlink" title="1. 这是我的一个自动更新博客测试"></a>1. 这是我的一个自动更新博客测试</h2><ul>
-<li>结论：可以提醒</li>
-<li>要点：11</li>
-<li>行动：111</li>
-</ul>
-<h2 id="2-细节1111"><a href="#2-细节1111" class="headerlink" title="2. 细节1111"></a>2. 细节1111</h2><p>1111</p>
-<h2 id="3-参考1111"><a href="#3-参考1111" class="headerlink" title="3. 参考1111"></a>3. 参考1111</h2>]]></content>
-      <categories>
-        <category>日常记录</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mini Court 小法庭 MVP 开发手册：一个 LLM 场景化产品是怎么从 0 到 1 搭起来的</title>
-    <url>/2026/02/24/2026-02-24-mini-court-kai-fa-shou-ce/</url>
-    <content><![CDATA[<p>前段时间把一个一直想做的小产品落了地，名字叫 <strong>Mini Court 小法庭</strong>。</p>
-<p>它不是一个特别宏大的项目，说白了就是围绕“生活纠纷裁决”这个场景，做一个能让用户发帖陈述、评论讨论，再由大模型给出初审和复审结果的 MVP。</p>
-<p>这篇不准备写成宣传文，而是把当时做这个东西时比较关键的技术和产品决策整理下来，留作后面复盘，也方便以后做类似产品时少走弯路。</p>
-<span id="more"></span>
-
-<h2 id="1-先定义产品边界：MVP-到底要解决什么"><a href="#1-先定义产品边界：MVP-到底要解决什么" class="headerlink" title="1. 先定义产品边界：MVP 到底要解决什么"></a>1. 先定义产品边界：MVP 到底要解决什么</h2><p>我做这个产品时，给自己定的边界很明确：</p>
-<h3 id="要做的"><a href="#要做的" class="headerlink" title="要做的"></a>要做的</h3><ul>
-<li>用户发帖陈述纠纷</li>
-<li>其他用户评论讨论</li>
-<li>基于用户原帖做一次初审</li>
-<li>融合评论区观点做一次复审</li>
-<li>支持结果分享</li>
-<li>留出后台治理能力</li>
-</ul>
-<h3 id="暂时不做的"><a href="#暂时不做的" class="headerlink" title="暂时不做的"></a>暂时不做的</h3><ul>
-<li>复杂社交关系</li>
-<li>长链路 IM</li>
-<li>多模型路由编排</li>
-<li>复杂推荐系统</li>
-<li>付费系统</li>
-</ul>
-<p>原因很简单：MVP 阶段最怕什么都想做，最后什么都做不完。</p>
-<p>所以我一开始就把核心链路定成：</p>
-<blockquote>
-<p>发帖陈述 → 评论讨论 → Bot1 初审 → Bot2 复审 → 分享传播</p>
-</blockquote>
-<p>只要这条链路是通的，这个产品就算站住了。</p>
-<h2 id="2-为什么这个场景适合-LLM"><a href="#2-为什么这个场景适合-LLM" class="headerlink" title="2. 为什么这个场景适合 LLM"></a>2. 为什么这个场景适合 LLM</h2><p>不是所有产品都应该硬套大模型。</p>
-<p>我觉得这个场景适合的原因主要有三点：</p>
-<h3 id="1-用户输入天然是开放文本"><a href="#1-用户输入天然是开放文本" class="headerlink" title="1. 用户输入天然是开放文本"></a>1. 用户输入天然是开放文本</h3><p>生活纠纷本来就很难结构化，适合让模型先做文本理解和归纳。</p>
-<h3 id="2-结果不是唯一正确答案"><a href="#2-结果不是唯一正确答案" class="headerlink" title="2. 结果不是唯一正确答案"></a>2. 结果不是唯一正确答案</h3><p>裁决类场景更适合做“观点整理 + 规则化表达”，而不是追求绝对标准答案。</p>
-<h3 id="3-评论区本身就是高价值上下文"><a href="#3-评论区本身就是高价值上下文" class="headerlink" title="3. 评论区本身就是高价值上下文"></a>3. 评论区本身就是高价值上下文</h3><p>用户评论能提供额外视角，这很适合做第二阶段裁决。</p>
-<p>所以我最后设计成了一个<strong>双阶段工作流</strong>：</p>
-<ul>
-<li><strong>Bot1</strong>：基于原始帖文生成初审结果；</li>
-<li><strong>Bot2</strong>：吸收评论区观点后生成复审结果。</li>
-</ul>
-<p>这样做的好处，是把“用户原始陈述”和“公共讨论补充”拆开处理，结果会更稳一些。</p>
-<h2 id="3-技术栈为什么这么选"><a href="#3-技术栈为什么这么选" class="headerlink" title="3. 技术栈为什么这么选"></a>3. 技术栈为什么这么选</h2><p>我最后选的是这套：</p>
-<ul>
-<li><strong>后端</strong>：NestJS</li>
-<li><strong>ORM</strong>：Prisma</li>
-<li><strong>数据库</strong>：PostgreSQL</li>
-<li><strong>反向代理</strong>：Nginx</li>
-<li><strong>部署</strong>：Docker Compose</li>
-<li><strong>LLM 接入</strong>：统一封装为服务层</li>
-</ul>
-<p>选择逻辑其实很务实。</p>
-<h3 id="NestJS"><a href="#NestJS" class="headerlink" title="NestJS"></a>NestJS</h3><p>适合快速把：</p>
-<ul>
-<li>用户系统</li>
-<li>帖子评论</li>
-<li>后台管理</li>
-<li>审计日志</li>
-<li>权限控制</li>
-</ul>
-<p>这几块都搭起来，模块化也比较清楚。</p>
-<h3 id="Prisma-PostgreSQL"><a href="#Prisma-PostgreSQL" class="headerlink" title="Prisma + PostgreSQL"></a>Prisma + PostgreSQL</h3><p>一方面开发体验好，另一方面对这种关系明确的业务数据很合适。后面做迁移、种子数据、后台管理都顺手。</p>
-<h3 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h3><p>MVP 阶段特别适合。服务不多，但需要稳定跑起来，Compose 管理就够了。</p>
-<h2 id="4-我当时拆出来的核心模块"><a href="#4-我当时拆出来的核心模块" class="headerlink" title="4. 我当时拆出来的核心模块"></a>4. 我当时拆出来的核心模块</h2><p>后端如果一开始不分模块，后面会越来越乱。</p>
-<p>我最后大概拆成了下面几块：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">src/</span><br><span class="line">  auth/           # 登录、鉴权、JWT</span><br><span class="line">  users/          # 用户信息</span><br><span class="line">  posts/          # 发帖、详情、列表</span><br><span class="line">  comments/       # 评论相关</span><br><span class="line">  judgments/      # 初审/复审结果</span><br><span class="line">  llm/            # 大模型调用封装</span><br><span class="line">  admin/          # 后台治理</span><br><span class="line">  rbac/           # 角色权限</span><br><span class="line">  logs/           # 审计日志</span><br><span class="line">  common/         # 公共响应、异常处理、工具函数</span><br></pre></td></tr></table></figure>
-
-<p>这样拆的目的不是为了“看起来高级”，而是为了后面两件事：</p>
-<ol>
-<li>改需求时不至于牵一发动全身；</li>
-<li>后台治理和用户主链路分离。</li>
-</ol>
-<h2 id="5-数据模型我会怎么设计"><a href="#5-数据模型我会怎么设计" class="headerlink" title="5. 数据模型我会怎么设计"></a>5. 数据模型我会怎么设计</h2><p>MVP 阶段不需要过度抽象，但几个核心表一定要先想清楚。</p>
-<p>我当时比较核心的实体大概有：</p>
-<h3 id="User"><a href="#User" class="headerlink" title="User"></a>User</h3><ul>
-<li>id</li>
-<li>nickname</li>
-<li>avatar</li>
-<li>role</li>
-<li>status</li>
-<li>createdAt</li>
-</ul>
-<h3 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h3><ul>
-<li>id</li>
-<li>userId</li>
-<li>title</li>
-<li>content</li>
-<li>status</li>
-<li>viewCount</li>
-<li>createdAt</li>
-</ul>
-<h3 id="Comment"><a href="#Comment" class="headerlink" title="Comment"></a>Comment</h3><ul>
-<li>id</li>
-<li>postId</li>
-<li>userId</li>
-<li>content</li>
-<li>status</li>
-<li>createdAt</li>
-</ul>
-<h3 id="Judgment"><a href="#Judgment" class="headerlink" title="Judgment"></a>Judgment</h3><ul>
-<li>id</li>
-<li>postId</li>
-<li>round（initial / final）</li>
-<li>inputSnapshot</li>
-<li>outputJson</li>
-<li>modelName</li>
-<li>createdAt</li>
-</ul>
-<h3 id="AdminLog"><a href="#AdminLog" class="headerlink" title="AdminLog"></a>AdminLog</h3><ul>
-<li>id</li>
-<li>adminId</li>
-<li>action</li>
-<li>targetType</li>
-<li>targetId</li>
-<li>detail</li>
-<li>createdAt</li>
-</ul>
-<p>这里我有一个明确要求：<strong>裁决结果尽量结构化。</strong></p>
-<p>也就是不要只存一整段自然语言，而是尽量让模型输出 JSON，再做展示层渲染。</p>
-<p>比如可以要求输出：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;summary&quot;</span><span class="punctuation">:</span> <span class="string">&quot;纠纷摘要&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;plaintiff_view&quot;</span><span class="punctuation">:</span> <span class="string">&quot;甲方主要观点&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;defendant_view&quot;</span><span class="punctuation">:</span> <span class="string">&quot;乙方主要观点&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;decision&quot;</span><span class="punctuation">:</span> <span class="string">&quot;初步裁决&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;reason&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;理由1&quot;</span><span class="punctuation">,</span> <span class="string">&quot;理由2&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;risk_hint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;风险提示&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>这样后面无论是前端展示、分享卡片、二次统计，都会方便很多。</p>
-<h2 id="6-双阶段裁决工作流怎么落地"><a href="#6-双阶段裁决工作流怎么落地" class="headerlink" title="6. 双阶段裁决工作流怎么落地"></a>6. 双阶段裁决工作流怎么落地</h2><p>这部分是我自己觉得最关键的地方。</p>
-<h3 id="第一阶段：Bot1-初审"><a href="#第一阶段：Bot1-初审" class="headerlink" title="第一阶段：Bot1 初审"></a>第一阶段：Bot1 初审</h3><p>输入内容：</p>
-<ul>
-<li>原帖标题</li>
-<li>原帖正文</li>
-<li>必要的用户补充信息</li>
-</ul>
-<p>输出内容：</p>
-<ul>
-<li>纠纷摘要</li>
-<li>双方争议点</li>
-<li>初步判断</li>
-<li>理由说明</li>
-</ul>
-<h3 id="第二阶段：Bot2-复审"><a href="#第二阶段：Bot2-复审" class="headerlink" title="第二阶段：Bot2 复审"></a>第二阶段：Bot2 复审</h3><p>输入内容：</p>
-<ul>
-<li>Bot1 的初审结果</li>
-<li>评论区若干高质量评论</li>
-<li>原始帖文摘要</li>
-</ul>
-<p>输出内容：</p>
-<ul>
-<li>最终复审意见</li>
-<li>是否采纳评论区新观点</li>
-<li>最终理由列表</li>
-<li>风险和建议</li>
-</ul>
-<p>这里最容易出问题的是评论区太乱，所以我当时做了几件事情来控成本和提稳定性：</p>
-<h4 id="1-截断"><a href="#1-截断" class="headerlink" title="1. 截断"></a>1. 截断</h4><p>评论太长就截断，不然 token 直接爆。</p>
-<h4 id="2-去重"><a href="#2-去重" class="headerlink" title="2. 去重"></a>2. 去重</h4><p>类似表达只保留一份，减少模型重复读取。</p>
-<h4 id="3-限条数"><a href="#3-限条数" class="headerlink" title="3. 限条数"></a>3. 限条数</h4><p>只取前 N 条有效评论，避免无意义堆料。</p>
-<h4 id="4-结果缓存"><a href="#4-结果缓存" class="headerlink" title="4. 结果缓存"></a>4. 结果缓存</h4><p>同一帖子的相同阶段结果，优先走缓存，降低重复调用成本。</p>
-<p>这一套做完以后，输出会稳定很多，费用也更可控。</p>
-<h2 id="7-后台治理为什么必须早点做"><a href="#7-后台治理为什么必须早点做" class="headerlink" title="7. 后台治理为什么必须早点做"></a>7. 后台治理为什么必须早点做</h2><p>做内容类产品，一个很常见的错误就是把后台治理放到最后。</p>
-<p>但实际上只要有用户发言，就一定会遇到：</p>
-<ul>
-<li>不当内容</li>
-<li>恶意刷帖</li>
-<li>重复评论</li>
-<li>管理员操作留痕</li>
-</ul>
-<p>所以我在 MVP 阶段就加了下面几项：</p>
-<h3 id="1-Admin-登录"><a href="#1-Admin-登录" class="headerlink" title="1. Admin 登录"></a>1. Admin 登录</h3><p>后台和普通用户逻辑分开，不混用权限。</p>
-<h3 id="2-RBAC"><a href="#2-RBAC" class="headerlink" title="2. RBAC"></a>2. RBAC</h3><p>至少区分超级管理员、内容管理员等角色。</p>
-<h3 id="3-内容下架"><a href="#3-内容下架" class="headerlink" title="3. 内容下架"></a>3. 内容下架</h3><p>帖子、评论都要支持状态切换。</p>
-<h3 id="4-审计日志"><a href="#4-审计日志" class="headerlink" title="4. 审计日志"></a>4. 审计日志</h3><p>谁在什么时候下架了什么内容，一定要有记录。</p>
-<p>MVP 可以简，但不能没有治理。</p>
-<h2 id="8-API-设计上，我会坚持的几个原则"><a href="#8-API-设计上，我会坚持的几个原则" class="headerlink" title="8. API 设计上，我会坚持的几个原则"></a>8. API 设计上，我会坚持的几个原则</h2><h3 id="1-前后端边界清楚"><a href="#1-前后端边界清楚" class="headerlink" title="1. 前后端边界清楚"></a>1. 前后端边界清楚</h3><p>不要把一堆业务逻辑写进 controller。</p>
-<h3 id="2-LLM-服务统一封装"><a href="#2-LLM-服务统一封装" class="headerlink" title="2. LLM 服务统一封装"></a>2. LLM 服务统一封装</h3><p>后面无论你换模型、换提示词、换重试逻辑，都不应该影响业务层。</p>
-<h3 id="3-响应格式统一"><a href="#3-响应格式统一" class="headerlink" title="3. 响应格式统一"></a>3. 响应格式统一</h3><p>成功和失败都走统一响应格式，前端处理会轻松很多。</p>
-<h3 id="4-状态字段提前预留"><a href="#4-状态字段提前预留" class="headerlink" title="4. 状态字段提前预留"></a>4. 状态字段提前预留</h3><p>像帖子状态、评论状态、裁决状态，别等以后再补。</p>
-<h2 id="9-一个最小可运行的部署方式"><a href="#9-一个最小可运行的部署方式" class="headerlink" title="9. 一个最小可运行的部署方式"></a>9. 一个最小可运行的部署方式</h2><p>MVP 阶段我更喜欢一台服务器先跑起来，再逐步优化。</p>
-<h3 id="docker-compose-yml-大致会包含"><a href="#docker-compose-yml-大致会包含" class="headerlink" title="docker-compose.yml 大致会包含"></a>docker-compose.yml 大致会包含</h3><ul>
-<li>app</li>
-<li>postgres</li>
-<li>nginx</li>
-</ul>
-<h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker compose up -d</span><br><span class="line">npx prisma migrate deploy</span><br><span class="line">npx prisma db seed</span><br></pre></td></tr></table></figure>
-
-<h3 id="Nginx-负责"><a href="#Nginx-负责" class="headerlink" title="Nginx 负责"></a>Nginx 负责</h3><ul>
-<li>反向代理</li>
-<li>静态资源转发</li>
-<li>HTTPS 入口（如果后面加证书）</li>
-</ul>
-<p>这套方案的好处是：简单、直观、便于迁移。对个人 MVP 足够用了。</p>
-<h2 id="10-我做完以后最大的几个感受"><a href="#10-我做完以后最大的几个感受" class="headerlink" title="10. 我做完以后最大的几个感受"></a>10. 我做完以后最大的几个感受</h2><h2 id="第一，产品一定要先站在用户链路上看"><a href="#第一，产品一定要先站在用户链路上看" class="headerlink" title="第一，产品一定要先站在用户链路上看"></a>第一，产品一定要先站在用户链路上看</h2><p>不是你技术上能做什么，而是用户第一步进来到底会不会玩。</p>
-<p>如果核心链路不顺，再好的模型都只是摆设。</p>
-<h2 id="第二，大模型输出一定要尽可能结构化"><a href="#第二，大模型输出一定要尽可能结构化" class="headerlink" title="第二，大模型输出一定要尽可能结构化"></a>第二，大模型输出一定要尽可能结构化</h2><p>不然前端展示、缓存、二次处理都很麻烦。</p>
-<h2 id="第三，治理能力不是锦上添花"><a href="#第三，治理能力不是锦上添花" class="headerlink" title="第三，治理能力不是锦上添花"></a>第三，治理能力不是锦上添花</h2><p>一旦有 UGC，治理就是基础设施。</p>
-<h2 id="第四，MVP-最怕过度设计"><a href="#第四，MVP-最怕过度设计" class="headerlink" title="第四，MVP 最怕过度设计"></a>第四，MVP 最怕过度设计</h2><p>很多功能明明可以后面再做，但人就是忍不住想“一次做全”。</p>
-<p>这对个人开发尤其危险。</p>
-<h2 id="11-如果后面继续迭代，我会优先做什么"><a href="#11-如果后面继续迭代，我会优先做什么" class="headerlink" title="11. 如果后面继续迭代，我会优先做什么"></a>11. 如果后面继续迭代，我会优先做什么</h2><p>如果继续往下做，我大概率会优先补这几项：</p>
-<ul>
-<li>更细的评论筛选和质量评分；</li>
-<li>更可控的提示词和多轮重试机制；</li>
-<li>分享页优化；</li>
-<li>用户举报与审核流程；</li>
-<li>数据统计看板；</li>
-<li>更完善的异常监控。</li>
-</ul>
-<p>这些比一开始就上复杂推荐系统更实际。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>我做 Mini Court 这个项目时，一个很深的感受是：</p>
-<blockquote>
-<p>LLM 产品真正难的，往往不是把模型调起来，而是把“产品链路、数据结构、治理、成本、稳定性”这些工程问题一起压住。</p>
-</blockquote>
-<p>如果只会调用接口，那最多算做了一个 demo；只有当整个链路真的跑通，用户能用，结果可控，后台能管，部署能稳，这个东西才算一个像样的产品。</p>
-<p>这篇就先记到这里。后面如果把它继续迭代下去，再回来补更细的部分。</p>
-]]></content>
-      <categories>
-        <category>产品开发</category>
-      </categories>
-      <tags>
-        <tag>栈</tag>
-        <tag>LLM</tag>
-        <tag>NestJS</tag>
-        <tag>Prisma</tag>
-        <tag>PostgreSQL</tag>
-        <tag>Docker</tag>
-        <tag>产品手册</tag>
-        <tag>Mini Court</tag>
       </tags>
   </entry>
   <entry>
