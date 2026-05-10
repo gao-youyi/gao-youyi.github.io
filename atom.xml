@@ -426,9 +426,9 @@
       <name>Gao Youyi</name>
     </author>
     <category term="深度学习" scheme="https://gao-youyi.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    <category term="PyTorch" scheme="https://gao-youyi.github.io/tags/PyTorch/"/>
-    <category term="深度学习" scheme="https://gao-youyi.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     <category term="torchvision" scheme="https://gao-youyi.github.io/tags/torchvision/"/>
+    <category term="深度学习" scheme="https://gao-youyi.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    <category term="PyTorch" scheme="https://gao-youyi.github.io/tags/PyTorch/"/>
     <category term="CIFAR10" scheme="https://gao-youyi.github.io/tags/CIFAR10/"/>
     <category term="测试" scheme="https://gao-youyi.github.io/tags/%E6%B5%8B%E8%AF%95/"/>
     <category term="训练" scheme="https://gao-youyi.github.io/tags/%E8%AE%AD%E7%BB%83/"/>
