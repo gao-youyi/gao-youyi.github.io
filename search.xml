@@ -304,6 +304,8 @@
             
             <tag> 计算机 </tag>
             
+            <tag> 过拟合 </tag>
+            
             <tag> 金融 </tag>
             
             <tag> 投资 </tag>
@@ -315,8 +317,6 @@
             <tag> A股 </tag>
             
             <tag> LeetCode </tag>
-            
-            <tag> 过拟合 </tag>
             
         </tags>
       
@@ -380,11 +380,11 @@
       
         <tags>
             
-            <tag> 过拟合 </tag>
-            
             <tag> 机器学习 </tag>
             
             <tag> 课程作业 </tag>
+            
+            <tag> 过拟合 </tag>
             
             <tag> 贝叶斯定理 </tag>
             
@@ -839,11 +839,11 @@
             
             <tag> 深度学习 </tag>
             
-            <tag> MaxPool2d </tag>
-            
             <tag> torchvision </tag>
             
             <tag> CIFAR10 </tag>
+            
+            <tag> MaxPool2d </tag>
             
         </tags>
       
@@ -874,9 +874,9 @@
             
             <tag> torchvision </tag>
             
-            <tag> CIFAR10 </tag>
-            
             <tag> Conv2d </tag>
+            
+            <tag> CIFAR10 </tag>
             
         </tags>
       
@@ -1004,13 +1004,13 @@
             
             <tag> C++ </tag>
             
-            <tag> 算法 </tag>
-            
             <tag> 链表 </tag>
             
-            <tag> 实例 </tag>
+            <tag> 算法 </tag>
             
             <tag> 数组 </tag>
+            
+            <tag> 实例 </tag>
             
             <tag> 队列 </tag>
             
@@ -1043,9 +1043,9 @@
             
             <tag> C++ </tag>
             
-            <tag> 算法 </tag>
-            
             <tag> 链表 </tag>
+            
+            <tag> 算法 </tag>
             
             <tag> 实例 </tag>
             
@@ -1082,13 +1082,13 @@
             
             <tag> C++ </tag>
             
-            <tag> 算法 </tag>
-            
             <tag> 链表 </tag>
             
-            <tag> 实例 </tag>
+            <tag> 算法 </tag>
             
             <tag> 数组 </tag>
+            
+            <tag> 实例 </tag>
             
             <tag> 递归 </tag>
             
@@ -1156,13 +1156,13 @@
             
             <tag> C++ </tag>
             
-            <tag> 算法 </tag>
-            
             <tag> 链表 </tag>
             
-            <tag> 实例 </tag>
+            <tag> 算法 </tag>
             
             <tag> 数组 </tag>
+            
+            <tag> 实例 </tag>
             
             <tag> 栈 </tag>
             
@@ -1234,9 +1234,9 @@
             
             <tag> C++ </tag>
             
-            <tag> 算法 </tag>
-            
             <tag> 链表 </tag>
+            
+            <tag> 算法 </tag>
             
             <tag> 数组 </tag>
             
@@ -1273,9 +1273,9 @@
             
             <tag> C++ </tag>
             
-            <tag> 算法 </tag>
-            
             <tag> 链表 </tag>
+            
+            <tag> 算法 </tag>
             
             <tag> 实例 </tag>
             
@@ -1308,9 +1308,9 @@
             
             <tag> C++ </tag>
             
-            <tag> 算法 </tag>
-            
             <tag> 链表 </tag>
+            
+            <tag> 算法 </tag>
             
         </tags>
       
@@ -1341,9 +1341,9 @@
             
             <tag> C++ </tag>
             
-            <tag> 算法 </tag>
-            
             <tag> 链表 </tag>
+            
+            <tag> 算法 </tag>
             
         </tags>
       
